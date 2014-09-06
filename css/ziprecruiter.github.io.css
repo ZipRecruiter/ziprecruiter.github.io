@@ -1,0 +1,41 @@
+/* Main Headline ---------------- */
+
+/* BG scroll */
+
+@-webkit-keyframes scrollBg {
+	0%{ background-position-x: 0 }
+	100%{ background-position-x: -1028px }
+}
+
+@-moz-keyframes scrollBg {
+	0%{ background-position-x: 0 }
+	100%{ background-position-x: -1028px }
+}
+
+@-o-keyframes scrollBg {
+	0%{ background-position-x: 0 }
+	100%{ background-position-x: -1028px }
+}
+
+@keyframes scrollBg {
+	0%{ background-position-x: 0 }
+	100%{ background-position-x: -1028px }
+}
+
+#main_headline {
+	background: #617ec0 url(/img/hiring_careers_bg.jpg) 0 0 repeat-x;
+	color: #fff;
+	-webkit-animation: scrollBg linear 125s infinite; /* Safari 4+ */
+	-moz-animation:    scrollBg linear 125s infinite; /* Fx 5+ */
+	-o-animation:      scrollBg linear 125s infinite; /* Opera 12+ */
+	animation:         scrollBg linear 125s infinite; /* IE 10+ */
+}
+
+#main_headline a {
+	color: #fff;
+}
+
+#main_headline a:hover,
+#main_headline a:focus {
+	text-decoration: none;
+}

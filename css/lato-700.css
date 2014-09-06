@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Lato';
+  font-style: normal;
+  font-weight: 700;
+  src: local('Lato Bold'), local('Lato-Bold'), url(https://fonts.gstatic.com/s/lato/v8/H2DMvhDLycM56KNuAtbJYA.woff2) format('woff2'), url(https://fonts.gstatic.com/s/lato/v8/wkfQbvfT_02e2IWO3yYueQ.woff) format('woff');
+}

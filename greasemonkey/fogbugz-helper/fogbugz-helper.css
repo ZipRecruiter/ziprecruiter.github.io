@@ -1,0 +1,281 @@
+
+body {
+}
+
+/* Header colors */
+
+#www-fogcreek-com-fogbugz,
+#main {
+  color: #fff;
+}
+
+#www-fogcreek-com-fogbugz div div,
+#main * div {
+  color: #000;
+}
+
+#header.thunder-header .main-header-bar {
+  background: rgba(255, 255, 255, .85);
+  border: none;
+}
+
+#header.thunder-header .main-header-bar .button {
+}
+
+#header.thunder-header .main-header-bar a {
+}
+
+#header.thunder-header .secondary-nav .menus {
+  background: transparent;
+}
+
+#header.thunder-header .button {
+  background: rgba(255, 255, 255, .85);
+}
+
+#belowBanner,
+#header #below-banner #below-nav {
+  background: rgba(255, 255, 255, .85);
+}
+
+#toolbar {
+  background: rgba(255, 255, 255, .85);
+  padding: .25em .5em;
+  border-radius: .25em;
+  line-height: 2;
+}
+
+#box div.col {
+  background: rgba(255, 255, 255, .9);
+}
+
+#box div.li div.header {
+  background: rgba(255, 255, 255, .9);
+}
+
+#www-fogcreek-com-fogbugz #mainArea {
+  padding-bottom: 0;
+}
+
+/* slidey woo */
+#main {
+  position: relative;
+  transition: left .1s linear;
+  left: 0;
+}
+
+.navigating #main {
+  left: -100%;
+}
+
+
+/* Task List */
+
+#event-tracking-div .case-list th,
+#event-tracking-div .wiki-page-list th,
+#event-tracking-div .case-list td,
+#event-tracking-div .wiki-page-list td,
+#event-tracking-div .case-list .wiki-grid-header,
+#event-tracking-div .wiki-page-list .wiki-grid-header,
+#event-tracking-div .case-list .wiki-grid-column,
+#event-tracking-div .wiki-page-list .wiki-grid-column {
+  white-space: normal;
+}
+
+#event-tracking-div .case-list tr.bug-grid-row .grid-title-col,
+
+#event-tracking-div td div {
+  white-space: normal;
+  text-overflow: clip;
+  overflow: visible;
+}
+
+#event-tracking-div td {
+  vertical-align: top;
+}
+
+.case-list .list-group-footer {
+  display: inline-block;
+  height: auto;
+}
+
+.case-list .list-group-footer > .list-add-case {
+  padding: .25em .5em;
+  margin: 0;
+  background: rgba(255, 255, 255, .8);
+  border-radius: .25em;
+  border-top-right-radius: 0;
+  border-top-left-radius: 0;
+}
+
+.case-list .list-group-footer > .list-add-case:before {
+  display: inline-block;
+  font-size: 13px;
+  transform: scale(.8, .8);
+  margin-right: .2em;
+}
+
+.case-list .list-group-footer {
+  margin: 0;
+}
+
+/*  */
+#fogbugz-helper-css {
+  content: "loaded";
+}
+
+#stacking-context-main>#main {
+  padding-top: 80px;
+}
+
+#header.thunder-header.has-custom-logo {
+  min-width: 0;
+}
+
+.contains-customfield textarea {
+  min-height: 150px;
+}
+
+#main .grid-column-TitleComment a {
+  font-weight: bold;
+}
+
+/* Container */
+section.case {
+  width: auto;
+  max-width: none;
+  /*min-width: 0;*/
+}
+
+/*section.case > article {
+  border: none;
+  background: none;
+}
+
+section.case > article > nav {
+  display: inline-block;
+}*/
+
+#formEditCase {
+  position: relative;
+}
+
+#formEditCase > div,
+#formEditCase > section {
+  /*outline: 1px solid red;*/
+  margin: 0;
+  width: auto;
+}
+
+/* Top */
+#formEditCase > .top {
+  float: none;
+  width: 100%;
+  display: table;
+}
+
+#formEditCase > .top > .left {
+  display: table-cell;
+  float: none;
+  vertical-align: top;
+}
+
+#main section.case #formEditCase .top>header {
+  border-left: none;
+  width: auto;
+  float: none;
+  display: table-cell;
+  width: 100%;
+  vertical-align: top;
+}
+
+#formEditCase > .top > header > .field.wide:first-child {
+  position: relative;
+  min-height: 2.3em;
+  padding: 0;
+  margin: 0 10px 5px 10px;
+  display: block;
+  width: auto;
+  float: none;
+}
+
+#formEditCase > .top > header > .field.wide:first-child input {
+  position: absolute;
+  left: 0;
+  top: 0;
+  right: 10px;
+  display: block;
+}
+
+#formEditCase .field {
+}
+
+/* BugzID */
+#main section.case .corner a.case {
+  margin-bottom: 0;
+}
+
+#formEditCase > .left {
+  height: auto;
+  width: auto;
+  width: 25%;
+}
+
+#formEditCase > .left > * {
+  padding: 0;
+  margin: 10px 0;
+}
+
+/* Comment */
+#formEditCase > .events {
+  float: right;
+  width: 75%;
+}
+
+/* Comments */
+#formEditCase > #eventList-0 {
+  float: right;
+  width: 75%;
+}
+
+/* Events */
+.event .editor > textarea {
+  height: auto;
+}
+
+.events .event header > div {
+  display: none;
+}
+
+.events .event header:hover {
+  position: relative;
+  z-index: 100;
+}
+
+.events .event header:hover > div {
+  display: block;
+  position: absolute;
+  left: 2em;
+  background: #f6f6f6;
+  padding: .5em;
+  border: 1px solid #ddd;
+  border-radius: .5em;
+}
+
+#sEvent {
+  min-height: 0 !important;
+}
+
+/* Colors */
+#header li.fogbugz-helper-colors {
+  padding: 0 1em;
+}
+
+.fogbugz-helper-colors button {
+  margin: 2px;
+  border-width: 1px;
+}
+
+.fogbugz-helper-colors input {
+  display: block;
+}

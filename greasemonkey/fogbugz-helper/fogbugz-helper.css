@@ -90,10 +90,6 @@ body {
 
 /* Task List */
 
-#case-list-mini-report {
-  display: none;
-}
-
 #event-tracking-div .case-list th,
 #event-tracking-div .wiki-page-list th,
 #event-tracking-div .case-list td,

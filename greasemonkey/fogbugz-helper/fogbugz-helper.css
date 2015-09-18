@@ -2,21 +2,28 @@
 body {
 }
 
+/* main2 */
+
+#stacking-context-main>#main2 {
+  padding: 5.55em 1em 0.5em;
+}
+
 /* Header colors */
 
 #www-fogcreek-com-fogbugz,
+#main2,
 #main {
   color: #fff;
 }
 
 #www-fogcreek-com-fogbugz div div,
+#main2 * div,
 #main * div {
   color: #000;
 }
 
 #header.thunder-header .main-header-bar {
   background: rgba(255, 255, 255, .85);
-  border: none;
 }
 
 #header.thunder-header .main-header-bar .button {
@@ -59,17 +66,33 @@ body {
 
 /* slidey woo */
 #main {
-  position: relative;
+  /* position: relative;
   transition: left .1s linear;
-  left: 0;
+  left: 0; */
 }
 
 .navigating #main {
-  left: -100%;
+  /*left: -100%;*/
+  opacity: 0;
 }
 
+/* modal main */
+
+#main.has-content {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .6);
+  overflow: scroll;
+}
 
 /* Task List */
+
+#case-list-mini-report {
+  display: none;
+}
 
 #event-tracking-div .case-list th,
 #event-tracking-div .wiki-page-list th,
@@ -125,7 +148,8 @@ body {
 }
 
 #stacking-context-main>#main {
-  padding-top: 80px;
+  /*padding-top: 80px;*/
+  padding-bottom: 30px;
 }
 
 #header.thunder-header.has-custom-logo {
@@ -143,7 +167,7 @@ body {
 /* Container */
 section.case {
   width: auto;
-  max-width: none;
+  /*max-width: none;*/
   /*min-width: 0;*/
 }
 
@@ -180,6 +204,7 @@ section.case > article > nav {
   vertical-align: top;
 }
 
+#main2 section.case #formEditCase .top>header,
 #main section.case #formEditCase .top>header {
   border-left: none;
   width: auto;
@@ -211,6 +236,7 @@ section.case > article > nav {
 }
 
 /* BugzID */
+#main2 section.case .corner a.case,
 #main section.case .corner a.case {
   margin-bottom: 0;
 }

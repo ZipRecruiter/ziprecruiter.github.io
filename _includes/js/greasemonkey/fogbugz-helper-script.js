@@ -124,9 +124,18 @@ var main = function() {
     $body.css('background-color', color);
   }
 
-  // Add colors to menu
+    ////////////////////////////
+   // Add colors to menu
+  ////////////////////////////
   var add_colors = function() {
-    var $color_li = $('<li/>')
+    var $color_li = $('.fogbugz-helper-colors');
+
+    // Can't figure out why the colors don't stay, we'll just run this function every time and bail if they exist
+    if ( $color_li.length ) {
+      return;
+    }
+
+    $color_li = $('<li/>')
       .addClass('fogbugz-helper-colors')
       .delegate('button', 'click', function(e) {
         e.preventDefault();
@@ -165,12 +174,85 @@ var main = function() {
 
     $menu.append($color_li);
 
-    $(document)
-      .undelegate('.tools', 'mouseover', add_colors);
+    /* $document
+      .undelegate('.tools', 'mouseover', add_colors); */
   }
 
-  $(document)
+  $document
     .delegate('.tools', 'mouseover', add_colors);
+
+    ////////////////////////////
+   // Go to edit
+  ////////////////////////////
+
+  $document
+    .delegate('a.case', 'mouseover focus', function() {
+      var href = this.href;
+
+      href = href.replace(/cases\/([0-9]+)/, 'cases/edit/$1');
+
+      this.href = href;
+    })
+    ;
+
+    ////////////////////////////
+   // Go to edit
+  ////////////////////////////
+
+  var $main = $('#main');
+  var filters_url;
+
+  var try_check_for_filters_timeout;
+
+  var try_check_for_filters = function() {
+    clearTimeout(try_check_for_filters_timeout);
+
+    try_check_for_filters_timeout = setTimeout(check_for_filters, 200);
+  };
+
+  var check_for_filters = function() {
+    console.log(document.location.href);
+    if ( !document.location.href.match(/f\/filters/) ) {
+      $main.addClass('has-content');
+
+      return;
+    }
+
+    filters_url = document.location.href;
+
+    $main.removeClass('has-content');
+
+    $main2
+      .empty()
+      .append($main.children())
+      ;
+  };
+
+  var $main2 = $('<div/>')
+    .attr('id', 'main2')
+    .insertBefore($main)
+    ;
+
+  $main
+    .bind('click', function(e) {
+      if ( e.target !== this ) {
+        return;
+      }
+
+      $main
+        .empty()
+        .removeClass('has-content')
+        ;
+
+      history.pushState(false, false, filters_url);
+    })
+    ;
+
+  // Why doesn't this work :\
+  // window.addEventListener('popstate', check_for_filters);
+
+  $document.delegate('#main', 'DOMNodeInserted', try_check_for_filters);
+
 
   /*// Click edit button
   sniff('#main', function() {

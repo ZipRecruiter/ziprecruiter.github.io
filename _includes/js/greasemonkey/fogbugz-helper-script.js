@@ -213,14 +213,16 @@ var main = function() {
   var check_for_filters = function() {
     console.log(document.location.href);
     if ( !document.location.href.match(/f\/filters/) ) {
-      $main.addClass('has-content');
+      $body
+        .addClass('main-has-content');
 
       return;
     }
 
     filters_url = document.location.href;
 
-    $main.removeClass('has-content');
+    $main
+      .removeClass('main-has-content');
 
     $main2
       .empty()
@@ -241,7 +243,10 @@ var main = function() {
 
       $main
         .empty()
-        .removeClass('has-content')
+        ;
+
+      $body
+        .removeClass('main-has-content')
         ;
 
       history.pushState(false, false, filters_url);

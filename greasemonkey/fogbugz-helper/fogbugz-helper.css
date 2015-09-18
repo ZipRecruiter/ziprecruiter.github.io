@@ -78,7 +78,11 @@ body {
 
 /* modal main */
 
-#main.has-content {
+body.main-has-content {
+  overflow: hidden;
+}
+
+.main-has-content #main {
   position: fixed;
   left: 0;
   top: 0;

@@ -4,7 +4,53 @@ title: Greasemonkey Scripts - FogBugz Helper
 ---
 <section class="section"><div class="content">
   <div class="cms">
-    <pre>
+    <section>
+      <h2>Features</h2>
+
+      <ul>
+        <li>Background color picker (in tools menu)</li>
+        <li>Task list: rows can be more than one line (may add a setting for that)</li>
+        <li>Task list: tickets open in a "modal" (will add a close button on tickets, for now you can click the background to close them)</li>
+        <li>Ticket links default to linking to "edit" mode (will make a setting for that)</li>
+        <li>Various styling tweaks to make the page more responsive for smaller windows</li>
+        <li>Tickets: Case description field made larger</li>
+        <li>Tickets: Text areas auto expand while typing</li>
+        <li>Tickets: Some ticket spam is hidden, mouse over the "events" to see the full description of the event</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Installation instructions</h2>
+
+      <h3>Firefox</h3>
+      <ul>
+        <li>Install greasemonkey (<a href="https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/</a>)</li>
+        <li>Copy the script below, click the down arrow next to the monkey and click "New User Script" then click "Use Script From Clipboard"</li>
+      </ul>
+
+      <h3>Chrome</h3>
+      <ul>
+        <li>Install Tampermonkey (<a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en">https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en</a>)</li>
+        <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script.</li>
+      </ul>
+
+      <h3>Opera</h3>
+      <ul>
+        <li>Install Violent Monkey (<a href="https://addons.opera.com/en/extensions/details/violent-monkey/?display=en">https://addons.opera.com/en/extensions/details/violent-monkey/?display=en</a>)</li>
+        <li>Copy the script below, click the monkey, click "Manage Scripts", then "New". Select what's there and paste the script.</li>
+      </ul>
+
+      <h3>Safari</h3>
+      <ul>
+        <li>Install Tampermonkey (<a href="https://tampermonkey.net/index.php?ext=dhdg&browser=safari">https://tampermonkey.net/index.php?ext=dhdg&browser=safari</a>)</li>
+        <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script.</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>The Script</h2>
+
+      <pre>
 // ==UserScript==
 // @name         FogBugz Helper
 // @namespace    http://ziprecruiter.github.io/
@@ -17,9 +63,7 @@ title: Greasemonkey Scripts - FogBugz Helper
 // ==/UserScript==
 
 javascript:(function(){url='//ziprecruiter.github.io/greasemonkey/fogbugz-helper/fogbugz-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
-    </pre>
-    <p>
-      Greasemonkey/Tampermonkey/Whatever other kinda monkey instructions here
-    </p>
+      </pre>
+    </section>
   </div>
 </div></section>

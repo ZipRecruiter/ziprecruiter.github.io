@@ -196,7 +196,7 @@ var main = function() {
     ;
 
     ////////////////////////////
-   // Go to edit
+   // Open tickets in modal on task list page
   ////////////////////////////
 
   var $main = $('#main');

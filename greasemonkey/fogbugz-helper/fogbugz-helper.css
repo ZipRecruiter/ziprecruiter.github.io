@@ -76,6 +76,10 @@ body {
   opacity: 0;
 }
 
+#stacking-context-main > #main {
+  padding: 5.55em 1em 0.5em;
+}
+
 /* modal main */
 
 body.main-has-content {

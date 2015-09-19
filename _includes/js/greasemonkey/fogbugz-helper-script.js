@@ -30,6 +30,12 @@ var sniff = function(selector, fn, once) {
   $document.delegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
 };
 
+var link = document.createElement('link');
+link.rel = 'stylesheet';
+link.id = 'fogbugz-helper-css';
+document.head.appendChild(link);
+link.href = window.zrBookmarkletUrl + '/fogbugz-helper.css?';
+
 var init = function() {
     ////////////////////////////
    // Make sure jQuery is loaded before continuing
@@ -44,12 +50,12 @@ var init = function() {
    ////////////////////////////
   // Add styling
   ////////////////////////////
-  var css = '<link rel="stylesheet" id="fogbugz-helper-css"/>';
+  /*var css = '<link rel="stylesheet" id="fogbugz-helper-css"/>';
   var $css = $(css)
     .appendTo('head')
     ;
 
-  $css.attr({href: window.zrBookmarkletUrl + '/fogbugz-helper.css?'});
+  $css.attr({href: window.zrBookmarkletUrl + '/fogbugz-helper.css?'});*/
 
   $fogbugz_helper_css = $('#fogbugz-helper-css');
 
@@ -211,8 +217,7 @@ var main = function() {
   };
 
   var check_for_filters = function() {
-    console.log(document.location.href);
-    if ( !document.location.href.match(/f\/filters/) ) {
+    if ( !document.location.href.match(/f\/((filters)|(search))/) ) {
       $body
         .addClass('main-has-content');
 
@@ -221,7 +226,7 @@ var main = function() {
 
     filters_url = document.location.href;
 
-    $main
+    $body
       .removeClass('main-has-content');
 
     $main2
@@ -254,10 +259,10 @@ var main = function() {
     ;
 
   // Why doesn't this work :\
-  // window.addEventListener('popstate', check_for_filters);
+  // window.addEventListener('popstate', try_check_for_filters);
 
   $document.delegate('#main', 'DOMNodeInserted', try_check_for_filters);
-
+  try_check_for_filters();
 
   /*// Click edit button
   sniff('#main', function() {

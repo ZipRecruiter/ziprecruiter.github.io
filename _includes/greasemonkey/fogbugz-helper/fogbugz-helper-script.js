@@ -1,7 +1,6 @@
 (function($) {
 'use strict';
 
-var $fogbugz_helper_css;
 var $document;
 var $window;
 
@@ -30,12 +29,6 @@ var sniff = function(selector, fn, once) {
   $document.delegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
 };
 
-var link = document.createElement('link');
-link.rel = 'stylesheet';
-link.id = 'fogbugz-helper-css';
-document.head.appendChild(link);
-link.href = window.zrBookmarkletUrl + '/fogbugz-helper.css?';
-
 var init = function() {
     ////////////////////////////
    // Make sure jQuery is loaded before continuing
@@ -46,18 +39,6 @@ var init = function() {
   }
 
   $ = window.jQuery;
-
-   ////////////////////////////
-  // Add styling
-  ////////////////////////////
-  /*var css = '<link rel="stylesheet" id="fogbugz-helper-css"/>';
-  var $css = $(css)
-    .appendTo('head')
-    ;
-
-  $css.attr({href: window.zrBookmarkletUrl + '/fogbugz-helper.css?'});*/
-
-  $fogbugz_helper_css = $('#fogbugz-helper-css');
 
   // autosize textarea plugin
   $.fn.autosize = function() {
@@ -81,14 +62,6 @@ var init = function() {
 }
 
 var main = function() {
-    ////////////////////////////
-   // Make sure css is loaded before continuing
-  ////////////////////////////
-  if ( !$fogbugz_helper_css.length || ($fogbugz_helper_css.css('content') != 'loaded' && $fogbugz_helper_css.css('content') != '"loaded"' && $fogbugz_helper_css.css('content') != "'loaded'") ) {
-    setTimeout(main, 10);
-    return;
-  }
-
     ////////////////////////////
    // Stuff
   ////////////////////////////

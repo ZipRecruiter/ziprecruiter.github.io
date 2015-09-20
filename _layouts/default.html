@@ -25,9 +25,16 @@
 	<link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
 
 	<!--[if !IE 6]><!-->
-		<link href='//fonts.googleapis.com/css?family=Ranchers' rel='stylesheet' type='text/css' media="screen" />
-
-		{% include {{site.stylesheets}} %}
+	<style>
+		{% include css/reset.css %}
+		{% include css/cms-normalize.css %}
+		{% include css/lato-300.css %}
+		{% include css/lato-400.css %}
+		{% include css/lato-700.css %}
+		{% include css/lato-900.css %}
+		{% include css/style.css %}
+		{% include css/ziprecruiter.github.io.css %}
+	</style>
 	<!--<![endif]-->
 	<!--[if lt IE 9]>
 		<script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -69,18 +76,20 @@
 		</main>
 	</div>
 
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-	{% include {{site.javascripts}} %}
+	<script>
+		{% include js/vendor/jquery/1.11.0/jquery.min.js %}
+		{% include js/script.js %}
+	</script>
 
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+<!-- script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
 
-  ga('create', 'UA-XXXXXXXX-1', 'ziprecruiter.github.io');
-  ga('send', 'pageview');
-</script>
+	ga('create', 'UA-XXXXXXXX-1', 'ziprecruiter.github.io');
+	ga('send', 'pageview');
+</script -->
 
 </body>
 </html>

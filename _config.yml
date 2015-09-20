@@ -1,3 +1,5 @@
+# This file is not set up correctly.  I don't know what I'm doing. Feel free to fix it.
+
 # Jekyll configuration precedence:
 # 1. Gruntfile task
 # 2. config.build.yml
@@ -10,8 +12,6 @@ author:
   email: contact@ziprecruiter.com
 
 domain: ziprecruiter.github.io
-javascripts: javascripts-minify.html
-stylesheets: stylesheets-minify.html
 # Grunt handles images and assets.
 # exclude: ['images', 'css', 'js', 'fonts',
 #           '**.png', '**.jpg', '**.jpeg', '**.gif', '**.webp', '**.svg', '**.ico']

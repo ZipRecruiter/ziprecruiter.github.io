@@ -240,80 +240,54 @@
 }
 
   /* //////////////////////////
- // Forgot
+ // Ticket Tweaks
 ////////////////////////// */
-
-
-/* Header colors */
-
-/*#www-fogcreek-com-fogbugz #mainArea {
-  padding-bottom: 0;
-}
-
-#stacking-context-main > #main {
-  padding: 5.55em 1em 0.5em;
-}*/
-
-/*  */
-#stacking-context-main>#main {
-  /*padding-top: 80px;*/
+.fogbugz-helper-ticket-tweaks #stacking-context-main>#main {
   padding-bottom: 30px;
 }
 
-#header.thunder-header.has-custom-logo {
+.fogbugz-helper-ticket-tweaks #header.thunder-header.has-custom-logo {
   min-width: 0;
 }
 
-.contains-customfield textarea {
+.fogbugz-helper-ticket-tweaks .contains-customfield textarea {
   min-height: 150px;
 }
 
-#main .grid-column-TitleComment a {
+.fogbugz-helper-ticket-tweaks #main .grid-column-TitleComment a {
   font-weight: bold;
 }
 
 /* Container */
-section.case {
+.fogbugz-helper-ticket-tweaks section.case {
   width: auto;
-  /*max-width: none;*/
-  /*min-width: 0;*/
 }
 
-/*section.case > article {
-  border: none;
-  background: none;
-}
-
-section.case > article > nav {
-  display: inline-block;
-}*/
-
-#formEditCase {
+.fogbugz-helper-ticket-tweaks #formEditCase {
   position: relative;
 }
 
-#formEditCase > div,
-#formEditCase > section {
-  /*outline: 1px solid red;*/
+.fogbugz-helper-ticket-tweaks #formEditCase > div,
+.fogbugz-helper-ticket-tweaks #formEditCase > section {
   margin: 0;
   width: auto;
 }
 
 /* Top */
-#formEditCase > .top {
+.fogbugz-helper-ticket-tweaks #formEditCase > .top {
   float: none;
   width: 100%;
   display: table;
 }
 
-#formEditCase > .top > .left {
+.fogbugz-helper-ticket-tweaks #formEditCase > .top > .left {
   display: table-cell;
   float: none;
   vertical-align: top;
 }
 
-#main2 section.case #formEditCase .top>header,
-#main section.case #formEditCase .top>header {
+.fogbugz-helper-ticket-tweaks #main2 section.case #formEditCase .top>header,
+.fogbugz-helper-ticket-tweaks #main section.case #formEditCase .top>header {
   border-left: none;
   width: auto;
   float: none;
@@ -322,7 +296,7 @@ section.case > article > nav {
   vertical-align: top;
 }
 
-#formEditCase > .top > header > .field.wide:first-child {
+.fogbugz-helper-ticket-tweaks #formEditCase > .top > header > .field.wide:first-child {
   position: relative;
   min-height: 2.3em;
   padding: 0;
@@ -332,7 +306,7 @@ section.case > article > nav {
   float: none;
 }
 
-#formEditCase > .top > header > .field.wide:first-child input {
+.fogbugz-helper-ticket-tweaks #formEditCase > .top > header > .field.wide:first-child input {
   position: absolute;
   left: 0;
   top: 0;
@@ -340,53 +314,53 @@ section.case > article > nav {
   display: block;
 }
 
-#formEditCase .field {
+.fogbugz-helper-ticket-tweaks #formEditCase .field {
 }
 
 /* BugzID */
-#main2 section.case .corner a.case,
-#main section.case .corner a.case {
+.fogbugz-helper-ticket-tweaks #main2 section.case .corner a.case,
+.fogbugz-helper-ticket-tweaks #main section.case .corner a.case {
   margin-bottom: 0;
 }
 
-#formEditCase > .left {
+.fogbugz-helper-ticket-tweaks #formEditCase > .left {
   height: auto;
   width: auto;
   width: 25%;
 }
 
-#formEditCase > .left > * {
+.fogbugz-helper-ticket-tweaks #formEditCase > .left > * {
   padding: 0;
   margin: 10px 0;
 }
 
 /* Comment */
-#formEditCase > .events {
+.fogbugz-helper-ticket-tweaks #formEditCase > .events {
   float: right;
   width: 75%;
 }
 
 /* Comments */
-#formEditCase > #eventList-0 {
+.fogbugz-helper-ticket-tweaks #formEditCase > #eventList-0 {
   float: right;
   width: 75%;
 }
 
 /* Events */
-.event .editor > textarea {
+.fogbugz-helper-ticket-tweaks .event .editor > textarea {
   height: auto;
 }
 
-.events .event header > div {
+.fogbugz-helper-ticket-tweaks .events .event header > div {
   display: none;
 }
 
-.events .event header:hover {
+.fogbugz-helper-ticket-tweaks .events .event header:hover {
   position: relative;
   z-index: 100;
 }
 
-.events .event header:hover > div {
+.fogbugz-helper-ticket-tweaks .events .event header:hover > div {
   display: block;
   position: absolute;
   left: 2em;
@@ -396,7 +370,16 @@ section.case > article > nav {
   border-radius: .5em;
 }
 
-#sEvent {
+.fogbugz-helper-ticket-tweaks #sEvent {
   min-height: 0 !important;
 }
 
+/* Header colors */
+
+.fogbugz-helper-ticket-tweaks #www-fogcreek-com-fogbugz #mainArea {
+  padding-bottom: 0;
+}
+
+.fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
+  padding: 5.55em 1em 0.5em;
+}

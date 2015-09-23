@@ -531,6 +531,25 @@ var main = function($) {
     onunload: onunload_expand_tasks
   });
 
+    ////////////////////////////
+   // Ticket Tweaks
+  ////////////////////////////
+  var onload_ticket_tweaks = function() {
+    $body.addClass('fogbugz-helper-ticket-tweaks');
+  };
+
+  var onunload_ticket_tweaks = function() {
+    $body.removeClass('fogbugz-helper-ticket-tweaks');
+  };
+
+  pm.add({
+    id: 'ticket_tweaks',
+    title: 'Ticket Styling Tweaks',
+    defaultOn: true,
+    onload: onload_ticket_tweaks,
+    onunload: onunload_ticket_tweaks
+  });
+
   // Set up all the preferences
   pm.load();
 };

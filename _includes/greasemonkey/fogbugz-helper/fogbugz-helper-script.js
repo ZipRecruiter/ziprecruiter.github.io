@@ -512,6 +512,25 @@ var main = function($) {
     onunload: onunload_auto_sort
   });
 
+    ////////////////////////////
+   // Expand Task List
+  ////////////////////////////
+  var onload_expand_tasks = function() {
+    $body.addClass('fogbugz-helper-expand-tasks');
+  };
+
+  var onunload_expand_tasks = function() {
+    $body.removeClass('fogbugz-helper-expand-tasks');
+  };
+
+  pm.add({
+    id: 'expand_tasks',
+    title: 'Expand Task List Cells',
+    defaultOn: false,
+    onload: onload_expand_tasks,
+    onunload: onunload_expand_tasks
+  });
+
   // Set up all the preferences
   pm.load();
 };

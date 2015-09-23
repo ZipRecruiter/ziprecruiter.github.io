@@ -76,6 +76,18 @@
   background: rgba(255, 255, 255, .9);
 }
 
+.fogbugz-helper-bgcolors #www-fogcreek-com-fogbugz,
+.fogbugz-helper-bgcolors #main2,
+.fogbugz-helper-bgcolors #main {
+  color: #fff;
+}
+
+.fogbugz-helper-bgcolors #www-fogcreek-com-fogbugz div div,
+.fogbugz-helper-bgcolors #main2 * div,
+.fogbugz-helper-bgcolors #main * div {
+  color: #000;
+}
+
 /* Colors */
 #header li.fogbugz-helper-colors {
   padding: 0 1em;
@@ -176,63 +188,38 @@
 }
 
   /* //////////////////////////
- // 
+ // Expand Task List
 ////////////////////////// */
 
-
-/* Header colors */
-
-#www-fogcreek-com-fogbugz,
-#main2,
-#main {
-  color: #fff;
-}
-
-#www-fogcreek-com-fogbugz div div,
-#main2 * div,
-#main * div {
-  color: #000;
-}
-
-#www-fogcreek-com-fogbugz #mainArea {
-  padding-bottom: 0;
-}
-
-#stacking-context-main > #main {
-  padding: 5.55em 1em 0.5em;
-}
-
-/* Task List */
-
-#event-tracking-div .case-list th,
-#event-tracking-div .wiki-page-list th,
-#event-tracking-div .case-list td,
-#event-tracking-div .wiki-page-list td,
-#event-tracking-div .case-list .wiki-grid-header,
-#event-tracking-div .wiki-page-list .wiki-grid-header,
-#event-tracking-div .case-list .wiki-grid-column,
-#event-tracking-div .wiki-page-list .wiki-grid-column {
+.fogbugz-helper-expand-tasks #event-tracking-div .case-list th,
+.fogbugz-helper-expand-tasks #event-tracking-div .wiki-page-list th,
+.fogbugz-helper-expand-tasks #event-tracking-div .case-list td,
+.fogbugz-helper-expand-tasks #event-tracking-div .wiki-page-list td,
+.fogbugz-helper-expand-tasks #event-tracking-div .case-list .wiki-grid-header,
+.fogbugz-helper-expand-tasks #event-tracking-div .wiki-page-list .wiki-grid-header,
+.fogbugz-helper-expand-tasks #event-tracking-div .case-list .wiki-grid-column,
+.fogbugz-helper-expand-tasks #event-tracking-div .wiki-page-list .wiki-grid-column {
   white-space: normal;
 }
 
-#event-tracking-div .case-list tr.bug-grid-row .grid-title-col,
+.fogbugz-helper-expand-tasks #event-tracking-div .case-list tr.bug-grid-row .grid-title-col,
 
-#event-tracking-div td div {
+.fogbugz-helper-expand-tasks #event-tracking-div td div {
   white-space: normal;
   text-overflow: clip;
   overflow: visible;
 }
 
-#event-tracking-div td {
+.fogbugz-helper-expand-tasks #event-tracking-div td {
   vertical-align: top;
 }
 
-.case-list .list-group-footer {
+.fogbugz-helper-expand-tasks .case-list .list-group-footer {
   display: inline-block;
   height: auto;
 }
 
-.case-list .list-group-footer > .list-add-case {
+.fogbugz-helper-expand-tasks .case-list .list-group-footer > .list-add-case {
   padding: .25em .5em;
   margin: 0;
   background: rgba(255, 255, 255, .8);
@@ -241,16 +228,31 @@
   border-top-left-radius: 0;
 }
 
-.case-list .list-group-footer > .list-add-case:before {
+.fogbugz-helper-expand-tasks .case-list .list-group-footer > .list-add-case:before {
   display: inline-block;
   font-size: 13px;
   transform: scale(.8, .8);
   margin-right: .2em;
 }
 
-.case-list .list-group-footer {
+.fogbugz-helper-expand-tasks .case-list .list-group-footer {
   margin: 0;
 }
+
+  /* //////////////////////////
+ // Forgot
+////////////////////////// */
+
+
+/* Header colors */
+
+/*#www-fogcreek-com-fogbugz #mainArea {
+  padding-bottom: 0;
+}
+
+#stacking-context-main > #main {
+  padding: 5.55em 1em 0.5em;
+}*/
 
 /*  */
 #stacking-context-main>#main {

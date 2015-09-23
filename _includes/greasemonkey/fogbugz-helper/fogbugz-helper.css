@@ -115,64 +115,70 @@
   opacity: 0;
 }
 
-/* main2 */
-
-#main2 .case-list {
+  /* //////////////////////////
+ // Auto Sort 
+////////////////////////// */
+.fogbugz-helper-auto-sort #main2 .case-list {
   display: flex;
   flex-direction: column;
 }
 
-#main2 .case-list > * {
+.fogbugz-helper-auto-sort #main2 .case-list > * {
   order: 100;
 }
 
-#main2 .case-list [data-collapse-key$="Triage"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Triage"] {
   order: 0;
 }
 
-#main2 .case-list [data-collapse-key$="Triage"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Triage"] + div {
   order: 1;
 }
 
-#main2 .case-list [data-collapse-key$="Planning"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] {
   order: 2;
 }
 
-#main2 .case-list [data-collapse-key$="Planning"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] + div {
   order: 3;
 }
 
-#main2 .case-list [data-collapse-key$="Development"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] {
   order: 4;
 }
 
-#main2 .case-list [data-collapse-key$="Development"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] + div {
   order: 5;
 }
 
-#main2 .case-list [data-collapse-key$="Review"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] {
   order: 6;
 }
 
-#main2 .case-list [data-collapse-key$="Review"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] + div {
   order: 7;
 }
 
-#main2 .case-list [data-collapse-key$="QA"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] {
   order: 8;
 }
 
-#main2 .case-list [data-collapse-key$="QA"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] + div {
   order: 9;
 }
 
-#main2 .case-list [data-collapse-key$="Released"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] {
   order: 10;
 }
 
-#main2 .case-list [data-collapse-key$="Released"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
   order: 11;
 }
+
+  /* //////////////////////////
+ // 
+////////////////////////// */
+
 
 /* Header colors */
 

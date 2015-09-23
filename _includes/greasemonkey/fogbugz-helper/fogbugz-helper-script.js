@@ -493,6 +493,25 @@ var main = function($) {
     onunload: onunload_tickets_in_modal
   });
 
+    ////////////////////////////
+   // Auto Sort Tickets
+  ////////////////////////////
+  var onload_auto_sort = function() {
+    $body.addClass('fogbugz-helper-auto-sort');
+  };
+
+  var onunload_auto_sort = function() {
+    $body.removeClass('fogbugz-helper-auto-sort');
+  };
+
+  pm.add({
+    id: 'auto_sort',
+    title: 'Auto Sort Tickets (by status)',
+    defaultOn: false,
+    onload: onload_auto_sort,
+    onunload: onunload_auto_sort
+  });
+
   // Set up all the preferences
   pm.load();
 };

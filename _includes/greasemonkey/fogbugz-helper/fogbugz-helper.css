@@ -1,11 +1,177 @@
+  /* //////////////////////////
+ // Preferences
+////////////////////////// */
+#fogbugz-helper-prefs-menu,
+#fogbugz-helper-features-menu {
+  padding: 0;
+  margin: .5em 1em;
+}
 
-body {
+#fogbugz-helper-prefs-menu {
+  padding-bottom: .5em;
+  margin: .5em 0;
+}
+
+#fogbugz-helper-prefs-menu:after {
+  content: '';
+  display: block;
+  height: 0;
+  border-bottom: 1px solid #bac2cc;
+  margin: 5px 12px 0px 12px;
+}
+
+#fogbugz-helper-prefs-menu input {
+  margin-right: .5em;
+  vertical-align: text-top;
+}
+
+#fogbugz-helper-prefs-menu label {
+  display: block;
+  padding: 0 12px;
+}
+
+#fogbugz-helper-prefs-menu label:hover {
+  background-color: #E0E9F1;
+}
+
+  /* //////////////////////////
+ // Use Stylesheet (for debugging)
+////////////////////////// */
+#fogbugz-helper-css {
+  content: "loaded";
+}
+
+  /* //////////////////////////
+ // Add cololors
+////////////////////////// */
+.fogbugz-helper-bgcolors #header.thunder-header .main-header-bar {
+  background: rgba(255, 255, 255, .85);
+}
+
+.fogbugz-helper-bgcolors #header.thunder-header .secondary-nav .menus {
+  background: transparent;
+}
+
+.fogbugz-helper-bgcolors #header.thunder-header .button {
+  background: rgba(255, 255, 255, .85);
+}
+
+.fogbugz-helper-bgcolors #belowBanner,
+.fogbugz-helper-bgcolors #header #below-banner #below-nav {
+  background: rgba(255, 255, 255, .85);
+}
+
+.fogbugz-helper-bgcolors #toolbar {
+  background: rgba(255, 255, 255, .85);
+  padding: .25em .5em;
+  border-radius: .25em;
+  line-height: 2;
+}
+
+.fogbugz-helper-bgcolors #box div.col {
+  background: rgba(255, 255, 255, .9);
+}
+
+.fogbugz-helper-bgcolors #box div.li div.header {
+  background: rgba(255, 255, 255, .9);
+}
+
+/* Colors */
+#header li.fogbugz-helper-colors {
+  padding: 0 1em;
+}
+
+.fogbugz-helper-colors button {
+  margin: 2px;
+  border-width: 1px;
+}
+
+.fogbugz-helper-colors input {
+  display: block;
+}
+
+  /* //////////////////////////
+ // Open Tickets in Modal
+////////////////////////// */
+.fogbugz-helper-tickets-in-modal #stacking-context-main > #main2 {
+  padding: 5.55em 1em 0.5em;
+}
+
+.fogbugz-helper-tickets-in-modal.main-has-content {
+  overflow: hidden;
+}
+
+.fogbugz-helper-tickets-in-modal.main-has-content #main {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .6);
+  overflow: scroll;
+}
+
+.fogbugz-helper-tickets-in-modal .navigating #main {
+  opacity: 0;
 }
 
 /* main2 */
 
-#stacking-context-main>#main2 {
-  padding: 5.55em 1em 0.5em;
+#main2 .case-list {
+  display: flex;
+  flex-direction: column;
+}
+
+#main2 .case-list > * {
+  order: 100;
+}
+
+#main2 .case-list [data-collapse-key$="Triage"] {
+  order: 0;
+}
+
+#main2 .case-list [data-collapse-key$="Triage"] + div {
+  order: 1;
+}
+
+#main2 .case-list [data-collapse-key$="Planning"] {
+  order: 2;
+}
+
+#main2 .case-list [data-collapse-key$="Planning"] + div {
+  order: 3;
+}
+
+#main2 .case-list [data-collapse-key$="Development"] {
+  order: 4;
+}
+
+#main2 .case-list [data-collapse-key$="Development"] + div {
+  order: 5;
+}
+
+#main2 .case-list [data-collapse-key$="Review"] {
+  order: 6;
+}
+
+#main2 .case-list [data-collapse-key$="Review"] + div {
+  order: 7;
+}
+
+#main2 .case-list [data-collapse-key$="QA"] {
+  order: 8;
+}
+
+#main2 .case-list [data-collapse-key$="QA"] + div {
+  order: 9;
+}
+
+#main2 .case-list [data-collapse-key$="Released"] {
+  order: 10;
+}
+
+#main2 .case-list [data-collapse-key$="Released"] + div {
+  order: 11;
 }
 
 /* Header colors */
@@ -22,78 +188,12 @@ body {
   color: #000;
 }
 
-#header.thunder-header .main-header-bar {
-  background: rgba(255, 255, 255, .85);
-}
-
-#header.thunder-header .main-header-bar .button {
-}
-
-#header.thunder-header .main-header-bar a {
-}
-
-#header.thunder-header .secondary-nav .menus {
-  background: transparent;
-}
-
-#header.thunder-header .button {
-  background: rgba(255, 255, 255, .85);
-}
-
-#belowBanner,
-#header #below-banner #below-nav {
-  background: rgba(255, 255, 255, .85);
-}
-
-#toolbar {
-  background: rgba(255, 255, 255, .85);
-  padding: .25em .5em;
-  border-radius: .25em;
-  line-height: 2;
-}
-
-#box div.col {
-  background: rgba(255, 255, 255, .9);
-}
-
-#box div.li div.header {
-  background: rgba(255, 255, 255, .9);
-}
-
 #www-fogcreek-com-fogbugz #mainArea {
   padding-bottom: 0;
 }
 
-/* slidey woo */
-#main {
-  /* position: relative;
-  transition: left .1s linear;
-  left: 0; */
-}
-
-.navigating #main {
-  /*left: -100%;*/
-  opacity: 0;
-}
-
 #stacking-context-main > #main {
   padding: 5.55em 1em 0.5em;
-}
-
-/* modal main */
-
-body.main-has-content {
-  overflow: hidden;
-}
-
-.main-has-content #main {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, .6);
-  overflow: scroll;
 }
 
 /* Task List */
@@ -147,10 +247,6 @@ body.main-has-content {
 }
 
 /*  */
-#fogbugz-helper-css {
-  content: "loaded";
-}
-
 #stacking-context-main>#main {
   /*padding-top: 80px;*/
   padding-bottom: 30px;
@@ -296,16 +392,3 @@ section.case > article > nav {
   min-height: 0 !important;
 }
 
-/* Colors */
-#header li.fogbugz-helper-colors {
-  padding: 0 1em;
-}
-
-.fogbugz-helper-colors button {
-  margin: 2px;
-  border-width: 1px;
-}
-
-.fogbugz-helper-colors input {
-  display: block;
-}

@@ -147,7 +147,7 @@
   order: 1;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] {
+/* .fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] {
   order: 2;
 }
 
@@ -184,6 +184,46 @@
 }
 
 .fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
+  order: 11;
+} */
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] {
+  order: 2;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
+  order: 3;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] {
+  order: 4;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] + div {
+  order: 5;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] {
+  order: 6;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] + div {
+  order: 7;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] {
+  order: 8;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] + div {
+  order: 9;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] {
+  order: 10;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] + div {
   order: 11;
 }
 

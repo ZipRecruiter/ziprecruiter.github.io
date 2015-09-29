@@ -1,3 +1,4 @@
+
 (function($) {
 'use strict';
 
@@ -548,6 +549,25 @@ var main = function($) {
     defaultOn: true,
     onload: onload_ticket_tweaks,
     onunload: onunload_ticket_tweaks
+  });
+
+    ////////////////////////////
+   // Fake Kanban
+  ////////////////////////////
+  var onload_fake_kanban = function() {
+    $body.addClass('fogbugz-helper-fake-kanban');
+  };
+
+  var onunload_fake_kanban = function() {
+    $body.removeClass('fogbugz-helper-fake-kanban');
+  };
+
+  pm.add({
+    id: 'fake_kanban',
+    title: 'Kanban-Style Ticket Listing',
+    defaultOn: false,
+    onload: onload_fake_kanban,
+    onunload: onunload_fake_kanban
   });
 
   // Set up all the preferences

@@ -435,6 +435,14 @@
   font-weight: bold;
 }
 
+.fogbugz-helper-ticket-tweaks .subscribers-list .expander {
+  display: none;
+}
+
+.fogbugz-helper-ticket-tweaks .subscribers-list .elided {
+  display: inline;
+}
+
 /* Container */
 .fogbugz-helper-ticket-tweaks section.case {
   width: auto;

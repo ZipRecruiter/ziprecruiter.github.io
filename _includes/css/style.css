@@ -309,6 +309,15 @@ a:focus {
 
 /* Main ---------------- */
 
+#main_headline .headline {
+	font-size: 1.75em;
+	font-weight: 300;
+	font-family: 'Lato', sans-serif;
+	line-height: 1.1;
+	margin-bottom: .75em;
+	background: transparent;
+}
+
 #main .section {
 	padding: 2em 0 2.5em 0;
 	display: inline-block;
@@ -317,14 +326,42 @@ a:focus {
 	line-height: 1.5;
 }
 
-#main .section .headline {
+#sub .headline {
 	font-size: 1.75em;
-	font-weight: 300;
-	font-family: 'Lato', sans-serif;
 	line-height: 1.1;
 	margin-bottom: .75em;
-	margin-left: .75em;
+	background: #f3f3f3;
+	padding: .25em .25em .25em 1em;
 }
+
+#sub .headline a {
+	display: block;
+}
+
+
+
+.body {
+	margin-left: 2em;
+}
+
+.page_nav {
+	margin-bottom: 1em;
+	display: inline-block;
+	vertical-align: top;
+}
+
+.page_nav a {
+	background: #f3f3f3;
+	float: left;
+	padding: .25em 1em;
+	margin-right: .25em;
+}
+
+.page_nav a:last-child {
+	border-top-right-radius: .5em;
+	border-bottom-right-radius: .5em;
+}
+
 
 /* Footer ---------------- */
 
@@ -450,6 +487,12 @@ a:focus {
 .js .lazy:after,
 .js .lazy {
 	background: transparent !important;
+}
+
+/* Extra cms classes ---------------- */
+.cms textarea {
+	width: 100%;
+	height: 16em;
 }
 
 /* ------------------------------------------------------------

@@ -3,10 +3,16 @@ layout: default
 title: Greasemonkey Scripts - FogBugz Helper
 ---
 <section class="section"><div class="content">
-  <div class="cms">
-    <section>
-      <h2>Features</h2>
+  <nav class="page_nav">
+    <a href="#features">Features</a>
+    <a href="#installing">Installation instructions</a>
+    <a href="#script">The Script</a>
+  </nav>
 
+  <section id="features">
+    <h2 class="headline"><a href="#features">Features</a></h2>
+
+    <div class="body cms">
       <ul>
         <li>Fake kanban-style interface for ticket lists (work in progress)</li>
         <li>Auto-sorting tickets that arranged by "status" (Fogbugz sorts them in an almost random order)</li>
@@ -20,11 +26,17 @@ title: Greasemonkey Scripts - FogBugz Helper
         <li>Tickets: Text areas auto expand while typing</li>
         <li>Tickets: Some ticket spam is hidden, mouse over the "events" to see the full description of the event</li>
       </ul>
-    </section>
 
-    <section>
-      <h2>Installation instructions</h2>
+      <p>To enable/disable features, mouse-over the tools menu in FogBugz:</p>
+      <p><img src="/greasemonkey/fogbugz-helper/img/tools_dropdown.png" width="350" height="610"></p>
+      <p>Note: some features are disabled by default</p>
+    </div>
+  </section>
 
+  <section id="installing">
+    <h2 class="headline"><a href="#installing">Installation instructions</a></h2>
+
+    <div class="body cms">
       <h3>Firefox</h3>
       <ul>
         <li>Install greasemonkey (<a href="https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/</a>)</li>
@@ -48,12 +60,14 @@ title: Greasemonkey Scripts - FogBugz Helper
         <li>Install Tampermonkey (<a href="https://tampermonkey.net/index.php?ext=dhdg&browser=safari">https://tampermonkey.net/index.php?ext=dhdg&browser=safari</a>)</li>
         <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script.</li>
       </ul>
-    </section>
+    </div>
+  </section>
 
-    <section>
-      <h2>The Script</h2>
+  <section id="script">
+    <h2 class="headline"><a href="#script">The Script</a></h2>
 
-      <pre>
+    <div class="body cms">
+      <textarea>
 // ==UserScript==
 // @name         FogBugz Helper
 // @namespace    http://ziprecruiter.github.io/
@@ -66,7 +80,7 @@ title: Greasemonkey Scripts - FogBugz Helper
 // ==/UserScript==
 
 javascript:(function(){url='//ziprecruiter.github.io/greasemonkey/fogbugz-helper/fogbugz-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
-      </pre>
-    </section>
-  </div>
+      </textarea>
+    </div>
+  </section>
 </div></section>

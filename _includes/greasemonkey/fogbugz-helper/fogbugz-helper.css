@@ -35,6 +35,16 @@
   background-color: #E0E9F1;
 }
 
+#header.thunder-header .dropdown-menu #fogbugz-helper-menu a {
+  color: #39668e;
+  font-weight: bold;
+}
+
+#header.thunder-header .dropdown-menu #fogbugz-helper-menu a:hover,
+#header.thunder-header .dropdown-menu #fogbugz-helper-menu a:focus {
+  text-decoration: underline;
+}
+
   /* //////////////////////////
  // Use Stylesheet (for debugging)
 ////////////////////////// */

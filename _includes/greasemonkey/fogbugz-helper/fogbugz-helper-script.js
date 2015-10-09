@@ -87,6 +87,9 @@ PreferenceManager.prototype.load = function() {
       $helper_menu.empty();
     } else {
       $helper_menu = $('<li/>').attr('id', 'fogbugz-helper-menu');
+      // Add a link to plugin homepage
+      var $homepage_link = $('<label><a href="http://ziprecruiter.github.io/greasemonkey/fogbugz-helper/" target="_blank">ZipRecruiter FogBugz Helper</a></label>');
+      $helper_menu.append($homepage_link);
     }
 
     // Menu to put checkbox preferences into

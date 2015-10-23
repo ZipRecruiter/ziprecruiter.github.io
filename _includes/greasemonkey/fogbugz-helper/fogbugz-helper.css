@@ -202,63 +202,78 @@
  // Fake Kanban
 ////////////////////////// */
 
+.fogbugz-helper-fake-kanban #main .case-list,
 .fogbugz-helper-fake-kanban #main2 .case-list {
   display: flex;
   flex-direction: column;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list > *,
 .fogbugz-helper-fake-kanban #main2 .case-list > * {
   order: 100;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] {
   order: 0;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] + div {
   order: 1;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Planning"] {
   order: 2;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Planning"] + div {
   order: 3;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Development"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Development"] {
   order: 4;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Development"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Development"] + div {
   order: 5;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] {
   order: 6;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] + div {
   order: 7;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] {
   order: 8;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] + div {
   order: 9;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] {
   order: 10;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] + div {
   order: 11;
 }
 
+.fogbugz-helper-fake-kanban #main .case-list,
 .fogbugz-helper-fake-kanban #main2 .case-list {
   display: flex;
   flex-direction: row;
@@ -372,6 +387,11 @@
 
 .fogbugz-helper-fake-kanban .person:after {
   content: ")";
+}
+
+.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row[data-depth="1"] .grid-title-col,
+.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row[data-depth="2"] .grid-title-col {
+  padding-left: 0;
 }
 
   /* //////////////////////////
@@ -489,6 +509,11 @@
   display: table-cell;
   width: 100%;
   vertical-align: top;
+}
+
+.fogbugz-helper-ticket-tweaks #main2 section.case #formEditCase .top>header+header,
+.fogbugz-helper-ticket-tweaks #main section.case #formEditCase .top>header+header {
+  display: table-caption;
 }
 
 .fogbugz-helper-ticket-tweaks #formEditCase > .top > header > .field.wide:first-child {

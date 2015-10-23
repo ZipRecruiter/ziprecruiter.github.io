@@ -119,9 +119,10 @@ PreferenceManager.prototype.load = function() {
       $plabel = $('<label/>')
         .attr({
           'id': 'fogbugz-helper-pref-' + pref.id,
-          'for': 'fogbugz-helper-pref-check-' + pref.id
+          'for': 'fogbugz-helper-pref-check-' + pref.id,
+          'title': pref.title
         })
-        .html(pref.title)
+        .html(pref.text)
         .prepend($pcheck)
         .appendTo($prefs_menu)
         ;
@@ -182,7 +183,7 @@ PreferenceManager.prototype.load = function() {
 var pm = new PreferenceManager();
 
   ////////////////////////////
- // Use Stylesheet (for debugging)
+ // (Preference) Use Stylesheet (for debugging)
 ////////////////////////////
 var use_stylesheet = function() {
   var link = document.createElement('link');
@@ -211,7 +212,8 @@ var onunload_use_stylesheet = function() {
 
 pm.add({
   id: 'use_stylesheet',
-  title: 'Use Stylesheet (for debugging)',
+  text: 'Use Stylesheet (for debugging)',
+  title: 'This is for development purposes, you shouldn\'t need to enable it',
   onload: onload_use_stylesheet,
   onunload: onunload_use_stylesheet
 });
@@ -271,7 +273,7 @@ var main = function($) {
   $window = $(window);
 
     ////////////////////////////
-   // Autosize Textareas
+   // (Preference) Autosize Textareas
   ////////////////////////////
   var autosize_textareas = function() {
     var $textareas = $('textarea:not(.autosize-autosized)');
@@ -292,14 +294,15 @@ var main = function($) {
 
   pm.add({
     id: 'autosize_textareas',
-    title: 'Autosize Textareas',
+    text: 'Autosize Textareas',
+    title: 'Large text fields will automatically expand when type in them',
     defaultOn: true,
     onload: onload_autosize_textareas,
     onunload: onunload_autosize_textareas
   });
 
     ////////////////////////////
-   // Add cololors
+   // (Preference) Background cololor picker
   ////////////////////////////
   var colors = [
     '#FFFFFF',
@@ -387,7 +390,8 @@ var main = function($) {
 
   pm.add({
     id: 'bgcolors',
-    title: 'Background Colors',
+    text: 'Background Colors',
+    title: 'Enable the color picker to change the background color of FogBugz. Has a few styling issues here and there. If you encounter an issue you can quickly disable it in the FogBugz tools menu.',
     defaultOn: true,
     onload: onload_bgcolors,
     ontools: ontools_bgcolors,
@@ -395,7 +399,7 @@ var main = function($) {
   });
 
     ////////////////////////////
-   // Edit Ticket Links
+   // (Preference) Edit Ticket Links
   ////////////////////////////
   var edit_ticket_links = function(e) {
     var href = this.href;
@@ -415,14 +419,15 @@ var main = function($) {
 
   pm.add({
     id: 'edit_ticket_links',
-    title: 'Edit Ticket Links',
+    text: 'Edit Ticket Links',
+    title: 'When you click on ticket links within FogBugz, they will open in "edit mode." This will not work on links outside of FogBugz yet (like links in emails, etc).',
     defaultOn: true,
     onload: onload_edit_ticket_links,
     onunload: onunload_edit_ticket_links
   });
 
     ////////////////////////////
-   // Open Tickets in Modal
+   // (Preference) Open Tickets in Modal
   ////////////////////////////
 
   var $main = $('#main');
@@ -474,6 +479,7 @@ var main = function($) {
       ;
 
     history.pushState(false, false, filters_url);
+    $(window).trigger('popState');
   };
 
   var onload_tickets_in_modal = function() {
@@ -491,14 +497,15 @@ var main = function($) {
 
   pm.add({
     id: 'onunload_tickets_in_modal',
-    title: 'Open Tickets in Modal',
+    text: 'Open Tickets in Modal',
+    title: 'Tickets will open in "modals" which will leave your task list/search open in the background. Click the black backdrop to close the ticket.',
     defaultOn: true,
     onload: onload_tickets_in_modal,
     onunload: onunload_tickets_in_modal
   });
 
     ////////////////////////////
-   // Auto Sort Tickets
+   // (Preference) Auto Sort Tickets
   ////////////////////////////
   var onload_auto_sort = function() {
     $body.addClass('fogbugz-helper-auto-sort');
@@ -510,14 +517,15 @@ var main = function($) {
 
   pm.add({
     id: 'auto_sort',
-    title: 'Auto Sort Tickets (by status)',
+    text: 'Auto Sort Tickets (by status)',
+    title: 'When grouped and sorted by status, ticket groups are arranged in a more logical order. Reverse sorting doesn\'t work yet',
     defaultOn: false,
     onload: onload_auto_sort,
     onunload: onunload_auto_sort
   });
 
     ////////////////////////////
-   // Expand Task List
+   // (Preference) Expand Task List
   ////////////////////////////
   var onload_expand_tasks = function() {
     $body.addClass('fogbugz-helper-expand-tasks');
@@ -529,14 +537,15 @@ var main = function($) {
 
   pm.add({
     id: 'expand_tasks',
-    title: 'Expand Task List Cells',
+    text: 'Expand Task List Cells',
+    title: 'Shows the full text of titles etc. in ticket lists. Each row can be more than one line of text.',
     defaultOn: false,
     onload: onload_expand_tasks,
     onunload: onunload_expand_tasks
   });
 
     ////////////////////////////
-   // Ticket Tweaks
+   // (Preference) Ticket Tweaks
   ////////////////////////////
   var onload_ticket_tweaks = function() {
     $body.addClass('fogbugz-helper-ticket-tweaks');
@@ -548,14 +557,15 @@ var main = function($) {
 
   pm.add({
     id: 'ticket_tweaks',
-    title: 'Ticket Styling Tweaks',
+    text: 'Ticket Styling Tweaks',
+    title: 'Various ticket styling changes to make tickets work a little better in smaller windows, etc.',
     defaultOn: true,
     onload: onload_ticket_tweaks,
     onunload: onunload_ticket_tweaks
   });
 
     ////////////////////////////
-   // Fake Kanban
+   // (Preference) Fake Kanban
   ////////////////////////////
   var onload_fake_kanban = function() {
     $body.addClass('fogbugz-helper-fake-kanban');
@@ -567,7 +577,8 @@ var main = function($) {
 
   pm.add({
     id: 'fake_kanban',
-    title: 'Kanban-Style Ticket Listing',
+    text: 'Kanban-Style Ticket Listing',
+    title: 'Changes ticket listings to be similar to the FogBugz Kanban board. Drag n drop to come...',
     defaultOn: false,
     onload: onload_fake_kanban,
     onunload: onunload_fake_kanban

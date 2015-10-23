@@ -53,8 +53,17 @@
 }
 
   /* //////////////////////////
- // Add cololors
+ // Add background colors
 ////////////////////////// */
+
+/* Need this here and in the modal ticket */
+.fogbugz-helper-bgcolors #case-errors-container {
+  background: #fff;
+  padding: 1em;
+  margin-bottom: .5em;
+  border-radius: .5em;
+}
+
 .fogbugz-helper-bgcolors #header.thunder-header .main-header-bar {
   background: rgba(255, 255, 255, .85);
 }
@@ -116,6 +125,15 @@
   /* //////////////////////////
  // Open Tickets in Modal
 ////////////////////////// */
+
+/* Need this here and in the background colors */
+.fogbugz-helper-tickets-in-modal #case-errors-container {
+  background: #fff;
+  padding: 1em;
+  margin-bottom: .5em;
+  border-radius: .5em;
+}
+
 .fogbugz-helper-tickets-in-modal #stacking-context-main > #main2 {
   padding: 5.55em 1em 0.5em;
 }

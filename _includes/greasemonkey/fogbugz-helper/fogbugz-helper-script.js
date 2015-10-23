@@ -478,8 +478,9 @@ var main = function($) {
       .removeClass('main-has-content')
       ;
 
-    history.pushState(false, false, filters_url);
-    $(window).trigger('popState');
+    //history.pushState(false, false, filters_url);
+    //$(window).trigger('popState');
+    $('.js-header-list-cases-link').click();
   };
 
   var onload_tickets_in_modal = function() {

@@ -585,6 +585,26 @@ var main = function($) {
     onunload: onunload_fake_kanban
   });
 
+    ////////////////////////////
+   // (Preference) Reverse Comments
+  ////////////////////////////
+  var onload_reverse_comments = function() {
+    $body.addClass('fogbugz-helper-reverse-comments');
+  };
+
+  var onunload_reverse_comments = function() {
+    $body.removeClass('fogbugz-helper-reverse-comments');
+  };
+
+  pm.add({
+    id: 'reverse_comments',
+    text: 'Reverse Comment Order on Tickets',
+    title: 'Pretty self explanatory',
+    defaultOn: false,
+    onload: onload_reverse_comments,
+    onunload: onunload_reverse_comments
+  });
+
   // Set up all the preferences
   pm.load();
 };

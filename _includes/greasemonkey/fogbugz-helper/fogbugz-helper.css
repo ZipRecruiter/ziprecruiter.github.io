@@ -465,6 +465,15 @@
 }
 
   /* //////////////////////////
+ // Reverse Comments
+////////////////////////// */
+
+.fogbugz-helper-reverse-comments #formEditCase > #eventList-0 {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+  /* //////////////////////////
  // Ticket Tweaks
 ////////////////////////// */
 .fogbugz-helper-ticket-tweaks #stacking-context-main>#main {

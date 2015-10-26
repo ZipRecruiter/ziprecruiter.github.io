@@ -273,6 +273,559 @@ var main = function($) {
   $window = $(window);
 
     ////////////////////////////
+   // (Preference) Hotkeys
+  ////////////////////////////
+
+  // Keep this preference first so other preferences can add their own hotkeys
+
+  // http://stackoverflow.com/questions/13992111/javascript-function-to-convert-keycodes-into-characters
+  var convertKeyCode = function(evt) {
+    var chara = null;
+    var keyCode = (evt.which) ? evt.which : evt.keyCode;
+    var shift = evt.shiftKey;
+    //if (keyCode == 8)
+    //  chara = "backspace";
+    //  backspace
+    //if (keyCode == 9)
+    //  chara = "tab";
+    //  tab
+    //if (keyCode == 13)
+    //  chara = "enter";
+    //  enter
+    if (keyCode == 16)
+      chara = "";
+    //  chara = "shift";
+    //  shift
+    //if (keyCode == 17)
+    //  chara = "ctrl";
+    //  ctrl
+    //if (keyCode == 18)
+    //  chara = "alt";
+    //  alt
+    if (keyCode == 19) {
+        chara = "PAUSE/BREAK";
+    //  pause/break
+    //if (keyCode == 20)
+    //  chara = "caps lock";
+    //  caps lock
+    } else if (keyCode == 27) {
+      chara = "ESC";
+    //  escape
+    //if (keyCode == 33)
+    //  chara = "page up";
+    // page up, to avoid displaying alternate character and confusing people
+    //if (keyCode == 34)
+    //  chara = "page down";
+    // page down
+    //if (keyCode == 35)
+    //  chara = "end";
+    // end
+    //if (keyCode == 36)
+    //  chara = "home";
+    // home
+    //if (keyCode == 37)
+    //  chara = "left arrow";
+    // left arrow
+    //if (keyCode == 38)
+    //  chara = "up arrow";
+    // up arrow
+    //if (keyCode == 39)
+    //  chara = "right arrow";
+    // right arrow
+    //if (keyCode == 40)
+    //  chara = "down arrow";
+    // down arrow
+    //if (keyCode == 45)
+    //  chara = "insert";
+    // insert
+    //if (keyCode == 46)
+    //  chara = "delete";
+    // delete
+    // Alphanumeric
+    } else if (keyCode == 48) {
+        chara = /*(shift) ? ")" :*/ "0";
+    } else if (keyCode == 49) {
+        chara = /*(shift) ? "!" :*/ "1";
+    } else if (keyCode == 50) {
+        chara = /*(shift) ? "@" :*/ "2";
+    } else if (keyCode == 51) {
+        chara = /*(shift) ? "#" :*/ "3";
+    } else if (keyCode == 52) {
+        chara = /*(shift) ? "$" :*/ "4";
+    } else if (keyCode == 53) {
+        chara = /*(shift) ? "%" :*/ "5";
+    } else if (keyCode == 54) {
+        chara = /*(shift) ? "^" :*/ "6";
+    } else if (keyCode == 55) {
+        chara = /*(shift) ? "&" :*/ "7";
+    } else if (keyCode == 56) {
+        chara = /*(shift) ? "*" :*/ "8";
+    } else if (keyCode == 57) {
+        chara = /*(shift) ? "(" :*/ "9";
+
+    } else if (keyCode == 65) {
+        chara = /*(shift) ? "A" :*/ "a";
+    } else if (keyCode == 66) {
+        chara = /*(shift) ? "B" :*/ "b";
+    } else if (keyCode == 67) {
+        chara = /*(shift) ? "C" :*/ "c";
+    } else if (keyCode == 68) {
+        chara = /*(shift) ? "D" :*/ "d";
+    } else if (keyCode == 69) {
+        chara = /*(shift) ? "E" :*/ "e";
+    } else if (keyCode == 70) {
+        chara = /*(shift) ? "F" :*/ "f";
+    } else if (keyCode == 71) {
+        chara = /*(shift) ? "G" :*/ "g";
+    } else if (keyCode == 72) {
+        chara = /*(shift) ? "H" :*/ "h";
+    } else if (keyCode == 73) {
+        chara = /*(shift) ? "I" :*/ "i";
+    } else if (keyCode == 74) {
+        chara = /*(shift) ? "J" :*/ "j";
+    } else if (keyCode == 75) {
+        chara = /*(shift) ? "K" :*/ "k";
+    } else if (keyCode == 76) {
+        chara = /*(shift) ? "L" :*/ "l";
+    } else if (keyCode == 77) {
+        chara = /*(shift) ? "M" :*/ "m";
+    } else if (keyCode == 78) {
+        chara = /*(shift) ? "N" :*/ "n";
+    } else if (keyCode == 79) {
+        chara = /*(shift) ? "O" :*/ "o";
+    } else if (keyCode == 80) {
+        chara = /*(shift) ? "P" :*/ "p";
+    } else if (keyCode == 81) {
+        chara = /*(shift) ? "Q" :*/ "q";
+    } else if (keyCode == 82) {
+        chara = /*(shift) ? "R" :*/ "r";
+    } else if (keyCode == 83) {
+        chara = /*(shift) ? "S" :*/ "s";
+    } else if (keyCode == 84) {
+        chara = /*(shift) ? "T" :*/ "t";
+    } else if (keyCode == 85) {
+        chara = /*(shift) ? "U" :*/ "u";
+    } else if (keyCode == 86) {
+        chara = /*(shift) ? "V" :*/ "v";
+    } else if (keyCode == 87) {
+        chara = /*(shift) ? "W" :*/ "w";
+    } else if (keyCode == 88) {
+        chara = /*(shift) ? "X" :*/ "x";
+    } else if (keyCode == 89) {
+        chara = /*(shift) ? "Y" :*/ "y";
+    } else if (keyCode == 90) {
+        chara = /*(shift) ? "Z" :*/ "z";
+    // Alphanumeric
+    //} else if (keyCode == 91) {
+    //  chara = "left window";
+    // left window
+    //} else if (keyCode == 92) {
+    //  chara = "right window";
+    // right window
+    //} else if (keyCode == 93) {
+    //  chara = "select key";
+    // select key
+    //} else if (keyCode == 96) {
+    //  chara = "numpad 0";
+    // numpad 0
+    //} else if (keyCode == 97) {
+    //  chara = "numpad 1";
+    // numpad 1
+    //} else if (keyCode == 98) {
+    //  chara = "numpad 2";
+    // numpad 2
+    //} else if (keyCode == 99) {
+    //  chara = "numpad 3";
+    // numpad 3
+    //} else if (keyCode == 100) {
+    //  chara = "numpad 4";
+    // numpad 4
+    //} else if (keyCode == 101) {
+    //  chara = "numpad 5";
+    // numpad 5
+    //} else if (keyCode == 102) {
+    //  chara = "numpad 6";
+    // numpad 6
+    //} else if (keyCode == 103) {
+    //  chara = "numpad 7";
+    // numpad 7
+    //} else if (keyCode == 104) {
+    //  chara = "numpad 8";
+    // numpad 8
+    //} else if (keyCode == 105) {
+    //  chara = "numpad 9";
+    // numpad 9
+    //} else if (keyCode == 106) {
+    //  chara = "multiply";
+    // multiply
+    //} else if (keyCode == 107) {
+    //  chara = "add";
+    // add
+    //} else if (keyCode == 109) {
+    //  chara = "subtract";
+    // subtract
+    //} else if (keyCode == 110) {
+    //  chara = "decimal point";
+    // decimal point
+    //} else if (keyCode == 111) {
+    //  chara = "divide";
+    // divide
+    //} else if (keyCode == 112) {
+    //  chara = "F1";
+    // F1
+    //} else if (keyCode == 113) {
+    //  chara = "F2";
+    // F2
+    //} else if (keyCode == 114) {
+    //  chara = "F3";
+    // F3
+    //} else if (keyCode == 115) {
+    //  chara = "F4";
+    // F4
+    //} else if (keyCode == 116) {
+    //  chara = "F5";
+    // F5
+    //} else if (keyCode == 117) {
+    //  chara = "F6";
+    // F6
+    //} else if (keyCode == 118) {
+    //  chara = "F7";
+    // F7
+    //} else if (keyCode == 119) {
+    //  chara = "F8";
+    // F8
+    //} else if (keyCode == 120) {
+    //  chara = "F9";
+    // F9
+    //} else if (keyCode == 121) {
+    //  chara = "F10";
+    // F10
+    //} else if (keyCode == 122) {
+    //  chara = "F11";
+    // F11
+    //} else if (keyCode == 123) {
+    //  chara = "F12";
+    // F12
+    //} else if (keyCode == 144) {
+    //  chara = "num lock";
+    // num lock
+    //} else if (keyCode == 145) {
+    //  chara = "scroll lock";
+    // scroll lock
+    } else if (keyCode == 186) {
+        chara = ";";
+    // semi-colon
+    } else if (keyCode == 187) {
+        chara = "=";
+    // equal-sign
+    } else if (keyCode == 188) {
+        chara = ",";
+    // comma
+    } else if (keyCode == 189) {
+        chara = "-";
+    // dash
+    } else if (keyCode == 190) {
+        chara = ".";
+    // period
+    } else if (keyCode == 191) {
+        chara = (shift) ? "?" : "/";
+    // forward slash
+    } else if (keyCode == 192) {
+        chara = "`";
+    // grave accent
+    } else if (keyCode == 219) {
+        chara = /*(shift) ? "{" :*/ "[";
+    // open bracket
+    } else if (keyCode == 220) {
+        chara = "\\";
+    // back slash
+    } else if (keyCode == 221) {
+        chara = /*(shift) ? "}" :*/ "]";
+    // close bracket
+    } else if (keyCode == 222) {
+        chara = "'";
+    // single quote
+    }
+
+    return chara;
+  }
+
+  var Hotkey = function(hotkey) {
+    this.action = hotkey.action;
+    this.hotkey = hotkey;
+  };
+
+  var default_hotkey_pairs = [
+    // Create new case
+    {
+      text: 'Create Case',
+      name: 'create_case',
+      keys: 'c',
+      allowInput: false,
+      action: function() {
+        $('.add-case-button').click();
+      }
+    }
+    // Close case
+    ,{
+      text: 'Close Case or Unfocus Input',
+      name: 'close_case_or_unfocus',
+      keys: 'ESC',
+      allowInput: true,
+      action: function(e) {
+        if ( $(e.target).is('input, button, textarea, select') ) {
+          $(e.target).blur();
+        } else {
+          $('.js-header-list-cases-link').click();
+        }
+
+        $hotkey_wrapper.hide();
+      }
+    }
+    // Search
+    ,{
+      text: 'Search Cases',
+      name: 'search_cases',
+      keys: 'gi',
+      allowInput: false,
+      action: function() {
+        $('.search-box').focus();
+      }
+    }
+    // Search
+    ,{
+      text: 'Quick Search',
+      name: 'quick_search',
+      keys: '/',
+      allowInput: false,
+      action: function() {
+        $('.search-box').focus();
+      }
+    }
+    // Search
+    ,{
+      text: 'Search',
+      name: 'search',
+      keys: 'f',
+      allowInput: false,
+      action: function() {
+        $('.search-box').focus();
+      }
+    }
+    // Hotkey help
+    ,{
+      text: 'Show Hotkeys',
+      name: 'show_hotkeys',
+      keys: '?',
+      allowInput: false,
+      action: function() {
+        $hotkey_wrapper.show();
+      }
+    }
+    // Previous case
+    ,{
+      text: 'Previous Case',
+      name: 'previous_case',
+      keys: 'j',
+      allowInput: false,
+      action: function() {
+        $('[name="previous-case"]').click();
+      }
+    }
+    // Next case
+    ,{
+      text: 'Next Case',
+      name: 'next_case',
+      keys: 'k',
+      allowInput: false,
+      action: function() {
+        $('[name="next-case"]').click();
+      }
+    }
+    // Edit case
+    ,{
+      text: 'Edit Case',
+      name: 'edit_case',
+      keys: 'e',
+      allowInput: false,
+      action: function() {
+        $('[name="edit"]').click();
+      }
+    }
+    // Assign case
+    ,{
+      text: 'Assign Case',
+      name: 'assign_case',
+      keys: 'a',
+      allowInput: false,
+      action: function() {
+        $('[name="assign"]').eq(0).click();
+      }
+    }
+  ];
+
+  var hotkey_pairs = {};
+  var hotkey_chain = '';
+  var clear_hotkey_chain_timeout;
+  var $hotkey_wrapper = $('<div/>')
+    .addClass('fogbugz-helper-hotkeys-wrapper')
+    ;
+
+  var hotkey_press = function(e) {
+    //expire after focusing anything
+    clearTimeout(clear_hotkey_chain_timeout);
+
+    var cha = convertKeyCode(e);
+    if ( cha === null ) {
+      hotkey_chain = '';
+      return;
+    }
+
+    hotkey_chain += cha;
+
+    if ( hotkey_pairs[hotkey_chain] ) {
+      // Make sure not to fire macros while typing comments etc
+      if ( !hotkey_pairs[hotkey_chain].hotkey.allowInput && $(e.target).is('input, button, textarea, select') ) {
+        hotkey_chain = '';
+        return;
+      }
+
+      setTimeout(function() {
+        hotkey_pairs[hotkey_chain].action(e);
+        hotkey_chain = '';
+      }, 0);
+    } else {
+      //expire after a set amount of time
+      clear_hotkey_chain_timeout = setTimeout(function() {
+        hotkey_chain = '';
+      }, 1000);
+    }
+  };
+
+  var onload_fb_hotkeys = function() {
+    $document
+      .bind('keydown', hotkey_press)
+      ;
+  };
+
+  var onunload_fb_hotkeys = function() {
+    $document
+      .unbind('keydown', hotkey_press)
+      ;
+
+    $('.fogbugz-helper-hotkeys-tool').remove();
+  };
+
+  var ontools_fb_hotkeys = function() {
+    var $hotkeys = $('<div/>')
+      .addClass('fogbugz-helper-hotkeys-tool fogbugz-helper-tool')
+      ;
+
+    var $headline = $('<a href="#">')
+      .addClass('fogbugz-helper-headline')
+      .html('Show Hotkeys')
+      .appendTo($hotkeys)
+      .bind('click', function() {
+        $hotkey_wrapper.show();
+      })
+      ;
+
+    var $menu = $('#fogbugz-helper-features-menu');
+
+    $menu.append($hotkeys);
+  }
+
+  var show_hotkeys_popup = function() {
+    $hotkey_wrapper
+      .show()
+      .focus()
+      ;
+  };
+
+  var build_hotkeys_pop = function() {
+    var hotkeys = localStorage.getItem('zr_hotkeys') || '{}';
+    hotkeys = JSON.parse(hotkeys);
+
+    var $hotkeys = $('<div/>')
+      .addClass('fogbugz-helper-hotkeys-modal')
+      ;
+
+    var $headline = $('<h4>')
+      .addClass('fogbugz-helper-headline')
+      .html('Hotkeys')
+      .appendTo($hotkeys)
+      ;
+
+    for ( var i = 0, l = default_hotkey_pairs.length, hotkey, keys; i < l; i++ ) {
+      hotkey = default_hotkey_pairs[i];
+      keys = hotkeys[hotkey.name] || hotkey.keys;
+
+      var $hotkey = $('<div/>')
+        .addClass('fogbugz-helper-hotkey')
+        ;
+
+      var $input = $('<label>') //$('<input type="text">')
+        .attr({
+          'id': 'hotkey-' + hotkey.name
+        })
+        .addClass('fogbugz-helper-hotkey-input-wrapper')
+        //.val(keys)
+        .html(keys)
+        ;
+
+      var $label = $('<label>')
+        .attr({
+          'for': 'hotkey-' + hotkey.name
+        })
+        .addClass('fogbugz-helper-hotkey-label')
+        .html(hotkey.text)
+        ;
+
+      $hotkeys.append(
+        $hotkey.append($input, $label)
+      );
+    }
+
+    var $close = $('<p>')
+      .addClass('fogbugz-helper-hotkey-close')
+      .html('(click anywhere or press ESC to close)')
+      .appendTo($hotkeys)
+      ;
+
+    $hotkey_wrapper
+      .attr({'tabIndex': 1})
+      .hide()
+      .empty()
+      .append($hotkeys)
+      .appendTo('body')
+      .bind('click', function() {
+        $hotkey_wrapper.hide();
+      })
+      ;
+  };
+
+  var hotkeys = localStorage.getItem('zr_hotkeys') || '{}';
+  hotkeys = JSON.parse(hotkeys);
+
+  for ( var i = 0, l = default_hotkey_pairs.length, hotkey, keys; i < l; i++ ) {
+    hotkey = default_hotkey_pairs[i];
+    keys = hotkeys[hotkey.name] || hotkey.keys;
+    hotkey_pairs[keys] = new Hotkey(hotkey);
+  }
+
+  build_hotkeys_pop();
+
+  pm.add({
+    id: 'fb_hotkeys',
+    text: 'Hotkeys',
+    title: 'Hotkeys for common actions. May not play nicely with FogBugz\'s built-in hotkeys.',
+    defaultOn: false,
+    onload: onload_fb_hotkeys,
+    ontools: ontools_fb_hotkeys,
+    onunload: onunload_fb_hotkeys
+  });
+
+    ////////////////////////////
    // (Preference) Autosize Textareas
   ////////////////////////////
   var autosize_textareas = function() {
@@ -302,7 +855,7 @@ var main = function($) {
   });
 
     ////////////////////////////
-   // (Preference) Background cololor picker
+   // (Preference) Background color picker
   ////////////////////////////
   var colors = [
     '#FFFFFF',
@@ -349,7 +902,7 @@ var main = function($) {
     }
 
     $color_li = $('<div/>')
-      .addClass('fogbugz-helper-colors')
+      .addClass('fogbugz-helper-colors fogbugz-helper-tool')
       .delegate('button', 'click', function(e) {
         e.preventDefault();
         var color = $(this).css('background-color');
@@ -358,6 +911,12 @@ var main = function($) {
         $body.css('background-color', color);
         $input.val(color);
       })
+      ;
+
+    var $headline = $('<h4>')
+      .addClass('fogbugz-helper-headline')
+      .html('Choose a background color')
+      .appendTo($color_li)
       ;
 
     // Buttons
@@ -465,22 +1024,16 @@ var main = function($) {
     .insertBefore($main)
     ;
 
+  var _close_ticket_modal = function() {
+    $('.js-header-list-cases-link').click();
+  };
+
   var close_ticket_modal = function(e) {
     if ( e.target !== this ) {
       return;
     }
 
-    $main
-      .empty()
-      ;
-
-    $body
-      .removeClass('main-has-content')
-      ;
-
-    //history.pushState(false, false, filters_url);
-    //$(window).trigger('popState');
-    $('.js-header-list-cases-link').click();
+    _close_ticket_modal();
   };
 
   var onload_tickets_in_modal = function() {

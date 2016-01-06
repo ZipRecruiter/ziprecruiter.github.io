@@ -26,6 +26,11 @@ a:focus {
 	text-decoration: underline;
 }
 
+img {
+	max-width: 100%;
+	height: auto;
+}
+
 .content {
 	width: 59em;
 	margin: auto;
@@ -338,8 +343,6 @@ a:focus {
 	display: block;
 }
 
-
-
 .body {
 	margin-left: 2em;
 }
@@ -487,6 +490,20 @@ a:focus {
 .js .lazy:after,
 .js .lazy {
 	background: transparent !important;
+}
+
+.thumb {
+	list-style: none;
+}
+
+.thumb img {
+	border: 2px solid blue;
+	cursor: pointer;
+}
+
+.thumb.collapsed img {
+	max-width: 200px;
+	height: auto;
 }
 
 /* Extra cms classes ---------------- */

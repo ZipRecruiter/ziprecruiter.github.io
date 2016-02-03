@@ -209,52 +209,74 @@
   order: 100;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Triage"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Active"] {
   order: 0;
 }
-
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Triage"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Active"] + div {
   order: 1;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Triage"] {
   order: 2;
 }
-
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Triage"] + div {
   order: 3;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Backlog"] {
   order: 4;
 }
-
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Backlog"] + div {
   order: 5;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] {
   order: 6;
 }
-
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] + div {
   order: 7;
 }
 
 .fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] {
   order: 8;
 }
-
 .fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] + div {
   order: 9;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Deploy"] {
   order: 10;
 }
-
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Planning"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Deploy"] + div {
   order: 11;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] {
+  order: 12;
+}
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] + div {
+  order: 13;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] {
+  order: 14;
+}
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] + div {
+  order: 15;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] {
+  order: 16;
+}
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
+  order: 17;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Paused"] {
+  order: 18;
+}
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Paused"] + div {
+  order: 19;
 }
 
   /* //////////////////////////
@@ -272,64 +294,94 @@
   order: 100;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Active"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Active"] {
   order: 0;
 }
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Active"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Active"] + div {
+  order: 1;
+}
 
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] {
+  order: 2;
+}
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] + div {
-  order: 1;
+  order: 3;
+}
+
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Backlog"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Backlog"] {
+  order: 4;
+}
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Backlog"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Backlog"] + div {
+  order: 5;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Planning"] {
-  order: 2;
+  order: 6;
 }
-
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Planning"] + div {
-  order: 3;
+  order: 7;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Development"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Development"] {
-  order: 4;
+  order: 8;
 }
-
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Development"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Development"] + div {
-  order: 5;
+  order: 9;
+}
+
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] {
+  order: 10;
+}
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] + div {
+  order: 11;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] {
-  order: 6;
+  order: 12;
 }
-
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] + div {
-  order: 7;
+  order: 13;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] {
-  order: 8;
+  order: 14;
 }
-
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] + div {
-  order: 9;
+  order: 15;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] {
-  order: 10;
+  order: 16;
 }
-
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] + div {
-  order: 11;
+  order: 17;
+}
+
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Paused"] {
+  order: 18;
+}
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Paused"] + div {
+  order: 19;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list,

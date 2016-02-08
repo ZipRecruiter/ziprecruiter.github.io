@@ -674,6 +674,10 @@ var main = function($) {
   var hotkey_press = function(e) {
     //expire after focusing anything
     clearTimeout(clear_hotkey_chain_timeout);
+    if ( e.altKey || e.ctrlKey || e.metaKey || e.shiftKey ) {
+      hotkey_chain = '';
+      return;
+    }
 
     var cha = convertKeyCode(e);
     if ( cha === null ) {

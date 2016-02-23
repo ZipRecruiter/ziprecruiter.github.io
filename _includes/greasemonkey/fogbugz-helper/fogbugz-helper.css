@@ -237,46 +237,60 @@
   order: 7;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Work"] {
   order: 8;
 }
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Development"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Work"] + div {
   order: 9;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Deploy"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Progress"] {
   order: 10;
 }
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Deploy"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Progress"] + div {
   order: 11;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Master"] {
   order: 12;
 }
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Master"] + div {
   order: 13;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] {
   order: 14;
 }
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Review"] + div {
   order: 15;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] {
   order: 16;
 }
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="QA"] + div {
   order: 17;
 }
 
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Paused"] {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Deploy"] {
   order: 18;
 }
-.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Paused"] + div {
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Deploy"] + div {
   order: 19;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] {
+  order: 20;
+}
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Released"] + div {
+  order: 21;
+}
+
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Paused"] {
+  order: 22;
+}
+.fogbugz-helper-auto-sort #main2 .case-list [data-collapse-key$="Paused"] + div {
+  order: 23;
 }
 
   /* //////////////////////////
@@ -330,58 +344,76 @@
   order: 7;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Development"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Development"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Work"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Work"] {
   order: 8;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Development"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Development"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Work"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Work"] + div {
   order: 9;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Progress"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Progress"] {
   order: 10;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Progress"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Progress"] + div {
   order: 11;
+}
+
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Master"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Master"] {
+  order: 12;
+}
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Master"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Master"] + div {
+  order: 13;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] {
-  order: 12;
+  order: 14;
 }
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] + div {
-  order: 13;
+  order: 15;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] {
-  order: 14;
+  order: 16;
 }
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] + div {
-  order: 15;
+  order: 17;
+}
+
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"],
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] {
+  order: 18;
+}
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"] + div,
+.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] + div {
+  order: 19;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] {
-  order: 16;
+  order: 20;
 }
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] + div {
-  order: 17;
+  order: 21;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"],
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Paused"] {
-  order: 18;
+  order: 22;
 }
 .fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"] + div,
 .fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Paused"] + div {
-  order: 19;
+  order: 23;
 }
 
 .fogbugz-helper-fake-kanban #main .case-list,

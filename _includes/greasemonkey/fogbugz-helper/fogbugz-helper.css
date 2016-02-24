@@ -497,7 +497,11 @@
 }
 
 .fogbugz-helper-fake-kanban .bug-grid-row .grid-row-checkbox {
-  display: none;
+  margin: 0;
+}
+
+.fogbugz-helper-fake-kanban .bug-grid-row .icon {
+  vertical-align: super;
 }
 
 .fogbugz-helper-fake-kanban .case-list tr.bug-grid-row .icon {

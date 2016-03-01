@@ -165,37 +165,11 @@
 
   /* //////////////////////////
  // Open Tickets in Modal
-////////////////////////// */
+////////////////////////// * /
 
-/* Need this here and in the background colors */
-.fogbugz-helper-tickets-in-modal #case-errors-container {
-  background: #fff;
-  padding: 1em;
-  margin-bottom: .5em;
-  border-radius: .5em;
-}
+.fogbugz-helper-tickets-in-modal
 
-.fogbugz-helper-tickets-in-modal #stacking-context-main > #main2 {
-  padding: 5.55em 1em 0.5em;
-}
-
-.fogbugz-helper-tickets-in-modal.main-has-content {
-  overflow: hidden;
-}
-
-.fogbugz-helper-tickets-in-modal.main-has-content #main {
-  position: fixed;
-  left: 0;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, .6);
-  overflow: scroll;
-}
-
-.fogbugz-helper-tickets-in-modal .navigating #main {
-  opacity: 0;
-}
+*/
 
   /* //////////////////////////
  // Auto Sort 
@@ -617,10 +591,6 @@
   min-height: 150px;
 }
 
-.fogbugz-helper-ticket-tweaks #main .grid-column-TitleComment a {
-  font-weight: bold;
-}
-
 .fogbugz-helper-ticket-tweaks .subscribers-list .expander {
   display: none;
 }
@@ -657,6 +627,7 @@
   vertical-align: top;
 }
 
+.fogbugz-helper-ticket-tweaks #formEditCase > .top > header,
 .fogbugz-helper-ticket-tweaks #main2 section.case #formEditCase .top>header,
 .fogbugz-helper-ticket-tweaks #main section.case #formEditCase .top>header {
   border-left: none;

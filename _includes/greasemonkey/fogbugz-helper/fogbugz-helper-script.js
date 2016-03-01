@@ -994,39 +994,6 @@ var main = function($) {
   ////////////////////////////
 
   var $main = $('#main');
-  var filters_url;
-
-  var try_check_for_filters_timeout;
-
-  var try_check_for_filters = function() {
-    clearTimeout(try_check_for_filters_timeout);
-
-    try_check_for_filters_timeout = setTimeout(check_for_filters, 200);
-  };
-
-  var check_for_filters = function() {
-    if ( !document.location.href.match(/f\/((filters)|(search))/) ) {
-      $body
-        .addClass('main-has-content');
-
-      return;
-    }
-
-    filters_url = document.location.href;
-
-    $body
-      .removeClass('main-has-content');
-
-    $main2
-      .empty()
-      .append($main.children())
-      ;
-  };
-
-  var $main2 = $('<div/>')
-    .attr('id', 'main2')
-    .insertBefore($main)
-    ;
 
   var _close_ticket_modal = function() {
     $('.js-header-list-cases-link').click();
@@ -1043,20 +1010,17 @@ var main = function($) {
   var onload_tickets_in_modal = function() {
     $body.addClass('fogbugz-helper-tickets-in-modal')
     $main.bind('click', close_ticket_modal);
-    $document.delegate('#main', 'DOMNodeInserted', try_check_for_filters);
-    try_check_for_filters();
   };
 
   var onunload_tickets_in_modal = function() {
     $body.removeClass('fogbugz-helper-tickets-in-modal')
     $main.unbind('click', close_ticket_modal);
-    $document.undelegate('#main', 'DOMNodeInserted', try_check_for_filters);
   };
 
   pm.add({
     id: 'onunload_tickets_in_modal',
-    text: 'Open Tickets in Modal',
-    title: 'Tickets will open in "modals" which will leave your task list/search open in the background. Click the black backdrop to close the ticket.',
+    text: 'Click Backdrop to Close Ticket',
+    title: 'Clicking the area behind a ticket will close the ticket and load your last filter.',
     defaultOn: true,
     onload: onload_tickets_in_modal,
     onunload: onunload_tickets_in_modal

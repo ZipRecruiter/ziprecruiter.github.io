@@ -638,6 +638,7 @@
   vertical-align: top;
 }
 
+.fogbugz-helper-ticket-tweaks #formEditCase > .top > header+header,
 .fogbugz-helper-ticket-tweaks #main2 section.case #formEditCase .top>header+header,
 .fogbugz-helper-ticket-tweaks #main section.case #formEditCase .top>header+header {
   display: table-caption;

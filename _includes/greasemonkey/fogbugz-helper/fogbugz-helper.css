@@ -673,8 +673,9 @@
 
 .fogbugz-helper-ticket-tweaks #formEditCase > .left {
   height: auto;
-  width: auto;
-  width: 25%;
+  width: 200px;
+  margin-right: -200px;
+  position: relative;
 }
 
 .fogbugz-helper-ticket-tweaks #formEditCase > .left > * {
@@ -685,13 +686,15 @@
 /* Comment */
 .fogbugz-helper-ticket-tweaks #formEditCase > .events {
   float: right;
-  width: 75%;
+  padding-left: 210px;
+  width: 100%;
 }
 
 /* Comments */
 .fogbugz-helper-ticket-tweaks #formEditCase > #eventList-0 {
   float: right;
-  width: 75%;
+  padding-left: 210px;
+  width: 100%;
 }
 
 /* Events */
@@ -731,3 +734,131 @@
 .fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
   padding: 5.55em 1em 0.5em;
 }
+
+/* Ticket modal */
+
+.fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.fogbugz-helper-ticket-tweaks .case-lightbox-overlay .case-lightbox {
+  width: auto;
+  /*max-width: none;*/
+}
+
+.fogbugz-helper-ticket-tweaks section.case {
+  width: auto;
+  /*max-width: none;*/
+}
+
+/* Responsive
+
+@media ( max-width: 765px ) {
+  .fogbugz-helper-ticket-tweaks section.case,
+  .fogbugz-helper-ticket-tweaks .case-lightbox-overlay .case-lightbox {
+    min-width: 0;
+    width: 100%;
+  }
+
+  .fogbugz-helper-ticket-tweaks #formEditCase > .top,
+  .fogbugz-helper-ticket-tweaks #formEditCase > .top > .left,
+  .fogbugz-helper-ticket-tweaks #formEditCase > .top > header,
+  .fogbugz-helper-ticket-tweaks #main section.case #formEditCase .top>header {
+    display: block;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case .left {
+    margin: 10px 10px 0 10px;
+    padding: 0;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case .corner a.case {
+    font-size: 16px;
+    font-weight: bold;
+  }
+
+  .fogbugz-helper-ticket-tweaks #formEditCase > .events {
+    float: none;
+    width: auto;
+  }
+
+  .fogbugz-helper-ticket-tweaks #formEditCase > .left {
+    padding-left: 10px;
+    width: 150px;
+    position: relative;
+    margin-right: -150px;
+  }
+
+  .fogbugz-helper-ticket-tweaks #formEditCase > #eventList-0 {
+    padding-left: 160px;
+    width: 100%;
+  }
+
+  .fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
+    position: static;
+    overflow: auto;
+  }
+
+  body.fogbugz-helper-ticket-tweaks.noscroll {
+    overflow: auto;
+  }
+}
+
+@media ( max-width: 480px ) {
+  .fogbugz-helper-ticket-tweaks section.case .field {
+    width: auto;
+    float: none;
+    display: block;
+  }
+
+  #formEditCase {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .fogbugz-helper-ticket-tweaks #formEditCase > .left {
+    width: 100%;
+    float: none;
+    margin-left: 0;
+    padding-right: 10px;
+    order: 4;
+  }
+
+  .fogbugz-helper-ticket-tweaks #formEditCase > #eventList-0 {
+    padding-left: 10px;
+    width: 100%;
+    float: none;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-header-bar {
+    height: auto;
+    display: table;
+    width: 100%;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .secondary-nav {
+    position: static;
+    float: right;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header #below-banner {
+    position: static;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .case-tools {
+    float: none;
+    display: inline;
+    margin: 0;
+  }
+
+  .fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
+    padding-top: 10px;
+  }
+
+  .fogbugz-helper-ticket-tweaks #main .case-list {
+    display: block;
+  }
+}
+
+*/

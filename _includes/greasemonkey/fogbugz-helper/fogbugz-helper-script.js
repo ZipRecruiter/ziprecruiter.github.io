@@ -1089,12 +1089,69 @@ var main = function($) {
     ////////////////////////////
    // (Preference) Fake Kanban
   ////////////////////////////
+  var _fake_kanban_class = 'fogbugz-helper-fake-kanban';
+  var _fake_kanban_sorted_class = 'fogbugz-helper-fake-kanban-sorted';
+
+  var _fake_kanban_popstate = function(ev) {
+    console.log($('#filter-description-sort').children().length);
+    if ( $('#filter-description-sort').children().length <= 2 ) {
+      $body.addClass(_fake_kanban_sorted_class);
+    } else {
+      $body.removeClass(_fake_kanban_sorted_class);
+    }
+  };
+
+  var _fake_kanban_nodeinserted = function(ev) {
+    //if ( ev.srcElement.id === 'filter-bar' ) {
+    //  console.log(document.getElementById('filter-description-sort'));
+    //}
+    //console.log(ev.srcElement.id);
+  };
+
+  /*var _sub = fb.pubsub.subscribe;
+
+  fb.pubsub.subscribe = function(name, fun) {
+    console.log(name);
+    _sub(name, fun);
+    _sub(name, function(m, d) {
+      console.log(m, d);
+      console.log($('#filter-description-sort').children().length);
+    });
+    //console.log(document.getElementById('filter-description-sort'));
+  };*/
+
+  /*var _pub = fb.pubsub.publish;
+
+  fb.pubsub.publish = function(name) {
+    console.log(arguments);
+    _pub.apply(window, arguments);
+    console.log($('#filter-description-sort').children().length);
+  };*/
+
+  fb.pubsub.subscribe("/template/inserted", function(r, data) {
+    if ( $('.list-group-header').children().length > 2 ) {
+      $body.addClass(_fake_kanban_sorted_class);
+    } else {
+      $body.removeClass(_fake_kanban_sorted_class);
+    }
+  });
+
   var onload_fake_kanban = function() {
-    $body.addClass('fogbugz-helper-fake-kanban');
+    $body.addClass(_fake_kanban_class);
+
+    window.addEventListener('popstate', _fake_kanban_popstate);
+    //document.addEventListener('DOMNodeInserted', _fake_kanban_nodeinserted);
+
+    _fake_kanban_popstate();
   };
 
   var onunload_fake_kanban = function() {
-    $body.removeClass('fogbugz-helper-fake-kanban');
+    $body.removeClass(_fake_kanban_class);
+
+    window.removeEventListener('popstate', _fake_kanban_popstate);
+    //document.removeEventListener('DOMNodeInserted', _fake_kanban_nodeinserted);
+
+    $body.removeClass(_fake_kanban_sorted_class);
   };
 
   pm.add({

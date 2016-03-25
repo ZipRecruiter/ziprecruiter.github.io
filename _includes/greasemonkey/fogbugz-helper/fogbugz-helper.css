@@ -271,132 +271,132 @@
  // Fake Kanban
 ////////////////////////// */
 
-.fogbugz-helper-fake-kanban #main .case-list,
-.fogbugz-helper-fake-kanban #main2 .case-list {
+.fogbugz-helper-fake-kanban-sorted #main .case-list,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list {
   display: flex;
   flex-direction: column;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list > *,
-.fogbugz-helper-fake-kanban #main2 .case-list > * {
+.fogbugz-helper-fake-kanban-sorted #main .case-list > *,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list > * {
   order: 100;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Active"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Active"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Active"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Active"] {
   order: 0;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Active"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Active"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Active"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Active"] + div {
   order: 1;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Triage"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Triage"] {
   order: 2;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Triage"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Triage"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Triage"] + div {
   order: 3;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Backlog"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Backlog"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Backlog"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Backlog"] {
   order: 4;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Backlog"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Backlog"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Backlog"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Backlog"] + div {
   order: 5;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Planning"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Planning"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Planning"] {
   order: 6;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Planning"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Planning"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Planning"] + div {
   order: 7;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Work"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Work"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Work"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Work"] {
   order: 8;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Work"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Work"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Work"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Work"] + div {
   order: 9;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Progress"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Progress"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Progress"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Progress"] {
   order: 10;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Progress"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Progress"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Progress"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Progress"] + div {
   order: 11;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Master"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Master"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Master"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Master"] {
   order: 12;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Master"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Master"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Master"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Master"] + div {
   order: 13;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Review"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Review"] {
   order: 14;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Review"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Review"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Review"] + div {
   order: 15;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="QA"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="QA"] {
   order: 16;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="QA"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="QA"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="QA"] + div {
   order: 17;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Deploy"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Deploy"] {
   order: 18;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Deploy"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Deploy"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Deploy"] + div {
   order: 19;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Released"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Released"] {
   order: 20;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Released"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Released"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Released"] + div {
   order: 21;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"],
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Paused"] {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Paused"],
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Paused"] {
   order: 22;
 }
-.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"] + div,
-.fogbugz-helper-fake-kanban #main2 .case-list [data-collapse-key$="Paused"] + div {
+.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Paused"] + div,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Paused"] + div {
   order: 23;
 }
 
-.fogbugz-helper-fake-kanban #main .case-list,
-.fogbugz-helper-fake-kanban #main2 .case-list {
+.fogbugz-helper-fake-kanban-sorted #main .case-list,
+.fogbugz-helper-fake-kanban-sorted #main2 .case-list {
   display: flex;
   flex-direction: row;
 }
 
-.fogbugz-helper-fake-kanban .list-group-body {
+.fogbugz-helper-fake-kanban-sorted .list-group-body {
   flex: 1;
   padding: 5px;
   border: 1px solid #000;
@@ -405,7 +405,7 @@
   border-radius: 3px;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid:before {
+.fogbugz-helper-fake-kanban-sorted .bug-grid:before {
   content: attr(data-group-name);
   display: table-caption;
   background: #fff;
@@ -416,11 +416,11 @@
   border-radius: 3px;
 }
 
-.fogbugz-helper-fake-kanban .case-list {
+.fogbugz-helper-fake-kanban-sorted .case-list {
   max-width: 100%;
 }
 
-.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row {
+.fogbugz-helper-fake-kanban-sorted .case-list tr.bug-grid-row {
   height: auto;
   margin-bottom: 5px;
   display: block;
@@ -429,89 +429,89 @@
   border-radius: 3px;
 }
 
-.fogbugz-helper-fake-kanban .case-list .grid-column-contents {
+.fogbugz-helper-fake-kanban-sorted .case-list .grid-column-contents {
   padding: 0;
 }
 
-.fogbugz-helper-fake-kanban .case-list .grid-column-Case a {
+.fogbugz-helper-fake-kanban-sorted .case-list .grid-column-Case a {
   text-decoration: underline;
 }
 
-.fogbugz-helper-fake-kanban .case-list .grid-column-Case:after {
+.fogbugz-helper-fake-kanban-sorted .case-list .grid-column-Case:after {
   content: ":";
 }
 
-.fogbugz-helper-fake-kanban .case-list td {
+.fogbugz-helper-fake-kanban-sorted .case-list td {
   white-space: normal;
 }
 
-.fogbugz-helper-fake-kanban .list-group-header {
+.fogbugz-helper-fake-kanban-sorted .list-group-header {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row td,
-.fogbugz-helper-fake-kanban .bug-grid-row div {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row td,
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row div {
   display: inline;
   width: auto;
   height: auto;
 }
 
-.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row .grid-title-col,
-.fogbugz-helper-fake-kanban .case-list .grid-column-contents {
+.fogbugz-helper-fake-kanban-sorted .case-list tr.bug-grid-row .grid-title-col,
+.fogbugz-helper-fake-kanban-sorted .case-list .grid-column-contents {
   overflow: visible;
   white-space: normal;
 }
 
-.fogbugz-helper-fake-kanban .grid-title-col .context-menu-show {
+.fogbugz-helper-fake-kanban-sorted .grid-title-col .context-menu-show {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-header {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-header {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row .grid-row-checkbox {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row .grid-row-checkbox {
   margin: 0;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row .icon {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row .icon {
   vertical-align: super;
 }
 
-.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row .icon {
+.fogbugz-helper-fake-kanban-sorted .case-list tr.bug-grid-row .icon {
   font-size: 9px;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row .grid-column-Favorite {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row .grid-column-Favorite {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row .grid-column-Status {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row .grid-column-Status {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row .grid-title-extra {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row .grid-title-extra {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .bug-grid-row .spacer-cell {
+.fogbugz-helper-fake-kanban-sorted .bug-grid-row .spacer-cell {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .arrow {
+.fogbugz-helper-fake-kanban-sorted .arrow {
   display: none;
 }
 
-.fogbugz-helper-fake-kanban .person:before {
+.fogbugz-helper-fake-kanban-sorted .person:before {
   content: "(";
 }
 
-.fogbugz-helper-fake-kanban .person:after {
+.fogbugz-helper-fake-kanban-sorted .person:after {
   content: ")";
 }
 
-.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row[data-depth="1"] .grid-title-col,
-.fogbugz-helper-fake-kanban .case-list tr.bug-grid-row[data-depth="2"] .grid-title-col {
+.fogbugz-helper-fake-kanban-sorted .case-list tr.bug-grid-row[data-depth="1"] .grid-title-col,
+.fogbugz-helper-fake-kanban-sorted .case-list tr.bug-grid-row[data-depth="2"] .grid-title-col {
   padding-left: 0;
 }
 
@@ -732,7 +732,7 @@
 }
 
 .fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
-  padding: 5.55em 1em 0.5em;
+  /*padding: 5.55em 1em 0.5em;*/
 }
 
 /* Ticket modal */
@@ -745,14 +745,48 @@
 .fogbugz-helper-ticket-tweaks .case-lightbox-overlay .case-lightbox {
   width: auto;
   /*max-width: none;*/
+  min-width: 0;
 }
 
 .fogbugz-helper-ticket-tweaks section.case {
   width: auto;
   /*max-width: none;*/
+  min-width: 0;
 }
 
-/* Responsive
+/* Responsive */
+
+@media ( max-width: 1024px ) {
+  /* Header */
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-header-bar {
+    height: auto;
+    display: table;
+    width: 100%;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-nav {
+    float: none;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .secondary-nav {
+    position: static;
+    float: right;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header #below-banner {
+    position: static;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .case-tools {
+    float: none;
+    display: inline;
+    margin: 0;
+  }
+
+  .fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
+    padding-top: 10px;
+  }
+}
 
 @media ( max-width: 765px ) {
   .fogbugz-helper-ticket-tweaks section.case,
@@ -831,34 +865,7 @@
     float: none;
   }
 
-  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-header-bar {
-    height: auto;
-    display: table;
-    width: 100%;
-  }
-
-  .fogbugz-helper-ticket-tweaks #header.thunder-header .secondary-nav {
-    position: static;
-    float: right;
-  }
-
-  .fogbugz-helper-ticket-tweaks #header #below-banner {
-    position: static;
-  }
-
-  .fogbugz-helper-ticket-tweaks #header.thunder-header .case-tools {
-    float: none;
-    display: inline;
-    margin: 0;
-  }
-
-  .fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
-    padding-top: 10px;
-  }
-
   .fogbugz-helper-ticket-tweaks #main .case-list {
     display: block;
   }
 }
-
-*/

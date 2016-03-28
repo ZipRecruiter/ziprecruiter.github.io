@@ -869,3 +869,25 @@
     display: block;
   }
 }
+
+  /* //////////////////////////
+ // Hide Useless Stuff
+////////////////////////// */
+
+/* Ticket list */
+.fogbugz-helper-hide-stuff a[title="Kanban Board"],
+.fogbugz-helper-hide-stuff a[href$="pgVisualStudioAddIn"],
+.fogbugz-helper-hide-stuff a[href$="pgVisualStudioAddIn"],
+.fogbugz-helper-hide-stuff a[href$="pgListReleaseNotes"],
+.fogbugz-helper-hide-stuff #versionFooter,
+.fogbugz-helper-hide-stuff #case-list-mini-report,
+.fogbugz-helper-hide-stuff #working-on-popup-link,
+.fogbugz-helper-hide-stuff .nav-link[href$="sPluginId=kanbanboard%40ergonlabs.com"],
+.fogbugz-helper-hide-stuff .personal-notifications,
+.fogbugz-helper-hide-stuff .wiki,
+.fogbugz-helper-hide-stuff .schedules,
+.fogbugz-helper-hide-stuff .email-button,
+.fogbugz-helper-hide-stuff .planner-button,
+.fogbugz-helper-hide-stuff .product-menu {
+  display: none !important;
+}

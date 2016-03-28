@@ -1167,6 +1167,26 @@ var main = function($) {
     onunload: onunload_reverse_comments
   });
 
+    ////////////////////////////
+   // Hide Useless Stuff
+  ////////////////////////////
+  var onload_hide_stuff = function() {
+    $body.addClass('fogbugz-helper-hide-stuff');
+  };
+
+  var onunload_reverse_comments = function() {
+    $body.removeClass('fogbugz-helper-hide-stuff');
+  };
+
+  pm.add({
+    id: 'hide_stuff',
+    text: 'Hide unused FogBugz stuff',
+    title: 'I don\'t use these anyway. Hollar if you like this but want something specific back.',
+    defaultOn: false,
+    onload: onload_hide_stuff,
+    onunload: onunload_reverse_comments
+  });
+
   // Set up all the preferences
   pm.load();
 };

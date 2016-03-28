@@ -1180,7 +1180,7 @@ var main = function($) {
 
   pm.add({
     id: 'hide_stuff',
-    text: 'Hide unused FogBugz stuff',
+    text: 'Hide Unused FogBugz Stuff',
     title: 'I don\'t use these anyway. Hollar if you like this but want something specific back.',
     defaultOn: false,
     onload: onload_hide_stuff,

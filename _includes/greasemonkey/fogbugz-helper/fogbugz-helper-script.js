@@ -834,7 +834,6 @@ var main = function($) {
   ////////////////////////////
   var autosize_textareas = function() {
     var $textareas = $('textarea:not(.autosize-autosized)');
-
     if ( $textareas.length ) {
       $textareas.autosize();
     }
@@ -842,11 +841,11 @@ var main = function($) {
 
   var onload_autosize_textareas = function() {
     autosize_textareas();
-    $document.delegate('#main', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
+    $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
   };
 
   var onunload_autosize_textareas = function() {
-    $document.undelegate('#main', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
+    $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
   };
 
   pm.add({

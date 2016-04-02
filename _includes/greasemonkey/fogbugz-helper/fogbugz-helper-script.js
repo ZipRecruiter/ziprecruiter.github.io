@@ -1272,7 +1272,7 @@ var main = function($) {
 
   pm.add({
     id: 'wysiwygify',
-    text: 'WYSIWYG on Case Summary',
+    text: 'Rich Text on Case Summary',
     title: 'Makes the Case Summary textarea "rich text" formattable',
     defaultOn: true,
     onload: onload_wysiwygify,

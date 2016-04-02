@@ -571,7 +571,7 @@
  // Reverse Comments
 ////////////////////////// */
 
-.fogbugz-helper-reverse-comments #formEditCase > #eventList-0 {
+.fogbugz-helper-reverse-comments #formEditCase > .events {
   display: flex;
   flex-direction: column-reverse;
 }

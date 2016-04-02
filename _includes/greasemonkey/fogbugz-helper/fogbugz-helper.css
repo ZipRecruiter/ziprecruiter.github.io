@@ -891,3 +891,19 @@
 .fogbugz-helper-hide-stuff .product-menu {
   display: none !important;
 }
+
+  /* //////////////////////////
+ // WYSIWYG
+////////////////////////// */
+
+.wysiwygified_content pre {
+  background: #eee;
+  border-radius: 3px;
+  padding: 10px;
+  display: table;
+  font-family: monospace;
+}
+
+.wysiwygified_content img {
+  max-width: 100%;
+}

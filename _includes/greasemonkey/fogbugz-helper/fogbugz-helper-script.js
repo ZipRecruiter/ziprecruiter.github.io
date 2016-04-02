@@ -1186,6 +1186,99 @@ var main = function($) {
     onunload: onunload_reverse_comments
   });
 
+    ////////////////////////////
+   // WYSIWYG for custom inputs
+  ////////////////////////////
+  var decodeEntities = (function() {
+    // this prevents any overhead from creating the object each time
+    var $div = $('<div>');
+    var txt = document.createElement('textarea');
+
+    function decodeHTMLEntities (str) {
+      txt.innerHTML = str;
+      str = txt.value;
+      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+      $div.html(str);
+
+      var $imgs = $div.find('img');
+      for ( var i = 0, l = $imgs.length; i < l; i++ ) {
+        var $img = $imgs.eq(i);
+        var src = $img.attr('src');
+        $img.wrap('<a href="' + src + '" target="_blank"></a>');
+      }
+
+      str = $div.html();
+
+      return str;
+    }
+
+    return decodeHTMLEntities;
+  })();
+
+  var wysiwygify_editor;
+  var wysiwygify_config = {
+    customConfig: "{0}config_MVC.js".format(window.CKEDITOR_BASEPATH)
+  };
+
+  var wysiwygify = function() {
+    var $customfield = $('.customfield-longtext');
+    var $textarea = $customfield.find('textarea:not(.wysiwygified)').addClass('wysiwygified');
+
+    if ( $textarea.length ) {
+      // replace textarea with ckeditor
+      var code = $.trim($textarea.val());
+
+      if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
+        $textarea.val( code.replace(/\n/g, '<br>') );
+      }
+
+      wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
+      wysiwygify_editor.addCss('pre {\
+        background: #eee;\
+        border-radius: 3px;\
+        padding: 10px;\
+        display: table;\
+        font-family: monospace;\
+      }');
+    } else if ( $customfield.length ) {
+      // See if the case summary is there
+      var $content = $customfield.find('.content:not(.wysiwygified)').addClass('wysiwygified');
+
+      if ( $content.length ) {
+        var $pre = $content.find('pre');
+        var code = $pre.text();
+
+        if ( code.charAt(0) === '<' || code.charAt(code.length - 1) === '>' ) {
+          var $div = $('<div/>')
+            .addClass('wysiwygified_content')
+            .html( decodeEntities(code) )
+            .insertAfter($pre);
+
+          $pre.hide();
+        }
+      }
+    }
+  };
+
+  var onload_wysiwygify = function() {
+    wysiwygify();
+    $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
+  };
+
+  var onunload_wysiwygify = function() {
+    // TODO: Unload CKEDITOR instances
+    $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
+  };
+
+  pm.add({
+    id: 'wysiwygify',
+    text: 'WYSIWYG on Case Summary',
+    title: 'Makes the Case Summary textarea "rich text" formattable',
+    defaultOn: true,
+    onload: onload_wysiwygify,
+    onunload: onunload_wysiwygify
+  });
+
   // Set up all the preferences
   pm.load();
 };

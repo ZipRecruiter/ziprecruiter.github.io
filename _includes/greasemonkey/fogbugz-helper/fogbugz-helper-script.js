@@ -1286,7 +1286,7 @@ var main = function($) {
     id: 'wysiwygify',
     text: 'Rich Text on Case Summary',
     title: 'Makes the Case Summary textarea "rich text" formattable',
-    defaultOn: true,
+    defaultOn: false,
     onload: onload_wysiwygify,
     onunload: onunload_wysiwygify
   });

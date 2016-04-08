@@ -907,3 +907,42 @@
 .wysiwygified_content img {
   max-width: 100%;
 }
+
+.wysiwyg_toggle {
+  text-align: right;
+  float: right;
+  padding-bottom: 1px;
+}
+
+.wysiwyg_toggle label {
+  -webkit-appearance: none; // iOS
+
+  border-radius: 0;
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  font: inherit;
+  padding: 0;
+
+  border-bottom: 1px dotted #000;
+  margin: 4px;
+  margin-right: 0;
+  cursor: pointer;
+  font-size: 11px !important;
+}
+
+.wysiwyg_toggle label&::-moz-focus-inner { 
+  border: 0;
+  padding: 0;
+  margin: 0;
+}
+
+.wysiwyg_toggle label.wysiwyg_toggle_selected {
+  font-weight: bold;
+  border-bottom: 1px solid #000;
+}
+
+.wysiwygified + *,
+.wysiwyg_toggle + * {
+  clear: both;
+}

@@ -12,6 +12,42 @@
 (function($) {
 'use strict';
 
+// http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+function convertHtmlToText(inputText) {
+  var returnText = "" + inputText;
+
+  //-- remove BR tags and replace them with line break
+  returnText=returnText.replace(/<br>/gi, "\n");
+  returnText=returnText.replace(/<br\s\/>/gi, "\n");
+  returnText=returnText.replace(/<br\/>/gi, "\n");
+
+  //-- remove P and A tags but preserve what's inside of them
+  returnText=returnText.replace(/<p.*>/gi, "\n");
+  returnText=returnText.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 ($1)");
+
+  //-- remove all inside SCRIPT and STYLE tags
+  returnText=returnText.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, "");
+  returnText=returnText.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, "");
+  //-- remove all else
+  returnText=returnText.replace(/<(?:.|\s)*?>/g, "");
+
+  //-- get rid of more than 2 multiple line breaks:
+  returnText=returnText.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gim, "\n\n");
+
+  //-- get rid of more than 2 spaces:
+  returnText = returnText.replace(/ +(?= )/g,'');
+
+  //-- get rid of html-encoded characters:
+  returnText=returnText.replace(/&nbsp;/gi," ");
+  returnText=returnText.replace(/&amp;/gi,"&");
+  returnText=returnText.replace(/&quot;/gi,'"');
+  returnText=returnText.replace(/&lt;/gi,'<');
+  returnText=returnText.replace(/&gt;/gi,'>');
+
+  //-- return
+  return returnText;
+}
+
 var $document;
 var $window;
 
@@ -1225,31 +1261,106 @@ var main = function($) {
     return decodeHTMLEntities;
   })();
 
+  // Toggle
+  var $wysiwyg_toggle;
+
+  var wysiwyg_add = function(force) {
+    force = force || false;
+    var $customfield = $('.customfield-longtext');
+    var $textarea = $customfield.find('textarea.wysiwygified');
+
+    // Edit
+    if ( $textarea.length ) {
+      // replace textarea with ckeditor
+      var code = $.trim($textarea.val());
+
+      if ( !force && (code.charAt(0) != '<' || code.charAt(code.length - 1) != '>') ) {
+        //$textarea.val( code.replace(/\n/g, '<br>') );
+        $wysiwyg_toggle.find('.wysiwyg_toggle_plain').addClass('wysiwyg_toggle_selected');
+      } else {
+        if ( force ) {
+          $textarea.val($textarea.val().replace(/\n/g, '<br>'));
+        }
+
+        wysiwyg_textarea($textarea);
+        $wysiwyg_toggle.find('.wysiwyg_toggle_rich').addClass('wysiwyg_toggle_selected');
+      }
+    }
+  };
+
+  var wysiwyg_remove = function() {
+    wysiwygify_editor.destroy(true);
+    wysiwygify_editor = null;
+    var $textarea = $('textarea.wysiwygified');
+    var converted = decodeEntities(convertHtmlToText($textarea.val()));
+    $textarea.val($.trim(converted));
+  };
+
+  var wysiwyg_toggle_off = function() {
+    $wysiwyg_toggle.find('label').removeClass('wysiwyg_toggle_selected');
+  };
+
+  $body
+    .delegate('.wysiwyg_toggle .wysiwyg_toggle_plain:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
+      ev.preventDefault();
+      if ( !confirm('Lose formatting and switch to plain-text mode?') ) {
+        return;
+      }
+
+      var $this = $(this);
+      wysiwyg_toggle_off();
+      wysiwyg_remove();
+      $this.addClass('wysiwyg_toggle_selected');
+    })
+    .delegate('.wysiwyg_toggle .wysiwyg_toggle_rich:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
+      ev.preventDefault();
+      var $this = $(this);
+      wysiwyg_toggle_off();
+      wysiwyg_add(true);
+      $this.addClass('wysiwyg_toggle_selected');
+    })
+    .delegate('.wysiwyg_toggle .wysiwyg_toggle_markdown:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
+      ev.preventDefault();
+      alert('Not yet');
+      return;
+      var $this = $(this);
+      wysiwyg_toggle_off();
+      $this.addClass('wysiwyg_toggle_selected');
+    })
+    ;
+
+  // Make wysiwyg editor
   var wysiwygify_editor;
   var wysiwygify_config = {
     customConfig: "{0}config_MVC.js".format(window.CKEDITOR_BASEPATH)
+  };
+
+  var wysiwyg_textarea = function($textarea) {
+    wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
+    wysiwygify_editor.addCss('pre {\
+      background: #eee;\
+      border-radius: 3px;\
+      padding: 10px;\
+      display: table;\
+      font-family: monospace;\
+    }');
   };
 
   var wysiwygify = function() {
     var $customfield = $('.customfield-longtext');
     var $textarea = $customfield.find('textarea:not(.wysiwygified)').addClass('wysiwygified');
 
+    // Edit
     if ( $textarea.length ) {
-      // replace textarea with ckeditor
-      var code = $.trim($textarea.val());
+      $wysiwyg_toggle = $('<div class="wysiwyg_toggle">\
+        <label class="wysiwyg_toggle_plain">Plain text</label>\
+        <!-- label class="wysiwyg_toggle_markdown">Markdown</label -->\
+        <label class="wysiwyg_toggle_rich">Rich text</label>\
+      </div>')
+      .insertBefore($textarea);
 
-      if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
-        $textarea.val( code.replace(/\n/g, '<br>') );
-      }
-
-      wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
-      wysiwygify_editor.addCss('pre {\
-        background: #eee;\
-        border-radius: 3px;\
-        padding: 10px;\
-        display: table;\
-        font-family: monospace;\
-      }');
+      wysiwyg_add();
+    // Show
     } else if ( $customfield.length ) {
       // See if the case summary is there
       var $content = $customfield.find('.content:not(.wysiwygified)').addClass('wysiwygified');
@@ -1258,7 +1369,7 @@ var main = function($) {
         var $pre = $content.find('pre');
         var code = $pre.text();
 
-        code = Autolinker.link(code);
+        code = Autolinker.link(code, {stripPrefix: false});
 
         if ( code.charAt(0) === '<' || code.charAt(code.length - 1) === '>' ) {
           var $div = $('<div/>')
@@ -1279,6 +1390,23 @@ var main = function($) {
 
   var onunload_wysiwygify = function() {
     // TODO: Unload CKEDITOR instances
+    if ( wysiwygify_editor && wysiwygify_editor.name ) {
+      wysiwygify_editor.destroy(true);
+      //CKEDITOR.instances[wysiwygify_editor.name].destroy(true);
+      wysiwygify_editor = null;
+      var $textarea = $('textarea.wysiwygified');
+      if ( $textarea.length ) {
+        var val = $textarea.val();
+
+        $wysiwyg_toggle.remove();
+
+        $textarea
+          .removeClass('wysiwygified')
+          .val(convertHtmlToText(val))
+          ;
+      }
+    }
+
     $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
   };
 

@@ -1369,9 +1369,9 @@ var main = function($) {
         var $pre = $content.find('pre');
         var code = $pre.text();
 
-        code = Autolinker.link(code, {stripPrefix: false});
+        code = $.trim(Autolinker.link(code, {stripPrefix: false}));
 
-        if ( code.charAt(0) === '<' || code.charAt(code.length - 1) === '>' ) {
+        if ( code.charAt(0) === '<' && code.charAt(code.length - 1) === '>' && code.charAt(1) !== 'a' && code.charAt(code.length - 2) !== 'a' ) {
           var $div = $('<div/>')
             .addClass('wysiwygified_content')
             .html( decodeEntities(code) )

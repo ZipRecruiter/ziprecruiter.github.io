@@ -30,6 +30,7 @@ title: Greasemonkey Scripts - FogBugz Helper
         <li>Tickets: Reverse order of comments (disabled by default)</li>
         <li>Auto-sorting tickets that arranged by "status" (Fogbugz sorts them in an almost random order)</li>
         <li>Hotkeys (work in progress, disabled by default)</li>
+        <li>Markdown to HTML in comments and case description (disabled by default)</li>
 
         <li>Preferences for many JS features. More styling features to come.</li>
       </ul>
@@ -88,7 +89,7 @@ title: Greasemonkey Scripts - FogBugz Helper
 // @run-at       document-start
 // ==/UserScript==
 
-javascript:(function(){url='//ziprecruiter.github.io/greasemonkey/fogbugz-helper/fogbugz-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
+(function(){url='//ziprecruiter.github.io/greasemonkey/fogbugz-helper/fogbugz-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
       </textarea>
     </div>
   </section>

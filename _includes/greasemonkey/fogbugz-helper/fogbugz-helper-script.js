@@ -1429,6 +1429,8 @@ var main = function($) {
     ////////////////////////////
    // Markdown parser
   ////////////////////////////
+  var marked_options = {gfm: true};
+
   var markdownify = function() {
     var $customfield = $('.customfield-longtext .content pre:not(.wysiwygified, .markdownified)').addClass('markdownified');
 
@@ -1437,7 +1439,7 @@ var main = function($) {
         var $this = $(this);
         var text = $this.html();
         $this.data('markdown-text', text);
-        $this.html(marked(text));
+        $this.html(marked(text, marked_options));
       });
     }
 
@@ -1449,7 +1451,7 @@ var main = function($) {
         var text = $this.html();
 
         $this.data('markdown-text', text);
-        $this.html(marked(text.replace(/<br>/g, '')));
+        $this.html(marked(text.replace(/<br>/g, ''), marked_options));
       });
     }
   };

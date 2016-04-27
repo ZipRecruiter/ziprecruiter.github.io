@@ -1451,7 +1451,7 @@ var main = function($) {
         var text = $this.html();
 
         $this.data('markdown-text', text);
-        $this.html(marked(text.replace(/<br>/g, ''), marked_options));
+        $this.html(marked(text.replace(/<br>/g, '').replace(/&nbsp;/g, ' '), marked_options));
       });
     }
   };

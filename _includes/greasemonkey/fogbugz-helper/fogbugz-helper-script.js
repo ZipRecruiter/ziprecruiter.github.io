@@ -1577,7 +1577,7 @@ var main = function($) {
 
   pm.add({
     id: 'markdown',
-    text: 'Markdown for comments/Case Description',
+    text: 'Markdown for Comments/Case Description',
     title: 'Automatically converts markdown in plain text comments and case description',
     defaultOn: false,
     onload: onload_markdown,

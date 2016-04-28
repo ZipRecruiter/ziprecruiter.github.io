@@ -896,14 +896,6 @@
  // WYSIWYG
 ////////////////////////// */
 
-.wysiwygified_content pre {
-  background: #eee;
-  border-radius: 3px;
-  padding: 10px;
-  display: table;
-  font-family: monospace;
-}
-
 .wysiwygified_content img {
   max-width: 100%;
 }
@@ -953,10 +945,45 @@
 
 .markdownified {
   white-space: normal;
-  line-height: normal;
+  line-height: 1.5;
 }
 
-.markdownified h1 {
-  margin-top: 1em;
-  margin-bottom: 1em;
+.markdownified h1,
+.markdownified h2,
+.markdownified h3,
+.markdownified h4,
+.markdownified h5,
+.markdownified h6,
+.markdownified p,
+.markdownified ul,
+.markdownified ol {
+  margin-top: .5em;
+  margin-bottom: .5em;
+}
+
+.markdownified pre {
+  background: #eee;
+  border-radius: 3px;
+  padding: 5px 10px;
+  display: table;
+  font-family: monospace;
+}
+
+.markdownified code {
+  background-color: #f7f7f9;
+  border: 1px solid #e1e1e8;
+  white-space: normal;
+  color: #c25;
+  padding: 1px 3px;
+  border-radius: 3px;
+  font-size: 12px;
+}
+
+.markdownified pre code {
+  background-color: transparent;
+  border: none;
+  white-space: inherit;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
 }

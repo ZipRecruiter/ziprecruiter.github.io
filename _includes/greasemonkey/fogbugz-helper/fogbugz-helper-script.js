@@ -1539,7 +1539,7 @@ var main = function($) {
       });
     }
 
-    var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(div))').addClass('markdownified');
+    var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(:not(a, br)))').addClass('markdownified');
 
     if ( $bodycontent.length ) {
       $bodycontent.each(function() {

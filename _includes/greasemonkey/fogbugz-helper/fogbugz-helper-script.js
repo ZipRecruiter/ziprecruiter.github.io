@@ -1579,7 +1579,7 @@ var main = function($) {
     id: 'markdown',
     text: 'Markdown for Comments/Case Description',
     title: 'Automatically converts markdown in plain text comments and case description',
-    defaultOn: false,
+    defaultOn: true,
     onload: onload_markdown,
     onunload: onunload_markdown
   });

@@ -1306,6 +1306,7 @@ var main = function($) {
       code = $.trim($textarea.val());
 
       if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
+        code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         code = marked(code, marked_options);
       } else {
         code = marked(toMarkdown(code, toMarkdown_options), marked_options);

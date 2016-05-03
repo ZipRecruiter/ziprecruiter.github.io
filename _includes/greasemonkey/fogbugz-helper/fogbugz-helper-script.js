@@ -1579,11 +1579,11 @@ var main = function($) {
         var $this = $(this);
         var text = $this.html();
 
-        text = decodeEntities(text);
+        //text = decodeEntities(text);
         $this.data('markdown-text', text);
         $this.html(marked(text, marked_options));
 
-        // 
+        // fix links
         $this.find('code').each(function() {
           this.innerHTML = this.innerHTML
             .replace(/&lt;a href="\/\/([a-z_\-]+).fogbugz.com\/f\/cases\/([0-9]+)\/" rel="nofollow" class="([a-z\-]+)"&gt;bugzid:([0-9]+)&lt;\/a&gt;/g, '<a href="//$1.fogbugz.com/f/cases/$2/" rel="nofollow" class="$3">bugzid:$4</a>')
@@ -1602,6 +1602,14 @@ var main = function($) {
 
         $this.data('markdown-text', text);
         $this.html(marked(text.replace(/<br>/g, '').replace(/&nbsp;/g, ' '), marked_options));
+
+        // fix links
+        $this.find('code').each(function() {
+          this.innerHTML = this.innerHTML
+            .replace(/&lt;a href="\/\/([a-z_\-]+).fogbugz.com\/f\/cases\/([0-9]+)\/" rel="nofollow" class="([a-z\-]+)"&gt;bugzid:([0-9]+)&lt;\/a&gt;/g, '<a href="//$1.fogbugz.com/f/cases/$2/" rel="nofollow" class="$3">bugzid:$4</a>')
+            .replace(/&lt;a href="([^"]+)" rel="nofollow" target="_blank"&gt;([^&]+)&lt;\/a&gt;/g, '<a href="$1" rel="nofollow" target="_blank">$2</a>')
+            ;
+        });
       });
     }
   };

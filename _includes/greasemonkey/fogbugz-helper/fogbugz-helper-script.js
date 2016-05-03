@@ -1266,7 +1266,7 @@ var main = function($) {
   ////////////////////////////
   var toMarkdown_options = { gfm: true };
 
-  var decodeEntities = (function() {
+  /*var decodeEntities = (function() {
     // this prevents any overhead from creating the object each time
     var $div = $('<div>');
     var txt = document.createElement('textarea');
@@ -1290,6 +1290,48 @@ var main = function($) {
     }
 
     return decodeHTMLEntities;
+  })();*/
+
+  /*var decodeEntities = (function() {
+    // this prevents any overhead from creating the object each time
+    var element = document.createElement('div');
+
+    function decodeHTMLEntities (str) {
+      if(str && typeof str === 'string') {
+        // strip script/html tags
+        str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+        str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+        element.innerHTML = str;
+        str = element.textContent;
+        element.textContent = '';
+      }
+
+      return str;
+    }
+
+    return decodeHTMLEntities;
+  })();*/
+
+  // http://stackoverflow.com/questions/5796718/html-entity-decode
+  var decodeEntities = (function() {
+      // this prevents any overhead from creating the object each time
+      var element = document.createElement('div');
+
+      // regular expression matching HTML entities
+      var entity = /&(?:#x[a-f0-9]+|#[0-9]+|[a-z0-9]+);?/ig;
+
+      return function decodeHTMLEntities(str) {
+          // find and replace all the html entities
+          str = str.replace(entity, function(m) {
+              element.innerHTML = m;
+              return element.textContent;
+          });
+
+          // reset the value
+          element.textContent = '';
+
+          return str;
+      }
   })();
 
   // Toggle
@@ -1527,6 +1569,7 @@ var main = function($) {
    // Markdown parser
   ////////////////////////////
 
+  var $markdownify_converter = $('<textarea/>');
   var markdownify_timeout;
   var _markdownify = function() {
     var $customfield = $('.customfield-longtext .content > pre:not(.wysiwygified, .markdownified)').addClass('markdownified');
@@ -1535,8 +1578,18 @@ var main = function($) {
       $customfield.each(function() {
         var $this = $(this);
         var text = $this.html();
+
+        text = decodeEntities(text);
         $this.data('markdown-text', text);
         $this.html(marked(text, marked_options));
+
+        // 
+        $this.find('code').each(function() {
+          this.innerHTML = this.innerHTML
+            .replace(/&lt;a href="\/\/([a-z_\-]+).fogbugz.com\/f\/cases\/([0-9]+)\/" rel="nofollow" class="([a-z\-]+)"&gt;bugzid:([0-9]+)&lt;\/a&gt;/g, '<a href="//$1.fogbugz.com/f/cases/$2/" rel="nofollow" class="$3">bugzid:$4</a>')
+            .replace(/&lt;a href="([^"]+)" rel="nofollow" target="_blank"&gt;([^&]+)&lt;\/a&gt;/g, '<a href="$1" rel="nofollow" target="_blank">$2</a>')
+            ;
+        });
       });
     }
 

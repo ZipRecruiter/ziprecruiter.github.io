@@ -1356,6 +1356,8 @@ var main = function($) {
         code = marked(toMarkdown(code, toMarkdown_options), marked_options);
       }
 
+      code = decodeEntities(code);
+
       $textarea.val(code);
       wysiwyg_textarea($textarea);
     }
@@ -1463,6 +1465,44 @@ var main = function($) {
           color: inherit;\
           padding: 0;\
         }\
+        table {\
+          margin: .5em 0;\
+          border-collapse: collapse;\
+          border-spacing: 0;\
+          empty-cells: show;\
+          border: 1px solid #cbcbcb;\
+        }\
+        \
+        thead {\
+          background-color: #e0e0e0;\
+          color: #000;\
+          text-align: left;\
+          vertical-align: bottom;\
+        }\
+        \
+        td,\
+        th {\
+          border-left: 1px solid #cbcbcb;\
+          border-width: 0 0 0 1px;\
+          font-size: inherit;\
+          margin: 0;\
+          overflow: visible;\
+          padding: .5em 1em;\
+        }\
+        \
+        th,\
+        td {\
+          padding: 0.5em 1em;\
+        }\
+        \
+        td:first-child,\
+        th:first-child {\
+          border-left-width: 0;\
+        }\
+        \
+        tr:nth-child(even) {\
+          background: #f2f2f2;\
+        }\
       ')
     ]
   };
@@ -1482,7 +1522,29 @@ var main = function($) {
         }
 
         if ( element.is( 'textarea' ) ) {
+          // Strip tags
+          data = data.replace(/<([\/]?)(div)([^>]*)>/g, '<$1p>');
+          // My regex isn't good enough to combine these :(
+          data = data.replace(/<([\/]?)(span)([^>]*)>/g, '');
+          data = data.replace(/<(?!((?:\/\s*)?(?:table|thead|tr|th|tbody|td|del|strike|s|code|pre|a|blockquote|h1|h2|h3|h4|h5|h6|br|p|i|em|b|strong|[o|u]l|li)))([^>])+>/g, '');
+
           data = toMarkdown(data, toMarkdown_options);
+
+          // Fix MD links that FB will munge
+          // find markdown links
+          var ms = data.match(/\[([^\]]+)\]\(([^\)]+)\)/g);
+
+          for ( var i = 0, l = ms.length, m, mms; i < l; i++ ) {
+            m = ms[i];
+
+            // if the first and last argument match, just put the url in
+            mms = m.match(/\[([^\]]+)\]\(([^\)]+)\)/);
+
+            if ( mms[1] == mms[2] || mms[1] + '/' == mms[2] || mms[1] == mms[2] + '/' ) {
+              data = data.replace(mms[0], mms[1]);
+            }
+          }
+
           element.setValue( data );
         } else {
           element.setHtml( data );

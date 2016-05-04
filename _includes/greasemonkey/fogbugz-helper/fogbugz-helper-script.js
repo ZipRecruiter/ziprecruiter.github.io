@@ -1374,6 +1374,7 @@ var main = function($) {
     if ( markdown ) {
       val = wysiwygify_editor.getData();
       val = toMarkdown(val, toMarkdown_options);
+      val = _wysiwyg_fix_links(val);
     } else {
       val = $textarea.val();
       val = $.trim(decodeEntities(convertHtmlToText(val)));
@@ -1507,6 +1508,25 @@ var main = function($) {
     ]
   };
 
+  var _wysiwyg_fix_links = function(data) {
+    // Fix MD links that FB will munge
+    // find markdown links
+    var ms = data.match(/\[([^\]]+)\]\(([^\)]+)\)/g);
+
+    for ( var i = 0, l = ms.length, m, mms; i < l; i++ ) {
+      m = ms[i];
+
+      // if the first and last argument match, just put the url in
+      mms = m.match(/\[([^\]]+)\]\(([^\)]+)\)/);
+
+      if ( mms[1] == mms[2] || mms[1] + '/' == mms[2] || mms[1] == mms[2] + '/' ) {
+        data = data.replace(mms[0], mms[1]);
+      }
+    }
+
+    return data;
+  };
+
   var wysiwyg_textarea = function($textarea) {
     wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
 
@@ -1530,20 +1550,7 @@ var main = function($) {
 
           data = toMarkdown(data, toMarkdown_options);
 
-          // Fix MD links that FB will munge
-          // find markdown links
-          var ms = data.match(/\[([^\]]+)\]\(([^\)]+)\)/g);
-
-          for ( var i = 0, l = ms.length, m, mms; i < l; i++ ) {
-            m = ms[i];
-
-            // if the first and last argument match, just put the url in
-            mms = m.match(/\[([^\]]+)\]\(([^\)]+)\)/);
-
-            if ( mms[1] == mms[2] || mms[1] + '/' == mms[2] || mms[1] == mms[2] + '/' ) {
-              data = data.replace(mms[0], mms[1]);
-            }
-          }
+          data = _wysiwyg_fix_links(data);
 
           element.setValue( data );
         } else {
@@ -1647,6 +1654,7 @@ var main = function($) {
         $this.data('markdown-text', text);
 
         text = decodeEntities(text);
+        text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
 
         $this.html(marked(text, marked_options));
 
@@ -1669,8 +1677,13 @@ var main = function($) {
         $this.data('markdown-text', text);
 
         text = decodeEntities(text);
+        // Remove br tags that FB adds
+        text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
 
-        $this.html(marked(text.replace(/<br>/g, '').replace(/&nbsp;/g, ' '), marked_options));
+        // Remove links FB adds to markdown'd links
+        text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
+
+        $this.html(marked(text, marked_options));
 
         // fix links
         $this.find('code').each(function() {

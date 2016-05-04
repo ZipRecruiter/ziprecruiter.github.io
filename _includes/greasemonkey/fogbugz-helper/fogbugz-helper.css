@@ -398,7 +398,6 @@
 
 .fogbugz-helper-fake-kanban-sorted .list-group-body {
   flex: 1;
-  padding: 5px;
   border: 1px solid #000;
   margin-right: 5px;
   background: #eee;
@@ -411,9 +410,7 @@
   background: #fff;
   padding: .5em;
   width: auto;
-  margin-bottom: 5px;
-  border: 2px solid #000;
-  border-radius: 3px;
+  border-bottom: 1px solid #000;
 }
 
 .fogbugz-helper-fake-kanban-sorted .case-list {
@@ -422,11 +419,9 @@
 
 .fogbugz-helper-fake-kanban-sorted .case-list tr.bug-grid-row {
   height: auto;
-  margin-bottom: 5px;
   display: block;
-  padding: 3px;
-  border: 1px solid #000;
-  border-radius: 3px;
+  padding: .5em;
+  border-bottom: 1px solid #000;
 }
 
 .fogbugz-helper-fake-kanban-sorted .case-list .grid-column-contents {

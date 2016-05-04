@@ -1513,6 +1513,10 @@ var main = function($) {
     // find markdown links
     var ms = data.match(/\[([^\]]+)\]\(([^\)]+)\)/g);
 
+    if ( ! ms ) {
+      return data;
+    }
+
     for ( var i = 0, l = ms.length, m, mms; i < l; i++ ) {
       m = ms[i];
 

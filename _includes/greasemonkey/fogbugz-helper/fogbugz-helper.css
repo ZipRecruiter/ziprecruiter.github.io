@@ -465,6 +465,10 @@
   display: none;
 }
 
+.fogbugz-helper-fake-kanban-sorted .bug-grid {
+  width: 100%;
+}
+
 .fogbugz-helper-fake-kanban-sorted .bug-grid-row .grid-row-checkbox {
   margin: 0;
 }

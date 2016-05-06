@@ -1731,6 +1731,163 @@ var main = function($) {
     onunload: onunload_markdown
   });
 
+    ////////////////////////////
+   // Add related tickets
+  ////////////////////////////
+
+  var add_related_ticket_buttons_timeout;
+  var add_related_ticket_done_class = 'add_related_ticket_done';
+  var add_related_ticket_button_class = 'add_related_ticket_button';
+  //var add_related_ticket_link_class = 'add_related_ticket_link';
+  var add_related_ticket_child_class = 'add_related_ticket_child';
+  var add_related_ticket_parent_class = 'add_related_ticket_parent';
+
+  var add_related_ticket_child_id = null;
+  var add_related_ticket_parent_id = null;
+
+  var add_related_ticket_ixProject = null;
+  var add_related_ticket_ixArea = null;
+  var add_related_ticket_ixCategory = null;
+
+  var add_related_ticket_click = function(ev) {
+    ev.preventDefault();
+
+    var $this = $(this);
+    var id = $('.case .top .left .case').text();
+
+    add_related_ticket_ixProject = $('#ixProject [name="ixProject"]').val() || $('.case .top .case-header-info a').eq(0).text();
+
+    add_related_ticket_ixArea = $('#ixArea .droplist-input').val() || $('.case .top .case-header-info a').eq(1).text();
+
+    add_related_ticket_ixCategory = $('#ixCategory .droplist-input').val() || $('.case .case-header-info .icon').attr('title');
+
+    if ( $this.hasClass(add_related_ticket_child_class) ) {
+      add_related_ticket_child_id = id;
+    } else {
+      add_related_ticket_parent_id = id;
+    }
+
+    $('#header .main-nav .add-case-button').click();
+  };
+
+  // Add buttons and add id's if a button was previously clicked
+  var _add_related_ticket_buttons = function() {
+    var $left = $('.case .top .left:not(.' + add_related_ticket_done_class + ')').addClass(add_related_ticket_done_class);
+
+    // Case has an ID
+    if ( $('.case .top .left .case').length ) {
+      var id = $('#formEditCase .top .left .case').text();
+
+      var $child = // $('<a href="/f/cases/new?ixBugParent=' + id + '">+ Subcase</a>')
+        $('<button>+ Sub Case</button>')
+        .addClass(add_related_ticket_button_class)
+        .addClass(add_related_ticket_child_class)
+        //.addClass(add_related_ticket_link_class)
+        .appendTo($left)
+        ;
+
+      var $parent = $('<button>+ Parent Case</button>')
+        .addClass(add_related_ticket_button_class)
+        .addClass(add_related_ticket_parent_class)
+        .appendTo($left)
+        ;
+    } else {
+      // New case
+      if ( add_related_ticket_child_id ) {
+        $('#formEditCase [name="ixBugParent"]')
+          .val(add_related_ticket_child_id)
+          .trigger('change')
+          .trigger('keyup')
+          .trigger('input')
+          .trigger('blur')
+          ;
+
+        add_related_ticket_child_id = null;
+      }
+
+      if ( add_related_ticket_ixProject ) {
+        if ( /^[0-9]+$/.test(add_related_ticket_ixProject) ) {
+          $('#ixProject').data('droplist').val(parseInt(add_related_ticket_ixProject));
+        } else {
+          $('#ixProject').data('droplist').val(
+            $('#ixProject').data('droplist').getChoiceFromText(add_related_ticket_ixProject).value
+          );
+        }
+
+        $('#ixProject').data('droplist').input.trigger('input');
+        $('#ixProject').data('droplist').commitChosenValue();
+        add_related_ticket_ixProject = null;
+      }
+
+      if ( add_related_ticket_ixArea ) {
+        $('#ixArea').data('droplist').val(
+          $('#ixArea').data('droplist').getChoiceFromText(add_related_ticket_ixArea).value
+        );
+
+        $('#ixArea').data('droplist').input.trigger('input');
+        $('#ixArea').data('droplist').commitChosenValue();
+        add_related_ticket_ixArea = null;
+      }
+
+      if ( add_related_ticket_ixCategory ) {
+        $('#ixCategory').data('droplist').val(
+          $('#ixCategory').data('droplist').getChoiceFromText(add_related_ticket_ixCategory).value
+        );
+
+        $('#ixCategory').data('droplist').input.trigger('input');
+        $('#ixCategory').data('droplist').commitChosenValue();
+        add_related_ticket_ixCategory = null;
+      }
+
+      if ( add_related_ticket_parent_id ) {
+        $('#formEditCase #sidebarSubcases .droplist-input')
+          .val(add_related_ticket_parent_id)
+          .trigger('change')
+          .trigger('keyup')
+          .trigger('input')
+          .trigger('blur')
+          ;
+
+        add_related_ticket_parent_id = null;
+      }
+    }
+  };
+
+  // Don't call this function thousands of times
+  var add_related_ticket_buttons = function() {
+    clearTimeout(add_related_ticket_buttons_timeout);
+
+    add_related_ticket_buttons_timeout = setTimeout(_add_related_ticket_buttons, 10);
+  };
+
+  var onload_add_related_ticket = function() {
+    add_related_ticket_buttons();
+    $document
+      .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
+      .delegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
+      ;
+  };
+
+  var onunload_add_related_ticket = function() {
+    $document
+      .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
+      .undelegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
+      ;
+
+    $('.' + add_related_ticket_button_class).remove();
+    //$('.' + add_related_ticket_link_class).remove();
+    $('.' + add_related_ticket_done_class).removeClass(add_related_ticket_done_class);
+  };
+
+  pm.add({
+    id: 'add_related_ticket',
+    text: 'Add Related Ticket Buttons',
+    title: 'Adds buttons to make it easy to add parent/child tickets',
+    defaultOn: true,
+    onload: onload_add_related_ticket,
+    onunload: onunload_add_related_ticket
+  });
+
   // Set up all the preferences
   pm.load();
 };

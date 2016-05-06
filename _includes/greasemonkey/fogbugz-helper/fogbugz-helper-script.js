@@ -1786,11 +1786,11 @@ var main = function($) {
         .appendTo($left)
         ;
 
-      var $parent = $('<button>+ Parent Case</button>')
+      /* var $parent = $('<button>+ Parent Case</button>')
         .addClass(add_related_ticket_button_class)
         .addClass(add_related_ticket_parent_class)
         .appendTo($left)
-        ;
+        ;*/
     } else {
       // New case
       if ( add_related_ticket_child_id ) {

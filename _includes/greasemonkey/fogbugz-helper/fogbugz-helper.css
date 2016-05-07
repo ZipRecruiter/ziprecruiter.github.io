@@ -271,122 +271,226 @@
  // Fake Kanban
 ////////////////////////// */
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list {
+/* Double
+------------------------------------------------------------ */
+
+.fogbugz-helper-fake-kanban-double-sorted .list-group-footer,
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid {
+  display: none !important;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .list-group-body {
+  display: flex;
+  flex-direction: row;
+  max-width: 100%;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .list-group-body > table {
+  flex: 1;
+  border: 1px solid #000;
+  margin-right: 5px;
+  background: #eee;
+  border-radius: 3px;
+  display: block;
+  overflow: hidden;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .list-group-body tbody,
+.fogbugz-helper-fake-kanban-double-sorted .list-group-body tr {
+  display: block;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list tr.bug-grid-row {
+  height: auto;
+  display: block;
+  padding: .5em;
+  border-bottom: 1px solid #000;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list td {
+  white-space: normal;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid-row td,
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid-row div {
+  display: inline;
+  width: auto;
+  height: auto;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list tr.bug-grid-row .grid-title-col,
+.fogbugz-helper-fake-kanban-double-sorted .case-list .grid-column-contents {
+  overflow: visible;
+  white-space: normal;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted-sort {
+  display: none !important;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .grid-title-col .context-menu-show {
+  display: none;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid-header {
+  display: none;
+}
+
+/* tweaks */
+
+.fogbugz-helper-fake-kanban-double-sorted .list-group-body > table:before {
+  content: attr(data-collapse-key);
+  display: block;
+  background: #fff;
+  padding: .5em;
+  width: auto;
+  border-bottom: 1px solid #000;
+
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid-row .grid-row-checkbox {
+  margin: 0;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid-row .icon {
+  vertical-align: super;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list tr.bug-grid-row .icon {
+  font-size: 9px;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .bug-grid-row .spacer-cell {
+  display: none;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .arrow {
+  display: none;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .person:before {
+  content: "(";
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .person:after {
+  content: ")";
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list .grid-column-Case a {
+  text-decoration: underline;
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list .grid-column-Case:after {
+  content: ":";
+}
+
+.fogbugz-helper-fake-kanban-double-sorted .case-list .grid-column-contents {
+  padding: 0;
+}
+
+/* Single
+------------------------------------------------------------ */
+
+.fogbugz-helper-fake-kanban #main .case-list,
+.fogbugz-helper-fake-kanban #main2 .case-list {
   display: flex;
   flex-direction: column;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list > *,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list > * {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key],
+.fogbugz-helper-fake-kanban #main .case-list > * {
   order: 100;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Active"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Active"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Active"] {
   order: 0;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Active"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Active"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Active"] + div {
   order: 1;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Triage"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Triage"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"] {
   order: 2;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Triage"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Triage"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Triage"] + div {
   order: 3;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Backlog"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Backlog"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Backlog"] {
   order: 4;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Backlog"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Backlog"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Backlog"] + div {
   order: 5;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Planning"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Planning"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"] {
   order: 6;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Planning"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Planning"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Planning"] + div {
   order: 7;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Work"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Work"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Work"] {
   order: 8;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Work"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Work"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Work"] + div {
   order: 9;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Progress"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Progress"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Progress"] {
   order: 10;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Progress"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Progress"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Progress"] + div {
   order: 11;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Master"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Master"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Master"] {
   order: 12;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Master"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Master"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Master"] + div {
   order: 13;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Review"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Review"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"] {
   order: 14;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Review"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Review"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Review"] + div {
   order: 15;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="QA"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="QA"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"] {
   order: 16;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="QA"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="QA"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="QA"] + div {
   order: 17;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Deploy"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Deploy"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"] {
   order: 18;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Deploy"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Deploy"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Deploy"] + div {
   order: 19;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Released"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Released"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"] {
   order: 20;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Released"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Released"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Released"] + div {
   order: 21;
 }
 
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Paused"],
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Paused"] {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"] {
   order: 22;
 }
-.fogbugz-helper-fake-kanban-sorted #main .case-list [data-collapse-key$="Paused"] + div,
-.fogbugz-helper-fake-kanban-sorted #main2 .case-list [data-collapse-key$="Paused"] + div {
+.fogbugz-helper-fake-kanban #main .case-list [data-collapse-key$="Paused"] + div {
   order: 23;
 }
 
@@ -402,15 +506,33 @@
   margin-right: 5px;
   background: #eee;
   border-radius: 3px;
+  overflow: hidden;
+}
+
+.fogbugz-helper-fake-kanban-sorted .bug-grid {
+  width: 100%;
+  display: block;
+}
+
+.fogbugz-helper-fake-kanban-sorted .bug-grid > tbody {
+  display: block;
 }
 
 .fogbugz-helper-fake-kanban-sorted .bug-grid:before {
   content: attr(data-group-name);
-  display: table-caption;
+  display: block;
   background: #fff;
   padding: .5em;
-  width: auto;
   border-bottom: 1px solid #000;
+
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
 }
 
 .fogbugz-helper-fake-kanban-sorted .case-list {
@@ -463,10 +585,6 @@
 
 .fogbugz-helper-fake-kanban-sorted .bug-grid-header {
   display: none;
-}
-
-.fogbugz-helper-fake-kanban-sorted .bug-grid {
-  width: 100%;
 }
 
 .fogbugz-helper-fake-kanban-sorted .bug-grid-row .grid-row-checkbox {

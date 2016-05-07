@@ -1165,11 +1165,85 @@ var main = function($) {
   ////////////////////////////
   var _fake_kanban_class = 'fogbugz-helper-fake-kanban';
   var _fake_kanban_sorted_class = 'fogbugz-helper-fake-kanban-sorted';
+  var _fake_kanban_double_sorted_class = 'fogbugz-helper-fake-kanban-double-sorted';
 
   var _fake_kanban_template_inserted = function(r, data) {
     if ( $('.list-group-header').children().length > 2 ) {
-      $body.addClass(_fake_kanban_sorted_class);
+      if ( !r.element.filter('#filter-bar-title').length ) {
+        return;
+      }
+
+      // This is where we do things when the tickets are all loaded
+
+      // Sorts
+      var $sorts = $('#filter-description-sort [data-s-name]');
+      var sorts = [];
+      $sorts.each(function() {
+        sorts.push($(this).data('s-name'));
+      });
+
+      // Columns
+      var $columns = $('.grid-column-contents');
+      var columns_o = {};
+      var columns = [];
+      $columns.each(function() {
+        var match = this.className.match(/ grid\-column\-([a-zA-Z]+)/);
+        if ( match && columns_o[match[1]] !== true ) {
+          columns_o[match[1]] = true;
+          columns.push(match[1]);
+        }
+      });
+
+      // Double sort
+      if ( sorts.length > 1 && columns_o[sorts[1]] === true ) {
+        $body.removeClass(_fake_kanban_sorted_class);
+        $body.addClass(_fake_kanban_double_sorted_class);
+
+        var types_o = {};
+        var types_a = [];
+        $('.list-group-body').each(function() {
+          $(this).find('.bug-grid-row').each(function() {
+            var $column = $(this).find('.grid-column-' + sorts[1]);
+            var id = $.trim($column.text());
+
+            if ( !types_o[id] ) {
+              types_o[id] = true;
+              types_a.push(id);
+            }
+          });
+        });
+
+        types_a.sort();
+
+        $('.list-group-body').each(function() {
+          var list_group_body = this;
+          var types = {};
+
+          for ( var i = 0, l = types_a.length, t; i < l; i++ ) {
+            t = types_a[i];
+            var $table = $('<table/>');
+            types[t] = $table;
+            $table
+              .appendTo(list_group_body)
+              .attr('data-collapse-key', t)
+              ;
+          }
+
+          $(this).find('.bug-grid-row').each(function() {
+            var $column = $(this).find('.grid-column-' + sorts[1]);
+            var id = $.trim($column.text());
+
+            $column.closest('td').addClass(_fake_kanban_double_sorted_class + '-sort');
+            types[id].append($column.closest('tr').detach());
+          });
+        });
+      } else {
+        // Single sort
+        $body.removeClass(_fake_kanban_double_sorted_class);
+        $body.addClass(_fake_kanban_sorted_class);
+      }
     } else {
+      $body.removeClass(_fake_kanban_double_sorted_class);
       $body.removeClass(_fake_kanban_sorted_class);
     }
   };

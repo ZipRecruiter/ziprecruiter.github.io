@@ -1166,28 +1166,6 @@ var main = function($) {
   var _fake_kanban_class = 'fogbugz-helper-fake-kanban';
   var _fake_kanban_sorted_class = 'fogbugz-helper-fake-kanban-sorted';
 
-  /* Not used, but this is how I figured out FB's event names
-
-  var _sub = fb.pubsub.subscribe;
-
-  fb.pubsub.subscribe = function(name, fun) {
-    console.log(name);
-    _sub(name, fun);
-    _sub(name, function(m, d) {
-      console.log(m, d);
-      console.log($('#filter-description-sort').children().length);
-    });
-    //console.log(document.getElementById('filter-description-sort'));
-  };*/
-
-  /*var _pub = fb.pubsub.publish;
-
-  fb.pubsub.publish = function(name) {
-    console.log(arguments);
-    _pub.apply(window, arguments);
-    console.log($('#filter-description-sort').children().length);
-  };*/
-
   var _fake_kanban_template_inserted = function(r, data) {
     if ( $('.list-group-header').children().length > 2 ) {
       $body.addClass(_fake_kanban_sorted_class);
@@ -1889,27 +1867,51 @@ var main = function($) {
   });
 
     ////////////////////////////
-   // Resolve to edit ticket
+   // Add resolve/reopen button to edit ticket
   ////////////////////////////
 
   var add_resolve_button_timeout;
   var has_add_resolve_button_class = 'has_add_resolve_button';
 
-  // Add buttons and add id's if a button was previously clicked
+  // Add resolve or reopen button to ticket
   var _add_resolve_button = function() {
     var $nav = $('.case > article > nav:not(.' + has_add_resolve_button_class + ')');
 
     if ( $nav.length && $('#sCommand').val() === 'edit' ) {
       $nav.addClass(has_add_resolve_button_class);
-      var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
 
-      $nav.append('\
-        <span class="controls">\
-          <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
-            <span class="icon icon-case-resolve"></span>Resolve\
-          </a>\
-        </span>\
-      ');
+      // Case is open
+      if ( add_resolve_fOpen ) {
+        var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
+
+        $nav.append('\
+          <span class="controls">\
+            <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
+              <span class="icon icon-case-resolve"></span>Resolve\
+            </a>\
+          </span>\
+        ');
+      } else {
+        // Case is closed
+        var reopen_url = document.location.href.replace(/\/edit\//, '/reopen/');
+
+        $nav.append('\
+          <span class="controls">\
+            <a class="control" name="reopen" href="' + reopen_url + '" accesskey="u">\
+              <span class="icon icon-case-reopen"></span>Reopen\
+            </a>\
+          </span>\
+        ');
+      }
+    }
+  };
+
+  // Checking to see if the api call was a case, and if so save the fOpen state
+  var add_resolve_fOpen;
+  var add_resolve_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
+  var add_resolve_check_api_response = function(type, info) {
+    if ( add_resolve_check_api_response_regex.test(type.route) ) {
+      add_resolve_fOpen = info.data.fOpen;
     }
   };
 
@@ -1925,6 +1927,8 @@ var main = function($) {
     $document
       .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
       ;
+
+    fb.pubsub.subscribe('/api/success', add_resolve_check_api_response);
   };
 
   var onunload_add_related_ticket = function() {
@@ -1933,16 +1937,37 @@ var main = function($) {
       ;
 
     $('.' + has_add_resolve_button_class).removeClass().find('.controls').remove();
+    fb.pubsub.unsubscribe('/api/success', add_resolve_check_api_response);
   };
 
   pm.add({
     id: 'add_resolve',
-    text: 'Add Resolve Button to Edit Ticket Header',
-    title: 'Adds a "resolve" button to the header area of tickets when editing',
+    text: 'Add Resolve/Reopen Buttons to Edit Ticket Header',
+    title: 'Adds a "resolve" and "reopen" buttons to the header area of tickets when editing',
     defaultOn: true,
     onload: onload_add_resolve,
     onunload: onunload_add_related_ticket
   });
+
+  /* Not used, but this is how I figured out FB's event names*/
+
+  /*var _sub = fb.pubsub.subscribe;
+
+  fb.pubsub.subscribe = function(name, fun) {
+    console.log('fb.pubsub.subscribe:', name);
+    _sub(name, fun);
+    _sub(name, function(m, d) {
+      console.log('subscribed event:', name, m, d);
+    });
+  };*/
+
+  /*var _pub = fb.pubsub.publish;
+
+  fb.pubsub.publish = function(name) {
+    console.log('fb.pubsub.publish:', arguments);
+    _pub.apply(window, arguments);
+    debugger;
+  };*/
 
   // Set up all the preferences
   pm.load();

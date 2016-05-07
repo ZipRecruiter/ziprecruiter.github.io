@@ -1888,6 +1888,62 @@ var main = function($) {
     onunload: onunload_add_related_ticket
   });
 
+    ////////////////////////////
+   // Resolve to edit ticket
+  ////////////////////////////
+
+  var add_resolve_button_timeout;
+  var has_add_resolve_button_class = 'has_add_resolve_button';
+
+  // Add buttons and add id's if a button was previously clicked
+  var _add_resolve_button = function() {
+    var $nav = $('.case > article > nav:not(.' + has_add_resolve_button_class + ')');
+
+    if ( $nav.length && $('#sCommand').val() === 'edit' ) {
+      $nav.addClass(has_add_resolve_button_class);
+      var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
+
+      $nav.append('\
+        <span class="controls">\
+          <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
+            <span class="icon icon-case-resolve"></span>Resolve\
+          </a>\
+        </span>\
+      ');
+    }
+  };
+
+  // Don't call this function thousands of times
+  var add_resolve_button = function() {
+    clearTimeout(add_resolve_button_timeout);
+
+    add_resolve_button_timeout = setTimeout(_add_resolve_button, 10);
+  };
+
+  var onload_add_resolve = function() {
+    add_resolve_button();
+    $document
+      .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
+      ;
+  };
+
+  var onunload_add_related_ticket = function() {
+    $document
+      .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
+      ;
+
+    $('.' + has_add_resolve_button_class).removeClass().find('.controls').remove();
+  };
+
+  pm.add({
+    id: 'add_resolve',
+    text: 'Add Resolve Button to Edit Ticket Header',
+    title: 'Adds a "resolve" button to the header area of tickets when editing',
+    defaultOn: true,
+    onload: onload_add_resolve,
+    onunload: onunload_add_related_ticket
+  });
+
   // Set up all the preferences
   pm.load();
 };

@@ -1696,22 +1696,26 @@ var main = function($) {
    // Markdown parser
   ////////////////////////////
 
-  var _markdownify_fix_text = function(text, replace_br) {
-    text = decodeEntities(text);
+  var _markdownify_fix_text = function(text, replace_br, skip_other) {
+    if ( !skip_other ) {
+      text = decodeEntities(text);
+    }
 
     if ( replace_br ) {
       // Remove br tags that FB adds
       text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
     }
 
-    // Remove links FB adds to markdown'd links
-    text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
+    if ( !skip_other ) {
+      // Remove links FB adds to markdown'd links
+      text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
 
-    // Fix other f'd up links like [http://google.com](http://google.com)
-    // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
-    text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
-    // Convert to markdown
-    text = marked(text, marked_options);
+      // Fix other f'd up links like [http://google.com](http://google.com)
+      // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
+      text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
+      // Convert to markdown
+      text = marked(text, marked_options);
+    }
 
     // Link sha1's to gitlabs
     text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1<a href="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2" target="_blank">$2</a>');
@@ -1745,6 +1749,7 @@ var main = function($) {
       });
     }
 
+    // Plain text comments
     var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(:not(a, br)))').addClass('markdownified');
 
     if ( $bodycontent.length ) {
@@ -1755,6 +1760,22 @@ var main = function($) {
         $this.data('markdown-text', text);
 
         text = _markdownify_fix_text(text, true);
+
+        $this.html(text);
+      });
+    }
+
+    // WYSIWYG'd comments
+    var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
+
+    if ( $bodycontent.length ) {
+      $bodycontent.each(function() {
+        var $this = $(this);
+        var text = $this.html();
+
+        $this.data('markdown-text', text);
+
+        text = _markdownify_fix_text(text, false, true);
 
         $this.html(text);
 

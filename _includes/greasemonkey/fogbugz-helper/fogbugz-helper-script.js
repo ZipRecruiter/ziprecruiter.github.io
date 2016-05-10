@@ -69,6 +69,15 @@ function convertHtmlToText(inputText) {
   return returnText;
 }
 
+// Link sha1's to gitlabs
+var link_sha1 = function(text, url_only) {
+  if ( url_only ) {
+    text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2');
+  }
+
+  return text;
+};
+
 var $document;
 var $window;
 
@@ -1410,6 +1419,8 @@ var main = function($) {
 
       code = decodeEntities(code);
 
+      code = link_sha1(code, true);
+
       $textarea.val(code);
       wysiwyg_textarea($textarea);
     }
@@ -1717,8 +1728,7 @@ var main = function($) {
       text = marked(text, marked_options);
     }
 
-    // Link sha1's to gitlabs
-    text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1<a href="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2" target="_blank">$2</a>');
+    text = link_sha1(text);
 
     return text;
   };

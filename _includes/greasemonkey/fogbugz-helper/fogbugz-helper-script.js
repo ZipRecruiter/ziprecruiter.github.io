@@ -1766,7 +1766,7 @@ var main = function($) {
     }
 
     // WYSIWYG'd comments
-    var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
+    $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
 
     if ( $bodycontent.length ) {
       $bodycontent.each(function() {

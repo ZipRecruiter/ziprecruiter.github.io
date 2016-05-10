@@ -73,6 +73,8 @@ function convertHtmlToText(inputText) {
 var link_sha1 = function(text, url_only) {
   if ( url_only ) {
     text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2');
+  } else {
+    text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1<a href="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2" target="_blank">$2</a>');
   }
 
   return text;
@@ -1492,8 +1494,8 @@ var main = function($) {
         ['Undo', 'Redo'],
         ['Format'],
         ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'],
-        ['NumberedList', 'BulletedList', 'Blockquote'] // , 'Outdent', 'Indent'],
-        // ['Source']
+        ['NumberedList', 'BulletedList', 'Blockquote', 'Outdent', 'Indent'],
+        ['Source']
     ],
     format_tags: 'h1;h2;h3;h4;h5;h6;p;pre',
     contentsCss: [

@@ -1979,7 +1979,7 @@ var main = function($) {
   });
 
     ////////////////////////////
-   // Add resolve/reopen button to edit ticket
+   // Add resolve/reopen/close/reactivate button to edit ticket
   ////////////////////////////
 
   var add_resolve_button_timeout;
@@ -1995,12 +1995,29 @@ var main = function($) {
       // Case is open
       if ( add_resolve_fOpen ) {
         var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
+        var extra = '';
+
+        // Case is resolved
+        if ( add_resolve_personResolvedBy ) {
+          var reactivate_url = document.location.href.replace(/\/edit\//, '/reactivate/');
+          var close_url = document.location.href.replace(/\/edit\//, '/close/');
+
+          extra = '\
+            <a class="control" name="reactivate" href="' + reactivate_url + '" accesskey="t">\
+              <span class="icon icon-case-reactivate"></span>Reactivate\
+            </a>\
+            <a class="control" name="close" href="' + close_url + '" accesskey="x">\
+              <span class="icon icon-case-close"></span>Close Case\
+            </a>\
+          ';
+        }
 
         $nav.append('\
           <span class="controls">\
             <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
               <span class="icon icon-case-resolve"></span>Resolve\
             </a>\
+            ' + extra + '\
           </span>\
         ');
       } else {
@@ -2020,10 +2037,13 @@ var main = function($) {
 
   // Checking to see if the api call was a case, and if so save the fOpen state
   var add_resolve_fOpen;
+  var add_resolve_personResolvedBy;
   var add_resolve_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
   var add_resolve_check_api_response = function(type, info) {
     if ( add_resolve_check_api_response_regex.test(type.route) ) {
+      console.log(info.data)
       add_resolve_fOpen = info.data.fOpen;
+      add_resolve_personResolvedBy = info.data.personResolvedBy;
     }
   };
 
@@ -2055,7 +2075,7 @@ var main = function($) {
   pm.add({
     id: 'add_resolve',
     text: 'Add Resolve/Reopen Buttons to Edit Ticket Header',
-    title: 'Adds a "resolve" and "reopen" buttons to the header area of tickets when editing',
+    title: 'Adds a "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
     defaultOn: true,
     onload: onload_add_resolve,
     onunload: onunload_add_related_ticket

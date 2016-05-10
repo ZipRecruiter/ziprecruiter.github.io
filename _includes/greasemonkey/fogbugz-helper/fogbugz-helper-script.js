@@ -1696,6 +1696,29 @@ var main = function($) {
    // Markdown parser
   ////////////////////////////
 
+  var _markdownify_fix_text = function(text, replace_br) {
+    text = decodeEntities(text);
+
+    if ( replace_br ) {
+      // Remove br tags that FB adds
+      text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
+    }
+
+    // Remove links FB adds to markdown'd links
+    text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
+
+    // Fix other f'd up links like [http://google.com](http://google.com)
+    // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
+    text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
+    // Convert to markdown
+    text = marked(text, marked_options);
+
+    // Link sha1's to gitlabs
+    text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1<a href="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2" target="_blank">$2</a>');
+
+    return text;
+  };
+
   var $markdownify_converter = $('<textarea/>');
   var markdownify_timeout;
   var _markdownify = function() {
@@ -1709,10 +1732,9 @@ var main = function($) {
         //text = decodeEntities(text);
         $this.data('markdown-text', text);
 
-        text = decodeEntities(text);
-        text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
+        text = _markdownify_fix_text(text);
 
-        $this.html(marked(text, marked_options));
+        $this.html(text);
 
         // fix links
         $this.find('code').each(function() {
@@ -1732,14 +1754,9 @@ var main = function($) {
 
         $this.data('markdown-text', text);
 
-        text = decodeEntities(text);
-        // Remove br tags that FB adds
-        text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
+        text = _markdownify_fix_text(text, true);
 
-        // Remove links FB adds to markdown'd links
-        text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
-
-        $this.html(marked(text, marked_options));
+        $this.html(text);
 
         // fix links
         $this.find('code').each(function() {

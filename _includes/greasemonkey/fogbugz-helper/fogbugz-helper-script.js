@@ -1492,8 +1492,8 @@ var main = function($) {
         ['Undo', 'Redo'],
         ['Format'],
         ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'],
-        ['NumberedList', 'BulletedList', 'Blockquote', 'Outdent', 'Indent'],
-        ['Source']
+        ['NumberedList', 'BulletedList', 'Blockquote'] // , 'Outdent', 'Indent'],
+        // ['Source']
     ],
     format_tags: 'h1;h2;h3;h4;h5;h6;p;pre',
     contentsCss: [

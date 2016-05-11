@@ -69,11 +69,51 @@ function convertHtmlToText(inputText) {
   return returnText;
 }
 
-// Link sha1's to gitlabs
-var link_sha1 = function(text) {
-  text = text.replace(/([^<\/])([a-f0-9]{40})/g, '$1<a href="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$2" target="_blank">$2</a>');
+// Safely auto link stuff
+var auto_link_html_div = document.createElement('div');
+var auto_link_html = function(node, exp, rep) {
+  // http://stackoverflow.com/questions/11863847/regex-to-match-urls-but-not-urls-in-hyperlinks
+  //var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+  var nodes = node.childNodes;
 
-  return text;
+  for ( var i = 0, m = nodes.length; i < m; i++){
+    var n = nodes[i];
+
+    if ( n.nodeType == n.TEXT_NODE ) {
+      var g = n.textContent.match(exp);
+
+      while( g ) {
+        var idx = n.textContent.indexOf(g[0]);
+        var pre = n.textContent.substring(0, idx);
+        var t = document.createTextNode(pre);
+        var a = document.createElement('a');
+        a.href = rep.replace(/\$1/, g[0]);
+        a.innerText = g[0];
+        n.textContent = n.textContent.substring(idx + g[0].length);
+        n.parentElement.insertBefore(t, n);
+        n.parentElement.insertBefore(a, n);
+        g = n.textContent.match(exp);
+      }
+    } else if ( n.tagName !== 'A' ) {
+      auto_link_html(n, exp, rep);
+    }
+  }
+};
+
+// link special texts
+var auto_links = function(text) {
+  auto_link_html_div.innerHTML = text;
+
+  // Sha1's to ZR gitlabs
+  auto_link_html(auto_link_html_div, /(\b[a-f0-9]{40})/, 'https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$1');
+
+  // Perl nerd stuff
+  // ZR specific
+  auto_link_html(auto_link_html_div, /\b(ZR::|StarterView::|PartnerAlerts::|Test::ZR::|Test::StarterView::|Test::PartnerAlerts::)(([a-zA-Z0-9]+::)*[a-zA-Z0-9]+)/, 'https://pod.ziprecruiter.com/?$1');
+
+  auto_link_html(auto_link_html_div, /\b([a-zA-Z0-9]+::)+[a-zA-Z0-9]+/, 'https://metacpan.org/pod/$1');
+
+  return auto_link_html_div.innerHTML;
 };
 
 var $document;
@@ -1417,7 +1457,7 @@ var main = function($) {
 
       code = decodeEntities(code);
 
-      code = link_sha1(code);
+      code = auto_links(code);
 
       $textarea.val(code);
       wysiwyg_textarea($textarea);
@@ -1726,7 +1766,7 @@ var main = function($) {
       text = marked(text, marked_options);
     }
 
-    text = link_sha1(text);
+    text = auto_links(text);
 
     return text;
   };

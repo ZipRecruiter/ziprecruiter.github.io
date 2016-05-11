@@ -94,7 +94,7 @@ var auto_link_html = function(node, exp, rep) {
         n.parentElement.insertBefore(a, n);
         g = n.textContent.match(exp);
       }
-    } else if ( n.tagName !== 'A' ) {
+    } else if ( n.tagName !== 'A' && n.tagName !== 'CODE' ) {
       auto_link_html(n, exp, rep);
     }
   }
@@ -1810,6 +1810,13 @@ var main = function($) {
         text = _markdownify_fix_text(text, true);
 
         $this.html(text);
+
+        // fix links
+        $this.find('code').each(function() {
+          this.innerHTML = this.innerHTML
+            .replace(/&lt;a ([^&]+)&gt;([^&]+)&lt;\/a&gt;/g, '<a $1>$2</a>')
+            ;
+        });
       });
     }
 

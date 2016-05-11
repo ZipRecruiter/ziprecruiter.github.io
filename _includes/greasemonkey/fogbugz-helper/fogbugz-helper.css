@@ -1154,17 +1154,46 @@ section.case .corner.add_related_ticket_done a.case {
 
 .add_related_ticket_button {
   text-align: left;
-  color: #39668e;
+  color: #555;
   padding: 0;
   width: 100%;
 
   -webkit-appearance: none; // iOS
 
-  border-radius: 0;
-  background: transparent;
+  font-size: 13px;
+  border-radius: 4px;
+
+  background: #f6f6f6;
   border: none;
   box-shadow: none;
   font: inherit;
+  font-weight: normal;
+  padding: 4px 5px;
+  position: relative;
+  text-shadow: none;
+}
+
+.add_related_ticket_button:before {
+  background-image: none;
+  width: auto;
+  font-family: 'kiwicons';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  position: relative;
+
+  color: #80a1bd;
+  position: relative;
+  top: 0;
+  content: "\e61d";
+  margin-right: 4px;
+  vertical-align: bottom;
 }
 
 .add_related_ticket_link,
@@ -1172,7 +1201,6 @@ section.case .corner.add_related_ticket_done a.case {
   margin: 1em 0;
   white-space: nowrap;
   display: block;
-  font-weight: bold;
 }
 
 .add_related_ticket_button&::-moz-focus-inner { 
@@ -1183,5 +1211,5 @@ section.case .corner.add_related_ticket_done a.case {
 
 .add_related_ticket_button:focus,
 .add_related_ticket_button:hover {
-  text-decoration: underline;
+  background-color: #ddd;
 }

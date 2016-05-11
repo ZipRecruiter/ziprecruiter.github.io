@@ -1838,14 +1838,11 @@ var main = function($) {
   var add_related_ticket_button_class = 'add_related_ticket_button';
   //var add_related_ticket_link_class = 'add_related_ticket_link';
   var add_related_ticket_child_class = 'add_related_ticket_child';
-  var add_related_ticket_parent_class = 'add_related_ticket_parent';
+  var add_related_ticket_copy_class = 'add_related_ticket_copy';
+  //var add_related_ticket_parent_class = 'add_related_ticket_parent';
 
-  var add_related_ticket_child_id = null;
-  var add_related_ticket_parent_id = null;
-
-  var add_related_ticket_ixProject = null;
-  var add_related_ticket_ixArea = null;
-  var add_related_ticket_ixCategory = null;
+  var add_related_ticket_values = null;
+  var add_related_ticket_array_regex = /^\[.*\]$/;
 
   var add_related_ticket_click = function(ev) {
     ev.preventDefault();
@@ -1853,19 +1850,98 @@ var main = function($) {
     var $this = $(this);
     var id = $('.case .top .left .case').text();
 
-    add_related_ticket_ixProject = $('#ixProject [name="ixProject"]').val() || $('.case .top .case-header-info a').eq(0).text();
-
-    add_related_ticket_ixArea = $('#ixArea .droplist-input').val() || $('.case .top .case-header-info a').eq(1).text();
-
-    add_related_ticket_ixCategory = $('#ixCategory .droplist-input').val() || $('.case .case-header-info .icon').attr('title');
+    var $add_button = $('#header .main-nav .add-case-button');
+    var old_href = $add_button.attr('href');
+    var href = old_href + '?';
 
     if ( $this.hasClass(add_related_ticket_child_class) ) {
-      add_related_ticket_child_id = id;
-    } else {
-      add_related_ticket_parent_id = id;
+      var duplicates = {
+        props: [
+          'ixProject',
+          'ixArea',
+          'ixCategory'
+        ]
+      };
+
+      href += 'ixBugParent=' + id + '&';
+    } else if ( $this.hasClass(add_related_ticket_copy_class) ) {
+      // Values are hard coded, couldn't find anything in fb that would tell me what should be editable
+      var duplicates = {
+        props: [
+          'sTitle',
+          'ixProject',
+          'ixArea',
+          'ixFixFor',
+          'ixCategory',
+          'ixPersonAssignedTo',
+          'ixStatus',
+          'sCustomerEmail',
+          'ixPriority',
+          'ixBugParent',
+          'dtDue',
+          'hrsCurrEst',
+          'hrsElapsedExtra',
+          'dblStoryPts',
+          'tags',
+        ],
+        customs: [],
+        kanbans: [
+          'ixKanbanColumn',
+          'ixKanbanColor'
+        ],
+        cases: [
+          'subcases',
+          'casesDependedOn'
+        ]
+      };
+
+      for ( var field in add_related_ticket_data.customFields ) {
+        if ( !add_related_ticket_data.customFields.hasOwnProperty(field) ) continue;
+        if ( /^[0-9]+_/.test(field) === false ) continue;
+        duplicates.customs.push(field);
+      }
     }
 
-    $('#header .main-nav .add-case-button').click();
+    for ( var key in duplicates ) {
+      // skip loop if the property is from prototype
+      if (!duplicates.hasOwnProperty(key)) continue;
+
+      var dupes = duplicates[key];
+
+      for ( var i = 0, l = dupes.length, value; i < l; i++ ) {
+        if ( key === 'props' ) {
+          value = add_related_ticket_data[dupes[i]];
+
+          if ( dupes[i] === 'sTitle' ) {
+            value = 'Copy of ' + value;
+          }
+        } else if ( key === 'customs' ) {
+          value = add_related_ticket_data.customFields[dupes[i]];
+        } else if ( key === 'kanbans' ) {
+          value = add_related_ticket_data.kanbanInfo[dupes[i]];
+        } else if ( key === 'cases' ) {
+          value = [];
+          var cases = add_related_ticket_data[dupes[i]];
+
+          for ( var ci = 0, cl = cases.length, c; ci < cl; ci++ ) {
+            c = cases[ci];
+            value.push(c.ixBug + ': ' + c.sTitle);
+          }
+        }
+
+        if ( value === null || typeof value === 'undefined' || value === 0 ) {
+          continue;
+        }
+
+        href += encodeURIComponent(dupes[i]) + '=' + encodeURIComponent(value) + '&'
+      }
+    }
+
+    $add_button
+      .attr('href', href)
+      .click()
+      .attr('href', old_href)
+      ;
   };
 
   // Add buttons and add id's if a button was previously clicked
@@ -1876,11 +1952,15 @@ var main = function($) {
     if ( $('.case .top .left .case').length ) {
       var id = $('#formEditCase .top .left .case').text();
 
-      var $child = // $('<a href="/f/cases/new?ixBugParent=' + id + '">+ Subcase</a>')
-        $('<button>+ Sub Case</button>')
+      var $child = $('<button>Sub Case</button>')
         .addClass(add_related_ticket_button_class)
         .addClass(add_related_ticket_child_class)
-        //.addClass(add_related_ticket_link_class)
+        .appendTo($left)
+        ;
+
+      var $copy = $('<button>Duplicate</button>')
+        .addClass(add_related_ticket_button_class)
+        .addClass(add_related_ticket_copy_class)
         .appendTo($left)
         ;
 
@@ -1889,65 +1969,6 @@ var main = function($) {
         .addClass(add_related_ticket_parent_class)
         .appendTo($left)
         ;*/
-    } else {
-      // New case
-      if ( add_related_ticket_child_id ) {
-        $('#formEditCase [name="ixBugParent"]')
-          .val(add_related_ticket_child_id)
-          .trigger('change')
-          .trigger('keyup')
-          .trigger('input')
-          .trigger('blur')
-          ;
-
-        add_related_ticket_child_id = null;
-      }
-
-      if ( add_related_ticket_ixProject ) {
-        if ( /^[0-9]+$/.test(add_related_ticket_ixProject) ) {
-          $('#ixProject').data('droplist').val(parseInt(add_related_ticket_ixProject));
-        } else {
-          $('#ixProject').data('droplist').val(
-            $('#ixProject').data('droplist').getChoiceFromText(add_related_ticket_ixProject).value
-          );
-        }
-
-        $('#ixProject').data('droplist').input.trigger('input');
-        $('#ixProject').data('droplist').commitChosenValue();
-        add_related_ticket_ixProject = null;
-      }
-
-      if ( add_related_ticket_ixArea ) {
-        $('#ixArea').data('droplist').val(
-          $('#ixArea').data('droplist').getChoiceFromText(add_related_ticket_ixArea).value
-        );
-
-        $('#ixArea').data('droplist').input.trigger('input');
-        $('#ixArea').data('droplist').commitChosenValue();
-        add_related_ticket_ixArea = null;
-      }
-
-      if ( add_related_ticket_ixCategory ) {
-        $('#ixCategory').data('droplist').val(
-          $('#ixCategory').data('droplist').getChoiceFromText(add_related_ticket_ixCategory).value
-        );
-
-        $('#ixCategory').data('droplist').input.trigger('input');
-        $('#ixCategory').data('droplist').commitChosenValue();
-        add_related_ticket_ixCategory = null;
-      }
-
-      if ( add_related_ticket_parent_id ) {
-        $('#formEditCase #sidebarSubcases .droplist-input')
-          .val(add_related_ticket_parent_id)
-          .trigger('change')
-          .trigger('keyup')
-          .trigger('input')
-          .trigger('blur')
-          ;
-
-        add_related_ticket_parent_id = null;
-      }
     }
   };
 
@@ -1958,12 +1979,30 @@ var main = function($) {
     add_related_ticket_buttons_timeout = setTimeout(_add_related_ticket_buttons, 10);
   };
 
+  var add_related_ticket_data;
+  var add_related_ticket_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
+  var add_related_ticket_check_api_response = function(type, info) {
+    if ( add_related_ticket_check_api_response_regex.test(type.route) ) {
+      var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\//);
+
+      if ( id ) {
+        var uid = type.route.match(/cases\/([0-9]+)/)[1];
+
+        if ( id[2] === uid ) {
+          add_related_ticket_data = info.data;
+        }
+      }
+    }
+  };
+
   var onload_add_related_ticket = function() {
     add_related_ticket_buttons();
     $document
       .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
       .delegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
       ;
+
+    fb.pubsub.subscribe('/api/success', add_related_ticket_check_api_response);
   };
 
   var onunload_add_related_ticket = function() {
@@ -1975,6 +2014,8 @@ var main = function($) {
     $('.' + add_related_ticket_button_class).remove();
     //$('.' + add_related_ticket_link_class).remove();
     $('.' + add_related_ticket_done_class).removeClass(add_related_ticket_done_class);
+
+    fb.pubsub.unsubscribe('/api/success', add_related_ticket_check_api_response);
   };
 
   pm.add({

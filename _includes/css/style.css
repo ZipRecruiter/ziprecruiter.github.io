@@ -348,7 +348,6 @@ img {
 }
 
 .page_nav {
-	margin-bottom: 1em;
 	display: inline-block;
 	vertical-align: top;
 }
@@ -483,6 +482,14 @@ img {
 /* ------------------------------------------------------------
    Modules/Reusables
    --------------------------------------------------------- */
+
+.page_section {
+	padding-top: 60px;
+}
+
+.cms:last-child > :last-child {
+	margin-bottom: 0;
+}
 
 /* Lazy loading ---------------- */
 

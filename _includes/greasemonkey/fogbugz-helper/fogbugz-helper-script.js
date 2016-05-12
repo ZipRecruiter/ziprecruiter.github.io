@@ -1680,26 +1680,6 @@ var main = function($) {
 
       wysiwyg_add();
     // Show
-    } else if ( $customfield.length ) {
-      // See if the case summary is there
-      var $content = $customfield.find('.content:not(.wysiwygified)').addClass('wysiwygified');
-
-      if ( $content.length ) {
-        var $pre = $content.find('pre');
-        var code = $pre.text();
-
-        code = $.trim(Autolinker.link(code, {stripPrefix: false}));
-
-        // For old cases with html formatting so they can be changed to markdown
-        if ( code.charAt(0) === '<' && code.charAt(code.length - 1) === '>' && code.charAt(1) !== 'a' && code.charAt(code.length - 2) !== 'a' ) {
-          var $div = $('<div/>')
-            .addClass('wysiwygified_content')
-            .html( decodeEntities(code) )
-            .insertAfter($pre);
-
-          $pre.hide();
-        }
-      }
     }
   };
 

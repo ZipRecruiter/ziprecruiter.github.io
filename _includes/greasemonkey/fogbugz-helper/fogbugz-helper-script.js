@@ -2010,8 +2010,7 @@ var main = function($) {
   var add_related_ticket_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
   var add_related_ticket_check_api_response = function(type, info) {
     if ( add_related_ticket_check_api_response_regex.test(type.route) ) {
-      var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\//);
-
+      var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\/?/);
       if ( id ) {
         var uid = type.route.match(/cases\/([0-9]+)/)[1];
 

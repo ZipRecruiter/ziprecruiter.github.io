@@ -1426,7 +1426,9 @@ var main = function($) {
               return element.textContent;
           });
 
-          str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+          //str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+          str = str.replace(/<script/gmi, '&lt;script');
+          str = str.replace(/<\/script/gmi, '&lt;/script');
 
           // reset the value
           element.textContent = '';
@@ -1446,7 +1448,7 @@ var main = function($) {
     // Edit
     if ( $textarea.length ) {
       // replace textarea with ckeditor
-      code = $.trim($textarea.val());
+      code = $textarea.val();
 
       if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
         code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -1478,7 +1480,7 @@ var main = function($) {
       val = _wysiwyg_fix_links(val);
     } else {
       val = $textarea.val();
-      val = $.trim(decodeEntities(convertHtmlToText(val)));
+      val = decodeEntities(convertHtmlToText(val));
     }
 
     wysiwygify_editor.destroy(true);
@@ -1637,6 +1639,10 @@ var main = function($) {
 
     // Replacing CKE's textarea updater so I can intercept the save command. Kinda scary.
     wysiwygify_editor.updateElement = function() {
+      if ( !wysiwygify_editor.checkDirty() ) {
+        return;
+      }
+
       var element = this.element;
 
       if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE ) {
@@ -1742,6 +1748,7 @@ var main = function($) {
       // Fix other f'd up links like [http://google.com](http://google.com)
       // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
       text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
+
       // Convert to markdown
       text = marked(text, marked_options);
     }

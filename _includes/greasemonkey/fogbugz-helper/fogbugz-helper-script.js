@@ -1439,6 +1439,7 @@ var main = function($) {
 
   // Toggle
   var $wysiwyg_toggle;
+  var original_code;
 
   var wysiwyg_add = function() {
     var $customfield = $('.customfield-longtext');
@@ -1448,7 +1449,7 @@ var main = function($) {
     // Edit
     if ( $textarea.length ) {
       // replace textarea with ckeditor
-      code = $textarea.val();
+      original_code = code = $textarea.val();
 
       if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
         code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
@@ -1636,16 +1637,16 @@ var main = function($) {
 
   var wysiwyg_textarea = function($textarea) {
     wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
-
     // Replacing CKE's textarea updater so I can intercept the save command. Kinda scary.
     wysiwygify_editor.updateElement = function() {
-      if ( !wysiwygify_editor.checkDirty() ) {
-        return;
-      }
-
       var element = this.element;
 
       if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE ) {
+        if ( !wysiwygify_editor.checkDirty() ) {
+          element.setValue( original_code );
+          return;
+        }
+
         var data = this.getData();
 
         if ( this.config.htmlEncodeOutput ) {

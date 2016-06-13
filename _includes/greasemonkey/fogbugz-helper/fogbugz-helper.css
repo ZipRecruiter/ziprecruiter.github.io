@@ -1062,6 +1062,7 @@
 .markdownified {
   white-space: normal;
   line-height: 1.5;
+  word-break: break-word;
 }
 
 .markdownified h1,

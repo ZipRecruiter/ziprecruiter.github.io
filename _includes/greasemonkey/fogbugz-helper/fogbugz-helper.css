@@ -1059,6 +1059,8 @@
  // Markdown
 ////////////////////////// */
 
+/* Note: these styles are duplicated in the css */
+
 .markdownified {
   white-space: normal;
   line-height: 1.5;
@@ -1142,6 +1144,12 @@
 
 .markdownified tr:nth-child(even) {
   background: #f2f2f2;
+}
+
+.markdownified blockquote {
+  margin-left: .5em;
+  padding-left: .5em;
+  border-left: 2px solid #ccc;
 }
 
   /* //////////////////////////

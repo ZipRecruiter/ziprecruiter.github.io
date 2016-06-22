@@ -1537,6 +1537,7 @@ var main = function($) {
         // ['Source']
     ],
     format_tags: 'h1;h2;h3;h4;h5;h6;p;pre',
+    // Note: these styles are duplicated in the css
     contentsCss: [
       '{0}contents.css'.format(window.CKEDITOR_BASEPATH),
       '{0}contents.bugRichEdit.css'.format(window.CKEDITOR_BASEPATH),
@@ -1607,6 +1608,11 @@ var main = function($) {
         \
         tr:nth-child(even) {\
           background: #f2f2f2;\
+        }\
+        blockquote {\
+          margin-left: .5em;\
+          padding-left: .5em;\
+          border-left: 2px solid #ccc;\
         }\
       ')
     ]

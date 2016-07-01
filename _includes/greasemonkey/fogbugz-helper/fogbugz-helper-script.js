@@ -2169,6 +2169,42 @@ var main = function($) {
     onunload: onunload_add_related_ticket
   });
 
+    ////////////////////////////
+   // Auto-clear notifications
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var auto_clear_interval;
+    var $header_unread_counter;
+
+    var clear = function() {
+      if ( !$header_unread_counter || !$header_unread_counter.length ) {
+        $header_unread_counter = $('#header-unread-counter');
+      }
+
+      if ( parseInt($header_unread_counter.html()) ) {
+        $('#mark-all-read').click();
+      }
+    };
+
+    // Preference Manager functions
+    var onload_fn = function() {
+      auto_clear_interval = setInterval(clear, 5000);
+    };
+
+    var onunload_fn = function() {
+      clearInterval(auto_clear_interval);
+    };
+
+    pm.add({
+      id: 'auto_clear_notifications',
+      text: 'Auto-Clear Notifications',
+      title: 'Clears the FogBugz notifications periodically. Can help with FogBugz sluggishness.',
+      defaultOn: false,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
   /* Not used, but this is how I figured out FB's event names*/
 
   /*var _sub = fb.pubsub.subscribe;

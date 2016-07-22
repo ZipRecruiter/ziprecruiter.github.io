@@ -1221,3 +1221,17 @@ section.case .corner.add_related_ticket_done a.case {
 .add_related_ticket_button:hover {
   background-color: #ddd;
 }
+
+  /* //////////////////////////
+ // Auto-Clear Notifications
+////////////////////////// */
+
+.fogbugz-helper-auto-clear-notify #global-error {
+  max-height: 50px;
+  overflow: scroll;
+  padding: 0;
+}
+
+.fogbugz-helper-auto-clear-notify #global-error > h3 {
+  margin-top: 0;
+}

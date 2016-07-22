@@ -2189,10 +2189,12 @@ var main = function($) {
     // Preference Manager functions
     var onload_fn = function() {
       auto_clear_interval = setInterval(clear, 5000);
+      $body.addClass('fogbugz-helper-auto-clear-notify');
     };
 
     var onunload_fn = function() {
       clearInterval(auto_clear_interval);
+      $body.removeClass('fogbugz-helper-auto-clear-notify');
     };
 
     pm.add({

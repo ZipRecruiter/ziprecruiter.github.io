@@ -1223,6 +1223,25 @@ section.case .corner.add_related_ticket_done a.case {
 }
 
   /* //////////////////////////
+ // Add Cancel/Resolve/Reopen Buttons to Edit Ticket Header
+////////////////////////// */
+
+section.case nav .controls>.control {
+}
+
+section.case nav .controls>.control.cancel {
+  margin-left: 1em;
+}
+
+section.case nav .controls>.control.cancel .icon {
+  vertical-align: bottom;
+}
+
+section.case nav .controls>.control.cancel .icon:before {
+  content: "\e628";
+}
+
+  /* //////////////////////////
  // Auto-Clear Notifications
 ////////////////////////// */
 

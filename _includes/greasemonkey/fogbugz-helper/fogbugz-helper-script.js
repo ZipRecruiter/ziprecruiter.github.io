@@ -2107,6 +2107,9 @@ var main = function($) {
               <span class="icon icon-case-resolve"></span>Resolve\
             </a>\
             ' + extra + '\
+            <label for="btnCancel" class="control cancel">\
+              <span class="icon"></span>Cancel\
+            </label>\
           </span>\
         ');
       } else {
@@ -2118,6 +2121,9 @@ var main = function($) {
             <a class="control" name="reopen" href="' + reopen_url + '" accesskey="u">\
               <span class="icon icon-case-reopen"></span>Reopen\
             </a>\
+            <label for="btnCancel" class="control cancel">\
+              <span class="icon"></span>Cancel\
+            </label>\
           </span>\
         ');
       }
@@ -2162,8 +2168,8 @@ var main = function($) {
 
   pm.add({
     id: 'add_resolve',
-    text: 'Add Resolve/Reopen Buttons to Edit Ticket Header',
-    title: 'Adds a "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
+    text: 'Add Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
+    title: 'Adds a "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
     defaultOn: true,
     onload: onload_add_resolve,
     onunload: onunload_add_related_ticket

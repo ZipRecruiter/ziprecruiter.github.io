@@ -1797,7 +1797,8 @@ var main = function($) {
     if ( $bodycontent.length ) {
       $bodycontent.each(function() {
         var $this = $(this);
-        var text = $this.html();
+                               // Removing some weird whitespace FB adds causing code formatting
+        var text = $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
 
         $this.data('markdown-text', text);
 

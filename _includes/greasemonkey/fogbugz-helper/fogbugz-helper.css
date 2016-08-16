@@ -1380,7 +1380,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #eb3030;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_status,
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-resize-container .grid-column-Status,
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper {
   background: transparent;
   text-shadow: none;

@@ -1256,3 +1256,131 @@ section.case nav .controls>.control.save .icon:before {
 .fogbugz-helper-auto-clear-notify #global-error > h3 {
   margin-top: 0;
 }
+
+  /* //////////////////////////
+ // Colorize Statuses
+////////////////////////// */
+
+/* Ticket */
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_helper:before,
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper:before {
+  margin-right: 4px;
+  height: 1em;
+  width: 1em;
+  vertical-align: bottom;
+  display: inline-block;
+  border-radius: .5em;
+  background: #777;
+}
+
+/* List */
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status {
+  display: inline-block;
+  font-size: 12px;
+  line-height: 15px;
+  padding: 0 3px;
+  border-radius: 3px;
+  background: #777;
+  color: #fff !important;
+  vertical-align: middle;
+  margin-top: 1px;
+}
+
+/* Both */
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_backlog {
+  background: #aaa;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_backlog:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_backlog:before {
+  content: " ";
+  background: #aaa;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_triage {
+  background: #ff9900;
+  text-shadow: 1px 1px 1px rgba(175, 110, 13, 1);
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_triage:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_triage:before {
+  content: " ";
+  background: #ff9900;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_planning {
+  background: #0079bf;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_planning:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_planning:before {
+  content: " ";
+  background: #0079bf;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_ready_for_work {
+  background: #ff80ce;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_work:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_work:before {
+  content: " ";
+  background: #ff80ce;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_work_in_progress {
+  background: #bf9000;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_work_in_progress:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_work_in_progress:before {
+  content: " ";
+  background: #bf9000;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_ready_for_master {
+  background: #51e898;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_master:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_master:before {
+  content: " ";
+  background: #51e898;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_in_review {
+  background: #00c2e0;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_review:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_review:before {
+  content: " ";
+  background: #00c2e0;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_in_qa {
+  background: #c377e0;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_qa:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_qa:before {
+  content: " ";
+  background: #c377e0;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_released {
+  background: #38761d;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_released:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_released:before {
+  content: " ";
+  background: #38761d;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .status_paused {
+  background: #eb3030;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_paused:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_paused:before {
+  content: " ";
+  background: #eb3030;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper {
+  background: transparent;
+  text-shadow: none;
+}

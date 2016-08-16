@@ -2220,6 +2220,83 @@ var main = function($) {
     });
   })(pm);
 
+    ////////////////////////////
+   // Color code statuses
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var has_add_text_classes_class = 'has_add_text_classes_button';
+
+    // Add resolve or reopen button to ticket
+    var _add_text_classes = function() {
+      var $container = $('.droplist-popup:not(.' + has_add_text_classes_class + '), .case-list:not(.' + has_add_text_classes_class + '), .case .case-header-info:not(.' + has_add_text_classes_class + ')');
+
+      if ( $container.length ) {
+        $container.addClass(has_add_text_classes_class);
+
+        $container.find('.grid-column-Status, .status, .droplist-popup-item').each(function() {
+          var $this = $(this);
+          $this.addClass('status_helper ' + ('status_' + $this.text().trim()).replace(/[^a-z\-]+/gi, '_').toLowerCase());
+        });
+      }
+
+      var $field = $('#ixStatus input[type="text"]');
+
+      if ( $field.length ) {
+        $field.closest('.field')
+          .removeClass (function (index, css) {
+            return (css.match (/(^|\s)status_\S+/g) || []).join(' ');
+          })
+          .addClass('status_helper ' + ('status_' + $field.val().trim()).replace(/[^a-z\-]+/gi, '_').toLowerCase());
+      }
+    };
+
+    var add_text_classes_timeout;
+    // Don't call this function thousands of times
+    var add_text_classes = function() {
+      clearTimeout(add_text_classes_timeout);
+
+      add_text_classes_timeout = setTimeout(_add_text_classes, 10);
+    };
+
+    var active_class = 'fogbugz-helper-colorize-statuses';
+    var onload_fn = function() {
+      $body.addClass(active_class);
+
+      add_text_classes();
+      $document
+        .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
+        ;
+    };
+
+    var onunload_fn = function() {
+      $body.removeClass(active_class);
+
+      $document
+        .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
+        ;
+
+      $('.' + has_add_text_classes_class).removeClass();
+    };
+
+    /* pm.add({
+      id: 'add_resolve',
+      text: 'Add Save/Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
+      title: 'Adds a "save," "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
+      defaultOn: true,
+      onload: onload_add_resolve,
+      onunload: onunload_add_related_ticket
+    }); */
+
+    pm.add({
+      id: 'colorize_statuses',
+      text: 'Colorize Statuses',
+      title: 'Adds colorful backgrounds to status indicators on tickets',
+      defaultOn: true,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
   /* Not used, but this is how I figured out FB's event names*/
 
   /*var _sub = fb.pubsub.subscribe;

@@ -332,14 +332,14 @@ img {
 }
 
 #sub .headline {
-	font-size: 1.75em;
-	line-height: 1.1;
-	margin-bottom: .75em;
 	background: #f3f3f3;
-	padding: .25em .25em .25em 1em;
 }
 
 #sub .headline a {
+	padding: .25em .25em .25em 1em;
+	font-size: 1.75em;
+	line-height: 1.1;
+	margin-bottom: .75em;
 	display: block;
 }
 
@@ -353,17 +353,16 @@ img {
 }
 
 .page_nav a {
-	background: #f3f3f3;
 	float: left;
 	padding: .25em 1em;
 	margin-right: .25em;
+	text-decoration: underline;
 }
 
-.page_nav a:last-child {
-	border-top-right-radius: .5em;
-	border-bottom-right-radius: .5em;
+.page_nav a:hover,
+.page_nav a:focus {
+	transform: scale(1.05);
 }
-
 
 /* Footer ---------------- */
 

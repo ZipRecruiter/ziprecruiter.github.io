@@ -2,17 +2,17 @@
 layout: default
 title: Greasemonkey Scripts - FogBugz Helper
 ---
-<section class="section"><div class="content">
-  <nav class="page_nav">
-    <a href="#features">Features</a>
-    <a href="#installing">Installation instructions</a>
-    <a href="#script">The Script</a>
-  </nav>
+<section class="section">
+  <div class="content">
+    <nav class="page_nav">
+      <a href="#installing">Installation instructions</a>
+    </nav>
+  </div>
 
   <section id="features" class="page_section">
-    <h2 class="headline"><a href="#features">Features</a></h2>
+    <h2 class="headline"><div class="content"><a href="#features">Features</a></div></h2>
 
-    <div class="body cms">
+    <div class="body cms"><div class="content">
       <ul>
         <li>Fake kanban-style interface for ticket lists (work in progress)</li>
         <li>Background color picker (in tools menu)</li>
@@ -27,6 +27,9 @@ title: Greasemonkey Scripts - FogBugz Helper
         <li>Tickets: Some ticket spam is hidden, mouse over the "events" to see the full description of the event</li>
         <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/new_tickets.png" width="786" height="903"></li>
 
+        <li>Tickets: Useful buttons added to the top of tickets</li>
+        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/ticket_buttons.png" width="252" height="47"></li>
+
         <li>Tickets: Reverse order of comments (disabled by default)</li>
         <li>Auto-sorting tickets that arranged by "status" (Fogbugz sorts them in an almost random order)</li>
         <li>Hotkeys (work in progress, disabled by default)</li>
@@ -35,18 +38,21 @@ title: Greasemonkey Scripts - FogBugz Helper
         <li>Markdown to HTML in comments and case description</li>
 
         <li>Preferences for many JS features. More styling features to come.</li>
+
+        <li>Colorful status indicators</li>
+        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/colorful_statuses.png" width="374" height="355"></li>
       </ul>
 
       <p>To enable/disable features, mouse-over the tools menu in FogBugz:</p>
       <p><img src="/greasemonkey/fogbugz-helper/img/tools_dropdown.png" width="363" height="764"></p>
       <p>Note: some features are disabled by default</p>
-    </div>
+    </div></div>
   </section>
 
   <section id="installing" class="page_section">
-    <h2 class="headline"><a href="#installing">Installation instructions</a></h2>
+    <h2 class="headline"><div class="content"><a href="#installing">Installation instructions</a></div></h2>
 
-    <div class="body cms">
+    <div class="body cms"><div class="content">
       <h3>Firefox</h3>
       <ul>
         <li>Install greasemonkey (<a href="https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/</a>)</li>
@@ -71,13 +77,13 @@ title: Greasemonkey Scripts - FogBugz Helper
         <li>Once installed, you must restart Safari.</li>
         <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script.</li>
       </ul>
-    </div>
+    </div></div>
   </section>
 
   <section id="script" class="page_section">
-    <h2 class="headline"><a href="#script">The Script</a></h2>
+    <h2 class="headline"><div class="content"><a href="#script">The Script</a></div></h2>
 
-    <div class="body cms">
+    <div class="body cms"><div class="content">
       <p>Copy <strong>everything</strong> in the green box:</p>
 
       <textarea id="user_script">
@@ -94,6 +100,6 @@ title: Greasemonkey Scripts - FogBugz Helper
 
 (function(){url='//ziprecruiter.github.io/greasemonkey/fogbugz-helper/fogbugz-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
       </textarea>
-    </div>
+    </div></div>
   </section>
-</div></section>
+</section>

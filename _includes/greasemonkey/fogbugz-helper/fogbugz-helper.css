@@ -1322,13 +1322,13 @@ section.case nav .controls>.control.save .icon:before {
 }
 
 .fogbugz-helper-colorize-statuses #stacking-context-main .status_ready_for_work {
-  background: #ff80ce;
+  background: #f169aa;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_work:before,
 .fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_work:before,
 .fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_ready_for_work:before {
   content: " ";
-  background: #ff80ce;
+  background: #f169aa;
 }
 
 .fogbugz-helper-colorize-statuses #stacking-context-main .status_work_in_progress {
@@ -1362,13 +1362,13 @@ section.case nav .controls>.control.save .icon:before {
 }
 
 .fogbugz-helper-colorize-statuses #stacking-context-main .status_in_qa {
-  background: #c377e0;
+  background: #bd68c8;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_qa:before,
 .fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_qa:before,
 .fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_in_qa:before {
   content: " ";
-  background: #c377e0;
+  background: #bd68c8;
 }
 
 .fogbugz-helper-colorize-statuses #stacking-context-main .status_released {

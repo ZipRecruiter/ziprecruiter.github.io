@@ -2275,7 +2275,7 @@ var main = function($) {
         .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
         ;
 
-      $('.' + has_add_text_classes_class).removeClass();
+      $('.' + active_class).removeClass();
     };
 
     /* pm.add({

@@ -1263,6 +1263,7 @@ section.case nav .controls>.control.save .icon:before {
 
 /* Ticket */
 .fogbugz-helper-colorize-statuses #stacking-context-droplists .status_helper:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_helper:before,
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper:before {
   margin-right: 4px;
   height: 1em;
@@ -1293,7 +1294,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #aaa;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_backlog:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_backlog:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_backlog:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_backlog:before {
   content: " ";
   background: #aaa;
 }
@@ -1303,16 +1305,18 @@ section.case nav .controls>.control.save .icon:before {
   text-shadow: 1px 1px 1px rgba(175, 110, 13, 1);
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_triage:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_triage:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_triage:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_triage:before {
   content: " ";
   background: #ff9900;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_planning {
+.fogbugz-helper-colorize-statuses #stacking-context-main :not(.field).status_planning {
   background: #0079bf;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_planning:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_planning:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_planning:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_planning:before {
   content: " ";
   background: #0079bf;
 }
@@ -1321,7 +1325,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #ff80ce;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_work:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_work:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_work:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_ready_for_work:before {
   content: " ";
   background: #ff80ce;
 }
@@ -1330,7 +1335,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #bf9000;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_work_in_progress:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_work_in_progress:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_work_in_progress:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_work_in_progress:before {
   content: " ";
   background: #bf9000;
 }
@@ -1339,7 +1345,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #51e898;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_master:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_master:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_master:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_ready_for_master:before {
   content: " ";
   background: #51e898;
 }
@@ -1348,7 +1355,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #00c2e0;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_review:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_review:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_review:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_in_review:before {
   content: " ";
   background: #00c2e0;
 }
@@ -1357,7 +1365,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #c377e0;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_qa:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_qa:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_in_qa:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_in_qa:before {
   content: " ";
   background: #c377e0;
 }
@@ -1366,7 +1375,8 @@ section.case nav .controls>.control.save .icon:before {
   background: #38761d;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_released:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_released:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_released:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_released:before {
   content: " ";
   background: #38761d;
 }
@@ -1375,13 +1385,15 @@ section.case nav .controls>.control.save .icon:before {
   background: #eb3030;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_paused:before,
-.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_paused:before {
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_paused:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_paused:before {
   content: " ";
   background: #eb3030;
 }
 
 .fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-resize-container .grid-column-Status,
-.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper {
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .droplist-popup-item.status_helper {
   background: transparent;
   text-shadow: none;
 }

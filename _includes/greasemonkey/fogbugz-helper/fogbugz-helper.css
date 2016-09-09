@@ -1059,7 +1059,7 @@
  // Markdown
 ////////////////////////// */
 
-.fogbugz-helper-markdown .customfield-longtext {
+.fogbugz-helper-markdown .customfield-longtext textarea {
   font-family: monospace;
 }
 

@@ -1059,6 +1059,10 @@
  // Markdown
 ////////////////////////// */
 
+.fogbugz-helper-markdown .customfield-longtext {
+  font-family: monospace;
+}
+
 /* Note: these styles are duplicated in the css */
 
 .markdownified {

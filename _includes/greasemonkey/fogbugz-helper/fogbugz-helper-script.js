@@ -1849,6 +1849,7 @@ var main = function($) {
   var onload_markdown = function() {
     markdownify();
     $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
+    $body.addClass('fogbugz-helper-markdown');
   };
 
   var onunload_markdown = function() {
@@ -1860,6 +1861,8 @@ var main = function($) {
       $this.removeClass('markdownified');
       $this.html($this.data('markdown-text'));
     });
+
+    $body.removeClass('fogbugz-helper-markdown');
   };
 
   pm.add({

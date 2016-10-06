@@ -2316,6 +2316,77 @@ var main = function($) {
     });
   })(pm);
 
+    ////////////////////////////
+   // Hotfix shortcut
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var $tooltip = $('<span class="fogbugz_helper_tooltip"></span>');
+    var $tooltip_text = $('<span class="fogbugz_helper_tooltip_text"></span>')
+      .appendTo($tooltip);
+
+    $tooltip.bind('click', function(ev) {
+      ev.preventDefault();
+      var range = document.createRange();
+      range.selectNode($tooltip_text[0]);
+      window.getSelection().addRange(range);
+
+      try {
+        document.execCommand('copy');
+      } catch(copyErr) {
+        alert('Unable to copy');
+      }
+
+      window.getSelection().removeAllRanges();
+    });
+
+    var hide_tooltip_to;
+    var show_tooltip_to;
+
+    var show_tooltip = function() {
+      var el = this;
+      var $this = $(this);
+      clearTimeout(hide_tooltip_to);
+      clearTimeout(show_tooltip_to);
+
+      show_tooltip_to = setTimeout(function() {
+        var text = el.childNodes[0].textContent;
+        if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
+          $tooltip_text.html('bin/zr-req-hotfix -s --server-class=www --bugzid=' + $('a.case').html() + ' ' + text + ' -m ""');
+          $tooltip.appendTo(el);
+        }
+      }, 100);
+    };
+
+    var hide_tooltip = function() {
+      hide_tooltip_to = setTimeout(function() {
+        $tooltip.detach();
+      }, 100);
+    };
+
+    var onload_fn = function() {
+      $document
+        .delegate('a', 'mouseover focus', show_tooltip)
+        .delegate('a', 'mouseout blur', hide_tooltip)
+        ;
+    };
+
+    var onunload_fn = function() {
+      $document
+        .undelegate('a', 'mouseover focus', show_tooltip)
+        .undelegate('a', 'mouseout blur', hide_tooltip)
+        ;
+    };
+
+    pm.add({
+      id: 'hotfix_shortcut',
+      text: 'Show Hotfix Comand on Commit IDs',
+      title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
+      defaultOn: false,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
   /* Not used, but this is how I figured out FB's event names*/
 
   /*var _sub = fb.pubsub.subscribe;

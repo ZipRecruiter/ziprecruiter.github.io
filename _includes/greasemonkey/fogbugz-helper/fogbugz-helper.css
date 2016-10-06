@@ -1400,3 +1400,35 @@ section.case nav .controls>.control.save .icon:before {
   background: transparent;
   text-shadow: none;
 }
+
+  /* //////////////////////////
+ // Hotfix tooltip
+////////////////////////// */
+
+.fogbugz_helper_tooltip {
+  position: absolute;
+}
+
+.fogbugz_helper_tooltip_text {
+  display: block;
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  padding: 5px;
+  background: rgba(0,0,0,.75);
+  border-radius: 3px;
+  color: #fff;
+}
+
+.fogbugz_helper_tooltip_text:before {
+  content: "Copy";
+  display: inline-block;
+  margin-right: 5px;
+
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  border-radius: .5em;
+  color: #fff;
+  padding: 2px 5px;
+  text-decoration: none;
+}

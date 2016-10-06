@@ -181,6 +181,7 @@ PreferenceManager.prototype.load = function() {
   var me = this;
   var pkey;
   var pref;
+  var prefs_array = [];
 
   if ( me.loaded ) {
     // Maybe throw an error?
@@ -216,8 +217,22 @@ PreferenceManager.prototype.load = function() {
     var $plabel;
     var $pcheck;
 
-    for ( pkey in me.prefs ) {
-      pref = me.prefs[pkey];
+    prefs_array.sort(function(a, b) {
+      if ( a.text < b.text ) {
+        return -1;
+      }
+
+      if ( a.text > b.text ) {
+        return 1;
+      }
+
+      // names must be equal
+      return 0;
+    });
+
+    for ( var i = 0, l = prefs_array.length; i < l; i++ /*pkey in me.prefs*/ ) {
+      //pref = me.prefs[pkey];
+      pref = prefs_array[i];
 
       $pcheck = $('<input type="checkbox">')
         .attr({
@@ -286,6 +301,7 @@ PreferenceManager.prototype.load = function() {
 
   for ( pkey in me.prefs ) {
     pref = me.prefs[pkey];
+    prefs_array.push(pref);
 
     if ( me.get(pref.id, pref.defaultOn) && pref.onload ) {
       pref.onload();

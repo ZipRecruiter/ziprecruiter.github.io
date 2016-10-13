@@ -2161,7 +2161,7 @@ var main = function($) {
   var add_resolve_personResolvedBy;
   var add_resolve_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
   var add_resolve_check_api_response = function(type, info) {
-    if ( add_resolve_check_api_response_regex.test(type.route) ) {
+    if ( info.data && add_resolve_check_api_response_regex.test(type.route) ) {
       add_resolve_fOpen = info.data.fOpen;
       add_resolve_personResolvedBy = info.data.personResolvedBy;
     }

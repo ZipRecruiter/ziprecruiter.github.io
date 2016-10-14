@@ -1544,13 +1544,16 @@ var main = function($) {
   // Make wysiwyg editor
   var wysiwygify_editor;
   var wysiwygify_config = {
-    customConfig: "{0}config_MVC.js".format(window.CKEDITOR_BASEPATH),
-    toolbar_RichTextArea: [
-        ['Undo', 'Redo'],
-        ['Format'],
-        ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'],
-        ['NumberedList', 'BulletedList', 'Blockquote'] //, 'Outdent', 'Indent'],
-        // ['Source']
+    extraPlugins : '',
+    uploadUrl: '/',
+    extraAllowedContent: 'code',
+    //customConfig: "{0}FogBugzMVC.js".format(window.CKEDITOR_BASEPATH),
+    toolbar: [
+      { name: 'one', items: ['Undo', 'Redo'] }
+      ,{ name: 'two', items: ['Format'] }
+      ,{ name: 'three', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] }
+      ,{ name: 'four', items: ['NumberedList', 'BulletedList', 'Blockquote'] } //, 'Outdent', 'Indent'],
+      ,{ name: 'five', items: ['Source'] }
     ],
     format_tags: 'h1;h2;h3;h4;h5;h6;p;pre',
     // Note: these styles are duplicated in the css

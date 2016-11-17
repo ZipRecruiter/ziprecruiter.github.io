@@ -1,3 +1,10 @@
+  /* //////////////////////////
+ // Little tweaks
+////////////////////////// */
+label[id="38_SHA"] + .content {
+  overflow-x: hidden;
+  text-overflow: ellipsis;
+}
 
   /* //////////////////////////
  // Preferences

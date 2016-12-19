@@ -1799,6 +1799,13 @@ var main = function($) {
 
         // get rid of auto links within code blocks
         var matches = text.match(/\n    .+/g);
+        var cmatches = text.match(/```[\s\S]+?```/g);
+
+        if ( matches ) {
+          matches = matches.concat(cmatches);
+        } else {
+          matches = cmatches;
+        }
 
         if ( matches ) {
           for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
@@ -1827,6 +1834,13 @@ var main = function($) {
 
         // get rid of auto links within code blocks
         var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+        var cmatches = text.match(/```[\s\S]+?```/g);
+
+        if ( matches ) {
+          matches = matches.concat(cmatches);
+        } else {
+          matches = cmatches;
+        }
 
         if ( matches ) {
           for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
@@ -1854,6 +1868,13 @@ var main = function($) {
 
         // get rid of auto links within code blocks
         var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+        var cmatches = text.match(/```[\s\S]+?```/g);
+
+        if ( matches ) {
+          matches = matches.concat(cmatches);
+        } else {
+          matches = cmatches;
+        }
 
         if ( matches ) {
           for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {

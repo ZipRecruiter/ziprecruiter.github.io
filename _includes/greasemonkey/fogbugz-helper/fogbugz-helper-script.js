@@ -1797,16 +1797,20 @@ var main = function($) {
         //text = decodeEntities(text);
         $this.data('markdown-text', text);
 
+        // get rid of auto links within code blocks
+        var matches = text.match(/\n    .+/g);
+
+        if ( matches ) {
+          for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+            m = matches[i];
+            rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+            text = text.replace(m, rm);
+          }
+        }
+
         text = _markdownify_fix_text(text);
 
         $this.html(text);
-
-        // fix links
-        $this.find('code').each(function() {
-          this.innerHTML = this.innerHTML
-            .replace(/&lt;a ([^&]+)&gt;([^&]+)&lt;\/a&gt;/g, '<a $1>$2</a>')
-            ;
-        });
       });
     }
 
@@ -1821,16 +1825,20 @@ var main = function($) {
 
         $this.data('markdown-text', text);
 
+        // get rid of auto links within code blocks
+        var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+
+        if ( matches ) {
+          for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+            m = matches[i];
+            rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+            text = text.replace(m, rm);
+          }
+        }
+
         text = _markdownify_fix_text(text, true);
 
         $this.html(text);
-
-        // fix links
-        $this.find('code').each(function() {
-          this.innerHTML = this.innerHTML
-            .replace(/&lt;a ([^&]+)&gt;([^&]+)&lt;\/a&gt;/g, '<a $1>$2</a>')
-            ;
-        });
       });
     }
 
@@ -1844,16 +1852,20 @@ var main = function($) {
 
         $this.data('markdown-text', text);
 
+        // get rid of auto links within code blocks
+        var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+
+        if ( matches ) {
+          for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+            m = matches[i];
+            rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+            text = text.replace(m, rm);
+          }
+        }
+
         text = _markdownify_fix_text(text, false, true);
 
         $this.html(text);
-
-        // fix links
-        $this.find('code').each(function() {
-          this.innerHTML = this.innerHTML
-            .replace(/&lt;a ([^&]+)&gt;([^&]+)&lt;\/a&gt;/g, '<a $1>$2</a>')
-            ;
-        });
       });
     }
   };

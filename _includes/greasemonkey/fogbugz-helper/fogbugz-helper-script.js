@@ -1546,7 +1546,7 @@ var main = function($) {
   var wysiwygify_config = {
     extraPlugins : '',
     uploadUrl: '/',
-    extraAllowedContent: 'code;hr;table;tr;td;thead;tbody;th',
+    extraAllowedContent: 'code;hr;table;tr;td;thead;tbody;th;del',
     //customConfig: "{0}FogBugzMVC.js".format(window.CKEDITOR_BASEPATH),
     toolbar: [
       { name: 'one', items: ['Undo', 'Redo'] }

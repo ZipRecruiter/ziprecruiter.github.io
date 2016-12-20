@@ -1810,8 +1810,11 @@ var main = function($) {
         if ( matches ) {
           for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
             m = matches[i];
-            rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-            text = text.replace(m, rm);
+
+            if ( m ) {
+              rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+              text = text.replace(m, rm);
+            }
           }
         }
 
@@ -1845,8 +1848,11 @@ var main = function($) {
         if ( matches ) {
           for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
             m = matches[i];
-            rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-            text = text.replace(m, rm);
+
+            if ( m ) {
+              rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+              text = text.replace(m, rm);
+            }
           }
         }
 
@@ -1879,8 +1885,11 @@ var main = function($) {
         if ( matches ) {
           for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
             m = matches[i];
-            rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-            text = text.replace(m, rm);
+
+            if ( m ) {
+              rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+              text = text.replace(m, rm);
+            }
           }
         }
 

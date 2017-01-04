@@ -104,6 +104,20 @@ label[id="38_SHA"] + .content {
  // Add background colors
 ////////////////////////// */
 
+.fogbugz-helper-bgcolors .userPrefs .form-item {
+  background-color: #fff;
+}
+
+.fogbugz-helper-bgcolors .legacy-settings {
+  background-color: #fff;
+  display: block;
+  margin: 0;
+  padding: 20px;
+  float: left;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 /* Need this here and in the modal ticket */
 .fogbugz-helper-bgcolors #case-errors-container {
   background: #fff;

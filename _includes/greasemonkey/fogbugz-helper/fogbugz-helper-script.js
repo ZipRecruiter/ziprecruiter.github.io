@@ -1,3 +1,8 @@
+(function() {
+// Prevent the script from being loaded twice
+if ( window['--fogbugz-helper-loaded'] ) return;
+window['--fogbugz-helper-loaded'] = true;
+
 /*!
  * Autolinker.js
  * 0.25.2
@@ -2459,4 +2464,5 @@ var main = function($) {
 // Attempt to run the code
 init();
 
+})();
 })();

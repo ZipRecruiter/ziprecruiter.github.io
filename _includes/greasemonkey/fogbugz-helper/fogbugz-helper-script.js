@@ -256,7 +256,7 @@ PreferenceManager.prototype.load = function() {
           'for': 'fogbugz-helper-pref-check-' + pref.id,
           'title': pref.title
         })
-        .html(pref.text)
+        .html(pref.text + ' (Default: ' + (pref.defaultOn?'On':'Off') + ')')
         .prepend($pcheck)
         .appendTo($prefs_menu)
         ;
@@ -1237,7 +1237,9 @@ var main = function($) {
 
   var _fake_kanban_template_inserted = function(r, data) {
     if ( $('.list-group-header').children().length > 2 ) {
-      if ( !r.element.filter('#filter-bar-title').length ) {
+      if ( r === false ) {
+        // This is specifically for the first page load
+      } else if ( !r || !r.element.filter('#filter-bar-title').length ) {
         return;
       }
 
@@ -1245,6 +1247,9 @@ var main = function($) {
 
       // Sorts
       var $sorts = $('#filter-description-sort [data-s-name]');
+
+      if ( !$sorts.length ) return;
+
       var sorts = [];
       $sorts.each(function() {
         sorts.push($(this).data('s-name'));
@@ -1321,7 +1326,7 @@ var main = function($) {
 
     fb.pubsub.subscribe("/template/inserted", _fake_kanban_template_inserted);
 
-    _fake_kanban_template_inserted();
+    _fake_kanban_template_inserted(false);
   };
 
   var onunload_fake_kanban = function() {

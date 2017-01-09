@@ -1126,7 +1126,7 @@ var main = function($) {
     id: 'edit_ticket_links',
     text: 'Edit Ticket Links',
     title: 'When you click on ticket links within FogBugz, they will open in "edit mode." This will not work on links outside of FogBugz yet (like links in emails, etc).',
-    defaultOn: true,
+    defaultOn: false,
     onload: onload_edit_ticket_links,
     onunload: onunload_edit_ticket_links
   });

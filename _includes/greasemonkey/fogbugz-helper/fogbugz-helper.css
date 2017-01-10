@@ -986,6 +986,28 @@ label[id="38_SHA"] + .content {
     padding-left: .5em;
   }
 
+  .fogbugz-helper-ticket-tweaks #case-lightbox-popups {
+    margin-top: 10px;
+  }
+
+  .fogbugz-helper-ticket-tweaks #case-lightbox-popups * {
+    position: static !important;
+    width: auto !important;
+    min-width: 0 !important;
+  }
+
+  .fogbugz-helper-ticket-tweaks .case-popup .comment .body:after {
+    display: none;
+  }
+
+  .fogbugz-helper-ticket-tweaks #case-lightbox-popups + .case-lightbox {
+    margin-top: 20px;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case .corner a.case {
+    width: auto;
+  }
+
   .fogbugz-helper-ticket-tweaks section.case nav {
     height: auto;
     display: block;

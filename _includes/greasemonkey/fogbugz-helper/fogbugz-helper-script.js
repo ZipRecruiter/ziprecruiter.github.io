@@ -1238,12 +1238,17 @@ var main = function($) {
     ////////////////////////////
    // (Preference) Ticket Tweaks
   ////////////////////////////
+
+  var $meta_tweaks = $('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>');
+
   var onload_ticket_tweaks = function() {
     $body.addClass('fogbugz-helper-ticket-tweaks');
+    $meta_tweaks.appendTo('head');
   };
 
   var onunload_ticket_tweaks = function() {
     $body.removeClass('fogbugz-helper-ticket-tweaks');
+    $meta_tweaks.remove();
   };
 
   pm.add({

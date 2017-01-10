@@ -927,6 +927,66 @@ label[id="38_SHA"] + .content {
 }
 
 @media ( max-width: 765px ) {
+  /* fake kanbanboard */
+  .fogbugz-helper-ticket-tweaks.fogbugz-helper-fake-kanban-double-sorted .list-group-body {
+    display: block;
+  }
+
+  .fogbugz-helper-ticket-tweaks.fogbugz-helper-fake-kanban-double-sorted .list-group-body > table {
+    margin-bottom: 4px;
+  }
+
+  /* header */
+
+  .fogbugz-helper-ticket-tweaks .main-header-bar {
+    white-space: nowrap;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .secondary-nav,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .secondary-nav > ul,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .secondary-nav > ul > li,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-nav,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-nav > ul,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-nav > ul > li,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-nav .case-tools > ul,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .main-nav .case-tools > ul > li {
+    display: inline-block;
+    vertical-align: top;
+    float: none;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .dropdown.active .dropdown-menu {
+    position: fixed;
+    left: 0;
+    right: 0;
+  }
+
+  /* other */
+
+  .fogbugz-helper-ticket-tweaks #stacking-context-main > #main {
+    padding-left: .5em;
+    padding-right: .5em;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case nav .controls {
+    display: inline;
+  }
+
+  .fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
+    position: fixed;
+    z-index: 101;
+    padding-left: .5em;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case nav {
+    height: auto;
+    display: block;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .search-guide .panel {
+    z-index: 100;
+  }
+
   .fogbugz-helper-ticket-tweaks section.case,
   .fogbugz-helper-ticket-tweaks .case-lightbox-overlay .case-lightbox {
     min-width: 0;
@@ -941,8 +1001,29 @@ label[id="38_SHA"] + .content {
   }
 
   .fogbugz-helper-ticket-tweaks section.case .left {
-    margin: 10px 10px 0 10px;
-    padding: 0;
+    margin: 0 10px 0 10px;
+    padding: 0 0 0 0;
+    float: none;
+    width: auto;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case .left button {
+    display: inline-block;
+    margin-left: 1em;
+    width: auto;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case .top>header>h1 {
+    padding-top: 0;
+    font-size: 20px;
+    line-height: 1.5;
+  }
+
+  .fogbugz-helper-ticket-tweaks section.case .events,
+  .fogbugz-helper-ticket-tweaks section.case .top>header {
+    float: none;
+    width: auto;
+    border-left: 0;
   }
 
   .fogbugz-helper-ticket-tweaks section.case .corner a.case {
@@ -951,8 +1032,8 @@ label[id="38_SHA"] + .content {
   }
 
   .fogbugz-helper-ticket-tweaks #formEditCase > .events {
-    float: none;
-    width: auto;
+    padding-left: 0;
+    padding-right: 0;
   }
 
   .fogbugz-helper-ticket-tweaks #formEditCase > .left {
@@ -965,15 +1046,6 @@ label[id="38_SHA"] + .content {
   .fogbugz-helper-ticket-tweaks #formEditCase > #eventList-0 {
     padding-left: 160px;
     width: 100%;
-  }
-
-  .fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
-    position: static;
-    overflow: auto;
-  }
-
-  body.fogbugz-helper-ticket-tweaks.noscroll {
-    overflow: auto;
   }
 }
 

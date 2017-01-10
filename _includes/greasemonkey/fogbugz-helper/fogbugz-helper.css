@@ -941,6 +941,7 @@ label[id="38_SHA"] + .content {
   .fogbugz-helper-ticket-tweaks #header.thunder-header.has-custom-logo {
     max-width: 100%;
     overflow: auto;
+    position: static;
   }
 
   .fogbugz-helper-ticket-tweaks .main-header-bar {
@@ -989,8 +990,19 @@ label[id="38_SHA"] + .content {
     display: block;
   }
 
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .has-search-guide {
+    position: static;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .search-guide #search-guide-button {
+    top: 9px;
+  }
+
   .fogbugz-helper-ticket-tweaks #header.thunder-header .search-guide .panel {
     z-index: 100;
+    position: fixed;
+    left: 0;
+    width: 100vw;
   }
 
   .fogbugz-helper-ticket-tweaks section.case,

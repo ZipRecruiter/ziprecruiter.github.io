@@ -158,9 +158,9 @@ label[id="38_SHA"] + .content {
   background: rgba(255, 255, 255, .9);
 }
 
-.fogbugz-helper-bgcolors #www-fogcreek-com-fogbugz,
-.fogbugz-helper-bgcolors #main2,
-.fogbugz-helper-bgcolors #main {
+.fogbugz-helper-bgcolors-dark #www-fogcreek-com-fogbugz,
+.fogbugz-helper-bgcolors-dark #main2,
+.fogbugz-helper-bgcolors-dark #main {
   color: #fff;
 }
 

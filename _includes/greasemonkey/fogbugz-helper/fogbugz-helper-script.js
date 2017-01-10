@@ -1003,105 +1003,132 @@ var main = function($) {
     ////////////////////////////
    // (Preference) Background color picker
   ////////////////////////////
-  var colors = [
-    '#FFFFFF',
-    '#3B3B3B',
-    '#0079BF',
-    '#D29034',
-    '#519839',
-    '#B04632',
-    '#89609E',
-    '#CD5A91',
-    '#4BBF6B',
-    '#00AECC',
-    '#838C91'
-  ];
+  (function(pm) { // So as not to pollute the namespace
+    var colors = [
+      '#FFFFFF',
+      '#3B3B3B',
+      '#0079BF',
+      '#D29034',
+      '#519839',
+      '#B04632',
+      '#89609E',
+      '#CD5A91',
+      '#4BBF6B',
+      '#00AECC',
+      '#838C91'
+    ];
 
-  // Get preference
-  var color;
+    // Get preference
+    var color;
+    var color_re = /(rgb)\(([0-9]+),\s+([0-9]+),\s+([0-9]+)/; 
 
-  var onload_bgcolors = function() {
-    $body.addClass('fogbugz-helper-bgcolors');
-
-    color = localStorage.getItem('color');
-
-    if ( color ) {
+    var set_bgcolor = function(color) {
       $body.css('background-color', color);
-    }
-  };
+      color = $body.css('background-color');
 
-  var onunload_bgcolors = function() {
-    $body
-      .removeClass('fogbugz-helper-bgcolors')
-      .css('background-color', '')
-      ;
+      if ( color ) {
+        var matches = color.match(color_re);
+        var r = matches[2];
+        var g = matches[3];
+        var b = matches[4];
+        var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-    $('.fogbugz-helper-colors').remove();
-  };
+        console.log(color);
+        console.log(luma);
 
-  var ontools_bgcolors = function() {
-    var $color_li = $('.fogbugz-helper-colors');
+        if ( luma < 200 ) {
+          $body.addClass('fogbugz-helper-bgcolors-dark');
+        } else {
+          $body.removeClass('fogbugz-helper-bgcolors-dark');
+        }
+      }
 
-    // Can't figure out why the colors don't stay, we'll just run this function every time and bail if they exist
-    if ( $color_li.length ) {
-      return;
-    }
+      return color;
+    };
 
-    $color_li = $('<div/>')
-      .addClass('fogbugz-helper-colors fogbugz-helper-tool')
-      .delegate('button', 'click', function(e) {
-        e.preventDefault();
-        var color = $(this).css('background-color');
+    var onload_bgcolors = function() {
+      $body.addClass('fogbugz-helper-bgcolors');
 
-        localStorage.setItem('color', color);
-        $body.css('background-color', color);
-        $input.val(color);
-      })
-      ;
+      color = localStorage.getItem('color');
 
-    var $headline = $('<h4>')
-      .addClass('fogbugz-helper-headline')
-      .html('Choose a background color')
-      .appendTo($color_li)
-      ;
+      set_bgcolor(color);
+    };
 
-    // Buttons
-    for ( var ci = 0, cl = colors.length, c, $c; ci < cl; ci++ ) {
-      c = colors[ci];
+    var onunload_bgcolors = function() {
+      $body
+        .removeClass('fogbugz-helper-bgcolors')
+        .removeClass('fogbugz-helper-bgcolors-dark')
+        .css('background-color', '')
+        ;
 
-      $c = $('<button>&nbsp;</button>')
-        .addClass('color')
-        .css('background-color', c)
+      $('.fogbugz-helper-colors').remove();
+    };
+
+    var ontools_bgcolors = function() {
+      var $color_li = $('.fogbugz-helper-colors');
+
+      // Can't figure out why the colors don't stay, we'll just run this function every time and bail if they exist
+      if ( $color_li.length ) {
+        return;
+      }
+
+      $color_li = $('<div/>')
+        .addClass('fogbugz-helper-colors fogbugz-helper-tool')
+        .delegate('button', 'click', function(e) {
+          e.preventDefault();
+          var color = $(this).css('background-color');
+
+          localStorage.setItem('color', color);
+          set_bgcolor(color);
+          $input.val(color);
+        })
+        ;
+
+      var $headline = $('<h4>')
+        .addClass('fogbugz-helper-headline')
+        .html('Choose a background color')
         .appendTo($color_li)
         ;
-    }
 
-    // Input
-    var $input = $('<input type="text">')
-      .val(color)
-      .appendTo($color_li)
-      .bind('input', function() {
-        var color = $(this).val();
+      // Buttons
+      for ( var ci = 0, cl = colors.length, c, $c; ci < cl; ci++ ) {
+        c = colors[ci];
 
-        localStorage.setItem('color', color);
-        $body.css('background-color', color);
-      })
-      ;
+        $c = $('<button>&nbsp;</button>')
+          .addClass('color')
+          .css('background-color', c)
+          .appendTo($color_li)
+          ;
+      }
 
-    var $menu = $('#fogbugz-helper-features-menu');
+      // Input
+      var $input = $('<input type="text">')
+        .val(color)
+        .appendTo($color_li)
+        .bind('input', function() {
+          var color = $(this).val();
 
-    $menu.append($color_li);
-  };
+          localStorage.setItem('color', color);
 
-  pm.add({
-    id: 'bgcolors',
-    text: 'Background Colors',
-    title: 'Enable the color picker to change the background color of FogBugz. Has a few styling issues here and there. If you encounter an issue you can quickly disable it in the FogBugz tools menu.',
-    defaultOn: true,
-    onload: onload_bgcolors,
-    ontools: ontools_bgcolors,
-    onunload: onunload_bgcolors
-  });
+          set_bgcolor(color);
+        })
+        ;
+
+      var $menu = $('#fogbugz-helper-features-menu');
+
+      $menu.append($color_li);
+    };
+
+    pm.add({
+      id: 'bgcolors',
+      text: 'Background Colors',
+      title: 'Enable the color picker to change the background color of FogBugz. Has a few styling issues here and there. If you encounter an issue you can quickly disable it in the FogBugz tools menu.',
+      defaultOn: true,
+      onload: onload_bgcolors,
+      ontools: ontools_bgcolors,
+      onunload: onunload_bgcolors
+    });
+  })(pm);
 
     ////////////////////////////
    // (Preference) Edit Ticket Links
@@ -1809,7 +1836,7 @@ var main = function($) {
 
         // get rid of auto links within code blocks
         var matches = text.match(/\n    .+/g);
-        var cmatches = text.match(/```[\s\S]+?```/g);
+        var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
 
         if ( matches ) {
           matches = matches.concat(cmatches);
@@ -1847,7 +1874,7 @@ var main = function($) {
 
         // get rid of auto links within code blocks
         var matches = text.match(/\n&nbsp; &nbsp; .+/g);
-        var cmatches = text.match(/```[\s\S]+?```/g);
+        var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
 
         if ( matches ) {
           matches = matches.concat(cmatches);
@@ -1884,7 +1911,7 @@ var main = function($) {
 
         // get rid of auto links within code blocks
         var matches = text.match(/\n&nbsp; &nbsp; .+/g);
-        var cmatches = text.match(/```[\s\S]+?```/g);
+        var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
 
         if ( matches ) {
           matches = matches.concat(cmatches);

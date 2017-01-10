@@ -1244,6 +1244,8 @@ var main = function($) {
   var onload_ticket_tweaks = function() {
     $body.addClass('fogbugz-helper-ticket-tweaks');
     $meta_tweaks.appendTo('head');
+    $('html,body').scrollTop(0);
+    $('html,body').scrollLeft(0);
   };
 
   var onunload_ticket_tweaks = function() {

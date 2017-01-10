@@ -938,6 +938,11 @@ label[id="38_SHA"] + .content {
 
   /* header */
 
+  .fogbugz-helper-ticket-tweaks #header.thunder-header.has-custom-logo {
+    max-width: 100%;
+    overflow: auto;
+  }
+
   .fogbugz-helper-ticket-tweaks .main-header-bar {
     white-space: nowrap;
   }

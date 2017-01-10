@@ -959,6 +959,7 @@ label[id="38_SHA"] + .content {
     position: fixed;
     left: 0;
     right: 0;
+    width: 100vw;
   }
 
   /* other */

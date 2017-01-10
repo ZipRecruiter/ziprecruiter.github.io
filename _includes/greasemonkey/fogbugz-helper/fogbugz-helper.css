@@ -942,6 +942,7 @@ label[id="38_SHA"] + .content {
     max-width: 100%;
     overflow: auto;
     position: static;
+    -webkit-overflow-scrolling: touch;
   }
 
   .fogbugz-helper-ticket-tweaks .main-header-bar {
@@ -967,6 +968,7 @@ label[id="38_SHA"] + .content {
     right: 0;
     width: 90vw;
     overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   /* other */
@@ -984,6 +986,10 @@ label[id="38_SHA"] + .content {
     position: fixed;
     z-index: 101;
     padding-left: .5em;
+  }
+
+  .fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
+    -webkit-overflow-scrolling: touch;
   }
 
   .fogbugz-helper-ticket-tweaks #case-lightbox-popups {

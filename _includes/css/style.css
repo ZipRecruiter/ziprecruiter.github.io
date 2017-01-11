@@ -56,7 +56,6 @@ img {
 /* Header */
 
 #wrapper {
-	padding-top: 49px;
 }
 
 #site_header {
@@ -64,15 +63,9 @@ img {
 	border-bottom: 1px solid #000;
 	color: #888;
 	display: inline-block;
-	*display: inline;
-	zoom: 1;
 	width: 100%;
 	vertical-align: top;
 	line-height: 3em;
-	top: 0;
-	left: 0;
-	z-index: 100;
-	position: fixed;
 	font-family: Lato, sans-serif;
 }
 
@@ -324,7 +317,7 @@ img {
 }
 
 #main .section {
-	padding: 2em 0 2.5em 0;
+	padding: 20px 0 20px 0;
 	display: inline-block;
 	width: 100%;
 	vertical-align: top;
@@ -483,11 +476,36 @@ img {
    --------------------------------------------------------- */
 
 .page_section {
-	padding-top: 60px;
+	margin-top: 20px;
 }
 
 .cms:last-child > :last-child {
 	margin-bottom: 0;
+}
+
+.cms figure {
+	display: inline-block;
+	vertical-align: top;
+	padding: .5em;
+}
+
+.cms figure img {
+	display: block;
+}
+
+.cms figcaption {
+	border-top: 1px solid #ccc;
+	margin-top: .5em;
+	margin-bottom: .5em;
+	padding-top: .5em;
+}
+
+.cms li:hover {
+	background: #f0f3f9;
+}
+
+.cms a {
+	word-wrap: break-word;
 }
 
 /* Lazy loading ---------------- */
@@ -505,11 +523,13 @@ img {
 .thumb img {
 	border: 2px solid blue;
 	cursor: pointer;
+	box-sizing: content-box;
 }
 
 .thumb.collapsed img {
 	max-width: 200px;
 	height: auto;
+	box-sizing: inherit;
 }
 
 /* Extra cms classes ---------------- */
@@ -534,14 +554,6 @@ img {
 @media all and (min-width: 1200px) {
 	.content {
 		width: 73em;
-	}
-}
-
-@media all and (min-width: 981px) {
-	#site_header {
-		position: fixed !important;
-		top: 0 !important;
-		left: 0 !important;
 	}
 }
 

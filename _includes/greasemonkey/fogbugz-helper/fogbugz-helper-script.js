@@ -27,6 +27,16 @@ var marked_options = {
   sanitize: true
 };
 
+var fb_links_reg = /&lt;(a href=&quot;.+?&quot; rel=&quot;nofollow noopener noreferrer&quot; target=&quot;_blank&quot;)&gt;(.+?)&lt;\/a&gt;/g;
+var do_marked = function(text) {
+  var ret_text = marked(text, marked_options)
+console.log({text: ret_text});
+console.log(ret_text.match(fb_links_reg));
+  ret_text = ret_text.replace(fb_links_reg, '<$1>$2</a>');
+
+  return ret_text;
+}
+
 /*
  * to-markdown - an HTML to Markdown converter
  *
@@ -1034,9 +1044,6 @@ var main = function($) {
         var b = matches[4];
         var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
 
-        console.log(color);
-        console.log(luma);
-
         if ( luma < 200 ) {
           $body.addClass('fogbugz-helper-bgcolors-dark');
         } else {
@@ -1514,9 +1521,9 @@ var main = function($) {
 
       if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
         code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        code = marked(code, marked_options);
+        code = do_marked(code);
       } else {
-        code = marked(toMarkdown(code, toMarkdown_options), marked_options);
+        code = do_marked(toMarkdown(code, toMarkdown_options));
       }
 
       code = decodeEntities(code);
@@ -1821,7 +1828,7 @@ var main = function($) {
       text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
 
       // Convert to markdown
-      text = marked(text, marked_options);
+      text = do_marked(text);
     }
 
     text = auto_links(text);

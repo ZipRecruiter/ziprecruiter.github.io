@@ -23,7 +23,8 @@ window['--fogbugz-helper-loaded'] = true;
 
 var marked_options = {
   gfm: true,
-  breaks: true
+  breaks: true,
+  sanitize: true
 };
 
 /*

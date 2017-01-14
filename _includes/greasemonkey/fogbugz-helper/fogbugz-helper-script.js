@@ -27,11 +27,11 @@ var marked_options = {
   sanitize: true
 };
 
-var fb_links_reg = /&lt;a href=&quot;(.+?)&quot; rel=&quot;nofollow noopener noreferrer&quot; target=&quot;_blank&quot;&gt;(.+?)&lt;\/a&gt;/g;
+var fb_links_reg = /&lt;a href=&quot;(.+?)&quot; rel=&quot;nofollow noopener noreferrer&quot; (.+?)=&quot;(.+?)&quot;&gt;(.+?)&lt;\/a&gt;/g;
 var do_marked = function(text) {
   var ret_text = marked(text, marked_options)
 
-  ret_text = ret_text.replace(fb_links_reg, '<a href="$1" rel="nofollow noopener noreferrer" target="_blank">$2</a>');
+  ret_text = ret_text.replace(fb_links_reg, '<a href="$1" rel="nofollow noopener noreferrer" $2="$3">$4</a>');
 
   return ret_text;
 }

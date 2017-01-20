@@ -938,6 +938,35 @@ label[id="38_SHA"] + .content {
 
   /* header */
 
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .cases-button .link-list-cases,
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .button {
+    height: auto;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .button:after {
+    content: " ";
+    display: block;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .dropdown.active {
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .dropdown.active ~ * {
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .cases-button .link-list-cases .section-link {
+    height: auto;
+    padding: 12px 15px;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .dropdown.active:not(.no-menu-content):after {
+    display: none;
+  }
+
+  .fogbugz-helper-ticket-tweaks #header.thunder-header .cases-button .link-list-cases {
+    width: auto;
+  }
+
   .fogbugz-helper-ticket-tweaks #header.thunder-header.has-custom-logo {
     max-width: 100%;
     overflow: auto;
@@ -963,12 +992,13 @@ label[id="38_SHA"] + .content {
   }
 
   .fogbugz-helper-ticket-tweaks #header.thunder-header .dropdown.active .dropdown-menu {
-    position: fixed;
-    left: 0;
-    right: 0;
-    width: 90vw;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    position: relative;
+    top: auto;
+    right: auto;
+    bottom: auto;
+    left: auto;
+    max-width: none;
+    width: auto;
   }
 
   /* other */

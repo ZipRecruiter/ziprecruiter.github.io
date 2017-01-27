@@ -1172,7 +1172,7 @@ label[id="38_SHA"] + .content {
 .fogbugz-helper-hide-stuff .wiki,
 .fogbugz-helper-hide-stuff .schedules,
 .fogbugz-helper-hide-stuff .email-button,
-.fogbugz-helper-hide-stuff .planner-button,
+/* .fogbugz-helper-hide-stuff .planner-button, */
 .fogbugz-helper-hide-stuff .product-menu {
   display: none !important;
 }

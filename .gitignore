@@ -1,4 +1,4 @@
 /_site
 /Gemfile.lock
-/project.sublime-workspace
-/project.sublime-project
+*.sublime-project
+*.sublime-workspace

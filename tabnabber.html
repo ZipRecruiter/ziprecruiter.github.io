@@ -10,9 +10,11 @@
   function superFunJankTime() {
     var start = Date.now();
     jankWarn.innerHTML = 'Killing CPU';
-    while (Date.now() - start < 1000);
-    setTimeout(superFunJankTime, 500);
-    jankWarn.innerHTML = 'Done Killing CPU';
+    setTimeout(function() {
+      while (Date.now() - start < 1000);
+      setTimeout(superFunJankTime, 500);
+      jankWarn.innerHTML = 'Done Killing CPU';
+    }, 0);
   }
   superFunJankTime();
 </script>

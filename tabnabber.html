@@ -2,11 +2,17 @@
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+<p id="jankWarn"></p>
+
 <script>
+  var jankWarn = document.getElementById('jankWarn');
+
   function superFunJankTime() {
     var start = Date.now();
+    jankWarn.innerHTML = 'Killing CPU';
     while (Date.now() - start < 1000);
-    setTimeout(superFunJankTime, 50);
+    setTimeout(superFunJankTime, 500);
+    jankWarn.innerHTML = 'Done Killing CPU';
   }
   superFunJankTime();
 </script>

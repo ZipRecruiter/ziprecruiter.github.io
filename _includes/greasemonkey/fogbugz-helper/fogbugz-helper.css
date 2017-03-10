@@ -717,6 +717,13 @@ label[id="38_SHA"] + .content {
   /* //////////////////////////
  // Ticket Tweaks
 ////////////////////////// */
+
+.fogbugz-helper-ticket-tweaks .event.brief {
+  background: white;
+  font-style: italic;
+  margin: 0px;
+}
+
 .fogbugz-helper-ticket-tweaks #stacking-context-main>#main {
   padding-bottom: 30px;
 }

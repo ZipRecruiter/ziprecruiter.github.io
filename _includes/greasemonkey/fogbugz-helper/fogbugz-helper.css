@@ -718,10 +718,24 @@ label[id="38_SHA"] + .content {
  // Ticket Tweaks
 ////////////////////////// */
 
+.fogbugz-helper-ticket-tweaks .event {
+  margin-bottom: 0;
+  margin-top: 1em;
+}
+
 .fogbugz-helper-ticket-tweaks .event.brief {
-  background: white;
+  background: transparent;
   font-style: italic;
-  margin: 0px;
+  margin: 0;
+  opacity: .6;
+}
+
+.fogbugz-helper-ticket-tweaks .event.brief:hover {
+  opacity: 1;
+}
+
+.fogbugz-helper-ticket-tweaks .event.brief + .event {
+  margin-top: 0;
 }
 
 .fogbugz-helper-ticket-tweaks #stacking-context-main>#main {

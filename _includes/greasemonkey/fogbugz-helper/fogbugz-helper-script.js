@@ -48,6 +48,16 @@ var do_marked = function(text) {
 (function($) {
 'use strict';
 
+var toMarkdown_options = { gfm: true };
+
+// wrap the above toMarkdown function
+function _toMarkDown(html) {
+  html = html.replace(/<pre>\n/g, '<pre><code>').replace(/<\/pre>/g, '</code></pre>');
+  var md = toMarkdown(html, toMarkdown_options);
+
+  return md;
+}
+
 // http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
 function convertHtmlToText(inputText) {
   var returnText = "" + inputText;
@@ -1430,7 +1440,6 @@ var main = function($) {
     ////////////////////////////
    // WYSIWYG for custom inputs
   ////////////////////////////
-  var toMarkdown_options = { gfm: true };
 
   /*var decodeEntities = (function() {
     // this prevents any overhead from creating the object each time
@@ -1522,7 +1531,7 @@ var main = function($) {
         code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
         code = do_marked(code);
       } else {
-        code = do_marked(toMarkdown(code, toMarkdown_options));
+        code = do_marked(_toMarkDown(code));
       }
 
       code = decodeEntities(code);
@@ -1544,7 +1553,7 @@ var main = function($) {
 
     if ( markdown ) {
       val = wysiwygify_editor.getData();
-      val = toMarkdown(val, toMarkdown_options);
+      val = _toMarkDown(val);
       val = _wysiwyg_fix_links(val);
     } else {
       val = $textarea.val();
@@ -1736,7 +1745,7 @@ var main = function($) {
           data = data.replace(/<([\/]?)(span)([^>]*)>/g, '');
           data = data.replace(/<(?!((?:\/\s*)?(?:table|thead|tr|th|tbody|td|del|strike|s|code|pre|a|blockquote|h1|h2|h3|h4|h5|h6|br|p|i|em|b|strong|[o|u]l|li)))([^>])+>/g, '');
 
-          data = toMarkdown(data, toMarkdown_options);
+          data = _toMarkDown(data);
 
           data = _wysiwyg_fix_links(data);
 

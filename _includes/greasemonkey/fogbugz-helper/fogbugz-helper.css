@@ -723,7 +723,7 @@ label[id="38_SHA"] + .content {
   margin-top: 1em;
 }
 
-.fogbugz-helper-ticket-tweaks .event.brief {
+.fogbugz-helper-ticket-tweaks .event.brief:not(.has-attachments) {
   background: transparent;
   font-style: italic;
   margin: 0;
@@ -734,7 +734,7 @@ label[id="38_SHA"] + .content {
   opacity: 1;
 }
 
-.fogbugz-helper-ticket-tweaks .event.brief + .event {
+.fogbugz-helper-ticket-tweaks .event.brief:not(.has-attachments) + .event {
   margin-top: 0;
 }
 

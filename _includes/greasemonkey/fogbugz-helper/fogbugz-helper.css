@@ -1282,8 +1282,10 @@ label[id="38_SHA"] + .content {
   background: #eee;
   border-radius: 3px;
   padding: 5px 10px;
-  display: table;
+  display: block;
   font-family: monospace;
+  overflow: auto;
+  white-space: pre;
 }
 
 .markdownified code {

@@ -1629,8 +1629,11 @@ var main = function($) {
           background: #eee;\
           border-radius: 3px;\
           padding: 10px;\
-          display: table;\
+          display: block;\
           font-family: monospace;\
+          overflow: auto;\
+          max-width: 100%;\
+          white-space: pre;\
         }\
         \
         code {\

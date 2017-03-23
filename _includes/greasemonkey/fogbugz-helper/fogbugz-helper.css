@@ -1612,8 +1612,37 @@ section.case nav .controls>.control.save .icon:before {
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
-  padding: 5px;
-  background: rgba(0,0,0,.75);
-  border-radius: 3px;
-  color: #fff;
+
+  color: #555;
+  border-radius: 4px;
+  background: #f6f6f6;
+  padding: 4px 5px;
+  border: 1px solid #ccc;
+}
+
+.fogbugz_helper_tooltip_text:hover {
+  background-color: #ddd;
+}
+
+.fogbugz_helper_tooltip_text:before {
+  content: "\e633";
+  color: #80a1bd;
+
+  background-image: none;
+  width: auto;
+  font-family: 'kiwicons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 15px;
+  position: relative;
+
+  display: inline-block;
+
+  margin-right: 4px;
 }

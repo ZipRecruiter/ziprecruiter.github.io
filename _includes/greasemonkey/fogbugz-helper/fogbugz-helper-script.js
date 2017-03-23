@@ -2434,15 +2434,19 @@ var main = function($) {
 
     $tooltip.bind('click', function(ev) {
       ev.preventDefault();
-      var range = document.createRange();
-      range.selectNode($tooltip_text[0]);
-      window.getSelection().addRange(range);
+      ev.stopPropagation();
 
       try {
+        var range = document.createRange();
+        range.selectNode($tooltip_text[0]);
+        window.getSelection().addRange(range);
+
         document.execCommand('copy');
       } catch(copyErr) {
         alert('Unable to copy');
       }
+
+      $tooltip.fadeOut(50);
 
       window.getSelection().removeAllRanges();
     });
@@ -2459,7 +2463,8 @@ var main = function($) {
       show_tooltip_to = setTimeout(function() {
         var text = el.childNodes[0].textContent;
         if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
-          $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www --bugzid=' + $('a.case').html() + ' ' + text + ' -m ""');
+          $tooltip.show();
+          $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www -m "" ' + text + '');
           $tooltip.appendTo(el);
         }
       }, 100);

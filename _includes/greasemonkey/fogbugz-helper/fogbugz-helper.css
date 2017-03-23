@@ -1617,15 +1617,3 @@ section.case nav .controls>.control.save .icon:before {
   border-radius: 3px;
   color: #fff;
 }
-
-.fogbugz_helper_tooltip_text:before {
-  content: "Copy";
-  display: inline-block;
-  margin-right: 5px;
-
-  background-image: linear-gradient(to bottom, #3498db, #2980b9);
-  border-radius: .5em;
-  color: #fff;
-  padding: 2px 5px;
-  text-decoration: none;
-}

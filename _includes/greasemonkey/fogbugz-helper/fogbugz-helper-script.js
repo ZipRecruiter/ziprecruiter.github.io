@@ -2459,7 +2459,7 @@ var main = function($) {
       show_tooltip_to = setTimeout(function() {
         var text = el.childNodes[0].textContent;
         if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
-          $tooltip_text.html('bin/zr-req-hotfix -s --server-class=www --bugzid=' + $('a.case').html() + ' ' + text + ' -m ""');
+          $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www --bugzid=' + $('a.case').html() + ' ' + text + ' -m ""');
           $tooltip.appendTo(el);
         }
       }, 100);
@@ -2489,7 +2489,7 @@ var main = function($) {
       id: 'hotfix_shortcut',
       text: 'Show Hotfix Comand on Commit IDs',
       title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
-      defaultOn: false,
+      defaultOn: true,
       onload: onload_fn,
       onunload: onunload_fn
     });

@@ -171,6 +171,8 @@ var sniff = function(selector, fn, once) {
   $document.delegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
 };
 
+var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
   //////////////////////
  // Preference manager
 //////////////////////
@@ -266,7 +268,7 @@ PreferenceManager.prototype.load = function() {
         .data('prefid', pref.id)
         ;
 
-      if ( me.get(pref.id, pref.defaultOn) ) {
+      if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) ) {
         $pcheck.prop('checked', true);
       }
 
@@ -276,7 +278,7 @@ PreferenceManager.prototype.load = function() {
           'for': 'fogbugz-helper-pref-check-' + pref.id,
           'title': pref.title
         })
-        .html(pref.text + ' (Default: ' + (pref.defaultOn?'On':'Off') + ')')
+        .html(pref.text + ' (Default: ' + (pref.defaultOn || (iOS && pref.defaultOnIOS)?'On':'Off') + ')')
         .prepend($pcheck)
         .appendTo($prefs_menu)
         ;
@@ -291,7 +293,7 @@ PreferenceManager.prototype.load = function() {
     for ( pkey in me.prefs ) {
       pref = me.prefs[pkey];
 
-      if ( me.get(pref.id, pref.defaultOn) && pref.ontools ) {
+      if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) && pref.ontools ) {
         pref.ontools();
       }
     }
@@ -328,7 +330,7 @@ PreferenceManager.prototype.load = function() {
     pref = me.prefs[pkey];
     prefs_array.push(pref);
 
-    if ( me.get(pref.id, pref.defaultOn) && pref.onload ) {
+    if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) && pref.onload ) {
       pref.onload();
     }
   }
@@ -2495,6 +2497,32 @@ var main = function($) {
       text: 'Show Hotfix Comand on Commit IDs',
       title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
       defaultOn: true,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
+    ////////////////////////////
+   // Kill ticket modals
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var force_ticket_navigation = function(e) {
+      e.stopPropagation();
+    };
+
+    var onload_fn = function() {
+      $('#event-tracking-div').delegate('a.case', 'click', force_ticket_navigation);
+    };
+
+    var onunload_fn = function() {
+      $('#event-tracking-div').undelegate('a.case', 'click', force_ticket_navigation);
+    };
+
+    pm.add({
+      id: 'no_ticket_modals',
+      text: 'Disable Ticket Modals',
+      title: 'Forces a page refresh when clicking a ticket link',
+      defaultOnIOS: true,
       onload: onload_fn,
       onunload: onunload_fn
     });

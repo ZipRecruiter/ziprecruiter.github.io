@@ -2430,7 +2430,7 @@ var main = function($) {
    // Hotfix shortcut
   ////////////////////////////
   (function(pm) { // So as not to pollute the namespace
-    var $tooltip = $('<span class="fogbugz_helper_tooltip"></span>');
+    var $tooltip = $('<button type="button" class="fogbugz_helper_tooltip"></button>');
     var $tooltip_text = $('<span class="fogbugz_helper_tooltip_text"></span>')
       .appendTo($tooltip);
 
@@ -2466,7 +2466,7 @@ var main = function($) {
         var text = el.childNodes[0].textContent;
         if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
           $tooltip.show();
-          $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www -m "" ' + text + '');
+          $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www -m="" ' + text + '');
           $tooltip.appendTo(el);
         }
       }, 100);

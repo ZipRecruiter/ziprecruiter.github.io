@@ -2434,24 +2434,47 @@ var main = function($) {
     var $tooltip_text = $('<span class="fogbugz_helper_tooltip_text"></span>')
       .appendTo($tooltip);
 
-    $tooltip.bind('click', function(ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
-
+    var copy_text = function(ev) {
       try {
+        if ( window.getSelection().empty ) {  // Chrome
+          window.getSelection().empty();
+        } else if ( window.getSelection().removeAllRanges ) {  // Firefox
+          window.getSelection().removeAllRanges();
+        }
+
         var range = document.createRange();
         range.selectNode($tooltip_text[0]);
         window.getSelection().addRange(range);
 
-        document.execCommand('copy');
+        if ( window.getSelection().toString() ) {
+          document.execCommand('copy');
+        } else {
+          // If at first you don't succeed...
+          setTimeout(function() {
+            copy_text.call(this, ev);
+          }, 100)
+        }
       } catch(copyErr) {
         alert('Unable to copy');
       }
 
-      $tooltip.fadeOut(50);
+      // Hiding here seems to cause all kinds of issues
+      // $tooltip.fadeOut(50);
 
-      window.getSelection().removeAllRanges();
-    });
+      if ( window.getSelection().empty ) {  // Chrome
+        window.getSelection().empty();
+      } else if ( window.getSelection().removeAllRanges ) {  // Firefox
+        window.getSelection().removeAllRanges();
+      }
+    };
+
+    $tooltip
+      .bind('mousedown', copy_text)
+      .bind('click', function(ev) {
+        ev.preventDefault();
+        ev.stopPropagation();
+      })
+      ;
 
     var hide_tooltip_to;
     var show_tooltip_to;
@@ -2475,7 +2498,7 @@ var main = function($) {
     var hide_tooltip = function() {
       hide_tooltip_to = setTimeout(function() {
         $tooltip.detach();
-      }, 100);
+      }, 500);
     };
 
     var onload_fn = function() {

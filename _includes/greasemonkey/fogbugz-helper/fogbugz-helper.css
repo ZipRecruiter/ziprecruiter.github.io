@@ -1604,9 +1604,7 @@ section.case nav .controls>.control.save .icon:before {
 
 .fogbugz_helper_tooltip {
   position: absolute;
-}
 
-.fogbugz_helper_tooltip_text {
   display: block;
   max-width: 150px;
   text-overflow: ellipsis;
@@ -1618,13 +1616,15 @@ section.case nav .controls>.control.save .icon:before {
   background: #f6f6f6;
   padding: 4px 5px;
   border: 1px solid #ccc;
+
+  -webkit-appearance: none;
 }
 
-.fogbugz_helper_tooltip_text:hover {
+.fogbugz_helper_tooltip:hover {
   background-color: #ddd;
 }
 
-.fogbugz_helper_tooltip_text:before {
+.fogbugz_helper_tooltip:before {
   content: "\e633";
   color: #80a1bd;
 

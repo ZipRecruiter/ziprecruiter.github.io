@@ -1619,7 +1619,7 @@ section.case nav .controls>.control.save .icon:before {
   position: relative;
 }
 
-.fogbugz_helper_preview_images .case-list .bug-grid-row .grid-column-50_PreviewImage {
+.fogbugz_helper_preview_images .case-list .grid-column-50_PreviewImage.fogbugz_helper_preview_images_has_image {
   margin-top: 5px;
   display: block;
 }

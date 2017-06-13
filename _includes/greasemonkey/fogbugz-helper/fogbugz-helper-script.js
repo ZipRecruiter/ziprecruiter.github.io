@@ -2551,6 +2551,169 @@ var main = function($) {
     });
   })(pm);
 
+    ////////////////////////////
+   // Preview Images
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var _preview_images_class = 'fogbugz_helper_preview_images';
+    var _inserted_class = 'fogbugz_helper_preview_images_inserted';
+    var _has_image_class = 'fogbugz_helper_preview_images_has_image';
+    var _image_selector = '.fogbugz_helper_preview_images_inserted .grid-column-contents.grid-column-50_PreviewImage button';
+
+    // TODO: Make these globally accessible
+    var _modal_showing_class = 'fogbugz_helper_modal_showing';
+    var $backdrop = $('<div/>').addClass('fogbugz_helper_backdrop');
+    var $modal_wrapper = $('<div/>').addClass('fogbugz_helper_modal_wrapper');
+    var $modal = $('<div/>').addClass('fogbugz_helper_modal');
+    var $modal_content = $('<div/>').addClass('fogbugz_helper_modal_content');
+    var $close = $('<button/>').attr('type', 'button').html('Close').addClass('fogbugz_helper_modal_close');
+
+    var show_modal = function(content) {
+      $body.addClass(_modal_showing_class);
+      $modal_content.empty().append($(content));
+    };
+
+    var hide_modal = function() {
+      $body.removeClass(_modal_showing_class);
+      $modal_content.empty();
+    };
+
+    $modal_wrapper
+      .delegate('.fogbugz_helper_modal_close', 'click', hide_modal)
+      .bind('click', function(ev) {
+        if ( ev.target === $modal_wrapper[0] ) {
+          hide_modal.call($modal_wrapper[0], ev);
+        }
+      })
+      .append($modal)
+      .appendTo('body')
+      ;
+
+    $modal
+      .append($modal_content)
+      .append($close)
+      ;
+
+    $backdrop.appendTo('body').bind('click', hide_modal);
+
+    $modal.bind('click', function(ev) {
+      // ev.stopPropagation();
+    });
+
+    // Back to feature stuff
+    var images;
+    var _template_inserted = function(r, data) {
+      var $case_list = $('.case-list');
+
+      if ( $case_list.hasClass(_inserted_class) ) {
+        return;
+      }
+
+      var idx = 0;
+      images = [];
+      $('.bug-grid-row .grid-column-50_PreviewImage').each(function() {
+        var $this = $(this);
+        var $a = $this.find('a');
+        var href = $a.attr('href');
+
+        if ( href ) {
+          var $img = $('<img/>').attr('src', href);
+          var $button = $('<button/>').attr('type', 'button').append($img);
+          //$this.css({width: 100, height: 100, border: '1px solid blue'});
+          //console.log($this[0], $img[0])
+          $this
+            .empty().addClass(_has_image_class).append($button)
+            .data('__fbhpis_idx', idx)
+            ;
+
+          images.push($button[0]);
+
+          idx++;
+        }
+      });
+
+      $case_list.addClass(_inserted_class)
+    };
+
+    var image;
+    var image_click = function(ev) {
+      ev.preventDefault();
+      ev.stopPropagation();
+
+      var $row = $(this).closest('.bug-grid-row');
+      var $pi = $row.find('.grid-column-50_PreviewImage');
+      image = $pi.data('__fbhpis_idx');
+
+      $modal_wrapper.scrollTop(0);
+
+      var content = '';
+      $row.find('td').each(function() {
+        content += this.innerHTML;
+      });
+
+      var $div = $('<div/>').addClass(_preview_images_class + '_modal_content').html(content);
+
+      var $prev;
+      var $next;
+
+      $div.find('input').remove(); // remove checkbox
+      var $img_div = $div.find('.grid-column-50_PreviewImage');
+      $img_div.find('img').appendTo($img_div);
+      $img_div.find('button').remove();
+
+      if ( image > 0 ) {
+        $prev = $('<button/>').attr('type', 'button').html('Prev').addClass(_preview_images_class + '_prev ' + _preview_images_class + '_prevnext');
+        $img_div.prepend($prev);
+      }
+
+      if ( image < images.length - 1 ) {
+        $next = $('<button/>').attr('type', 'button').html('Next').addClass(_preview_images_class + '_next ' + _preview_images_class + '_prevnext');
+        $img_div.append($next);
+      }
+
+      $div.append($img_div); // Make image last
+
+      show_modal($div);
+    };
+
+    var prev_image_click = function(ev) {
+      image_click.call(images[image - 1], ev);
+    };
+
+    var next_image_click = function(ev) {
+      image_click.call(images[image + 1], ev);
+    };
+
+    var onload_fn = function() {
+      $body.addClass(_preview_images_class);
+
+      fb.pubsub.subscribe("/template/inserted", _template_inserted);
+      $document.delegate(_image_selector, 'click', image_click);
+      $document.delegate('.fogbugz_helper_preview_images_next', 'click', next_image_click);
+      $document.delegate('.fogbugz_helper_preview_images_prev', 'click', prev_image_click);
+
+      _template_inserted(false);
+    };
+
+    var onunload_fn = function() {
+      fb.pubsub.unsubscribe("/template/inserted", _template_inserted);
+      $document.undelegate(_image_selector, 'click', image_click);
+      $document.undelegate('.fogbugz_helper_preview_images_next', 'click', next_image_click);
+      $document.undelegate('.fogbugz_helper_preview_images_prev', 'click', prev_image_click);
+
+      $body.removeClass(_preview_images_class);
+    };
+
+    pm.add({
+      id: 'preview_images',
+      text: 'Preview Images',
+      title: 'Changes "Preview Image" field into an image',
+      defaultOn: true,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
   /* Not used, but this is how I figured out FB's event names*/
 
   /*var _sub = fb.pubsub.subscribe;

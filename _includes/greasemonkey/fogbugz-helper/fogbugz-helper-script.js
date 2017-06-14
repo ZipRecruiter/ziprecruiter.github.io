@@ -2503,15 +2503,15 @@ var main = function($) {
 
     var onload_fn = function() {
       $document
-        .delegate('a', 'mouseover focus', show_tooltip)
-        .delegate('a', 'mouseout blur', hide_tooltip)
+        .delegate('.event a', 'mouseover focus', show_tooltip)
+        .delegate('.event a', 'mouseout blur', hide_tooltip)
         ;
     };
 
     var onunload_fn = function() {
       $document
-        .undelegate('a', 'mouseover focus', show_tooltip)
-        .undelegate('a', 'mouseout blur', hide_tooltip)
+        .undelegate('.event a', 'mouseover focus', show_tooltip)
+        .undelegate('.event a', 'mouseout blur', hide_tooltip)
         ;
     };
 

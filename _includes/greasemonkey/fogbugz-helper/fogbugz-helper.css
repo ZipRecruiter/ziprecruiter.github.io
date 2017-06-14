@@ -1274,8 +1274,7 @@ label[id="38_SHA"] + .content {
 .markdownified p,
 .markdownified ul,
 .markdownified ol {
-  margin-top: .5em;
-  margin-bottom: .5em;
+  margin: .5em 0;
 }
 
 .markdownified pre {

@@ -3,18 +3,11 @@ layout: default
 title: Greasemonkey Scripts - FogBugz Helper
 ---
 <section class="section">
-  <div class="content">
-    <nav class="page_nav">
-      <a href="#enabling">Enabling FogBugz Customization</a>
-      <a href="#features">Features</a>
-      <a href="#installing">Greasemonkey Installation instructions</a>
-    </nav>
-  </div>
-
   <section id="enabling" class="page_section">
-    <h2 class="headline"><div class="content"><a href="#enabling">Enabling FogBugz Customization</a></div></h2>
+    <h2 class="headline"><div class="content"><a href="#enabling">Enabling in FogBugz</a></div></h2>
 
     <div class="body cms"><div class="content">
+      <p>Note: You do <strong>not</strong> need Greasemonkey etc. to enable this in Fogbugz. Just follow these instructions:</p>
       <ol>
         <li>
           <figure>
@@ -86,41 +79,45 @@ title: Greasemonkey Scripts - FogBugz Helper
   <section id="installing" class="page_section">
     <h2 class="headline"><div class="content"><a href="#installing">Greasemonkey Installation instructions</a></div></h2>
 
-    <div class="body cms"><div class="content">
-      <h3>Firefox</h3>
-      <ul>
-        <li>Install greasemonkey (<a href="https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/</a>)</li>
-        <li>Copy the script below, click the down arrow next to the monkey and click "New User Script" then click "Use Script From Clipboard"</li>
-      </ul>
+    <div class="spoiler" data-type="spoiler">
+      <div class="body cms" data-type="spoiler-info"><div class="content">
+        <p>Note: You do not need Greasemonkey to run this script. Simply <a href="#enabling">follow the instructions at the top</a>.</p>
+        <p><a href="#installing" data-type="spoiler-show">Show me the Greasemonkey instructions.</a></p>
+      </div></div>
 
-      <h3>Chrome</h3>
-      <ul>
-        <li>Install Tampermonkey (<a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en">https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en</a>)</li>
-        <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script. Then click the Save button.</li>
-      </ul>
+      <div class="body cms"><div class="content">
+        <h3>Firefox</h3>
+        <ul>
+          <li>Install greasemonkey (<a href="https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/</a>)</li>
+          <li>Copy the script below, click the down arrow next to the monkey and click "New User Script" then click "Use Script From Clipboard"</li>
+        </ul>
 
-      <h3>Opera</h3>
-      <ul>
-        <li>Install Violent Monkey (<a href="https://addons.opera.com/en/extensions/details/violent-monkey/?display=en">https://addons.opera.com/en/extensions/details/violent-monkey/?display=en</a>)</li>
-        <li>Copy the script below, click the monkey, click "Manage Scripts", then "New". Select what's there and paste the script.</li>
-      </ul>
+        <h3>Chrome</h3>
+        <ul>
+          <li>Install Tampermonkey (<a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en">https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en</a>)</li>
+          <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script. Then click the Save button.</li>
+        </ul>
 
-      <h3>Safari</h3>
-      <ul>
-        <li>Install Tampermonkey (<a href="https://tampermonkey.net/index.php?ext=dhdg&browser=safari">https://tampermonkey.net/index.php?ext=dhdg&browser=safari</a>)</li>
-        <li>Once installed, you must restart Safari.</li>
-        <li>Copy the script below, click the weird square icon with two circles then click "Create new script". Select what's there and paste the script. Click the floppy disk to save.</li>
-      </ul>
-    </div></div>
-  </section>
+        <h3>Opera</h3>
+        <ul>
+          <li>Install Violent Monkey (<a href="https://addons.opera.com/en/extensions/details/violent-monkey/?display=en">https://addons.opera.com/en/extensions/details/violent-monkey/?display=en</a>)</li>
+          <li>Copy the script below, click the monkey, click "Manage Scripts", then "New". Select what's there and paste the script.</li>
+        </ul>
 
-  <section id="script" class="page_section">
-    <h2 class="headline"><div class="content"><a href="#script">The Script</a></div></h2>
+        <h3>Safari</h3>
+        <ul>
+          <li>Install Tampermonkey (<a href="https://tampermonkey.net/index.php?ext=dhdg&browser=safari">https://tampermonkey.net/index.php?ext=dhdg&browser=safari</a>)</li>
+          <li>Once installed, you must restart Safari.</li>
+          <li>Copy the script below, click the weird square icon with two circles then click "Create new script". Select what's there and paste the script. Click the floppy disk to save.</li>
+        </ul>
+      </div></div>
 
-    <div class="body cms"><div class="content">
-      <p>Copy <strong>everything</strong> in the green box:</p>
+      <h3 id="script" class="headline"><div class="content"><a href="#script">The Script</a></div></h2>
 
-      <textarea id="user_script">
+      <div class="body cms"><div class="content">
+        <p>Copy <strong>everything</strong> in the green box:</p>
+
+        <textarea id="user_script">
 // ==UserScript==
 // @name         FogBugz Helper
 // @namespace    http://ziprecruiter.github.io/
@@ -133,7 +130,9 @@ title: Greasemonkey Scripts - FogBugz Helper
 // ==/UserScript==
 
 (function(){url='//ziprecruiter.github.io/greasemonkey/fogbugz-helper/fogbugz-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
-      </textarea>
-    </div></div>
-  </section>
+        </textarea>
+      </div></div>
+    </section>
+  </div>
+
 </section>

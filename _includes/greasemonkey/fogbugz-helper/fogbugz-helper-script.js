@@ -2079,6 +2079,8 @@ var main = function($) {
 
       var dupes = duplicates[key];
 
+      add_related_ticket_data = add_related_ticket_data || window.fb.cases.current.bug;
+
       for ( var i = 0, l = dupes.length, value; i < l; i++ ) {
         if ( key === 'props' ) {
           value = add_related_ticket_data[dupes[i]];

@@ -1181,7 +1181,8 @@ var main = function($) {
    // (Preference) Open Tickets in Modal
   ////////////////////////////
 
-  var $main = $('#main');
+  //var $main = $('#main');
+  var $main = $('#main-wrap');
 
   var _close_ticket_modal = function() {
     $('.js-header-list-cases-link').click();
@@ -1207,7 +1208,7 @@ var main = function($) {
 
   pm.add({
     id: 'onunload_tickets_in_modal',
-    text: 'Click Backdrop to Close Ticket',
+    text: 'Click Backdrop to Close Ticket (Modal Only)',
     title: 'Clicking the area behind a ticket will close the ticket and load your last filter.',
     defaultOn: true,
     onload: onload_tickets_in_modal,

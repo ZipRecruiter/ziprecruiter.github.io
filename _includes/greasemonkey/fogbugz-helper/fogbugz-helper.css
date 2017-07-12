@@ -1416,9 +1416,10 @@ section.case .corner.add_related_ticket_done a.case {
   margin: 0;
 }
 
-.add_related_ticket_button:focus,
-.add_related_ticket_button:hover {
+.case .add_related_ticket_button:focus,
+.case .add_related_ticket_button:hover {
   background-color: #ddd;
+  text-decoration: none;
 }
 
   /* //////////////////////////

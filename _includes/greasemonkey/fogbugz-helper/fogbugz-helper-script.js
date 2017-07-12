@@ -2017,7 +2017,7 @@ var main = function($) {
   var add_related_ticket_array_regex = /^\[.*\]$/;
 
   var add_related_ticket_click = function(ev) {
-    ev.preventDefault();
+    // ev.preventDefault();
 
     var $this = $(this);
     var id = $('.case .top .left .case').text();
@@ -2111,11 +2111,13 @@ var main = function($) {
       }
     }
 
-    $add_button
+    /*$add_button
       .attr('href', href)
       .click()
       .attr('href', old_href)
-      ;
+      ;*/
+
+    return href;
   };
 
   // Add buttons and add id's if a button was previously clicked
@@ -2126,17 +2128,21 @@ var main = function($) {
     if ( $('.case .top .left .case').length ) {
       var id = $('#formEditCase .top .left .case').text();
 
-      var $child = $('<button>Sub Case</button>')
+      var $child = $('<a href="#">Sub Case</button>')
         .addClass(add_related_ticket_button_class)
         .addClass(add_related_ticket_child_class)
         .appendTo($left)
         ;
 
-      var $copy = $('<button>Duplicate</button>')
+      $child.attr('href', add_related_ticket_click.call($child[0]));
+
+      var $copy = $('<a href="#">Duplicate</a>')
         .addClass(add_related_ticket_button_class)
         .addClass(add_related_ticket_copy_class)
         .appendTo($left)
         ;
+
+      $copy.attr('href', add_related_ticket_click.call($copy[0]));
 
       /* var $parent = $('<button>+ Parent Case</button>')
         .addClass(add_related_ticket_button_class)

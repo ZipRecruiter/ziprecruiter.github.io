@@ -2221,12 +2221,12 @@ var main = function($) {
       $nav.addClass(has_add_resolve_button_class);
 
       // Case is open
-      if ( add_resolve_fOpen ) {
+      if ( window.fb.cases.current.bug.fOpen ) {
         var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
         var extra = '';
 
         // Case is resolved
-        if ( add_resolve_personResolvedBy ) {
+        if ( window.fb.cases.current.bug.ixPersonResolvedBy ) {
           var reactivate_url = document.location.href.replace(/\/edit\//, '/reactivate/');
           var close_url = document.location.href.replace(/\/edit\//, '/close/');
 
@@ -2276,14 +2276,10 @@ var main = function($) {
   };
 
   // Checking to see if the api call was a case, and if so save the fOpen state
-  var add_resolve_fOpen;
-  var add_resolve_personResolvedBy;
   var add_resolve_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
   var add_resolve_check_api_response = function(type, info) {
-    if ( info.data && add_resolve_check_api_response_regex.test(type.route) ) {
-      add_resolve_fOpen = info.data.fOpen;
-      add_resolve_personResolvedBy = info.data.personResolvedBy;
-    }
+    //if ( info.data && add_resolve_check_api_response_regex.test(type.route) ) {
+    //}
   };
 
   // Don't call this function thousands of times

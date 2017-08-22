@@ -28,19 +28,25 @@ label[id="38_SHA"] + .content {
 #fogbugz-helper-prefs-menu label {
   display: block;
   padding: 0 12px;
+  font-size: 14px;
 }
 
 #fogbugz-helper-prefs-menu label:hover {
   background-color: #E0E9F1;
 }
 
-#header.thunder-header .dropdown-menu #fogbugz-helper-menu a {
+#fogbugz-helper-menu {
+  padding: 0 10px;
+  margin-top: 15px;
+}
+
+#fogbugz-helper-menu a {
   color: #39668e;
   font-weight: bold;
 }
 
-#header.thunder-header .dropdown-menu #fogbugz-helper-menu a:hover,
-#header.thunder-header .dropdown-menu #fogbugz-helper-menu a:focus {
+#fogbugz-helper-menu a:hover,
+#fogbugz-helper-menu a:focus {
   text-decoration: underline;
 }
 
@@ -177,7 +183,7 @@ label[id="38_SHA"] + .content {
 
 .fogbugz-helper-colors button {
   margin: 2px;
-  border-width: 1px;
+  border: 1px solid #000;
 }
 
 .fogbugz-helper-colors input {

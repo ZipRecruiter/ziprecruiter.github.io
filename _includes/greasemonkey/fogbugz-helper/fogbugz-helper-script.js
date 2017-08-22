@@ -228,7 +228,7 @@ PreferenceManager.prototype.load = function() {
     } else if ( force ) {
       $helper_menu.empty();
     } else {
-      $helper_menu = $('<li/>').attr('id', 'fogbugz-helper-menu');
+      $helper_menu = $('<div/>').attr('id', 'fogbugz-helper-menu');
       // Add a link to plugin homepage
       var $homepage_link = $('<label><a href="http://ziprecruiter.github.io/greasemonkey/fogbugz-helper/" target="_blank">ZipRecruiter FogBugz Helper</a></label>');
       $helper_menu.append($homepage_link);
@@ -287,7 +287,7 @@ PreferenceManager.prototype.load = function() {
     $helper_menu
       .append($prefs_menu)
       .append($features_menu)
-      .appendTo($('body #header .tools .dropdown-menu'))
+      .insertBefore($('.gw-nav-entry-settings .dropdown-menu .menu-content-section:last-child'))
       ;
 
     for ( pkey in me.prefs ) {
@@ -301,7 +301,7 @@ PreferenceManager.prototype.load = function() {
 
   // One-time setup stuff
   $document
-    .delegate('.tools', 'mouseover', function() {
+    .delegate('.gw-nav-entry-settings', 'mouseover', function() {
       add_prefs();
     })
     // Changing preferences via checkboxes

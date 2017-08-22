@@ -2022,7 +2022,7 @@ var main = function($) {
     var $this = $(this);
     var id = $('.case .top .left .case').text();
 
-    var $add_button = $('#header .main-nav .add-case-button');
+    var $add_button = $('.gw-new-case');
     var old_href = $add_button.attr('href');
     var href = old_href + '?';
 
@@ -2128,7 +2128,7 @@ var main = function($) {
     if ( $('.case .top .left .case').length ) {
       var id = $('#formEditCase .top .left .case').text();
 
-      var $child = $('<a href="#">Sub Case</button>')
+      var $child = $('<a href="javascript:;">Sub Case</a>')
         .addClass(add_related_ticket_button_class)
         .addClass(add_related_ticket_child_class)
         .appendTo($left)
@@ -2136,7 +2136,7 @@ var main = function($) {
 
       $child.attr('href', add_related_ticket_click.call($child[0]));
 
-      var $copy = $('<a href="#">Duplicate</a>')
+      var $copy = $('<a href="javascript:;">Duplicate</a>')
         .addClass(add_related_ticket_button_class)
         .addClass(add_related_ticket_copy_class)
         .appendTo($left)

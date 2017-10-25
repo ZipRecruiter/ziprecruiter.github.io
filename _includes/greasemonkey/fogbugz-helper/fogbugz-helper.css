@@ -780,7 +780,7 @@ label[id="38_SHA"] + .content {
 }
 
 /* Top */
-.fogbugz-helper-ticket-tweaks #formEditCase > .top {
+/*.fogbugz-helper-ticket-tweaks #formEditCase > .top {
   float: none;
   width: 100%;
   display: table;
@@ -828,7 +828,7 @@ label[id="38_SHA"] + .content {
 }
 
 .fogbugz-helper-ticket-tweaks #formEditCase .field {
-}
+}*/
 
 /* BugzID */
 .fogbugz-helper-ticket-tweaks #main2 section.case .corner a.case,

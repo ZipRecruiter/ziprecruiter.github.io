@@ -830,6 +830,15 @@ label[id="38_SHA"] + .content {
 .fogbugz-helper-ticket-tweaks #formEditCase .field {
 }*/
 
+/* Button order */
+.fogbugz-helper-ticket-tweaks .controls .control {
+  order: 1;
+}
+
+.fogbugz-helper-ticket-tweaks .controls .control[name="edit"] {
+  order: 0;
+}
+
 /* BugzID */
 .fogbugz-helper-ticket-tweaks #main2 section.case .corner a.case,
 .fogbugz-helper-ticket-tweaks #main section.case .corner a.case {

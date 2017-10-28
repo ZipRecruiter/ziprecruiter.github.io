@@ -1823,183 +1823,207 @@ var main = function($) {
    // Markdown parser
   ////////////////////////////
 
-  var _markdownify_fix_text = function(text, replace_br, skip_other) {
-    if ( !skip_other ) {
-      text = decodeEntities(text);
-    }
+  (function(pm) {
+    var _markdownify_fix_text = function(text, replace_br, skip_other, skip_decode) {
+      if ( !skip_other && !skip_decode ) {
+        text = decodeEntities(text);
+      }
 
-    if ( replace_br ) {
-      // Remove br tags that FB adds
-      text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
-    }
+      if ( replace_br ) {
+        // Remove br tags that FB adds
+        text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
+      }
 
-    if ( !skip_other ) {
-      // Remove links FB adds to markdown'd links
-      text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
+      if ( !skip_other ) {
+        // Remove links FB adds to markdown'd links
+        text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
 
-      // Fix other f'd up links like [http://google.com](http://google.com)
-      // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
-      text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
+        // Fix other f'd up links like [http://google.com](http://google.com)
+        // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
+        text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
 
-      // Convert to markdown
-      text = do_marked(text);
-    }
+        // Convert to markdown
+        text = do_marked(text);
+      }
 
-    text = auto_links(text);
+      text = auto_links(text);
 
-    return text;
-  };
+      return text;
+    };
 
-  var $markdownify_converter = $('<textarea/>');
-  var markdownify_timeout;
-  var _markdownify = function() {
-    var $customfield = $('.customfield-longtext .content > pre:not(.wysiwygified, .markdownified)').addClass('markdownified');
+    var $markdownify_converter = $('<textarea/>');
+    var markdownify_timeout;
+    var _markdownify = function() {
+      var $customfield = $('.customfield-longtext .content > pre:not(.wysiwygified, .markdownified)').addClass('markdownified');
 
-    if ( $customfield.length ) {
-      $customfield.each(function() {
-        var $this = $(this);
-        var text = $this.html();
+      if ( $customfield.length ) {
+        $customfield.each(function() {
+          var $this = $(this);
+          var $parent = $this.closest('.customfield');
+          var id = $parent.find('[id]').attr('id');
+          var text = ticket_data.customFields[id] || $this.html();
 
-        //text = decodeEntities(text);
-        $this.data('markdown-text', text);
+          //text = decodeEntities(text);
+          $this.data('markdown-text', text);
 
-        // get rid of auto links within code blocks
-        var matches = text.match(/\n    .+/g);
-        var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
+          // get rid of auto links within code blocks
+          var matches = text.match(/\n    .+/g);
+          var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
 
-        if ( matches ) {
-          matches = matches.concat(cmatches);
-        } else {
-          matches = cmatches;
-        }
+          if ( matches ) {
+            matches = matches.concat(cmatches);
+          } else {
+            matches = cmatches;
+          }
 
-        if ( matches ) {
-          for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
-            m = matches[i];
+          if ( matches ) {
+            for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+              m = matches[i];
 
-            if ( m ) {
-              rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-              text = text.replace(m, rm);
+              if ( m ) {
+                rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+                text = text.replace(m, rm);
+              }
             }
           }
-        }
 
-        text = _markdownify_fix_text(text);
+                                                           // don't decode since we got this raw
+          text = _markdownify_fix_text(text, false, false, true);
 
-        $this.html(text);
-      });
-    }
+          $this.html(text);
+        });
+      }
 
-    // Plain text comments
-    var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(:not(a, br)))').addClass('markdownified');
+      // Plain text comments
+      var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(:not(a, br)))').addClass('markdownified');
 
-    if ( $bodycontent.length ) {
-      $bodycontent.each(function() {
-        var $this = $(this);
-                               // Removing some weird whitespace FB adds causing code formatting
-        var text = $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
+      if ( $bodycontent.length ) {
+        $bodycontent.each(function() {
+          var $this = $(this);
+                                 // Removing some weird whitespace FB adds causing code formatting
+          var text = $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
 
-        $this.data('markdown-text', text);
+          $this.data('markdown-text', text);
 
-        // get rid of auto links within code blocks
-        var matches = text.match(/\n&nbsp; &nbsp; .+/g);
-        var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
+          // get rid of auto links within code blocks
+          var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+          var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
 
-        if ( matches ) {
-          matches = matches.concat(cmatches);
-        } else {
-          matches = cmatches;
-        }
+          if ( matches ) {
+            matches = matches.concat(cmatches);
+          } else {
+            matches = cmatches;
+          }
 
-        if ( matches ) {
-          for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
-            m = matches[i];
+          if ( matches ) {
+            for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+              m = matches[i];
 
-            if ( m ) {
-              rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-              text = text.replace(m, rm);
+              if ( m ) {
+                rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+                text = text.replace(m, rm);
+              }
             }
           }
-        }
 
-        text = _markdownify_fix_text(text, true);
+          text = _markdownify_fix_text(text, true);
 
-        $this.html(text);
-      });
-    }
+          $this.html(text);
+        });
+      }
 
-    // WYSIWYG'd comments
-    $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
+      // WYSIWYG'd comments
+      $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
 
-    if ( $bodycontent.length ) {
-      $bodycontent.each(function() {
-        var $this = $(this);
-        var text = $this.html();
+      if ( $bodycontent.length ) {
+        $bodycontent.each(function() {
+          var $this = $(this);
+          var text = $this.html();
 
-        $this.data('markdown-text', text);
+          $this.data('markdown-text', text);
 
-        // get rid of auto links within code blocks
-        var matches = text.match(/\n&nbsp; &nbsp; .+/g);
-        var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
+          // get rid of auto links within code blocks
+          var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+          var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
 
-        if ( matches ) {
-          matches = matches.concat(cmatches);
-        } else {
-          matches = cmatches;
-        }
+          if ( matches ) {
+            matches = matches.concat(cmatches);
+          } else {
+            matches = cmatches;
+          }
 
-        if ( matches ) {
-          for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
-            m = matches[i];
+          if ( matches ) {
+            for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+              m = matches[i];
 
-            if ( m ) {
-              rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-              text = text.replace(m, rm);
+              if ( m ) {
+                rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+                text = text.replace(m, rm);
+              }
             }
           }
+
+          text = _markdownify_fix_text(text, false, true);
+
+          $this.html(text);
+        });
+      }
+    };
+
+    // TODO: DRY
+    var ticket_data;
+    var check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
+    var check_api_response = function(type, info) {
+      if ( check_api_response_regex.test(type.route) ) {
+        var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\/?/);
+        if ( id ) {
+          var uid = type.route.match(/cases\/([0-9]+)/)[1];
+
+          if ( id[2] === uid ) {
+            ticket_data = info.data;
+          }
         }
+      }
+    };
 
-        text = _markdownify_fix_text(text, false, true);
+    // Don't call this function thousands of times
+    var markdownify = function() {
+      clearTimeout(markdownify_timeout);
 
-        $this.html(text);
+      markdownify_timeout = setTimeout(_markdownify, 10);
+    };
+
+    var onload_markdown = function() {
+      markdownify();
+      $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
+      $body.addClass('fogbugz-helper-markdown');
+      fb.pubsub.subscribe('/api/success', check_api_response);
+    };
+
+    var onunload_markdown = function() {
+      $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
+
+      $('.markdownified').each(function() {
+        var $this = $(this);
+
+        $this.removeClass('markdownified');
+        $this.html($this.data('markdown-text'));
       });
-    }
-  };
 
-  // Don't call this function thousands of times
-  var markdownify = function() {
-    clearTimeout(markdownify_timeout);
+      $body.removeClass('fogbugz-helper-markdown');
 
-    markdownify_timeout = setTimeout(_markdownify, 10);
-  };
+      fb.pubsub.unsubscribe('/api/success', check_api_response);
+    };
 
-  var onload_markdown = function() {
-    markdownify();
-    $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
-    $body.addClass('fogbugz-helper-markdown');
-  };
-
-  var onunload_markdown = function() {
-    $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
-
-    $('.markdownified').each(function() {
-      var $this = $(this);
-
-      $this.removeClass('markdownified');
-      $this.html($this.data('markdown-text'));
+    pm.add({
+      id: 'markdown',
+      text: 'Markdown for Comments/Case Description',
+      title: 'Automatically converts markdown in plain text comments and case description',
+      defaultOn: true,
+      onload: onload_markdown,
+      onunload: onunload_markdown
     });
-
-    $body.removeClass('fogbugz-helper-markdown');
-  };
-
-  pm.add({
-    id: 'markdown',
-    text: 'Markdown for Comments/Case Description',
-    title: 'Automatically converts markdown in plain text comments and case description',
-    defaultOn: true,
-    onload: onload_markdown,
-    onunload: onunload_markdown
-  });
+  })(pm);
 
     ////////////////////////////
    // Add related tickets
@@ -2159,6 +2183,7 @@ var main = function($) {
     add_related_ticket_buttons_timeout = setTimeout(_add_related_ticket_buttons, 10);
   };
 
+  // TODO: DRY
   var add_related_ticket_data;
   var add_related_ticket_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
   var add_related_ticket_check_api_response = function(type, info) {

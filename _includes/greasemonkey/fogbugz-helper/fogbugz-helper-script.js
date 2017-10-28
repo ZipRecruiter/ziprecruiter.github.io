@@ -1900,8 +1900,11 @@ var main = function($) {
       if ( $bodycontent.length ) {
         $bodycontent.each(function() {
           var $this = $(this);
-                                 // Removing some weird whitespace FB adds causing code formatting
-          var text = $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
+          var id = $this.closest('[data-ix-bug-event]').data('ix-bug-event');
+          var event = ticket_data.findEvent(id);
+
+                                                                            // Removing some weird whitespace FB adds causing code formatting
+          var text = event.sHtmlBody.replace(/<br \/>/g, '') || $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
 
           $this.data('markdown-text', text);
 
@@ -1926,7 +1929,7 @@ var main = function($) {
             }
           }
 
-          text = _markdownify_fix_text(text, true);
+          text = _markdownify_fix_text(text, true, false, false);
 
           $this.html(text);
         });

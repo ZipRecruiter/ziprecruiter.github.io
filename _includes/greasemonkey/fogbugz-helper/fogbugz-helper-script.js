@@ -1861,6 +1861,7 @@ var main = function($) {
           var $this = $(this);
           var $parent = $this.closest('.customfield');
           var id = $parent.find('[id]').attr('id');
+          ticket_data = ticket_data || window.fb.cases.current.bug;
           var text = ticket_data.customFields[id] || $this.html();
 
           //text = decodeEntities(text);
@@ -1901,6 +1902,7 @@ var main = function($) {
         $bodycontent.each(function() {
           var $this = $(this);
           var id = $this.closest('[data-ix-bug-event]').data('ix-bug-event');
+          ticket_data = ticket_data || window.fb.cases.current.bug;
           var event = ticket_data.findEvent(id);
 
                                                                             // Removing some weird whitespace FB adds causing code formatting

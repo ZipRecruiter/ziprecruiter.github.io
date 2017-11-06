@@ -112,8 +112,9 @@ var auto_link_html = function(node, exp, rep) {
         var pre = n.textContent.substring(0, idx);
         var t = document.createTextNode(pre);
         var a = document.createElement('a');
-        a.href = rep.replace(/\$1/, g[0]);
+        a.href = rep.replace(/\$1/, g[0]).replace(/\$2/, g[1]);
         a.innerText = g[0];
+        a.target = '_blank';
         n.textContent = n.textContent.substring(idx + g[0].length);
         n.parentElement.insertBefore(t, n);
         n.parentElement.insertBefore(a, n);
@@ -137,6 +138,8 @@ var auto_links = function(text) {
   auto_link_html(auto_link_html_div, /\b(ZR::|StarterView::|PartnerAlerts::|Test::ZR::|Test::StarterView::|Test::PartnerAlerts::)(([a-zA-Z0-9]+::)*[a-zA-Z0-9]+)/, 'https://pod.ziprecruiter.com/?$1');
 
   auto_link_html(auto_link_html_div, /\b([a-zA-Z0-9]+::)+[a-zA-Z0-9]+/, 'https://metacpan.org/pod/$1');
+
+  auto_link_html(auto_link_html_div, /\b(?:case )([0-9]+)/i, '/f/cases/$2');
 
   return auto_link_html_div.innerHTML;
 };
@@ -1998,9 +2001,15 @@ var main = function($) {
       markdownify_timeout = setTimeout(_markdownify, 10);
     };
 
+    // open links in new window
+    var set_target_blank = function() {
+      $(this).attr('target', '_blank');
+    };
+
     var onload_markdown = function() {
       markdownify();
       $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
+      $body.delegate('.markdownified a', 'mouseover focus', set_target_blank);
       $body.addClass('fogbugz-helper-markdown');
       fb.pubsub.subscribe('/api/success', check_api_response);
     };
@@ -2016,6 +2025,7 @@ var main = function($) {
       });
 
       $body.removeClass('fogbugz-helper-markdown');
+      $body.undelegate('.markdownified a', 'mouseover focus', set_target_blank);
 
       fb.pubsub.unsubscribe('/api/success', check_api_response);
     };

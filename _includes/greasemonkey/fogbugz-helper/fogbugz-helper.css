@@ -1,3 +1,217 @@
+/* ------------------------------------------------------------
+   Mono fonts
+   --------------------------------------------------------- */
+
+@font-face { /* http://emojione.com/developers/ */
+  font-family: Emojione;
+  src: local("EmojiOne BW"), local("EmojiOne"), local("Emoji One"), 
+       /*   https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-bw.otf – monochrome only, deprecated, removed
+            https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-android.ttf – with hack
+            https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-apple.ttf – with hack */
+       url("https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-svg.woff2") format("woff2"),
+       url("https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-svg.woff") format("woff"),
+       url("https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-svg.otf") format("truetype");
+}
+@font-face { /* https://www.google.com/get/noto/#noto-emoji-zsye */
+  font-family: Noto;
+  src: local("Noto Emoji"), local("Noto Color Emoji"), local("Noto"), 
+       url("https://cdn.rawgit.com/googlei18n/noto-emoji/master/fonts/NotoEmoji-Regular.ttf");
+}
+@font-face { /* https://github.com/eosrei/twemoji-color-font/releases */
+  font-family: Twemoji;
+  src: local("Twemoji");
+}
+@font-face { /* http://users.teilar.gr/~g1951d/ */
+  font-family: Symbola;
+  src: local("Symbola");
+}
+
+/* ------------------------------------------------------------
+   OLD FB
+   --------------------------------------------------------- */
+
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  min-height: 100vh;
+}
+
+section.case nav {
+  background-color: #f6f6f6;
+  height: auto;
+  padding: 2px 10px 2px;
+}
+
+.case nav .favorite-toggle {
+  height: auto;
+  width: auto;
+}
+
+.case nav:first-of-type.active {
+  border-top: none;
+  border-bottom: 1px solid #ccc;
+}
+
+.icon-case-resolve:before {
+  content: "✔";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a8cc;
+  margin-right: 2px;
+}
+
+section.case:before {
+  display: none;
+}
+
+section.case nav .controls > .control {
+  padding: 4px 5px;
+  font-size: 13px;
+  line-height: normal;
+  border-radius: 4px;
+}
+
+section.case nav .controls > .control:focus,
+section.case nav .controls > .control:hover {
+  background: #ddd;
+  color: #444;
+}
+
+.case .corner a.case {
+  color: #39668e;
+  position: static;
+  display: block;
+}
+
+.case span.status {
+  display: none;
+}
+
+.case .left {
+  width: auto;
+  min-width: 0;
+  padding: 14px;
+}
+
+.case .right {
+  flex-grow: 1;
+}
+
+.case #formEditCase .top .right {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.case .top .right>header {
+  border-left: 1px solid #DADADA;
+}
+
+.case .field {
+  color: #000;
+  font-size: 13px;
+}
+
+.case input,
+.case textarea {
+  border: 1px solid #80A8CC;
+  box-shadow: none;
+  border-radius: 2px;
+  padding: 5px;
+  font-size: 13px;
+}
+
+.case .field>div,
+.case .field>input,
+.case .field>textarea {
+  margin-top: 0;
+}
+
+#sTitle {
+  font-weight: bold;
+}
+
+.chunky-droplist .droplist-chunks.active,
+.case input:active,
+.case textarea:active,
+.case input:focus,
+.case textarea:focus,
+.case input.active,
+.case textarea.active {
+  box-shadow: none;
+  outline: -webkit-focus-ring-color auto 5px;
+}
+
+.chunky-droplist .droplist-chunks.active input {
+  outline: none;
+}
+
+.select-droplist {
+  height: auto;
+  line-height: normal;
+  border: none;
+  box-shadow: none;
+}
+
+.select-droplist .droplist-input-wrapper {
+  height: auto;
+  padding: 0;
+}
+
+.select-droplist .droplist-input {
+  font-size: 13px;
+  padding: 5px;
+  border: 1px solid #80A8CC;
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.select-droplist .select-droplist-button {
+  background-color: #e0e9f1;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+  border: 1px solid #80a8cc;
+  height: auto;
+  border-left: none;
+  width: 25px;
+}
+
+.select-droplist .select-droplist-button svg {
+  fill: #39668e;
+}
+
+.chunky-droplist .droplist-chunks {
+  border: 1px solid #80A8CC;
+  box-shadow: none;
+  border-radius: 2px;
+  padding: 2px 2px 0 2px;
+  font-size: 13px;
+  min-height: 0;
+}
+
+.chunky-droplist .droplist-chunk {
+  font-size: 13px;
+  line-height: 13px;
+  padding: 3px 22px 3px 5px;
+  font-size: 11px;
+  margin-bottom: 2px;
+}
+
+.chunky-droplist .droplist-chunks .droplist-input {
+  font-size: 13px;
+  line-height: normal;
+  padding: 2px 5px;
+  margin-bottom: 2px;
+}
+
+.chunky-droplist .droplist-chunk-text {
+  margin: 0;
+  line-height: normal;
+  display: inline;
+}
+
+.chunky-droplist .droplist-chunk .droplist-chunk-remove {
+  height: 18px;
+  top: 2px;
+}
+
   /* //////////////////////////
  // Little tweaks
 ////////////////////////// */
@@ -1395,10 +1609,17 @@ section.case .corner.add_related_ticket_done a.case {
   text-shadow: none;
 }
 
+.add_related_ticket_button:hover {
+  text-decoration: none !important;
+}
+
 .add_related_ticket_button:before {
+  content: "➕";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a1bd;
+
   background-image: none;
   width: auto;
-  font-family: 'kiwicons';
   speak: none;
   font-style: normal;
   font-weight: normal;
@@ -1407,15 +1628,13 @@ section.case .corner.add_related_ticket_done a.case {
   line-height: 1;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-size: 15px;
-  position: relative;
-
-  color: #80a1bd;
   position: relative;
   top: 0;
-  content: "\e61d";
   margin-right: 4px;
-  vertical-align: bottom;
+}
+
+.add_related_ticket_copy:before {
+  content: "💕";
 }
 
 .add_related_ticket_link,
@@ -1451,11 +1670,17 @@ section.case nav .controls>.control.cancel .icon {
 }
 
 section.case nav .controls>.control.cancel .icon:before {
-  content: "\e628";
+  content: "🚫";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a8cc;
+  margin-right: 2px;
 }
 
 section.case nav .controls>.control.save .icon:before {
-  content: "\e612";
+  content: "💾";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a8cc;
+  margin-right: 2px;
 }
 
   /* //////////////////////////
@@ -1483,7 +1708,6 @@ section.case nav .controls>.control.save .icon:before {
   margin-right: 4px;
   height: 1em;
   width: 1em;
-  vertical-align: bottom;
   display: inline-block;
   border-radius: .5em;
   background: #777;

@@ -30,6 +30,489 @@
    OLD FB
    --------------------------------------------------------- */
 
+/* ------------------------------------------------------------
+   Kill BLUE
+   --------------------------------------------------------- */
+
+/* BLUE */
+
+.flexy-ok-input button {
+  color: #39668e;
+}
+.flexy-ok-input button .icon {
+  fill: #39668e;
+}
+.flexy-ok-input button.visited {
+  color: #39668e
+}
+.action-link {
+  color: #39668e;
+  border-bottom: 1px solid #39668e
+}
+.href {
+  color: #39668e
+}
+.droplist-popup .droplist-popup-item {
+  color: #39668e
+}
+.droplist-popup .droplist-popup-item.selected {
+  background-color: #39668e;
+}
+.select-droplist {
+  color: #39668e;
+}
+.select-droplist .select-droplist-button svg {
+  fill: #39668e;
+}
+.chunky-droplist .droplist-chunks.active,
+.chunky-droplist .droplist-chunks:focus,
+.chunky-droplist .droplist-chunks:active {
+  /*box-shadow: 0 0 0px 2px #39668e*/
+}
+.chunky-droplist .droplist-chunk.selected {
+  background-color: #39668e
+}
+.dialog-popup .button-group button {
+  color: #39668e;
+}
+.dialog-popup .button-group button .icon {
+  fill: #39668e;
+}
+.dialog-popup .button-group button.visited {
+  color: #39668e
+}
+a {
+  color: #39668e
+}
+a:visited {
+  color: #39668e;
+}
+a.not-visited {
+  color: #39668e;
+}
+table.calendar tr.monthname th {
+  background-color: #39668e;
+}
+a.novisited:visited,
+#mainArea a.novisited:visited {
+  color: #39668e
+}
+a.dotted,
+a .dotted,
+a.novisited.dotted:visited,
+a.novisited:visited .dotted {
+  border-bottom: 1px dotted #39668e;
+}
+.login-layout input[type=text]:active,
+.login-layout input[type=password]:active,
+.login-layout input[type=text]:focus,
+.login-layout input[type=password]:focus {
+  /*box-shadow: 0 0 0px 2px #39668e*/
+}
+.gw-btn {
+  color: #39668e;
+}
+.gw-btn .icon {
+  fill: #39668e;
+}
+.gw-btn.visited {
+  color: #39668e
+}
+.gw-btn-main {
+  background: #39668e;
+  border-color: #39668e
+}
+.gw-btn-main:hover {
+  background: #39668e
+}
+.m-btn {
+  color: #39668e;
+}
+.m-btn .icon {
+  fill: #39668e;
+}
+.m-btn.visited {
+  color: #39668e
+}
+.m-btn-main {
+  background: #39668e;
+  border-color: #39668e
+}
+.m-btn-main:hover {
+  background: #39668e
+}
+#www-fogcreek-com-fogbugz .gw-btn-main:hover {
+  color: #39668e
+}
+.gw-nav-submenu ul:not(.item-actions)>li a {
+  color: #39668e;
+}
+.gw-nav-submenu ul.item-actions:hover svg {
+  fill: #39668e
+}
+.gw-nav-submenu-links .gw-upsell-icon svg {
+  fill: #39668e
+}
+.gw-wrapper .notifications-display #notification-list li:hover .case-title,
+.gw-wrapper .notifications-display #notification-list li:hover .event-description {
+  color: #39668e
+}
+.gw-search .search-guide .search-guide-panel .search-guide-list {
+  border-right: 1px solid #39668e;
+}
+.gw-search .search-guide .search-guide-panel .search-guide-list li.axes-selected {
+  background-color: #39668e;
+  border: 1px solid #39668e;
+}
+.gw-search .search-guide .search-guide-panel .search-guide-description .axes-examples-title {
+  border-bottom: 1px solid #39668e;
+  color: #39668e;
+}
+.gw-nav-link:hover {
+  color: #39668e
+}
+.gw-nav-link:hover svg {
+  fill: #39668e
+}
+.gw-nav-link-icon:hover svg {
+  fill: #39668e
+}
+.gw-nav-entry-time .working-on-case {
+  color: #39668e
+}
+#filter-bar .menu-small-blue svg {
+  fill: #39668e;
+}
+#filter-bar #filter-view-selector {
+  color: #39668e;
+}
+#filter-bar #filter-view-selector .icon {
+  fill: #39668e;
+}
+#filter-bar #filter-view-selector.visited {
+  color: #39668e
+}
+#filter-bar #filter-view-selector svg {
+  fill: #39668e;
+}
+#filter-bar #filter-description .filter-axis-clickable {
+  color: #39668e;
+}
+#filter-bar #filter-description .filter-description-sort-element .filter-sort-clickable {
+  color: #39668e;
+}
+.filterbar-popup button {
+  color: #39668e;
+}
+.filterbar-popup button .icon {
+  fill: #39668e;
+}
+.filterbar-popup button.visited {
+  color: #39668e
+}
+.filterbar-view-popup .list-choices-item .view-name svg {
+  fill: #39668e;
+}
+.case-list th,
+.case-list .grid-column-header-drag-helper {
+  color: #39668e;
+}
+.case-list th .header-sort-toggle,
+.case-list .grid-column-header-drag-helper .header-sort-toggle {
+  color: #39668e;
+}
+.case-list .list-group-footer>.list-add-case {
+  color: #39668e;
+}
+.case-list .list-group-footer .quick-case-add .case-add-category,
+.case-list tr.add-case-row .quick-case-add .case-add-category {
+  color: #39668e;
+}
+.case-list .list-group-footer .quick-case-add .menu-small-blue svg,
+.case-list tr.add-case-row .quick-case-add .menu-small-blue svg {
+  fill: #39668e
+}
+.case-list .list-group-footer .quick-case-add .case-add-actions>.icon,
+.case-list tr.add-case-row .quick-case-add .case-add-actions>.icon {
+  color: #39668e;
+}
+#grid-column-popup .button-done {
+  color: #39668e;
+}
+#grid-column-popup .button-done .icon {
+  fill: #39668e;
+}
+#grid-column-popup .button-done.visited {
+  color: #39668e
+}
+.action-bar>.action-button {
+  color: #39668e;
+}
+.action-bar>.action-button:hover {
+  color: #39668e
+}
+.fb-link-mvc-dialog .link-help .link-help-expando {
+  color: #39668e
+}
+#kilnCheckins .startReview {
+  color: #39668e;
+}
+#kilnCheckins .startReview .icon {
+  fill: #39668e;
+}
+#kilnCheckins .startReview.visited {
+  color: #39668e
+}
+.kiln-review-popup .repo-crumb {
+  color: #39668e;
+}
+.kiln-review-popup .changesets .changeset h5 a {
+  color: #39668e
+}
+.kiln-review-popup .changesets .changeset h5 .startReview {
+  color: #39668e;
+}
+.kiln-review-popup .changesets .changeset h5 .startReview .icon {
+  fill: #39668e;
+}
+.kiln-review-popup .changesets .changeset h5 .startReview.visited {
+  color: #39668e
+}
+.ui-datepicker-calendar .ui-datepicker-today>a {
+  border: 1px solid #39668e
+}
+.ui-datepicker-header {
+  background-color: #39668e;
+  border: 1px solid #39668e
+}
+.datetime-input-container .show-datepicker {
+  color: #39668e;
+}
+.datetime-input-container .show-datepicker svg {
+  fill: #39668e
+}
+.datetime-input-container .show-timepicker {
+  color: #39668e;
+}
+.datetime-input-container .show-timepicker svg {
+  fill: #39668e
+}
+.timesheet-popup menu>span {
+  color: #39668e;
+}
+.timesheet-popup menu .previous-day svg,
+.timesheet-popup menu .next-day svg,
+.timesheet-popup menu .show-date-picker svg {
+  fill: #39668e;
+}
+.timesheet-popup td .edit-interval {
+  color: #39668e
+}
+.timesheet-popup td .edit-interval svg {
+  fill: #39668e
+}
+.timesheet-popup .add-interval,
+.timesheet-popup .stop-work {
+  color: #39668e
+}
+.timesheet-popup .add-interval svg {
+  fill: #39668e;
+}
+.welcome-wizard-popup .welcomewizard-back {
+  color: #39668e;
+}
+.person-page a {
+  color: #39668e
+}
+.person-page .bullet {
+  color: #39668e;
+}
+.person-page .feeds-header .person-info .person-data a {
+  color: #39668e;
+}
+.activity-feed .activity-feed-content .comment,
+.activity-feed .activity-feed-content .email-body {
+  color: #39668e;
+}
+.iteration-planner-bold-text {
+  color: #39668e;
+}
+.iteration-planner-droplist.iteration-planner-add-column-droplist .iteration-planner-add-column-droplist-columns {
+  color: #39668e;
+}
+.iteration-planner-droplist.iteration-planner-add-column-droplist .iteration-planner-add-column-droplist-columns li.disabled {
+  color: #39668e
+}
+.iteration-planner-tools .planner-button-column svg,
+.iteration-planner-tools .planner-button-filter svg {
+  fill: #39668e;
+}
+.input-field:focus {
+  /*box-shadow: 0 0 0px 2px #39668e*/
+}
+.iteration-planner-column.filter-column {
+  border: 1px solid #39668e
+}
+.iteration-planner-column-controls a:hover svg {
+  fill: #39668e
+}
+.iteration-planner-quick-edit svg {
+  fill: #39668e;
+}
+.iteration-planner-case-status.status-needs-estimate {
+  color: #39668e;
+}
+.iteration-planner-group-by svg {
+  fill: #39668e;
+}
+.iteration-planner-add-button:hover svg {
+  fill: #39668e
+}
+.iteration-planner-add-modal {
+  border: 1px solid #39668e;
+}
+.iteration-planner-add-modal svg {
+  fill: #39668e;
+}
+.iteration-planner-add-modal-link.selected {
+  background-color: #39668e;
+}
+.iteration-planner-popup-form-input:not([type=submit]):not([type=radio]):not([type=checkbox]):active {
+  /*box-shadow: 0 0 0px 2px #39668e*/
+}
+.iteration-planner-popup-button.button-positive {
+  background: #39668e;
+  border: 1px solid #39668e;
+}
+.iteration-planner-filter-select-button svg {
+  fill: #39668e;
+}
+.kanban-view-page .kanban-planned-column {
+  border-right: 1px solid #39668e;
+}
+.kanban-view-page .kanban-planned-column-toggle svg {
+  fill: #39668e;
+}
+.kanban-milestone-name svg {
+  fill: #39668e;
+}
+.kanban-milestone-name:visited,
+.kanban-milestone-name .visited {
+  color: #39668e
+}
+.iteration-planner-popup-droplist-button svg {
+  fill: #39668e;
+}
+.self-registration-title {
+  color: #39668e;
+}
+.integrations-page .integration-tiles .tile svg.icon-settings:hover {
+  color: #39668e
+}
+.integrations-page svg,
+.integration-settings svg {
+  fill: #39668e;
+}
+.modals .modal-contents .form-input:active,
+.modals .modal-contents .form-input:focus {
+  /*box-shadow: 0 0 0px 2px #39668e*/
+}
+.case input:active,
+.case textarea:active,
+.case input:focus,
+.case textarea:focus,
+.case input.active,
+.case textarea.active {
+  /*box-shadow: 0 0 0px 2px #39668e*/
+}
+.case nav .controls .control:hover {
+  color: #39668e;
+}
+.case .left .content .case {
+  color: #39668e
+}
+.case .left #sidebarSubscribe span {
+  border-bottom: 1px dotted #39668e
+}
+.case .corner a.case {
+  color: #39668e;
+}
+.case .icon-delete:hover svg {
+  fill: #39668e
+}
+.case .datetime-input-container svg {
+  fill: #39668e;
+}
+.case .datetime-input-container svg:hover {
+  fill: #39668e
+}
+.event .email-actions>.email-actions-more:hover svg {
+  fill: #39668e
+}
+.event header .ceedit:hover svg {
+  fill: #39668e
+}
+.event .editor>textarea:active,
+.event .editor>textarea:focus,
+.event .editor>textarea.active {
+  /*box-shadow: 0 0 0 2px #39668e*/
+}
+.event .buttons #btnSubmit,
+.event .buttons #btnSendAndClose,
+.event .buttons #btnResolveAndClose {
+  background: #39668e;
+  border-color: #39668e
+}
+.event .buttons #btnSubmit:hover,
+.event .buttons #btnSendAndClose:hover,
+.event .buttons #btnResolveAndClose:hover {
+  background: #39668e
+}
+.event .buttons #btnSendAndClose:not(.hidden)+#btnSubmit,
+.event .buttons #btnResolveAndClose:not(.hidden)+#btnSubmit {
+  color: #39668e;
+  color: #39668e !important
+}
+.event .buttons #btnSendAndClose:not(.hidden)+#btnSubmit .icon,
+.event .buttons #btnResolveAndClose:not(.hidden)+#btnSubmit .icon {
+  fill: #39668e;
+}
+.event .buttons #btnSendAndClose:not(.hidden)+#btnSubmit.visited,
+.event .buttons #btnResolveAndClose:not(.hidden)+#btnSubmit.visited {
+  color: #39668e
+}
+.event #files .icon svg:hover,
+.event #labelFileUpload .icon svg:hover {
+  fill: #39668e
+}
+.breakdown-popup .close-button input {
+  color: #39668e;
+}
+.breakdown-popup .close-button input .icon {
+  fill: #39668e;
+}
+.breakdown-popup .close-button input.visited {
+  color: #39668e
+}
+.case-popup .outline #sidebar-outline svg {
+  fill: #39668e
+}
+.right-event-action-wrapper {
+  color: #39668e;
+}
+#edit-release-note:hover svg {
+  fill: #39668e
+}
+#filter-bar #filter-description .filter-axis-clickable {
+  border-bottom: 1px solid #39668e;
+}
+
+#filter-bar #filter-description .filter-description-sort-element .filter-sort-clickable {
+  border-bottom: 1px solid #39668e;
+}
+
+/* Other */
+
 body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   min-height: 100vh;
@@ -73,6 +556,7 @@ section.case nav {
 .case nav .favorite-toggle {
   height: auto;
   width: auto;
+  display: inline-flex;
 }
 
 .case nav:first-of-type.active {
@@ -114,14 +598,12 @@ section.case nav .controls > .control:hover {
   display: block;
 }
 
-.case span.status {
+.case .case-category {
   display: none;
 }
 
-.case .left {
-  width: auto;
-  min-width: 0;
-  padding: 14px;
+.case span.status {
+  display: none;
 }
 
 .case .right {
@@ -135,6 +617,7 @@ section.case nav .controls > .control:hover {
 
 .case .top .right {
   border-left: 1px solid #DADADA;
+  width: auto;
 }
 
 .case .field {
@@ -253,8 +736,14 @@ section.case nav .controls > .control:hover {
 /* left */
 
 .case .left {
-  padding: 0 10px 10px 10px;
-  width: 185px;
+}
+
+
+.case .left {
+  width: auto;
+  min-width: 150px;
+  padding: 10px;
+  max-width: 185px;
 }
 
 .case .left label {
@@ -363,6 +852,46 @@ section.case nav .controls > .control:hover {
 .right-event-action-wrapper {
   float: right;
   line-height: normal;
+}
+
+/* non-ticket */
+
+.case-list .list-group-footer>.list-add-case.disabled {
+  background: #fff;
+  padding: 0 5px;
+}
+
+#filter-bar #filter-description .filter-axis-clickable {
+  font-weight: bold;
+  font-size: 15px;
+}
+
+.case-list th .header-sort-toggle,
+.case-list .grid-column-header-drag-helper .header-sort-toggle {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+.case-list th,
+.case-list .grid-column-header-drag-helper {
+  border: 1px solid #d4dde5;
+}
+
+.case-list th,
+.wiki-page-list th,
+.case-list .wiki-grid-header,
+.wiki-page-list .wiki-grid-header,
+.case-list .grid-column-header-drag-helper,
+.wiki-page-list .grid-column-header-drag-helper {
+  background: #eef3f7;
+}
+
+a.js-header-list-cases-link {
+  color: #39668e;
+}
+
+#grid-column-popup .list-choices-item {
+  font-size: 13px;
 }
 
   /* //////////////////////////
@@ -536,6 +1065,7 @@ label[id="38_SHA"] + .content {
   background: rgba(255, 255, 255, .9);
 }
 
+.fogbugz-helper-bgcolors-dark #filter-bar-title,
 .fogbugz-helper-bgcolors-dark #www-fogcreek-com-fogbugz,
 .fogbugz-helper-bgcolors-dark #main2,
 .fogbugz-helper-bgcolors-dark #main {
@@ -1486,10 +2016,31 @@ label[id="38_SHA"] + .content {
   }
 
   .fogbugz-helper-ticket-tweaks section.case .left {
-    margin: 0 10px 0 10px;
+    margin: 10px 10px 0 10px;
     padding: 0 0 0 0;
     float: none;
     width: auto;
+    max-width: none;
+    display: block;
+  }
+
+  .fogbugz-helper-ticket-tweaks .case .top {
+    display: block;
+  }
+
+  .fogbugz-helper-ticket-tweaks #single-case-link {
+    display: inline;
+  }
+
+  .fogbugz-helper-ticket-tweaks .case .corner a.case {
+    display: inline;
+  }
+
+  .fogbugz-helper-ticket-tweaks .add_related_ticket_link,
+  .fogbugz-helper-ticket-tweaks .add_related_ticket_button {
+    display: inline-block;
+    width: auto;
+    margin: 0 0 0 10px;
   }
 
   .fogbugz-helper-ticket-tweaks section.case .left button {

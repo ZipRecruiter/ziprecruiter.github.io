@@ -1,4 +1,20 @@
 (function() {
+
+// https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+function changeFavicon(src) {
+ var link = document.createElement('link'),
+     oldLink = document.getElementById('dynamic-favicon');
+ link.id = 'dynamic-favicon';
+ link.rel = 'shortcut icon';
+ link.href = src;
+ if (oldLink) {
+  document.head.removeChild(oldLink);
+ }
+ document.head.appendChild(link);
+}
+
+changeFavicon('https://d1y3t9jk3e3tu5.cloudfront.net/820679000/Content/images/favicon_fogbugz.ico');
+
 // Prevent the script from being loaded twice
 if ( window['--fogbugz-helper-loaded'] ) return;
 window['--fogbugz-helper-loaded'] = true;

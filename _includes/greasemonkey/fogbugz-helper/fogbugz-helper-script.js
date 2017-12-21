@@ -2783,11 +2783,12 @@ var main = function($) {
 
     var onunload_fn = function() {
       document.head.removeChild(document.getElementById('dynamic-favicon'));
+      $('[rel="shortcut icon"]').appendTo('head');
     };
 
     pm.add({
       id: 'use_old_favicon',
-      text: 'Use FogBugz Icon',
+      text: 'Use Old FogBugz Icon',
       title: 'Shows the old kiwi icon rather than the weird Decepticon/Manuscript icon',
       defaultOn: true,
       onload: onload_fn,

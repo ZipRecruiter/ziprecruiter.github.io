@@ -2796,6 +2796,28 @@ var main = function($) {
     });
   })(pm);
 
+    ////////////////////////////
+   // Hide user avatars
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var onload_fn = function() {
+      $body.addClass('fogbugz_helper_hide_avatars');
+    };
+
+    var onunload_fn = function() {
+      $body.removeClass('fogbugz_helper_hide_avatars');
+    };
+
+    pm.add({
+      id: 'hide_avatars',
+      text: 'Hide User Avatars in Comments',
+      title: 'Hides the avatars on ticket comments',
+      defaultOn: false,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
   /* Not used, but this is how I figured out FB's event names*/
 
   /*var _sub = fb.pubsub.subscribe;

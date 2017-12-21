@@ -2832,3 +2832,15 @@ section.case nav .controls>.control.save .icon:before {
 
   margin-right: 4px;
 }
+
+  /* //////////////////////////
+ // Hide user avatars
+////////////////////////// */
+
+.fogbugz_helper_hide_avatars .event header {
+  padding-left: 9px;
+}
+
+.fogbugz_helper_hide_avatars .event header .event-avatar {
+  display: none;
+}

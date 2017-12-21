@@ -2172,6 +2172,10 @@ label[id="38_SHA"] + .content {
     overflow: auto;
     -webkit-overflow-scrolling: touch;
   }
+
+  .case-list .list-group-footer {
+    height: auto;
+  }
 }
 
   /* //////////////////////////

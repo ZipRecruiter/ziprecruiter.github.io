@@ -4,7 +4,7 @@
 
 @font-face { /* http://emojione.com/developers/ */
   font-family: Emojione;
-  src: local("EmojiOne BW"), local("EmojiOne"), local("Emoji One"), 
+  src: local("EmojiOne BW"), local("EmojiOne"), local("Emoji One"),
        /*   https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-bw.otf – monochrome only, deprecated, removed
             https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-android.ttf – with hack
             https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-apple.ttf – with hack */
@@ -14,7 +14,7 @@
 }
 @font-face { /* https://www.google.com/get/noto/#noto-emoji-zsye */
   font-family: Noto;
-  src: local("Noto Emoji"), local("Noto Color Emoji"), local("Noto"), 
+  src: local("Noto Emoji"), local("Noto Color Emoji"), local("Noto"),
        url("https://cdn.rawgit.com/googlei18n/noto-emoji/master/fonts/NotoEmoji-Regular.ttf");
 }
 @font-face { /* https://github.com/eosrei/twemoji-color-font/releases */
@@ -1104,7 +1104,7 @@ label[id="38_SHA"] + .content {
 */
 
   /* //////////////////////////
- // Auto Sort 
+ // Auto Sort
 ////////////////////////// */
 .fogbugz-helper-auto-sort #main2 .case-list {
   display: flex;
@@ -2233,7 +2233,7 @@ label[id="38_SHA"] + .content {
   font-size: 11px !important;
 }
 
-.wysiwyg_toggle label&::-moz-focus-inner { 
+.wysiwyg_toggle label&::-moz-focus-inner {
   border: 0;
   padding: 0;
   margin: 0;
@@ -2415,7 +2415,7 @@ section.case .corner.add_related_ticket_done a.case {
   display: block;
 }
 
-.add_related_ticket_button&::-moz-focus-inner { 
+.add_related_ticket_button&::-moz-focus-inner {
   border: 0;
   padding: 0;
   margin: 0;
@@ -2846,4 +2846,19 @@ section.case nav .controls>.control.save .icon:before {
 
 .fogbugz_helper_hide_avatars .event header .event-avatar {
   display: none;
+}
+
+  /* //////////////////////////
+ // Hide empty comments
+////////////////////////// */
+
+.fogbugz_helper_hide_empty_comments .event.brief:not(.has-attachments) {
+  background: transparent;
+  font-style: italic;
+  margin: 0;
+  opacity: .6;
+}
+
+.fogbugz_helper_hide_empty_comments .event.brief:not(.has-attachments) + .event {
+  margin-top: 13px;
 }

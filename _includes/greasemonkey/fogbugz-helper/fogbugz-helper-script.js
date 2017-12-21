@@ -1046,7 +1046,7 @@ var main = function($) {
 
     // Get preference
     var color;
-    var color_re = /(rgb)\(([0-9]+),\s+([0-9]+),\s+([0-9]+)/; 
+    var color_re = /(rgb)\(([0-9]+),\s+([0-9]+),\s+([0-9]+)/;
 
     var set_bgcolor = function(color) {
       $body.css('background-color', color);
@@ -2812,6 +2812,29 @@ var main = function($) {
       id: 'hide_avatars',
       text: 'Hide User Avatars in Comments',
       title: 'Hides the avatars on ticket comments',
+      defaultOn: false,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
+
+    ////////////////////////////
+   // Hide empty comments
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    var onload_fn = function() {
+      $body.addClass('fogbugz_helper_hide_empty_comments');
+    };
+
+    var onunload_fn = function() {
+      $body.removeClass('fogbugz_helper_hide_empty_comments');
+    };
+
+    pm.add({
+      id: 'hide_empty_comments',
+      text: 'Hide empty comments in ticket view',
+      title: 'Hides the empty comments on ticket comments',
       defaultOn: false,
       onload: onload_fn,
       onunload: onunload_fn

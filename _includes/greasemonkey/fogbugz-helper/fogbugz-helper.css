@@ -588,6 +588,7 @@ section.case nav .controls > .control {
   font-size: 13px;
   line-height: normal;
   border-radius: 4px;
+  white-space: nowrap;
 }
 
 section.case nav .controls > .control:focus,
@@ -1867,6 +1868,10 @@ label[id="38_SHA"] + .content {
 }
 
 @media ( max-width: 765px ) {
+  .fogbugz-helper-ticket-tweaks #main-wrap #main {
+    /*padding: 0;*/
+  }
+
   /* fake kanbanboard */
   .fogbugz-helper-ticket-tweaks.fogbugz-helper-fake-kanban-double-sorted .list-group-body {
     display: block;
@@ -1949,13 +1954,21 @@ label[id="38_SHA"] + .content {
   }
 
   .fogbugz-helper-ticket-tweaks section.case nav .controls {
-    display: inline;
+    display: inline-block;
+  }
+
+  .case-lightbox-overlay .case-lightbox .close-button {
+    right: 0;
+    top: -30px;
+    border-radius: 0;
   }
 
   .fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
     position: fixed;
     z-index: 101;
-    padding-left: .5em;
+    padding-left: 0;
+    padding-right: 0;
+    max-width: 100vw;
   }
 
   .fogbugz-helper-ticket-tweaks .case-lightbox-overlay {
@@ -1987,6 +2000,7 @@ label[id="38_SHA"] + .content {
   .fogbugz-helper-ticket-tweaks section.case nav {
     height: auto;
     display: block;
+    padding: 10px 5px 5px 5px;
   }
 
   .fogbugz-helper-ticket-tweaks #header.thunder-header .has-search-guide {
@@ -2002,6 +2016,39 @@ label[id="38_SHA"] + .content {
     position: fixed;
     left: 0;
     width: 100vw;
+  }
+
+  .case>article {
+    border-radius: 0;
+  }
+
+  .case nav .case-arrows {
+    display: inline;
+    height: auto;
+    margin-left: 10px;
+  }
+
+  .case nav .icon-case-prev,
+  .case nav .icon-case-next {
+    display: inline-block;
+    height: auto;
+    transform: none;
+  }
+
+  .case nav .case-arrows-preview {
+    display: none;
+  }
+
+  .case nav:first-child {
+    border-radius: 0;
+  }
+
+  section.case nav .controls > .control {
+    margin: 0 5px 5px 0;
+  }
+
+  .case .top .right {
+    border-left: 0;
   }
 
   .fogbugz-helper-ticket-tweaks section.case,

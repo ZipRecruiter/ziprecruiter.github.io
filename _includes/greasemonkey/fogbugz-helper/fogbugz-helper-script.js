@@ -1,20 +1,5 @@
 (function() {
 
-// https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
-function changeFavicon(src) {
- var link = document.createElement('link'),
-     oldLink = document.getElementById('dynamic-favicon');
- link.id = 'dynamic-favicon';
- link.rel = 'shortcut icon';
- link.href = src;
- if (oldLink) {
-  document.head.removeChild(oldLink);
- }
- document.head.appendChild(link);
-}
-
-changeFavicon('https://d1y3t9jk3e3tu5.cloudfront.net/820679000/Content/images/favicon_fogbugz.ico');
-
 // Prevent the script from being loaded twice
 if ( window['--fogbugz-helper-loaded'] ) return;
 window['--fogbugz-helper-loaded'] = true;
@@ -2769,6 +2754,41 @@ var main = function($) {
       id: 'preview_images',
       text: 'Preview Images',
       title: 'Changes "Preview Image" field into an image',
+      defaultOn: true,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
+    ////////////////////////////
+   // FB Icon
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+    function changeFavicon(src) {
+     var link = document.createElement('link'),
+         oldLink = document.getElementById('dynamic-favicon');
+     link.id = 'dynamic-favicon';
+     link.rel = 'shortcut icon';
+     link.href = src;
+     if (oldLink) {
+      document.head.removeChild(oldLink);
+     }
+     document.head.appendChild(link);
+    }
+
+    var onload_fn = function() {
+      changeFavicon('https://d1y3t9jk3e3tu5.cloudfront.net/820679000/Content/images/favicon_fogbugz.ico');
+    };
+
+    var onunload_fn = function() {
+      document.head.removeChild(document.getElementById('dynamic-favicon'));
+    };
+
+    pm.add({
+      id: 'use_old_favicon',
+      text: 'Use FogBugz Icon',
+      title: 'Shows the old kiwi icon rather than the weird Decepticon/Manuscript icon',
       defaultOn: true,
       onload: onload_fn,
       onunload: onunload_fn

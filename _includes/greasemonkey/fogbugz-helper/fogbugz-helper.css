@@ -2601,10 +2601,13 @@ section.case nav .controls>.control.save .icon:before {
   background: #eb3030;
 }
 
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper {
+  background: transparent;
+}
+
 .fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-resize-container .grid-column-Status,
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_helper,
 .fogbugz-helper-colorize-statuses #case-lightbox-droplists .droplist-popup-item.status_helper {
-  background: transparent;
   text-shadow: none;
 }
 

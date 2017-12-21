@@ -2853,10 +2853,7 @@ section.case nav .controls>.control.save .icon:before {
 ////////////////////////// */
 
 .fogbugz_helper_hide_empty_comments .event.brief:not(.has-attachments) {
-  background: transparent;
-  font-style: italic;
-  margin: 0;
-  opacity: .6;
+  display: none;
 }
 
 .fogbugz_helper_hide_empty_comments .event.brief:not(.has-attachments) + .event {

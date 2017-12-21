@@ -2169,6 +2169,8 @@ label[id="38_SHA"] + .content {
 
   .fogbugz-helper-ticket-tweaks #main .case-list {
     display: block;
+    overflow: auto;
+    -webkit-overflow-scrolling: touch;
   }
 }
 

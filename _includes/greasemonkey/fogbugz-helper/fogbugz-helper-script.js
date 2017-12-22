@@ -280,9 +280,9 @@ PreferenceManager.prototype.load = function() {
         .attr({
           'id': 'fogbugz-helper-pref-' + pref.id,
           'for': 'fogbugz-helper-pref-check-' + pref.id,
-          'title': pref.title
+          'title': pref.title + ' (Default: ' + (pref.defaultOn || (iOS && pref.defaultOnIOS)?'On':'Off') + ')'
         })
-        .html(pref.text + ' (Default: ' + (pref.defaultOn || (iOS && pref.defaultOnIOS)?'On':'Off') + ')')
+        .html(pref.text)
         .prepend($pcheck)
         .appendTo($prefs_menu)
         ;
@@ -306,7 +306,7 @@ PreferenceManager.prototype.load = function() {
   // One-time setup stuff
   $document
     .delegate('.gw-nav-entry-settings', 'mouseover', function() {
-      add_prefs();
+      setTimeout(add_prefs, 10);
     })
     // Changing preferences via checkboxes
     .delegate('#fogbugz-helper-prefs-menu input', 'change', function() {
@@ -1263,28 +1263,53 @@ var main = function($) {
    // (Preference) Ticket Tweaks
   ////////////////////////////
 
-  var $meta_tweaks = $('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>');
+  (function(pm) {
+    var $meta_tweaks = $('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>');
 
-  var onload_ticket_tweaks = function() {
-    $body.addClass('fogbugz-helper-ticket-tweaks');
-    $meta_tweaks.appendTo('head');
-    $('html,body').scrollTop(0);
-    $('html,body').scrollLeft(0);
-  };
+    var onload = function() {
+      $body.addClass('_fhtt');
+      $meta_tweaks.appendTo('head');
+      $('html,body').scrollTop(0);
+      $('html,body').scrollLeft(0);
+    };
 
-  var onunload_ticket_tweaks = function() {
-    $body.removeClass('fogbugz-helper-ticket-tweaks');
-    $meta_tweaks.remove();
-  };
+    var onunload = function() {
+      $body.removeClass('_fhtt');
+      $meta_tweaks.remove();
+    };
 
-  pm.add({
-    id: 'ticket_tweaks',
-    text: 'Ticket Styling Tweaks',
-    title: 'Various ticket styling changes to make tickets work a little better in smaller windows, etc.',
-    defaultOn: true,
-    onload: onload_ticket_tweaks,
-    onunload: onunload_ticket_tweaks
-  });
+    pm.add({
+      id: 'ticket_tweaks',
+      text: 'Styling Fixes',
+      title: 'Various tweaks which fix mobile and other issues',
+      defaultOn: true,
+      onload: onload,
+      onunload: onunload
+    });
+  })(pm);
+
+    ////////////////////////////
+   // (Preference) Other Tweaks
+  ////////////////////////////
+
+  (function(pm) {
+    var onload = function() {
+      $body.addClass('_fhot');
+    };
+
+    var onunload = function() {
+      $body.removeClass('_fhot');
+    };
+
+    pm.add({
+      id: 'other_tweaks',
+      text: 'Old FogBugz Styling',
+      title: 'Changes colors, fonts and some other things back to a less terrible time',
+      defaultOn: true,
+      onload: onload,
+      onunload: onunload
+    });
+  })(pm);
 
     ////////////////////////////
    // (Preference) Fake Kanban

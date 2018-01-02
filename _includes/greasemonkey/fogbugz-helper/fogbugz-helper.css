@@ -1737,6 +1737,10 @@ body._fhot {
   display: none;
 }
 
+._fhtt .events .event header .changes:blank {
+  display: none !important;
+}
+
 ._fhtt .events .event header:hover {
   position: relative;
   z-index: 100;
@@ -1783,6 +1787,34 @@ body._fhot {
   width: auto;
   /*max-width: none;*/
   min-width: 0;
+}
+
+._fhtt .event.email .event-content {
+  margin-left: 0;
+  width: auto;
+  border-radius: 0;
+}
+
+._fhtt .event.email .event-content:before {
+  width: 3px;
+  border-radius: 0;
+}
+
+._fhtt .event.email .event-content.event-email-outgoing:before {
+  background: repeating-linear-gradient(180deg,#f55356,#f55356 36px,transparent 38px, transparent 39px);
+}
+
+._fhtt .event.email .event-content.event-email-incoming:before {
+  background: #8f09c4;
+}
+
+._fhtt .event.email .event-content {
+  background: #d0e0ef;
+}
+
+._fhtt .event .emailFields dd {
+  /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
+  /*font-size: 13px;*/
 }
 
 /* Responsive */

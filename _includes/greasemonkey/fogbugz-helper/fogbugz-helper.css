@@ -2480,10 +2480,14 @@ section.case nav .controls>.control.save .icon:before {
   line-height: 15px;
   padding: 0 3px;
   border-radius: 3px;
-  /*background: #777;*/
+  background: #777;
   color: #fff !important;
   vertical-align: middle;
   margin-top: 1px;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .bug-grid-header .grid-column-Status {
+  background: transparent;
 }
 
 /* Both */

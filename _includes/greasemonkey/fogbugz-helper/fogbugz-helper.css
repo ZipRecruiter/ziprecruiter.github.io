@@ -369,6 +369,7 @@ label[id="38_SHA"] + .content {
   border-radius: 3px;
   display: block;
   overflow: hidden;
+  font-size: 13px;
 }
 
 .fogbugz-helper-fake-kanban-double-sorted .list-group-body tbody,
@@ -437,11 +438,11 @@ label[id="38_SHA"] + .content {
 }
 
 .fogbugz-helper-fake-kanban-double-sorted .bug-grid-row .icon {
-  vertical-align: super;
+  vertical-align: middle;
 }
 
 .fogbugz-helper-fake-kanban-double-sorted .case-list tr.bug-grid-row .icon {
-  font-size: 9px;
+  /*font-size: 9px;*/
 }
 
 .fogbugz-helper-fake-kanban-double-sorted .bug-grid-row .spacer-cell {

@@ -2799,7 +2799,7 @@ var main = function($) {
     }
 
     var onload_fn = function() {
-      changeFavicon(window.zrBaseUrl + '/img/fogbugz.ico');
+      changeFavicon(window.zrBaseUrl + '/img/fogbugz_favicon.ico');
     };
 
     var onunload_fn = function() {

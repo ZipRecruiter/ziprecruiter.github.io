@@ -1,6 +1,10 @@
 ---
 ---
 
+// Prevent the script from being loaded twice
+if ( window['--fogbugz-helper-loaded'] ) return;
+window['--fogbugz-helper-loaded'] = true;
+
 (function() {
   // http://stackoverflow.com/questions/2976651/javascript-how-do-i-get-the-url-of-script-being-called
   var pathParts;

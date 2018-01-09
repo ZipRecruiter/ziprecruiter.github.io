@@ -1,9 +1,5 @@
 (function() {
 
-// Prevent the script from being loaded twice
-if ( window['--fogbugz-helper-loaded'] ) return;
-window['--fogbugz-helper-loaded'] = true;
-
 /*!
  * Autolinker.js
  * 0.25.2
@@ -2803,7 +2799,7 @@ var main = function($) {
     }
 
     var onload_fn = function() {
-      changeFavicon('https://d1y3t9jk3e3tu5.cloudfront.net/820679000/Content/images/favicon_fogbugz.ico');
+      changeFavicon(window.zrBaseUrl + '/img/fogbugz.ico');
     };
 
     var onunload_fn = function() {

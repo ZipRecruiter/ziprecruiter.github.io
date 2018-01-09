@@ -1,6 +1,8 @@
 ---
 ---
 
+(function() {
+
 // Prevent the script from being loaded twice
 if ( window['--fogbugz-helper-loaded'] ) return;
 window['--fogbugz-helper-loaded'] = true;
@@ -48,3 +50,5 @@ window.zrBookmarkletUrl = window.zrBaseUrl + "/greasemonkey/fogbugz-helper";
 window.zrBookmarkletCSS = {{ include_to_scssify | jsonify }};
 
 {% include greasemonkey/fogbugz-helper/fogbugz-helper-script.js %}
+
+})();

@@ -2493,7 +2493,7 @@ section.case nav .controls>.control.save .icon:before {
 
 /* Both */
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_backlog {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_backlog {
   background: #aaa;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_backlog:before,
@@ -2503,7 +2503,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #aaa;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_triage {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_triage {
   background: #ff9900;
   text-shadow: 1px 1px 1px rgba(175, 110, 13, 1);
 }
@@ -2514,7 +2514,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #ff9900;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main :not(.field).status_planning {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_planning {
   background: #0079bf;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_planning:before,
@@ -2524,7 +2524,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #0079bf;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_ready_for_work {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_ready_for_work {
   background: #f169aa;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_work:before,
@@ -2534,7 +2534,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #f169aa;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_work_in_progress {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_work_in_progress {
   background: #bf9000;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_work_in_progress:before,
@@ -2544,7 +2544,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #bf9000;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_ready_for_master {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_ready_for_master {
   background: #51e898;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_master:before,
@@ -2554,7 +2554,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #51e898;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_in_review {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_in_review {
   background: #00c2e0;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_review:before,
@@ -2564,7 +2564,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #00c2e0;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_in_qa {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_in_qa {
   background: #bd68c8;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_in_qa:before,
@@ -2574,7 +2574,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #bd68c8;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_released {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_released {
   background: #38761d;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_released:before,
@@ -2584,7 +2584,7 @@ section.case nav .controls>.control.save .icon:before {
   background: #38761d;
 }
 
-.fogbugz-helper-colorize-statuses #stacking-context-main .status_paused {
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_paused {
   background: #eb3030;
 }
 .fogbugz-helper-colorize-statuses #stacking-context-main .field.status_paused:before,

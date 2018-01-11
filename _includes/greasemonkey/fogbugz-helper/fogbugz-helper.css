@@ -1591,7 +1591,8 @@ body._fhot {
   background: transparent;
   font-style: italic;
   margin: 0;
-  opacity: .6;
+  opacity: .5;
+  border: none;
 }
 
 ._fhtt .event.brief:hover {

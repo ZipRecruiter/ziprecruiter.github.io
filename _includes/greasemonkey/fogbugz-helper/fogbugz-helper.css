@@ -2809,25 +2809,10 @@ section.case nav .controls>.control.save .icon:before {
 }
 
 .fogbugz_helper_tooltip:before {
-  content: "\e633";
+  content: "💕";
+  font-family: Emojione, Noto, Twemoji, Symbola;
   color: #80a1bd;
-
-  background-image: none;
-  width: auto;
-  font-family: 'kiwicons' !important;
-  speak: none;
-  font-style: normal;
-  font-weight: normal;
-  font-variant: normal;
-  text-transform: none;
-  line-height: 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  font-size: 15px;
-  position: relative;
-
   display: inline-block;
-
   margin-right: 4px;
 }
 

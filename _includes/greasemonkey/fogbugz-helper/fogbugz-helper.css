@@ -2839,3 +2839,40 @@ section.case nav .controls>.control.save .icon:before {
 .fogbugz_helper_hide_empty_comments .event.brief:not(.has-attachments) + .event {
   margin-top: 13px;
 }
+
+  /* //////////////////////////
+ // Hide empty comments
+////////////////////////// */
+
+._fbh_atm ._fbh_atm_button {
+  -webkit-appearance: none;
+  background: transparent;
+  border: none;
+  border-radius: 3px;
+  color: #444;
+  font-size: 13px;
+  font-weight: normal;
+  padding: 0 0 0 10px;
+  line-height: 15px;
+  margin-left: 0.4em;
+  box-shadow: none;
+  position: relative;
+  display: inline-block;
+  width: auto;
+  text-decoration: none;
+  text-align: center;
+  outline: none;
+  cursor: pointer;
+  float: right;
+}
+
+._fbh_atm ._fbh_atm_button:hover {
+}
+
+._fbh_atm ._fbh_atm_button:before {
+  content: "➥";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a1bd;
+  display: inline-block;
+  margin-right: 4px;
+}

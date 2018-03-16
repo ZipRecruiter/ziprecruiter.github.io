@@ -2862,6 +2862,72 @@ var main = function($) {
     });
   })(pm);
 
+    ////////////////////////////
+   // Assign To Me Button
+  ////////////////////////////
+  (function(pm) { // So as not to pollute the namespace
+    // Script specific
+    var assign_to_me = function(event) {
+      $('#ixPersonAssignedTo').droplist().val(window.fb.config.ixPerson);
+
+      if ( event ) {
+        event.preventDefault();
+      }
+    };
+
+    // Boilerplate
+    var body_class = '_fbh_atm';
+
+    var run_script = function() {
+      var $ixPersonAssignedTo = $('#ixPersonAssignedTo:not(._fbh_atm_done)');
+
+      if ( !$ixPersonAssignedTo.length ) return;
+
+      $ixPersonAssignedTo.addClass('_fbh_atm_done');
+
+      var $me = $('<a href="javascript:;" class="_fbh_atm_button">Assign to Me</a>');
+      $me.insertBefore($ixPersonAssignedTo);
+    };
+
+    var run_script_timeout;
+    // Don't call this function thousands of times
+    var try_run_script = function() {
+      clearTimeout(run_script_timeout);
+
+      run_script_timeout = setTimeout(run_script, 10);
+    };
+
+
+    var onload_fn = function() {
+      $body.addClass(body_class);
+
+      $document
+        .delegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
+        .delegate('._fbh_atm_button', 'click', assign_to_me);
+
+      try_run_script();
+    };
+
+    var onunload_fn = function() {
+      $body.removeClass(body_class);
+
+      $document
+        .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
+        .undelegate('._fbh_atm_button', 'click', assign_to_me);
+
+      $('._fbh_atm_button').remove();
+    };
+
+    pm.add({
+      id: 'assign_to_me_button',
+      text: 'Assign To Me Button',
+      title: 'Adds a "Me" to "Assigned To" field',
+      defaultOn: true,
+      onload: onload_fn,
+      onunload: onunload_fn
+    });
+  })(pm);
+
   /* Not used, but this is how I figured out FB's event names*/
 
   /*var _sub = fb.pubsub.subscribe;

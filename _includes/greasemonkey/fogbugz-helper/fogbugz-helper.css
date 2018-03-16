@@ -2876,3 +2876,7 @@ section.case nav .controls>.control.save .icon:before {
   display: inline-block;
   margin-right: 4px;
 }
+
+._fbh_atm ._fbh_atm_same ._fbh_atm_button {
+  display: none;
+}

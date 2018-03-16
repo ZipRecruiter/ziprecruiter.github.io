@@ -2875,6 +2875,26 @@ var main = function($) {
       }
     };
 
+    var remove_button = function() {
+      $('._fbh_atm_button').remove();
+
+      $('#ixPersonAssignedTo').removeClass('_fbh_atm_done').parent().removeClass('_fbh_atm_same');
+    };
+
+    var check_change = function() {
+      console.log('change');
+
+      var $ixPersonAssignedTo = $('#ixPersonAssignedTo');
+
+      var val = $ixPersonAssignedTo.droplist().val();
+
+      if ( val === window.fb.config.ixPerson || (val === '- default assignee -' && window.fb.cases.current.bug.ixPersonAssignedTo === window.fb.config.ixPerson) ) {
+        $ixPersonAssignedTo.parent().addClass('_fbh_atm_same');
+      } else {
+        $ixPersonAssignedTo.parent().removeClass('_fbh_atm_same');
+      }
+    };
+
     // Boilerplate
     var body_class = '_fbh_atm';
 
@@ -2887,6 +2907,10 @@ var main = function($) {
 
       var $me = $('<a href="javascript:;" class="_fbh_atm_button">Assign to Me</a>');
       $me.insertBefore($ixPersonAssignedTo);
+
+      $ixPersonAssignedTo.bind('droplistChange', check_change);
+
+      check_change();
     };
 
     var run_script_timeout;
@@ -2903,7 +2927,8 @@ var main = function($) {
 
       $document
         .delegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
-        .delegate('._fbh_atm_button', 'click', assign_to_me);
+        .delegate('._fbh_atm_button', 'click', assign_to_me)
+        ;
 
       try_run_script();
     };
@@ -2913,9 +2938,10 @@ var main = function($) {
 
       $document
         .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
-        .undelegate('._fbh_atm_button', 'click', assign_to_me);
+        .undelegate('._fbh_atm_button', 'click', assign_to_me)
+        ;
 
-      $('._fbh_atm_button').remove();
+      remove_button();
     };
 
     pm.add({

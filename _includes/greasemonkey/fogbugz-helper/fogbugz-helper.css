@@ -1317,6 +1317,7 @@ body._fhot {
 }
 ._fhot .case .right {
   flex-grow: 1;
+  overflow: auto;
 }
 ._fhot .case #formEditCase .top .right {
   padding-top: 0;

@@ -1,5 +1,4 @@
 (function() {
-
 /*!
  * Autolinker.js
  * 0.25.2
@@ -42,2944 +41,2942 @@ var do_marked = function(text) {
  */
 !function(e){if("object"==typeof exports&&"undefined"!=typeof module)module.exports=e();else if("function"==typeof define&&define.amd)define([],e);else{var n;n="undefined"!=typeof window?window:"undefined"!=typeof global?global:"undefined"!=typeof self?self:this,n.toMarkdown=e()}}(function(){return function e(n,t,r){function o(a,c){if(!t[a]){if(!n[a]){var l="function"==typeof require&&require;if(!c&&l)return l(a,!0);if(i)return i(a,!0);var u=new Error("Cannot find module '"+a+"'");throw u.code="MODULE_NOT_FOUND",u}var f=t[a]={exports:{}};n[a][0].call(f.exports,function(e){var t=n[a][1][e];return o(t?t:e)},f,f.exports,e,n,t,r)}return t[a].exports}for(var i="function"==typeof require&&require,a=0;a<r.length;a++)o(r[a]);return o}({1:[function(e,n,t){"use strict";function r(e){return-1!==b.indexOf(e.nodeName.toLowerCase())}function o(e){return-1!==y.indexOf(e.nodeName.toLowerCase())}function i(e){var n=(new v).parseFromString(e,"text/html");return N(n.documentElement,r),n}function a(e){for(var n,t,r,o=[e],i=[];o.length>0;)for(n=o.shift(),i.push(n),t=n.childNodes,r=0;r<t.length;r++)1===t[r].nodeType&&o.push(t[r]);return i.shift(),i}function c(e){for(var n="",t=0;t<e.childNodes.length;t++)if(1===e.childNodes[t].nodeType)n+=e.childNodes[t]._replacement;else{if(3!==e.childNodes[t].nodeType)continue;n+=e.childNodes[t].data}return n}function l(e,n){return e.cloneNode(!1).outerHTML.replace("><",">"+n+"<")}function u(e,n){if("string"==typeof n)return n===e.nodeName.toLowerCase();if(Array.isArray(n))return-1!==n.indexOf(e.nodeName.toLowerCase());if("function"==typeof n)return n.call(p,e);throw new TypeError("`filter` needs to be a string, array, or function")}function f(e,n){var t,o,i;return"left"===e?(t=n.previousSibling,o=/ $/):(t=n.nextSibling,o=/^ /),t&&(3===t.nodeType?i=o.test(t.nodeValue):1!==t.nodeType||r(t)||(i=o.test(t.textContent))),i}function d(e){var n="",t="";if(!r(e)){var o=/^[ \r\n\t]/.test(e.innerHTML),i=/[ \r\n\t]$/.test(e.innerHTML);o&&!f("left",e)&&(n=" "),i&&!f("right",e)&&(t=" ")}return{leading:n,trailing:t}}function s(e){var n,t=c(e);if(!o(e)&&!/A|TH|TD/.test(e.nodeName)&&/^\s*$/i.test(t))return void(e._replacement="");for(var r=0;r<m.length;r++){var i=m[r];if(u(e,i.filter)){if("function"!=typeof i.replacement)throw new TypeError("`replacement` needs to be a function that returns a string");var a=d(e);(a.leading||a.trailing)&&(t=t.trim()),n=a.leading+i.replacement.call(p,t,e)+a.trailing;break}}e._replacement=n}var p,m,h=e("./lib/md-converters"),g=e("./lib/gfm-converters"),v=e("./lib/html-parser"),N=e("collapse-whitespace"),b=["address","article","aside","audio","blockquote","body","canvas","center","dd","dir","div","dl","dt","fieldset","figcaption","figure","footer","form","frameset","h1","h2","h3","h4","h5","h6","header","hgroup","hr","html","isindex","li","main","menu","nav","noframes","noscript","ol","output","p","pre","section","table","tbody","td","tfoot","th","thead","tr","ul"],y=["area","base","br","col","command","embed","hr","img","input","keygen","link","meta","param","source","track","wbr"];p=function(e,n){if(n=n||{},"string"!=typeof e)throw new TypeError(e+" is not a string");e=e.replace(/(\d+)\. /g,"$1\\. ");var t,r=i(e).body,o=a(r);m=h.slice(0),n.gfm&&(m=g.concat(m)),n.converters&&(m=n.converters.concat(m));for(var l=o.length-1;l>=0;l--)s(o[l]);return t=c(r),t.replace(/^[\t\r\n]+|[\t\r\n\s]+$/g,"").replace(/\n\s+\n/g,"\n\n").replace(/\n{3,}/g,"\n\n")},p.isBlock=r,p.isVoid=o,p.outer=l,n.exports=p},{"./lib/gfm-converters":2,"./lib/html-parser":3,"./lib/md-converters":4,"collapse-whitespace":7}],2:[function(e,n,t){"use strict";function r(e,n){var t=Array.prototype.indexOf.call(n.parentNode.childNodes,n),r=" ";return 0===t&&(r="| "),r+e+" |"}var o=/highlight highlight-(\S+)/;n.exports=[{filter:"br",replacement:function(){return"\n"}},{filter:["del","s","strike"],replacement:function(e){return"~~"+e+"~~"}},{filter:function(e){return"checkbox"===e.type&&"LI"===e.parentNode.nodeName},replacement:function(e,n){return(n.checked?"[x]":"[ ]")+" "}},{filter:["th","td"],replacement:function(e,n){return r(e,n)}},{filter:"tr",replacement:function(e,n){var t="",o={left:":--",right:"--:",center:":-:"};if("THEAD"===n.parentNode.nodeName)for(var i=0;i<n.childNodes.length;i++){var a=n.childNodes[i].attributes.align,c="---";a&&(c=o[a.value]||c),t+=r(c,n.childNodes[i])}return"\n"+e+(t?"\n"+t:"")}},{filter:"table",replacement:function(e){return"\n\n"+e+"\n\n"}},{filter:["thead","tbody","tfoot"],replacement:function(e){return e}},{filter:function(e){return"PRE"===e.nodeName&&e.firstChild&&"CODE"===e.firstChild.nodeName},replacement:function(e,n){return"\n\n```\n"+n.firstChild.textContent+"\n```\n\n"}},{filter:function(e){return"PRE"===e.nodeName&&"DIV"===e.parentNode.nodeName&&o.test(e.parentNode.className)},replacement:function(e,n){var t=n.parentNode.className.match(o)[1];return"\n\n```"+t+"\n"+n.textContent+"\n```\n\n"}},{filter:function(e){return"DIV"===e.nodeName&&o.test(e.className)},replacement:function(e){return"\n\n"+e+"\n\n"}}]},{}],3:[function(e,n,t){function r(){var e=a.DOMParser,n=!1;try{(new e).parseFromString("","text/html")&&(n=!0)}catch(t){}return n}function o(){var n=function(){};if("undefined"==typeof document){var t=e("jsdom");n.prototype.parseFromString=function(e){return t.jsdom(e,{features:{FetchExternalResources:[],ProcessExternalResources:!1}})}}else i()?n.prototype.parseFromString=function(e){var n=new window.ActiveXObject("htmlfile");return n.designMode="on",n.open(),n.write(e),n.close(),n}:n.prototype.parseFromString=function(e){var n=document.implementation.createHTMLDocument("");return n.open(),n.write(e),n.close(),n};return n}function i(){var e=!1;try{document.implementation.createHTMLDocument("").open()}catch(n){window.ActiveXObject&&(e=!0)}return e}var a="undefined"!=typeof window?window:this;n.exports=r()?a.DOMParser:o()},{jsdom:6}],4:[function(e,n,t){"use strict";n.exports=[{filter:"p",replacement:function(e){return"\n\n"+e+"\n\n"}},{filter:"br",replacement:function(){return"  \n"}},{filter:["h1","h2","h3","h4","h5","h6"],replacement:function(e,n){for(var t=n.nodeName.charAt(1),r="",o=0;t>o;o++)r+="#";return"\n\n"+r+" "+e+"\n\n"}},{filter:"hr",replacement:function(){return"\n\n* * *\n\n"}},{filter:["em","i"],replacement:function(e){return"_"+e+"_"}},{filter:["strong","b"],replacement:function(e){return"**"+e+"**"}},{filter:function(e){var n=e.previousSibling||e.nextSibling,t="PRE"===e.parentNode.nodeName&&!n;return"CODE"===e.nodeName&&!t},replacement:function(e){return"`"+e+"`"}},{filter:function(e){return"A"===e.nodeName&&e.getAttribute("href")},replacement:function(e,n){var t=n.title?' "'+n.title+'"':"";return"["+e+"]("+n.getAttribute("href")+t+")"}},{filter:"img",replacement:function(e,n){var t=n.alt||"",r=n.getAttribute("src")||"",o=n.title||"",i=o?' "'+o+'"':"";return r?"!["+t+"]("+r+i+")":""}},{filter:function(e){return"PRE"===e.nodeName&&"CODE"===e.firstChild.nodeName},replacement:function(e,n){return"\n\n    "+n.firstChild.textContent.replace(/\n/g,"\n    ")+"\n\n"}},{filter:"blockquote",replacement:function(e){return e=e.trim(),e=e.replace(/\n{3,}/g,"\n\n"),e=e.replace(/^/gm,"> "),"\n\n"+e+"\n\n"}},{filter:"li",replacement:function(e,n){e=e.replace(/^\s+/,"").replace(/\n/gm,"\n    ");var t="*   ",r=n.parentNode,o=Array.prototype.indexOf.call(r.children,n)+1;return t=/ol/i.test(r.nodeName)?o+".  ":"*   ",t+e}},{filter:["ul","ol"],replacement:function(e,n){for(var t=[],r=0;r<n.childNodes.length;r++)t.push(n.childNodes[r]._replacement);return/li/i.test(n.parentNode.nodeName)?"\n"+t.join("\n"):"\n\n"+t.join("\n")+"\n\n"}},{filter:function(e){return this.isBlock(e)},replacement:function(e,n){return"\n\n"+this.outer(n,e)+"\n\n"}},{filter:function(){return!0},replacement:function(e,n){return this.outer(n,e)}}]},{}],5:[function(e,n,t){n.exports=["address","article","aside","audio","blockquote","canvas","dd","div","dl","fieldset","figcaption","figure","footer","form","h1","h2","h3","h4","h5","h6","header","hgroup","hr","main","nav","noscript","ol","output","p","pre","section","table","tfoot","ul","video"]},{}],6:[function(e,n,t){},{}],7:[function(e,n,t){"use strict";function r(e){return!(!e||!u[e.nodeName])}function o(e){return!(!e||!l[e.nodeName])}function i(e,n){if(e.firstChild&&"PRE"!==e.nodeName){"function"!=typeof n&&(n=r);for(var t=null,i=!1,l=null,u=c(l,e);u!==e;){if(3===u.nodeType){var f=u.data.replace(/[ \r\n\t]+/g," ");if(t&&!/ $/.test(t.data)||i||" "!==f[0]||(f=f.substr(1)),!f){u=a(u);continue}u.data=f,t=u}else{if(1!==u.nodeType){u=a(u);continue}n(u)||"BR"===u.nodeName?(t&&(t.data=t.data.replace(/ $/,"")),t=null,i=!1):o(u)&&(t=null,i=!0)}var d=c(l,u);l=u,u=d}t&&(t.data=t.data.replace(/ $/,""),t.data||a(t))}}function a(e){var n=e.nextSibling||e.parentNode;return e.parentNode.removeChild(e),n}function c(e,n){return e&&e.parentNode===n||"PRE"===n.nodeName?n.nextSibling||n.parentNode:n.firstChild||n.nextSibling||n.parentNode}var l=e("void-elements");Object.keys(l).forEach(function(e){l[e.toUpperCase()]=1});var u={};e("block-elements").forEach(function(e){u[e.toUpperCase()]=1}),n.exports=i},{"block-elements":5,"void-elements":8}],8:[function(e,n,t){n.exports={area:!0,base:!0,br:!0,col:!0,embed:!0,hr:!0,img:!0,input:!0,keygen:!0,link:!0,menuitem:!0,meta:!0,param:!0,source:!0,track:!0,wbr:!0}},{}]},{},[1])(1)});
 
-(function($) {
-'use strict';
+  (function($) {
+    'use strict';
 
-var toMarkdown_options = { gfm: true };
+    var toMarkdown_options = { gfm: true };
 
-// wrap the above toMarkdown function
-function _toMarkDown(html) {
-  html = html.replace(/<pre>\n/g, '<pre><code>').replace(/<\/pre>/g, '</code></pre>');
-  var md = toMarkdown(html, toMarkdown_options);
+    // wrap the above toMarkdown function
+    function _toMarkDown(html) {
+      html = html.replace(/<pre>\n/g, '<pre><code>').replace(/<\/pre>/g, '</code></pre>');
+      var md = toMarkdown(html, toMarkdown_options);
 
-  return md;
-}
-
-// http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
-function convertHtmlToText(inputText) {
-  var returnText = "" + inputText;
-
-  //-- remove BR tags and replace them with line break
-  returnText=returnText.replace(/<br>/gi, "\n");
-  returnText=returnText.replace(/<br\s\/>/gi, "\n");
-  returnText=returnText.replace(/<br\/>/gi, "\n");
-
-  //-- remove P and A tags but preserve what's inside of them
-  returnText=returnText.replace(/<p.*>/gi, "\n");
-  returnText=returnText.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 ($1)");
-
-  //-- remove all inside SCRIPT and STYLE tags
-  returnText=returnText.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, "");
-  returnText=returnText.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, "");
-  //-- remove all else
-  returnText=returnText.replace(/<(?:.|\s)*?>/g, "");
-
-  //-- get rid of more than 2 multiple line breaks:
-  returnText=returnText.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gim, "\n\n");
-
-  //-- get rid of more than 2 spaces:
-  returnText = returnText.replace(/ +(?= )/g,'');
-
-  //-- get rid of html-encoded characters:
-  returnText=returnText.replace(/&nbsp;/gi," ");
-  returnText=returnText.replace(/&amp;/gi,"&");
-  returnText=returnText.replace(/&quot;/gi,'"');
-  returnText=returnText.replace(/&lt;/gi,'<');
-  returnText=returnText.replace(/&gt;/gi,'>');
-
-  //-- return
-  return returnText;
-}
-
-// Safely auto link stuff
-var auto_link_html_div = document.createElement('div');
-var auto_link_html = function(node, exp, rep) {
-  // http://stackoverflow.com/questions/11863847/regex-to-match-urls-but-not-urls-in-hyperlinks
-  //var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
-  var nodes = node.childNodes;
-
-  for ( var i = 0, m = nodes.length; i < m; i++){
-    var n = nodes[i];
-
-    if ( n.nodeType == n.TEXT_NODE ) {
-      var g = n.textContent.match(exp);
-
-      while( g ) {
-        var idx = n.textContent.indexOf(g[0]);
-        var pre = n.textContent.substring(0, idx);
-        var t = document.createTextNode(pre);
-        var a = document.createElement('a');
-        a.href = rep.replace(/\$1/, g[0]).replace(/\$2/, g[1]);
-        a.innerText = g[0];
-        a.target = '_blank';
-        n.textContent = n.textContent.substring(idx + g[0].length);
-        n.parentElement.insertBefore(t, n);
-        n.parentElement.insertBefore(a, n);
-        g = n.textContent.match(exp);
-      }
-    } else if ( n.tagName !== 'A' && n.tagName !== 'CODE' ) {
-      auto_link_html(n, exp, rep);
-    }
-  }
-};
-
-// link special texts
-var auto_links = function(text) {
-  auto_link_html_div.innerHTML = text;
-
-  // Sha1's to ZR gitlabs
-  auto_link_html(auto_link_html_div, /(\b[a-f0-9]{40})/, 'https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$1');
-
-  // Perl nerd stuff
-  // ZR specific
-  auto_link_html(auto_link_html_div, /\b(ZR::|StarterView::|PartnerAlerts::|Test::ZR::|Test::StarterView::|Test::PartnerAlerts::)(([a-zA-Z0-9]+::)*[a-zA-Z0-9]+)/, 'https://pod.ziprecruiter.com/?$1');
-
-  auto_link_html(auto_link_html_div, /\b([a-zA-Z0-9]+::)+[a-zA-Z0-9]+/, 'https://metacpan.org/pod/$1');
-
-  auto_link_html(auto_link_html_div, /\b(?:case )([0-9]+)/i, '/f/cases/$2');
-
-  return auto_link_html_div.innerHTML;
-};
-
-var $document;
-var $window;
-
-  //////////////////////
- // Sniff for dom mutation events
-//////////////////////
-var sniff = function(selector, fn, once) {
-  once = once || false;
-  var running = false;
-  var fn_wrap = function() {
-    if ( running ) {
-      return;
+      return md;
     }
 
-    running = true;
+    // http://stackoverflow.com/questions/822452/strip-html-from-text-javascript
+    function convertHtmlToText(inputText) {
+      var returnText = "" + inputText;
 
-    var ret = fn.apply(this, arguments);
+      //-- remove BR tags and replace them with line break
+      returnText=returnText.replace(/<br>/gi, "\n");
+      returnText=returnText.replace(/<br\s\/>/gi, "\n");
+      returnText=returnText.replace(/<br\/>/gi, "\n");
 
-    if ( ret && once ) {
-      $document.undelegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
+      //-- remove P and A tags but preserve what's inside of them
+      returnText=returnText.replace(/<p.*>/gi, "\n");
+      returnText=returnText.replace(/<a.*href="(.*?)".*>(.*?)<\/a>/gi, " $2 ($1)");
+
+      //-- remove all inside SCRIPT and STYLE tags
+      returnText=returnText.replace(/<script.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/script>/gi, "");
+      returnText=returnText.replace(/<style.*>[\w\W]{1,}(.*?)[\w\W]{1,}<\/style>/gi, "");
+      //-- remove all else
+      returnText=returnText.replace(/<(?:.|\s)*?>/g, "");
+
+      //-- get rid of more than 2 multiple line breaks:
+      returnText=returnText.replace(/(?:(?:\r\n|\r|\n)\s*){2,}/gim, "\n\n");
+
+      //-- get rid of more than 2 spaces:
+      returnText = returnText.replace(/ +(?= )/g,'');
+
+      //-- get rid of html-encoded characters:
+      returnText=returnText.replace(/&nbsp;/gi," ");
+      returnText=returnText.replace(/&amp;/gi,"&");
+      returnText=returnText.replace(/&quot;/gi,'"');
+      returnText=returnText.replace(/&lt;/gi,'<');
+      returnText=returnText.replace(/&gt;/gi,'>');
+
+      //-- return
+      return returnText;
     }
 
-    running = false;
-
-    return ret;
-  };
-
-  $document.delegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
-};
-
-var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
-
-  //////////////////////
- // Preference manager
-//////////////////////
-var PreferenceManager = function() {
-  this.prefs = {};
-  this.loaded = false;
-};
-
-PreferenceManager.prototype.set = function(name, value) {
-  return localStorage.setItem('fogbugz-helper-' + name, value);
-}
-
-PreferenceManager.prototype.get = function(name, defaultOn) {
-  var val = JSON.parse(localStorage.getItem('fogbugz-helper-' + name));
-
-  if ( val === null && defaultOn ) {
-    val = true;
-  }
-
-  return val;
-}
-
-PreferenceManager.prototype.add = function(pref) {
-  if ( !pref.id ) {
-    // Maybe throw an error?
-    return;
-  }
-
-  this.prefs[pref.id] = pref;
-};
-
-PreferenceManager.prototype.load = function() {
-  var me = this;
-  var pkey;
-  var pref;
-  var prefs_array = [];
-
-  if ( me.loaded ) {
-    // Maybe throw an error?
-    return;
-  }
-
-  me.loaded = true;
-
-  var add_prefs = function(force) {
-    var $helper_menu = $('#fogbugz-helper-menu');
-
-    force = force || false;
-
-    if ( !force && $helper_menu.length ) {
-      // Already added menu
-      return;
-    } else if ( force ) {
-      $helper_menu.empty();
-    } else {
-      $helper_menu = $('<div/>').attr('id', 'fogbugz-helper-menu');
-      // Add a link to plugin homepage
-      var $homepage_link = $('<label><a href="http://ziprecruiter.github.io/greasemonkey/fogbugz-helper/" target="_blank">ZipRecruiter FogBugz Helper</a></label>');
-      $helper_menu.append($homepage_link);
-    }
-
-    // Menu to put checkbox preferences into
-    var $prefs_menu = $('<menu/>').attr('id', 'fogbugz-helper-prefs-menu');
-
-    // Menu for features to dump stuff into
-    var $features_menu = $('<menu/>').attr('id', 'fogbugz-helper-features-menu');
-
-    // Make preferences
-    var $plabel;
-    var $pcheck;
-
-    prefs_array.sort(function(a, b) {
-      if ( a.text < b.text ) {
-        return -1;
-      }
-
-      if ( a.text > b.text ) {
-        return 1;
-      }
-
-      // names must be equal
-      return 0;
-    });
-
-    for ( var i = 0, l = prefs_array.length; i < l; i++ /*pkey in me.prefs*/ ) {
-      //pref = me.prefs[pkey];
-      pref = prefs_array[i];
-
-      $pcheck = $('<input type="checkbox">')
-        .attr({
-          'id': 'fogbugz-helper-pref-check-' + pref.id
-        })
-        .data('prefid', pref.id)
-        ;
-
-      if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) ) {
-        $pcheck.prop('checked', true);
-      }
-
-      $plabel = $('<label/>')
-        .attr({
-          'id': 'fogbugz-helper-pref-' + pref.id,
-          'for': 'fogbugz-helper-pref-check-' + pref.id,
-          'title': pref.title + ' (Default: ' + (pref.defaultOn || (iOS && pref.defaultOnIOS)?'On':'Off') + ')'
-        })
-        .html(pref.text)
-        .prepend($pcheck)
-        .appendTo($prefs_menu)
-        ;
-    }
-
-    $helper_menu
-      .append($prefs_menu)
-      .append($features_menu)
-      .insertBefore($('.gw-nav-entry-settings .dropdown-menu .menu-content-section:last-child'))
-      ;
-
-    for ( pkey in me.prefs ) {
-      pref = me.prefs[pkey];
-
-      if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) && pref.ontools ) {
-        pref.ontools();
-      }
-    }
-  };
-
-  // One-time setup stuff
-  $document
-    .delegate('.gw-nav-entry-settings', 'mouseover', function() {
-      setTimeout(add_prefs, 10);
-    })
-    // Changing preferences via checkboxes
-    .delegate('#fogbugz-helper-prefs-menu input', 'change', function() {
-      var $this = $(this);
-      var id = $this.data('prefid');
-      var pref = me.prefs[id];
-      var checked = $this.prop('checked');
-      me.set(id, checked);
-
-      if ( !checked && pref.onunload ) {
-        pref.onunload();
-      } else if ( checked ) {
-        if ( pref.onload ) {
-          pref.onload();
-        }
-
-        if ( pref.ontools ) {
-          pref.ontools();
-        }
-      }
-    })
-    ;
-
-  for ( pkey in me.prefs ) {
-    pref = me.prefs[pkey];
-    prefs_array.push(pref);
-
-    if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) && pref.onload ) {
-      pref.onload();
-    }
-  }
-};
-
-// Make the preference manager
-var pm = new PreferenceManager();
-
-  ////////////////////////////
- // (Preference) Use Stylesheet (for debugging)
-////////////////////////////
-var use_stylesheet = function() {
-  var link = document.createElement('link');
-  link.rel = 'stylesheet';
-  link.id = 'fogbugz-helper-css';
-  document.head.appendChild(link);
-  link.href = window.zrBookmarkletUrl + '/fogbugz-helper.css?';
-};
-
-var use_style_tag = function() {
-  var s = document.createElement('style');
-  s.id = 'fogbugz-helper-css';
-  s.innerHTML = window.zrBookmarkletCSS;
-  document.head.appendChild(s);
-}
-
-var onload_use_stylesheet = function() {
-  $('#fogbugz-helper-css').remove();
-  use_stylesheet();
-};
-
-var onunload_use_stylesheet = function() {
-  $('#fogbugz-helper-css').remove();
-  use_style_tag();
-};
-
-pm.add({
-  id: 'use_stylesheet',
-  text: 'Use Stylesheet (for debugging)',
-  title: 'This is for development purposes, you shouldn\'t need to enable it',
-  onload: onload_use_stylesheet,
-  onunload: onunload_use_stylesheet
-});
-
-if ( pm.get('use_stylesheet') ) {
-  use_stylesheet();
-} else {
-  use_style_tag();
-}
-
-  //////////////////////
- // Set up and run the features
-//////////////////////
-var init = function() {
-  // Make sure jQuery is loaded before continuing
-  if ( !window.jQuery ) {
-    setTimeout(init, 10);
-    return;
-  }
-
-  $ = window.jQuery;
-
-  if ( pm.get('use_stylesheet') ) {
-    // Make sure css is loaded before continuing
-    var $fogbugz_helper_css = $('#fogbugz-helper-css');
-    if ( !$fogbugz_helper_css.length || ($fogbugz_helper_css.css('content') != 'loaded' && $fogbugz_helper_css.css('content') != '"loaded"' && $fogbugz_helper_css.css('content') != "'loaded'") ) {
-      setTimeout(init, 10);
-      return;
-    }
-  }
-
-    //////////////////////
-   // autosize textarea plugin
-  //////////////////////
-  $.fn.autosize = function() {
-    return this.each(function() {
-      var $this = $(this);
-
-      if ( $this.is('.autosize-autosized') ) {
-        return;
-      }
-
-      $this.addClass('autosize-autosized');
-
-      autosize(this);
-    });
-  };
-
-  // Run the main functionality
-  main($);
-}
-
-var main = function($) {
-  // Shared Stuff
-  var $body = $('body');
-  $document = $(document);
-  $window = $(window);
-
-    ////////////////////////////
-   // (Preference) Hotkeys
-  ////////////////////////////
-
-  // Keep this preference first so other preferences can add their own hotkeys
-
-  // http://stackoverflow.com/questions/13992111/javascript-function-to-convert-keycodes-into-characters
-  var convertKeyCode = function(evt) {
-    var chara = null;
-    var keyCode = (evt.which) ? evt.which : evt.keyCode;
-    var shift = evt.shiftKey;
-    //if (keyCode == 8)
-    //  chara = "backspace";
-    //  backspace
-    //if (keyCode == 9)
-    //  chara = "tab";
-    //  tab
-    //if (keyCode == 13)
-    //  chara = "enter";
-    //  enter
-    if (keyCode == 16)
-      chara = "";
-    //  chara = "shift";
-    //  shift
-    //if (keyCode == 17)
-    //  chara = "ctrl";
-    //  ctrl
-    //if (keyCode == 18)
-    //  chara = "alt";
-    //  alt
-    if (keyCode == 19) {
-        chara = "PAUSE/BREAK";
-    //  pause/break
-    //if (keyCode == 20)
-    //  chara = "caps lock";
-    //  caps lock
-    } else if (keyCode == 27) {
-      chara = "ESC";
-    //  escape
-    //if (keyCode == 33)
-    //  chara = "page up";
-    // page up, to avoid displaying alternate character and confusing people
-    //if (keyCode == 34)
-    //  chara = "page down";
-    // page down
-    //if (keyCode == 35)
-    //  chara = "end";
-    // end
-    //if (keyCode == 36)
-    //  chara = "home";
-    // home
-    //if (keyCode == 37)
-    //  chara = "left arrow";
-    // left arrow
-    //if (keyCode == 38)
-    //  chara = "up arrow";
-    // up arrow
-    //if (keyCode == 39)
-    //  chara = "right arrow";
-    // right arrow
-    //if (keyCode == 40)
-    //  chara = "down arrow";
-    // down arrow
-    //if (keyCode == 45)
-    //  chara = "insert";
-    // insert
-    //if (keyCode == 46)
-    //  chara = "delete";
-    // delete
-    // Alphanumeric
-    } else if (keyCode == 48) {
-        chara = /*(shift) ? ")" :*/ "0";
-    } else if (keyCode == 49) {
-        chara = /*(shift) ? "!" :*/ "1";
-    } else if (keyCode == 50) {
-        chara = /*(shift) ? "@" :*/ "2";
-    } else if (keyCode == 51) {
-        chara = /*(shift) ? "#" :*/ "3";
-    } else if (keyCode == 52) {
-        chara = /*(shift) ? "$" :*/ "4";
-    } else if (keyCode == 53) {
-        chara = /*(shift) ? "%" :*/ "5";
-    } else if (keyCode == 54) {
-        chara = /*(shift) ? "^" :*/ "6";
-    } else if (keyCode == 55) {
-        chara = /*(shift) ? "&" :*/ "7";
-    } else if (keyCode == 56) {
-        chara = /*(shift) ? "*" :*/ "8";
-    } else if (keyCode == 57) {
-        chara = /*(shift) ? "(" :*/ "9";
-
-    } else if (keyCode == 65) {
-        chara = /*(shift) ? "A" :*/ "a";
-    } else if (keyCode == 66) {
-        chara = /*(shift) ? "B" :*/ "b";
-    } else if (keyCode == 67) {
-        chara = /*(shift) ? "C" :*/ "c";
-    } else if (keyCode == 68) {
-        chara = /*(shift) ? "D" :*/ "d";
-    } else if (keyCode == 69) {
-        chara = /*(shift) ? "E" :*/ "e";
-    } else if (keyCode == 70) {
-        chara = /*(shift) ? "F" :*/ "f";
-    } else if (keyCode == 71) {
-        chara = /*(shift) ? "G" :*/ "g";
-    } else if (keyCode == 72) {
-        chara = /*(shift) ? "H" :*/ "h";
-    } else if (keyCode == 73) {
-        chara = /*(shift) ? "I" :*/ "i";
-    } else if (keyCode == 74) {
-        chara = /*(shift) ? "J" :*/ "j";
-    } else if (keyCode == 75) {
-        chara = /*(shift) ? "K" :*/ "k";
-    } else if (keyCode == 76) {
-        chara = /*(shift) ? "L" :*/ "l";
-    } else if (keyCode == 77) {
-        chara = /*(shift) ? "M" :*/ "m";
-    } else if (keyCode == 78) {
-        chara = /*(shift) ? "N" :*/ "n";
-    } else if (keyCode == 79) {
-        chara = /*(shift) ? "O" :*/ "o";
-    } else if (keyCode == 80) {
-        chara = /*(shift) ? "P" :*/ "p";
-    } else if (keyCode == 81) {
-        chara = /*(shift) ? "Q" :*/ "q";
-    } else if (keyCode == 82) {
-        chara = /*(shift) ? "R" :*/ "r";
-    } else if (keyCode == 83) {
-        chara = /*(shift) ? "S" :*/ "s";
-    } else if (keyCode == 84) {
-        chara = /*(shift) ? "T" :*/ "t";
-    } else if (keyCode == 85) {
-        chara = /*(shift) ? "U" :*/ "u";
-    } else if (keyCode == 86) {
-        chara = /*(shift) ? "V" :*/ "v";
-    } else if (keyCode == 87) {
-        chara = /*(shift) ? "W" :*/ "w";
-    } else if (keyCode == 88) {
-        chara = /*(shift) ? "X" :*/ "x";
-    } else if (keyCode == 89) {
-        chara = /*(shift) ? "Y" :*/ "y";
-    } else if (keyCode == 90) {
-        chara = /*(shift) ? "Z" :*/ "z";
-    // Alphanumeric
-    //} else if (keyCode == 91) {
-    //  chara = "left window";
-    // left window
-    //} else if (keyCode == 92) {
-    //  chara = "right window";
-    // right window
-    //} else if (keyCode == 93) {
-    //  chara = "select key";
-    // select key
-    //} else if (keyCode == 96) {
-    //  chara = "numpad 0";
-    // numpad 0
-    //} else if (keyCode == 97) {
-    //  chara = "numpad 1";
-    // numpad 1
-    //} else if (keyCode == 98) {
-    //  chara = "numpad 2";
-    // numpad 2
-    //} else if (keyCode == 99) {
-    //  chara = "numpad 3";
-    // numpad 3
-    //} else if (keyCode == 100) {
-    //  chara = "numpad 4";
-    // numpad 4
-    //} else if (keyCode == 101) {
-    //  chara = "numpad 5";
-    // numpad 5
-    //} else if (keyCode == 102) {
-    //  chara = "numpad 6";
-    // numpad 6
-    //} else if (keyCode == 103) {
-    //  chara = "numpad 7";
-    // numpad 7
-    //} else if (keyCode == 104) {
-    //  chara = "numpad 8";
-    // numpad 8
-    //} else if (keyCode == 105) {
-    //  chara = "numpad 9";
-    // numpad 9
-    //} else if (keyCode == 106) {
-    //  chara = "multiply";
-    // multiply
-    //} else if (keyCode == 107) {
-    //  chara = "add";
-    // add
-    //} else if (keyCode == 109) {
-    //  chara = "subtract";
-    // subtract
-    //} else if (keyCode == 110) {
-    //  chara = "decimal point";
-    // decimal point
-    //} else if (keyCode == 111) {
-    //  chara = "divide";
-    // divide
-    //} else if (keyCode == 112) {
-    //  chara = "F1";
-    // F1
-    //} else if (keyCode == 113) {
-    //  chara = "F2";
-    // F2
-    //} else if (keyCode == 114) {
-    //  chara = "F3";
-    // F3
-    //} else if (keyCode == 115) {
-    //  chara = "F4";
-    // F4
-    //} else if (keyCode == 116) {
-    //  chara = "F5";
-    // F5
-    //} else if (keyCode == 117) {
-    //  chara = "F6";
-    // F6
-    //} else if (keyCode == 118) {
-    //  chara = "F7";
-    // F7
-    //} else if (keyCode == 119) {
-    //  chara = "F8";
-    // F8
-    //} else if (keyCode == 120) {
-    //  chara = "F9";
-    // F9
-    //} else if (keyCode == 121) {
-    //  chara = "F10";
-    // F10
-    //} else if (keyCode == 122) {
-    //  chara = "F11";
-    // F11
-    //} else if (keyCode == 123) {
-    //  chara = "F12";
-    // F12
-    //} else if (keyCode == 144) {
-    //  chara = "num lock";
-    // num lock
-    //} else if (keyCode == 145) {
-    //  chara = "scroll lock";
-    // scroll lock
-    } else if (keyCode == 186) {
-        chara = ";";
-    // semi-colon
-    } else if (keyCode == 187) {
-        chara = "=";
-    // equal-sign
-    } else if (keyCode == 188) {
-        chara = ",";
-    // comma
-    } else if (keyCode == 189) {
-        chara = "-";
-    // dash
-    } else if (keyCode == 190) {
-        chara = ".";
-    // period
-    } else if (keyCode == 191) {
-        chara = (shift) ? "?" : "/";
-    // forward slash
-    } else if (keyCode == 192) {
-        chara = "`";
-    // grave accent
-    } else if (keyCode == 219) {
-        chara = /*(shift) ? "{" :*/ "[";
-    // open bracket
-    } else if (keyCode == 220) {
-        chara = "\\";
-    // back slash
-    } else if (keyCode == 221) {
-        chara = /*(shift) ? "}" :*/ "]";
-    // close bracket
-    } else if (keyCode == 222) {
-        chara = "'";
-    // single quote
-    }
-
-    return chara;
-  }
-
-  var Hotkey = function(hotkey) {
-    this.action = hotkey.action;
-    this.hotkey = hotkey;
-  };
-
-  var default_hotkey_pairs = [
-    // Create new case
-    {
-      text: 'Create Case',
-      name: 'create_case',
-      keys: 'c',
-      allowInput: false,
-      action: function() {
-        $('.add-case-button').click();
-      }
-    }
-    // Close case
-    ,{
-      text: 'Close Case or Unfocus Input',
-      name: 'close_case_or_unfocus',
-      keys: 'ESC',
-      allowInput: true,
-      action: function(e) {
-        if ( $(e.target).is('input, button, textarea, select') ) {
-          $(e.target).blur();
-        } else {
-          $('.js-header-list-cases-link').click();
-        }
-
-        $hotkey_wrapper.hide();
-      }
-    }
-    // Search
-    ,{
-      text: 'Search Cases',
-      name: 'search_cases',
-      keys: 'gi',
-      allowInput: false,
-      action: function() {
-        $('.search-box').focus();
-      }
-    }
-    // Search
-    ,{
-      text: 'Quick Search',
-      name: 'quick_search',
-      keys: '/',
-      allowInput: false,
-      action: function() {
-        $('.search-box').focus();
-      }
-    }
-    // Search
-    ,{
-      text: 'Search',
-      name: 'search',
-      keys: 'f',
-      allowInput: false,
-      action: function() {
-        $('.search-box').focus();
-      }
-    }
-    // Hotkey help
-    ,{
-      text: 'Show Hotkeys',
-      name: 'show_hotkeys',
-      keys: '?',
-      allowInput: false,
-      action: function() {
-        $hotkey_wrapper.show();
-      }
-    }
-    // Previous case
-    ,{
-      text: 'Previous Case',
-      name: 'previous_case',
-      keys: 'j',
-      allowInput: false,
-      action: function() {
-        $('[name="previous-case"]').click();
-      }
-    }
-    // Next case
-    ,{
-      text: 'Next Case',
-      name: 'next_case',
-      keys: 'k',
-      allowInput: false,
-      action: function() {
-        $('[name="next-case"]').click();
-      }
-    }
-    // Edit case
-    ,{
-      text: 'Edit Case',
-      name: 'edit_case',
-      keys: 'e',
-      allowInput: false,
-      action: function() {
-        $('[name="edit"]').click();
-      }
-    }
-    // Assign case
-    ,{
-      text: 'Assign Case',
-      name: 'assign_case',
-      keys: 'a',
-      allowInput: false,
-      action: function() {
-        $('[name="assign"]').eq(0).click();
-      }
-    }
-  ];
-
-  var hotkey_pairs = {};
-  var hotkey_chain = '';
-  var clear_hotkey_chain_timeout;
-  var $hotkey_wrapper = $('<div/>')
-    .addClass('fogbugz-helper-hotkeys-wrapper')
-    ;
-
-  var hotkey_press = function(e) {
-    //expire after focusing anything
-    clearTimeout(clear_hotkey_chain_timeout);
-    if ( e.altKey || e.ctrlKey || e.metaKey || e.shiftKey ) {
-      hotkey_chain = '';
-      return;
-    }
-
-    var cha = convertKeyCode(e);
-    if ( cha === null ) {
-      hotkey_chain = '';
-      return;
-    }
-
-    hotkey_chain += cha;
-
-    if ( hotkey_pairs[hotkey_chain] ) {
-      // Make sure not to fire macros while typing comments etc
-      if ( !hotkey_pairs[hotkey_chain].hotkey.allowInput && $(e.target).is('input, button, textarea, select') ) {
-        hotkey_chain = '';
-        return;
-      }
-
-      setTimeout(function() {
-        hotkey_pairs[hotkey_chain].action(e);
-        hotkey_chain = '';
-      }, 0);
-    } else {
-      //expire after a set amount of time
-      clear_hotkey_chain_timeout = setTimeout(function() {
-        hotkey_chain = '';
-      }, 1000);
-    }
-  };
-
-  var onload_fb_hotkeys = function() {
-    $document
-      .bind('keydown', hotkey_press)
-      ;
-  };
-
-  var onunload_fb_hotkeys = function() {
-    $document
-      .unbind('keydown', hotkey_press)
-      ;
-
-    $('.fogbugz-helper-hotkeys-tool').remove();
-  };
-
-  var ontools_fb_hotkeys = function() {
-    var $hotkeys = $('<div/>')
-      .addClass('fogbugz-helper-hotkeys-tool fogbugz-helper-tool')
-      ;
-
-    var $headline = $('<a href="#">')
-      .addClass('fogbugz-helper-headline')
-      .html('Show Hotkeys')
-      .appendTo($hotkeys)
-      .bind('click', function() {
-        $hotkey_wrapper.show();
-      })
-      ;
-
-    var $menu = $('#fogbugz-helper-features-menu');
-
-    $menu.append($hotkeys);
-  }
-
-  var show_hotkeys_popup = function() {
-    $hotkey_wrapper
-      .show()
-      .focus()
-      ;
-  };
-
-  var build_hotkeys_pop = function() {
-    var hotkeys = localStorage.getItem('zr_hotkeys') || '{}';
-    hotkeys = JSON.parse(hotkeys);
-
-    var $hotkeys = $('<div/>')
-      .addClass('fogbugz-helper-hotkeys-modal')
-      ;
-
-    var $headline = $('<h4>')
-      .addClass('fogbugz-helper-headline')
-      .html('Hotkeys')
-      .appendTo($hotkeys)
-      ;
-
-    for ( var i = 0, l = default_hotkey_pairs.length, hotkey, keys; i < l; i++ ) {
-      hotkey = default_hotkey_pairs[i];
-      keys = hotkeys[hotkey.name] || hotkey.keys;
-
-      var $hotkey = $('<div/>')
-        .addClass('fogbugz-helper-hotkey')
-        ;
-
-      var $input = $('<label>') //$('<input type="text">')
-        .attr({
-          'id': 'hotkey-' + hotkey.name
-        })
-        .addClass('fogbugz-helper-hotkey-input-wrapper')
-        //.val(keys)
-        .html(keys)
-        ;
-
-      var $label = $('<label>')
-        .attr({
-          'for': 'hotkey-' + hotkey.name
-        })
-        .addClass('fogbugz-helper-hotkey-label')
-        .html(hotkey.text)
-        ;
-
-      $hotkeys.append(
-        $hotkey.append($input, $label)
-      );
-    }
-
-    var $close = $('<p>')
-      .addClass('fogbugz-helper-hotkey-close')
-      .html('(click anywhere or press ESC to close)')
-      .appendTo($hotkeys)
-      ;
-
-    $hotkey_wrapper
-      .attr({'tabIndex': 1})
-      .hide()
-      .empty()
-      .append($hotkeys)
-      .appendTo('body')
-      .bind('click', function() {
-        $hotkey_wrapper.hide();
-      })
-      ;
-  };
-
-  var hotkeys = localStorage.getItem('zr_hotkeys') || '{}';
-  hotkeys = JSON.parse(hotkeys);
-
-  for ( var i = 0, l = default_hotkey_pairs.length, hotkey, keys; i < l; i++ ) {
-    hotkey = default_hotkey_pairs[i];
-    keys = hotkeys[hotkey.name] || hotkey.keys;
-    hotkey_pairs[keys] = new Hotkey(hotkey);
-  }
-
-  build_hotkeys_pop();
-
-  pm.add({
-    id: 'fb_hotkeys',
-    text: 'Hotkeys',
-    title: 'Hotkeys for common actions. May not play nicely with FogBugz\'s built-in hotkeys.',
-    defaultOn: false,
-    onload: onload_fb_hotkeys,
-    ontools: ontools_fb_hotkeys,
-    onunload: onunload_fb_hotkeys
-  });
-
-    ////////////////////////////
-   // (Preference) Autosize Textareas
-  ////////////////////////////
-
-  var _autosize_textareas = function() {
-    var $textareas = $('textarea:not(.autosize-autosized)');
-
-    if ( $textareas.length ) {
-      $textareas.autosize();
-    }
-  };
-
-  var autosize_textareas_timeout;
-  var autosize_textareas = function() {
-    clearTimeout(autosize_textareas_timeout);
-    autosize_textareas_timeout = setTimeout(_autosize_textareas, 10);
-  };
-
-  var onload_autosize_textareas = function() {
-    autosize_textareas();
-    $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
-  };
-
-  var onunload_autosize_textareas = function() {
-    $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
-  };
-
-  pm.add({
-    id: 'autosize_textareas',
-    text: 'Autosize Textareas',
-    title: 'Large text fields will automatically expand when type in them',
-    defaultOn: true,
-    onload: onload_autosize_textareas,
-    onunload: onunload_autosize_textareas
-  });
-
-    ////////////////////////////
-   // (Preference) Background color picker
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var colors = [
-      '#FFFFFF',
-      '#3B3B3B',
-      '#0079BF',
-      '#D29034',
-      '#519839',
-      '#B04632',
-      '#89609E',
-      '#CD5A91',
-      '#4BBF6B',
-      '#00AECC',
-      '#838C91'
-    ];
-
-    // Get preference
-    var color;
-    var color_re = /(rgb)\(([0-9]+),\s+([0-9]+),\s+([0-9]+)/;
-
-    var set_bgcolor = function(color) {
-      $body.css('background-color', color);
-      color = $body.css('background-color');
-
-      if ( color ) {
-        var matches = color.match(color_re);
-        var r = matches[2];
-        var g = matches[3];
-        var b = matches[4];
-        var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
-
-        if ( luma < 200 ) {
-          $body.addClass('fogbugz-helper-bgcolors-dark');
-        } else {
-          $body.removeClass('fogbugz-helper-bgcolors-dark');
-        }
-      }
-
-      return color;
-    };
-
-    var onload_bgcolors = function() {
-      $body.addClass('fogbugz-helper-bgcolors');
-
-      color = localStorage.getItem('color');
-
-      set_bgcolor(color);
-    };
-
-    var onunload_bgcolors = function() {
-      $body
-        .removeClass('fogbugz-helper-bgcolors')
-        .removeClass('fogbugz-helper-bgcolors-dark')
-        .css('background-color', '')
-        ;
-
-      $('.fogbugz-helper-colors').remove();
-    };
-
-    var ontools_bgcolors = function() {
-      var $color_li = $('.fogbugz-helper-colors');
-
-      // Can't figure out why the colors don't stay, we'll just run this function every time and bail if they exist
-      if ( $color_li.length ) {
-        return;
-      }
-
-      $color_li = $('<div/>')
-        .addClass('fogbugz-helper-colors fogbugz-helper-tool')
-        .delegate('button', 'click', function(e) {
-          e.preventDefault();
-          var color = $(this).css('background-color');
-
-          localStorage.setItem('color', color);
-          set_bgcolor(color);
-          $input.val(color);
-        })
-        ;
-
-      var $headline = $('<h4>')
-        .addClass('fogbugz-helper-headline')
-        .html('Choose a background color')
-        .appendTo($color_li)
-        ;
-
-      // Buttons
-      for ( var ci = 0, cl = colors.length, c, $c; ci < cl; ci++ ) {
-        c = colors[ci];
-
-        $c = $('<button>&nbsp;</button>')
-          .addClass('color')
-          .css('background-color', c)
-          .appendTo($color_li)
-          ;
-      }
-
-      // Input
-      var $input = $('<input type="text">')
-        .val(color)
-        .appendTo($color_li)
-        .bind('input', function() {
-          var color = $(this).val();
-
-          localStorage.setItem('color', color);
-
-          set_bgcolor(color);
-        })
-        ;
-
-      var $menu = $('#fogbugz-helper-features-menu');
-
-      $menu.append($color_li);
-    };
-
-    pm.add({
-      id: 'bgcolors',
-      text: 'Background Colors',
-      title: 'Enable the color picker to change the background color of FogBugz. Has a few styling issues here and there. If you encounter an issue you can quickly disable it in the FogBugz tools menu.',
-      defaultOn: true,
-      onload: onload_bgcolors,
-      ontools: ontools_bgcolors,
-      onunload: onunload_bgcolors
-    });
-  })(pm);
-
-    ////////////////////////////
-   // (Preference) Edit Ticket Links
-  ////////////////////////////
-  var edit_ticket_links = function(e) {
-    var href = this.href;
-
-    href = href.replace(/cases\/([0-9]+)/, 'cases/edit/$1');
-
-    this.href = href;
-  };
-
-  var onload_edit_ticket_links = function() {
-    $document.delegate('a.case', 'mouseover focus', edit_ticket_links);
-  };
-
-  var onunload_edit_ticket_links = function() {
-    $document.undelegate('a.case', 'mouseover focus', edit_ticket_links);
-  };
-
-  pm.add({
-    id: 'edit_ticket_links',
-    text: 'Edit Ticket Links',
-    title: 'When you click on ticket links within FogBugz, they will open in "edit mode." This will not work on links outside of FogBugz yet (like links in emails, etc).',
-    defaultOn: false,
-    onload: onload_edit_ticket_links,
-    onunload: onunload_edit_ticket_links
-  });
-
-    ////////////////////////////
-   // (Preference) Open Tickets in Modal
-  ////////////////////////////
-
-  //var $main = $('#main');
-  var $main = $('#main-wrap');
-
-  var _close_ticket_modal = function() {
-    $('.js-header-list-cases-link').click();
-  };
-
-  var close_ticket_modal = function(e) {
-    if ( e.target !== this ) {
-      return;
-    }
-
-    _close_ticket_modal();
-  };
-
-  var onload_tickets_in_modal = function() {
-    $body.addClass('fogbugz-helper-tickets-in-modal')
-    $main.bind('click', close_ticket_modal);
-  };
-
-  var onunload_tickets_in_modal = function() {
-    $body.removeClass('fogbugz-helper-tickets-in-modal')
-    $main.unbind('click', close_ticket_modal);
-  };
-
-  pm.add({
-    id: 'onunload_tickets_in_modal',
-    text: 'Click Backdrop to Close Ticket (Modal Only)',
-    title: 'Clicking the area behind a ticket will close the ticket and load your last filter.',
-    defaultOn: true,
-    onload: onload_tickets_in_modal,
-    onunload: onunload_tickets_in_modal
-  });
-
-    ////////////////////////////
-   // (Preference) Auto Sort Tickets
-  ////////////////////////////
-  var onload_auto_sort = function() {
-    $body.addClass('fogbugz-helper-auto-sort');
-  };
-
-  var onunload_auto_sort = function() {
-    $body.removeClass('fogbugz-helper-auto-sort');
-  };
-
-  pm.add({
-    id: 'auto_sort',
-    text: 'Auto Sort Tickets (by status)',
-    title: 'When grouped and sorted by status, ticket groups are arranged in a more logical order. Reverse sorting doesn\'t work yet',
-    defaultOn: false,
-    onload: onload_auto_sort,
-    onunload: onunload_auto_sort
-  });
-
-    ////////////////////////////
-   // (Preference) Expand Task List
-  ////////////////////////////
-  var onload_expand_tasks = function() {
-    $body.addClass('fogbugz-helper-expand-tasks');
-  };
-
-  var onunload_expand_tasks = function() {
-    $body.removeClass('fogbugz-helper-expand-tasks');
-  };
-
-  pm.add({
-    id: 'expand_tasks',
-    text: 'Expand Task List Cells',
-    title: 'Shows the full text of titles etc. in ticket lists. Each row can be more than one line of text.',
-    defaultOn: false,
-    onload: onload_expand_tasks,
-    onunload: onunload_expand_tasks
-  });
-
-    ////////////////////////////
-   // (Preference) Ticket Tweaks
-  ////////////////////////////
-
-  (function(pm) {
-    var $meta_tweaks = $('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>');
-
-    var onload = function() {
-      $body.addClass('_fhtt');
-      $meta_tweaks.appendTo('head');
-      $('html,body').scrollTop(0);
-      $('html,body').scrollLeft(0);
-    };
-
-    var onunload = function() {
-      $body.removeClass('_fhtt');
-      $meta_tweaks.remove();
-    };
-
-    pm.add({
-      id: 'ticket_tweaks',
-      text: 'Styling Fixes',
-      title: 'Various tweaks which fix mobile and other issues',
-      defaultOn: true,
-      onload: onload,
-      onunload: onunload
-    });
-  })(pm);
-
-    ////////////////////////////
-   // (Preference) Other Tweaks
-  ////////////////////////////
-
-  (function(pm) {
-    var onload = function() {
-      $body.addClass('_fhot');
-    };
-
-    var onunload = function() {
-      $body.removeClass('_fhot');
-    };
-
-    pm.add({
-      id: 'other_tweaks',
-      text: 'Old FogBugz Styling',
-      title: 'Changes colors, fonts and some other things back to a less terrible time',
-      defaultOn: true,
-      onload: onload,
-      onunload: onunload
-    });
-  })(pm);
-
-    ////////////////////////////
-   // (Preference) Fake Kanban
-  ////////////////////////////
-  var _fake_kanban_class = 'fogbugz-helper-fake-kanban';
-  var _fake_kanban_sorted_class = 'fogbugz-helper-fake-kanban-sorted';
-  var _fake_kanban_double_sorted_class = 'fogbugz-helper-fake-kanban-double-sorted';
-
-  var _fake_kanban_template_inserted = function(r, data) {
-    if ( $('.list-group-header').children().length > 2 ) {
-      if ( r === false ) {
-        // This is specifically for the first page load
-      } else if ( !r || !r.element.filter('#filter-bar-title').length ) {
-        return;
-      }
-
-      // This is where we do things when the tickets are all loaded
-
-      // Sorts
-      var $sorts = $('#filter-description-sort [data-s-name]');
-
-      if ( !$sorts.length ) return;
-
-      var sorts = [];
-      $sorts.each(function() {
-        sorts.push($(this).data('s-name'));
-      });
-
-      // Columns
-      var $columns = $('.grid-column-contents');
-      var columns_o = {};
-      var columns = [];
-      $columns.each(function() {
-        var match = this.className.match(/ grid\-column\-([a-zA-Z]+)/);
-        if ( match && columns_o[match[1]] !== true ) {
-          columns_o[match[1]] = true;
-          columns.push(match[1]);
-        }
-      });
-
-      // Double sort
-      if ( sorts.length > 1 && columns_o[sorts[1]] === true ) {
-        $body.removeClass(_fake_kanban_sorted_class);
-        $body.addClass(_fake_kanban_double_sorted_class);
-
-        var types_o = {};
-        var types_a = [];
-        $('.list-group-body').each(function() {
-          $(this).find('.bug-grid-row').each(function() {
-            var $column = $(this).find('.grid-column-' + sorts[1]);
-            var id = $.trim($column.text());
-
-            if ( !types_o[id] ) {
-              types_o[id] = true;
-              types_a.push(id);
-            }
-          });
-        });
-
-        types_a.sort();
-
-        $('.list-group-body').each(function() {
-          var list_group_body = this;
-          var types = {};
-
-          for ( var i = 0, l = types_a.length, t; i < l; i++ ) {
-            t = types_a[i];
-            var $table = $('<table/>');
-            types[t] = $table;
-            $table
-              .appendTo(list_group_body)
-              .attr('data-collapse-key', t)
-              ;
+    // Safely auto link stuff
+    var auto_link_html_div = document.createElement('div');
+    var auto_link_html = function(node, exp, rep) {
+      // http://stackoverflow.com/questions/11863847/regex-to-match-urls-but-not-urls-in-hyperlinks
+      //var exp = /(\b(https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/i;
+      var nodes = node.childNodes;
+
+      for ( var i = 0, m = nodes.length; i < m; i++){
+        var n = nodes[i];
+
+        if ( n.nodeType == n.TEXT_NODE ) {
+          var g = n.textContent.match(exp);
+
+          while( g ) {
+            var idx = n.textContent.indexOf(g[0]);
+            var pre = n.textContent.substring(0, idx);
+            var t = document.createTextNode(pre);
+            var a = document.createElement('a');
+            a.href = rep.replace(/\$1/, g[0]).replace(/\$2/, g[1]);
+            a.innerText = g[0];
+            a.target = '_blank';
+            n.textContent = n.textContent.substring(idx + g[0].length);
+            n.parentElement.insertBefore(t, n);
+            n.parentElement.insertBefore(a, n);
+            g = n.textContent.match(exp);
           }
-
-          $(this).find('.bug-grid-row').each(function() {
-            var $column = $(this).find('.grid-column-' + sorts[1]);
-            var id = $.trim($column.text());
-
-            $column.closest('td').addClass(_fake_kanban_double_sorted_class + '-sort');
-            types[id].append($column.closest('tr').detach());
-          });
-        });
-      } else {
-        // Single sort
-        $body.removeClass(_fake_kanban_double_sorted_class);
-        $body.addClass(_fake_kanban_sorted_class);
+        } else if ( n.tagName !== 'A' && n.tagName !== 'CODE' ) {
+          auto_link_html(n, exp, rep);
+        }
       }
-    } else {
-      $body.removeClass(_fake_kanban_double_sorted_class);
-      $body.removeClass(_fake_kanban_sorted_class);
-    }
-  };
+    };
 
-  var onload_fake_kanban = function() {
-    $body.addClass(_fake_kanban_class);
+    // link special texts
+    var auto_links = function(text) {
+      auto_link_html_div.innerHTML = text;
 
-    fb.pubsub.subscribe("/template/inserted", _fake_kanban_template_inserted);
+      // Sha1's to ZR gitlabs
+      auto_link_html(auto_link_html_div, /(\b[a-f0-9]{40})/, 'https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/$1');
 
-    _fake_kanban_template_inserted(false);
-  };
+      // Perl nerd stuff
+      // ZR specific
+      auto_link_html(auto_link_html_div, /\b(ZR::|StarterView::|PartnerAlerts::|Test::ZR::|Test::StarterView::|Test::PartnerAlerts::)(([a-zA-Z0-9]+::)*[a-zA-Z0-9]+)/, 'https://pod.ziprecruiter.com/?$1');
 
-  var onunload_fake_kanban = function() {
-    $body.removeClass(_fake_kanban_class);
+      auto_link_html(auto_link_html_div, /\b([a-zA-Z0-9]+::)+[a-zA-Z0-9]+/, 'https://metacpan.org/pod/$1');
 
-    fb.pubsub.unsubscribe("/template/inserted", _fake_kanban_template_inserted);
+      auto_link_html(auto_link_html_div, /\b(?:case )([0-9]+)/i, '/f/cases/$2');
 
-    $body.removeClass(_fake_kanban_sorted_class);
-  };
+      return auto_link_html_div.innerHTML;
+    };
 
-  pm.add({
-    id: 'fake_kanban',
-    text: 'Kanban-Style Ticket Listing',
-    title: 'Changes ticket listings to be similar to the FogBugz Kanban board. Drag n drop to come...',
-    defaultOn: false,
-    onload: onload_fake_kanban,
-    onunload: onunload_fake_kanban
-  });
+    var $document;
+    var $window;
 
-    ////////////////////////////
-   // (Preference) Reverse Comments
-  ////////////////////////////
-  var onload_reverse_comments = function() {
-    $body.addClass('fogbugz-helper-reverse-comments');
-  };
-
-  var onunload_reverse_comments = function() {
-    $body.removeClass('fogbugz-helper-reverse-comments');
-  };
-
-  pm.add({
-    id: 'reverse_comments',
-    text: 'Reverse Comment Order on Tickets',
-    title: 'Pretty self explanatory',
-    defaultOn: false,
-    onload: onload_reverse_comments,
-    onunload: onunload_reverse_comments
-  });
-
-    ////////////////////////////
-   // Hide Useless Stuff
-  ////////////////////////////
-  var onload_hide_stuff = function() {
-    $body.addClass('fogbugz-helper-hide-stuff');
-  };
-
-  var onunload_reverse_comments = function() {
-    $body.removeClass('fogbugz-helper-hide-stuff');
-  };
-
-  pm.add({
-    id: 'hide_stuff',
-    text: 'Hide Unused FogBugz Stuff',
-    title: 'I don\'t use these anyway. Hollar if you like this but want something specific back.',
-    defaultOn: false,
-    onload: onload_hide_stuff,
-    onunload: onunload_reverse_comments
-  });
-
-    ////////////////////////////
-   // WYSIWYG for custom inputs
-  ////////////////////////////
-
-  /*var decodeEntities = (function() {
-    // this prevents any overhead from creating the object each time
-    var $div = $('<div>');
-    var txt = document.createElement('textarea');
-
-    function decodeHTMLEntities (str) {
-      txt.innerHTML = str;
-      str = txt.value;
-      str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-      $div.html(str);
-
-      var $imgs = $div.find('img');
-      for ( var i = 0, l = $imgs.length; i < l; i++ ) {
-        var $img = $imgs.eq(i);
-        var src = $img.attr('src');
-        $img.wrap('<a href="' + src + '" target="_blank"></a>');
-      }
-
-      str = $div.html();
-
-      return str;
-    }
-
-    return decodeHTMLEntities;
-  })();*/
-
-  /*var decodeEntities = (function() {
-    // this prevents any overhead from creating the object each time
-    var element = document.createElement('div');
-
-    function decodeHTMLEntities (str) {
-      if(str && typeof str === 'string') {
-        // strip script/html tags
-        str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-        str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
-        element.innerHTML = str;
-        str = element.textContent;
-        element.textContent = '';
-      }
-
-      return str;
-    }
-
-    return decodeHTMLEntities;
-  })();*/
-
-  // http://stackoverflow.com/questions/5796718/html-entity-decode
-  var decodeEntities = (function() {
-      // this prevents any overhead from creating the object each time
-      var element = document.createElement('div');
-
-      // regular expression matching HTML entities
-      var entity = /&(?:#x[a-f0-9]+|#[0-9]+|[a-z0-9]+);?/ig;
-
-      return function decodeHTMLEntities(str) {
-          // find and replace all the html entities
-          str = str.replace(entity, function(m) {
-              element.innerHTML = m;
-              return element.textContent;
-          });
-
-          //str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-          str = str.replace(/<script/gmi, '&lt;script');
-          str = str.replace(/<\/script/gmi, '&lt;/script');
-
-          // reset the value
-          element.textContent = '';
-
-          return str;
-      }
-  })();
-
-  // Toggle
-  var $wysiwyg_toggle;
-  var original_code;
-
-  var wysiwyg_add = function() {
-    var $customfield = $('.customfield-longtext');
-    var $textarea = $customfield.find('textarea.wysiwygified');
-    var code = '';
-
-    // Edit
-    if ( $textarea.length ) {
-      // replace textarea with ckeditor
-      original_code = code = $textarea.val();
-
-      if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
-        code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
-        code = do_marked(code);
-      } else {
-        code = do_marked(_toMarkDown(code));
-      }
-
-      code = decodeEntities(code);
-
-      code = auto_links(code);
-
-      $textarea.val(code);
-      wysiwyg_textarea($textarea);
-    }
-
-    $wysiwyg_toggle.find('.wysiwyg_toggle_rich').addClass('wysiwyg_toggle_selected');
-  };
-
-  var wysiwyg_remove = function(markdown) {
-    markdown = markdown || false;
-
-    var $textarea = $('textarea.wysiwygified');
-    var val;
-
-    if ( markdown ) {
-      val = wysiwygify_editor.getData();
-      val = _toMarkDown(val);
-      val = _wysiwyg_fix_links(val);
-    } else {
-      val = $textarea.val();
-      val = decodeEntities(convertHtmlToText(val));
-    }
-
-    wysiwygify_editor.destroy(true);
-    wysiwygify_editor = null;
-
-    $textarea.val(val);
-  };
-
-  var wysiwyg_toggle_off = function() {
-    $wysiwyg_toggle.find('label').removeClass('wysiwyg_toggle_selected');
-  };
-
-  $body
-    /*.delegate('.wysiwyg_toggle .wysiwyg_toggle_plain:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
-      ev.preventDefault();
-      if ( !confirm('Lose formatting and switch to plain-text mode?') ) {
-        return;
-      }
-
-      var $this = $(this);
-      wysiwyg_toggle_off();
-      wysiwyg_remove();
-      $this.addClass('wysiwyg_toggle_selected');
-    })*/
-    .delegate('.wysiwyg_toggle .wysiwyg_toggle_rich:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
-      ev.preventDefault();
-      var $this = $(this);
-      wysiwyg_toggle_off();
-      wysiwyg_add(true);
-      $this.addClass('wysiwyg_toggle_selected');
-    })
-    .delegate('.wysiwyg_toggle .wysiwyg_toggle_markdown:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
-      ev.preventDefault();
-
-      var $this = $(this);
-      wysiwyg_toggle_off();
-
-      wysiwyg_remove(true);
-
-      $this.addClass('wysiwyg_toggle_selected');
-    })
-    ;
-
-  // Make wysiwyg editor
-  var wysiwygify_editor;
-  var wysiwygify_config = {
-    extraPlugins : '',
-    uploadUrl: '/',
-    extraAllowedContent: 'code;hr;table;tr;td;thead;tbody;th;del',
-    //customConfig: "{0}FogBugzMVC.js".format(window.CKEDITOR_BASEPATH),
-    toolbar: [
-      { name: 'one', items: ['Undo', 'Redo'] }
-      ,{ name: 'two', items: ['Format'] }
-      ,{ name: 'three', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] }
-      ,{ name: 'four', items: ['NumberedList', 'BulletedList', 'Blockquote'] } //, 'Outdent', 'Indent'],
-      ,{ name: 'five', items: ['Source'] }
-    ],
-    format_tags: 'h1;h2;h3;h4;h5;h6;p;pre',
-    // Note: these styles are duplicated in the css
-    contentsCss: [
-      '{0}contents.css'.format(window.CKEDITOR_BASEPATH),
-      '{0}contents.bugRichEdit.css'.format(window.CKEDITOR_BASEPATH),
-      'data:text/css;base64,' + btoa('\
-        body {\
-          line-height: 1.4;\
-          font-size: 13px;\
-        }\
-        pre {\
-          background: #eee;\
-          border-radius: 3px;\
-          padding: 10px;\
-          display: block;\
-          font-family: monospace;\
-          overflow: auto;\
-          max-width: 100%;\
-          white-space: pre;\
-        }\
-        \
-        code {\
-          background-color: #f7f7f9;\
-          border: 1px solid #e1e1e8;\
-          white-space: normal;\
-          color: #c25;\
-          padding: 1px 3px;\
-          border-radius: 3px;\
-          font-size: 12px;\
-        }\
-        \
-        pre code {\
-          background-color: transparent;\
-          border: none;\
-          white-space: inherit;\
-          color: inherit;\
-          padding: 0;\
-        }\
-        table {\
-          margin: .5em 0;\
-          border-collapse: collapse;\
-          border-spacing: 0;\
-          empty-cells: show;\
-          border: 1px solid #cbcbcb;\
-        }\
-        \
-        thead {\
-          background-color: #e0e0e0;\
-          color: #000;\
-          text-align: left;\
-          vertical-align: bottom;\
-        }\
-        \
-        td,\
-        th {\
-          border-left: 1px solid #cbcbcb;\
-          border-width: 0 0 0 1px;\
-          font-size: inherit;\
-          margin: 0;\
-          overflow: visible;\
-          padding: .5em 1em;\
-        }\
-        \
-        th,\
-        td {\
-          padding: 0.5em 1em;\
-        }\
-        \
-        td:first-child,\
-        th:first-child {\
-          border-left-width: 0;\
-        }\
-        \
-        tr:nth-child(even) {\
-          background: #f2f2f2;\
-        }\
-        blockquote {\
-          margin-left: .5em;\
-          padding-left: .5em;\
-          border-left: 2px solid #ccc;\
-        }\
-      ')
-    ]
-  };
-
-  var _wysiwyg_fix_links = function(data) {
-    // Fix MD links that FB will munge
-    // find markdown links
-    var ms = data.match(/\[([^\]]+)\]\(([^\)]+)\)/g);
-
-    if ( ! ms ) {
-      return data;
-    }
-
-    for ( var i = 0, l = ms.length, m, mms; i < l; i++ ) {
-      m = ms[i];
-
-      // if the first and last argument match, just put the url in
-      mms = m.match(/\[([^\]]+)\]\(([^\)]+)\)/);
-
-      if ( mms[1] == mms[2] || mms[1] + '/' == mms[2] || mms[1] == mms[2] + '/' ) {
-        data = data.replace(mms[0], mms[1]);
-      }
-    }
-
-    return data;
-  };
-
-  var wysiwyg_textarea = function($textarea) {
-    wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
-    // Replacing CKE's textarea updater so I can intercept the save command. Kinda scary.
-    wysiwygify_editor.updateElement = function() {
-      var element = this.element;
-
-      if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE ) {
-        if ( !wysiwygify_editor.checkDirty() ) {
-          element.setValue( original_code );
+      //////////////////////
+     // Sniff for dom mutation events
+    //////////////////////
+    var sniff = function(selector, fn, once) {
+      once = once || false;
+      var running = false;
+      var fn_wrap = function() {
+        if ( running ) {
           return;
         }
 
-        var data = this.getData();
+        running = true;
 
-        if ( this.config.htmlEncodeOutput ) {
-          data = CKEDITOR.tools.htmlEncode( data );
+        var ret = fn.apply(this, arguments);
+
+        if ( ret && once ) {
+          $document.undelegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
         }
 
-        if ( element.is( 'textarea' ) ) {
-          // Strip tags
-          data = data.replace(/<([\/]?)(div)([^>]*)>/g, '<$1p>');
-          // My regex isn't good enough to combine these :(
-          data = data.replace(/<([\/]?)(span)([^>]*)>/g, '');
-          data = data.replace(/<(?!((?:\/\s*)?(?:table|thead|tr|th|tbody|td|del|strike|s|code|pre|a|blockquote|h1|h2|h3|h4|h5|h6|br|p|i|em|b|strong|[o|u]l|li)))([^>])+>/g, '');
+        running = false;
 
-          data = _toMarkDown(data);
-
-          data = _wysiwyg_fix_links(data);
-
-          element.setValue( data );
-        } else {
-          element.setHtml( data );
-        }
-      }
-    }
-  };
-
-  var _wysiwygify = function() {
-    var $customfield = $('.customfield-longtext');
-    var $textarea = $customfield.find('textarea:not(.wysiwygified)').addClass('wysiwygified');
-
-    // Edit
-    if ( $textarea.length ) {
-      $wysiwyg_toggle = $('<div class="wysiwyg_toggle">\
-        <!-- label class="wysiwyg_toggle_plain">Plain text</label -->\
-        <label class="wysiwyg_toggle_markdown">Markdown</label>\
-        <label class="wysiwyg_toggle_rich">Rich text</label>\
-      </div>')
-      .insertBefore($textarea);
-
-      wysiwyg_add();
-    // Show
-    }
-  };
-
-  // Don't call this function thousands of times
-  var wysiwygify_timeout;
-  var wysiwygify = function() {
-    clearTimeout(wysiwygify_timeout);
-
-    wysiwygify_timeout = setTimeout(_wysiwygify, 10);
-  };
-
-  var onload_wysiwygify = function() {
-    wysiwygify();
-    $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
-  };
-
-  var onunload_wysiwygify = function() {
-    $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
-
-    // TODO: Unload CKEDITOR instances
-    if ( wysiwygify_editor && wysiwygify_editor.name ) {
-      wysiwyg_remove(true);
-
-      var $textarea = $('textarea.wysiwygified');
-      if ( $textarea.length ) {
-        $textarea
-          .removeClass('wysiwygified')
-          ;
-      }
-    }
-  };
-
-  pm.add({
-    id: 'wysiwygify',
-    text: 'Rich Text on Case Summary',
-    title: 'Makes the Case Summary textarea "rich text" formattable (saves as markdown)',
-    defaultOn: false,
-    onload: onload_wysiwygify,
-    onunload: onunload_wysiwygify
-  });
-
-    ////////////////////////////
-   // Markdown parser
-  ////////////////////////////
-
-  (function(pm) {
-    var _markdownify_fix_text = function(text, replace_br, skip_other, skip_decode) {
-      if ( !skip_other && !skip_decode ) {
-        text = decodeEntities(text);
-      }
-
-      if ( replace_br ) {
-        // Remove br tags that FB adds
-        text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
-      }
-
-      if ( !skip_other ) {
-        // Remove links FB adds to markdown'd links
-        text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
-
-        // Fix other f'd up links like [http://google.com](http://google.com)
-        // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
-        text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
-
-        // Convert to markdown
-        text = do_marked(text);
-      }
-
-      text = auto_links(text);
-
-      return text;
-    };
-
-    var $markdownify_converter = $('<textarea/>');
-    var markdownify_timeout;
-    var _markdownify = function() {
-      var $customfield = $('.customfield-longtext .content > pre:not(.wysiwygified, .markdownified)').addClass('markdownified');
-
-      if ( $customfield.length ) {
-        $customfield.each(function() {
-          var $this = $(this);
-          var $parent = $this.closest('.customfield');
-          var id = $parent.find('[id]').attr('id');
-          ticket_data = ticket_data || window.fb.cases.current.bug;
-          var text = ticket_data.customFields[id] || $this.html();
-
-          //text = decodeEntities(text);
-          $this.data('markdown-text', text);
-
-          // get rid of auto links within code blocks
-          var matches = text.match(/\n    .+/g);
-          var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
-
-          if ( matches ) {
-            matches = matches.concat(cmatches);
-          } else {
-            matches = cmatches;
-          }
-
-          if ( matches ) {
-            for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
-              m = matches[i];
-
-              if ( m ) {
-                rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-                text = text.replace(m, rm);
-              }
-            }
-          }
-
-                                                           // don't decode since we got this raw
-          text = _markdownify_fix_text(text, false, false, true);
-
-          $this.html(text);
-        });
-      }
-
-      // Plain text comments
-      var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(:not(a, br)))').addClass('markdownified');
-
-      if ( $bodycontent.length ) {
-        $bodycontent.each(function() {
-          var $this = $(this);
-          var id = $this.closest('[data-ix-bug-event]').data('ix-bug-event');
-          ticket_data = ticket_data || window.fb.cases.current.bug;
-          var event = ticket_data.findEvent(id);
-
-                                                                            // Removing some weird whitespace FB adds causing code formatting
-          var text = event.sHtmlBody.replace(/<br \/>/g, '') || $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
-
-          $this.data('markdown-text', text);
-
-          // get rid of auto links within code blocks
-          var matches = text.match(/\n&nbsp; &nbsp; .+/g);
-          var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
-
-          if ( matches ) {
-            matches = matches.concat(cmatches);
-          } else {
-            matches = cmatches;
-          }
-
-          if ( matches ) {
-            for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
-              m = matches[i];
-
-              if ( m ) {
-                rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-                text = text.replace(m, rm);
-              }
-            }
-          }
-
-          text = _markdownify_fix_text(text, true, false, false);
-
-          $this.html(text);
-        });
-      }
-
-      // WYSIWYG'd comments
-      $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
-
-      if ( $bodycontent.length ) {
-        $bodycontent.each(function() {
-          var $this = $(this);
-          var text = $this.html();
-
-          $this.data('markdown-text', text);
-
-          // get rid of auto links within code blocks
-          var matches = text.match(/\n&nbsp; &nbsp; .+/g);
-          var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
-
-          if ( matches ) {
-            matches = matches.concat(cmatches);
-          } else {
-            matches = cmatches;
-          }
-
-          if ( matches ) {
-            for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
-              m = matches[i];
-
-              if ( m ) {
-                rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
-                text = text.replace(m, rm);
-              }
-            }
-          }
-
-          text = _markdownify_fix_text(text, false, true);
-
-          $this.html(text);
-        });
-      }
-    };
-
-    // TODO: DRY
-    var ticket_data;
-    var check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
-    var check_api_response = function(type, info) {
-      if ( check_api_response_regex.test(type.route) ) {
-        var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\/?/);
-        if ( id ) {
-          var uid = type.route.match(/cases\/([0-9]+)/)[1];
-
-          if ( id[2] === uid ) {
-            ticket_data = info.data;
-          }
-        }
-      }
-    };
-
-    // Don't call this function thousands of times
-    var markdownify = function() {
-      clearTimeout(markdownify_timeout);
-
-      markdownify_timeout = setTimeout(_markdownify, 10);
-    };
-
-    // open links in new window
-    var set_target_blank = function() {
-      $(this).attr('target', '_blank');
-    };
-
-    var onload_markdown = function() {
-      markdownify();
-      $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
-      $body.delegate('.markdownified a', 'mouseover focus', set_target_blank);
-      $body.addClass('fogbugz-helper-markdown');
-      fb.pubsub.subscribe('/api/success', check_api_response);
-    };
-
-    var onunload_markdown = function() {
-      $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
-
-      $('.markdownified').each(function() {
-        var $this = $(this);
-
-        $this.removeClass('markdownified');
-        $this.html($this.data('markdown-text'));
-      });
-
-      $body.removeClass('fogbugz-helper-markdown');
-      $body.undelegate('.markdownified a', 'mouseover focus', set_target_blank);
-
-      fb.pubsub.unsubscribe('/api/success', check_api_response);
-    };
-
-    pm.add({
-      id: 'markdown',
-      text: 'Markdown for Comments/Case Description',
-      title: 'Automatically converts markdown in plain text comments and case description',
-      defaultOn: true,
-      onload: onload_markdown,
-      onunload: onunload_markdown
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Add related tickets
-  ////////////////////////////
-
-  var add_related_ticket_buttons_timeout;
-  var add_related_ticket_done_class = 'add_related_ticket_done';
-  var add_related_ticket_button_class = 'add_related_ticket_button';
-  //var add_related_ticket_link_class = 'add_related_ticket_link';
-  var add_related_ticket_child_class = 'add_related_ticket_child';
-  var add_related_ticket_copy_class = 'add_related_ticket_copy';
-  //var add_related_ticket_parent_class = 'add_related_ticket_parent';
-
-  var add_related_ticket_values = null;
-  var add_related_ticket_array_regex = /^\[.*\]$/;
-
-  var add_related_ticket_click = function(ev) {
-    // ev.preventDefault();
-
-    var $this = $(this);
-    var id = $('.case .top .left .case').text();
-
-    var $add_button = $('.gw-new-case');
-    var old_href = $add_button.attr('href');
-    var href = old_href + '?';
-
-    if ( $this.hasClass(add_related_ticket_child_class) ) {
-      var duplicates = {
-        props: [
-          'ixProject',
-          'ixArea',
-          'ixCategory'
-        ]
+        return ret;
       };
 
-      href += 'ixBugParent=' + id + '&';
-    } else if ( $this.hasClass(add_related_ticket_copy_class) ) {
-      // Values are hard coded, couldn't find anything in fb that would tell me what should be editable
-      var duplicates = {
-        props: [
-          'sTitle',
-          'ixProject',
-          'ixArea',
-          'ixFixFor',
-          'ixCategory',
-          'ixPersonAssignedTo',
-          'ixStatus',
-          'sCustomerEmail',
-          'ixPriority',
-          'ixBugParent',
-          'dtDue',
-          'hrsCurrEst',
-          'hrsElapsedExtra',
-          'dblStoryPts',
-          'tags',
-        ],
-        customs: [],
-        kanbans: [
-          'ixKanbanColumn',
-          'ixKanbanColor'
-        ],
-        cases: [
-          'subcases',
-          'casesDependedOn'
-        ]
-      };
+      $document.delegate('#main', 'DOMNodeInserted DOMNodeRemoved', fn_wrap);
+    };
 
-      for ( var field in add_related_ticket_data.customFields ) {
-        if ( !add_related_ticket_data.customFields.hasOwnProperty(field) ) continue;
-        if ( /^[0-9]+_/.test(field) === false ) continue;
-        duplicates.customs.push(field);
-      }
+    var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
+
+      //////////////////////
+     // Preference manager
+    //////////////////////
+    var PreferenceManager = function() {
+      this.prefs = {};
+      this.loaded = false;
+    };
+
+    PreferenceManager.prototype.set = function(name, value) {
+      return localStorage.setItem('fogbugz-helper-' + name, value);
     }
 
-    for ( var key in duplicates ) {
-      // skip loop if the property is from prototype
-      if (!duplicates.hasOwnProperty(key)) continue;
+    PreferenceManager.prototype.get = function(name, defaultOn) {
+      var val = JSON.parse(localStorage.getItem('fogbugz-helper-' + name));
 
-      var dupes = duplicates[key];
-
-      add_related_ticket_data = add_related_ticket_data || window.fb.cases.current.bug;
-
-      for ( var i = 0, l = dupes.length, value; i < l; i++ ) {
-        if ( key === 'props' ) {
-          value = add_related_ticket_data[dupes[i]];
-
-          if ( dupes[i] === 'sTitle' ) {
-            value = 'Copy of ' + value;
-          }
-        } else if ( key === 'customs' ) {
-          value = add_related_ticket_data.customFields[dupes[i]];
-        } else if ( key === 'kanbans' ) {
-          value = add_related_ticket_data.kanbanInfo[dupes[i]];
-        } else if ( key === 'cases' ) {
-          value = [];
-          var cases = add_related_ticket_data[dupes[i]];
-
-          for ( var ci = 0, cl = cases.length, c; ci < cl; ci++ ) {
-            c = cases[ci];
-            value.push(c.ixBug + ': ' + c.sTitle);
-          }
-        }
-
-        if ( value === null || typeof value === 'undefined' || value === 0 ) {
-          continue;
-        }
-
-        href += encodeURIComponent(dupes[i]) + '=' + encodeURIComponent(value) + '&'
+      if ( val === null && defaultOn ) {
+        val = true;
       }
+
+      return val;
     }
 
-    /*$add_button
-      .attr('href', href)
-      .click()
-      .attr('href', old_href)
-      ;*/
-
-    return href;
-  };
-
-  // Add buttons and add id's if a button was previously clicked
-  var _add_related_ticket_buttons = function() {
-    var $left = $('.case .top .left:not(.' + add_related_ticket_done_class + ')').addClass(add_related_ticket_done_class);
-
-    // Case has an ID
-    if ( $('.case .top .left .case').length ) {
-      var id = $('#formEditCase .top .left .case').text();
-
-      var $child = $('<a href="javascript:;">Sub Case</a>')
-        .addClass(add_related_ticket_button_class)
-        .addClass(add_related_ticket_child_class)
-        .appendTo($left)
-        ;
-
-      $child.attr('href', add_related_ticket_click.call($child[0]));
-
-      var $copy = $('<a href="javascript:;">Duplicate</a>')
-        .addClass(add_related_ticket_button_class)
-        .addClass(add_related_ticket_copy_class)
-        .appendTo($left)
-        ;
-
-      $copy.attr('href', add_related_ticket_click.call($copy[0]));
-
-      /* var $parent = $('<button>+ Parent Case</button>')
-        .addClass(add_related_ticket_button_class)
-        .addClass(add_related_ticket_parent_class)
-        .appendTo($left)
-        ;*/
-    }
-  };
-
-  // Don't call this function thousands of times
-  var add_related_ticket_buttons = function() {
-    clearTimeout(add_related_ticket_buttons_timeout);
-
-    add_related_ticket_buttons_timeout = setTimeout(_add_related_ticket_buttons, 10);
-  };
-
-  // TODO: DRY
-  var add_related_ticket_data;
-  var add_related_ticket_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
-  var add_related_ticket_check_api_response = function(type, info) {
-    if ( add_related_ticket_check_api_response_regex.test(type.route) ) {
-      var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\/?/);
-      if ( id ) {
-        var uid = type.route.match(/cases\/([0-9]+)/)[1];
-
-        if ( id[2] === uid ) {
-          add_related_ticket_data = info.data;
-        }
-      }
-    }
-  };
-
-  var onload_add_related_ticket = function() {
-    add_related_ticket_buttons();
-    $document
-      .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
-      .delegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
-      ;
-
-    fb.pubsub.subscribe('/api/success', add_related_ticket_check_api_response);
-  };
-
-  var onunload_add_related_ticket = function() {
-    $document
-      .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
-      .undelegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
-      ;
-
-    $('.' + add_related_ticket_button_class).remove();
-    //$('.' + add_related_ticket_link_class).remove();
-    $('.' + add_related_ticket_done_class).removeClass(add_related_ticket_done_class);
-
-    fb.pubsub.unsubscribe('/api/success', add_related_ticket_check_api_response);
-  };
-
-  pm.add({
-    id: 'add_related_ticket',
-    text: 'Add Related Ticket Buttons',
-    title: 'Adds buttons to make it easy to add parent/child tickets',
-    defaultOn: true,
-    onload: onload_add_related_ticket,
-    onunload: onunload_add_related_ticket
-  });
-
-    ////////////////////////////
-   // Add resolve/reopen/close/reactivate button to edit ticket
-  ////////////////////////////
-
-  var add_resolve_button_timeout;
-  var has_add_resolve_button_class = 'has_add_resolve_button';
-
-  // Add resolve or reopen button to ticket
-  var _add_resolve_button = function() {
-    var $nav = $('.case > article > nav:not(.' + has_add_resolve_button_class + ')');
-
-    if ( $nav.length && $('#sCommand').val() === 'edit' ) {
-      $nav.addClass(has_add_resolve_button_class);
-
-      // Case is open
-      if ( window.fb.cases.current.bug.fOpen ) {
-        var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
-        var extra = '';
-
-        // Case is resolved
-        if ( window.fb.cases.current.bug.ixPersonResolvedBy ) {
-          var reactivate_url = document.location.href.replace(/\/edit\//, '/reactivate/');
-          var close_url = document.location.href.replace(/\/edit\//, '/close/');
-
-          extra = '\
-            <a class="control" name="reactivate" href="' + reactivate_url + '" accesskey="t">\
-              <span class="icon icon-case-reactivate"></span>Reactivate\
-            </a>\
-            <a class="control" name="close" href="' + close_url + '" accesskey="x">\
-              <span class="icon icon-case-close"></span>Close Case\
-            </a>\
-          ';
-        }
-
-        $nav.append('\
-          <span class="controls">\
-            <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
-              <span class="icon icon-case-resolve"></span>Resolve\
-            </a>\
-            ' + extra + '\
-            <label for="btnSubmit" class="control save">\
-              <span class="icon"></span>Save\
-            </label>\
-            <label for="btnCancel" class="control cancel">\
-              <span class="icon"></span>Cancel\
-            </label>\
-          </span>\
-        ');
-      } else {
-        // Case is closed
-        var reopen_url = document.location.href.replace(/\/edit\//, '/reopen/');
-
-        $nav.append('\
-          <span class="controls">\
-            <a class="control" name="reopen" href="' + reopen_url + '" accesskey="u">\
-              <span class="icon icon-case-reopen"></span>Reopen\
-            </a>\
-            <label for="btnSubmit" class="control save">\
-              <span class="icon"></span>Save\
-            </label>\
-            <label for="btnCancel" class="control cancel">\
-              <span class="icon"></span>Cancel\
-            </label>\
-          </span>\
-        ');
-      }
-    }
-  };
-
-  // Checking to see if the api call was a case, and if so save the fOpen state
-  var add_resolve_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
-  var add_resolve_check_api_response = function(type, info) {
-    //if ( info.data && add_resolve_check_api_response_regex.test(type.route) ) {
-    //}
-  };
-
-  // Don't call this function thousands of times
-  var add_resolve_button = function() {
-    clearTimeout(add_resolve_button_timeout);
-
-    add_resolve_button_timeout = setTimeout(_add_resolve_button, 10);
-  };
-
-  var onload_add_resolve = function() {
-    add_resolve_button();
-    $document
-      .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
-      ;
-
-    fb.pubsub.subscribe('/api/success', add_resolve_check_api_response);
-  };
-
-  var onunload_add_related_ticket = function() {
-    $document
-      .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
-      ;
-
-    $('.' + has_add_resolve_button_class).removeClass().find('.controls').remove();
-    fb.pubsub.unsubscribe('/api/success', add_resolve_check_api_response);
-  };
-
-  pm.add({
-    id: 'add_resolve',
-    text: 'Add Save/Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
-    title: 'Adds a "save," "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
-    defaultOn: true,
-    onload: onload_add_resolve,
-    onunload: onunload_add_related_ticket
-  });
-
-    ////////////////////////////
-   // Auto-clear notifications
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var auto_clear_interval;
-    var $header_unread_counter;
-
-    var clear = function() {
-      if ( !$header_unread_counter || !$header_unread_counter.length ) {
-        $header_unread_counter = $('#header-unread-counter');
-      }
-
-      if ( parseInt($header_unread_counter.html()) ) {
-        $('#mark-all-read').click();
-      }
-    };
-
-    // Preference Manager functions
-    var onload_fn = function() {
-      auto_clear_interval = setInterval(clear, 5000);
-      $body.addClass('fogbugz-helper-auto-clear-notify');
-    };
-
-    var onunload_fn = function() {
-      clearInterval(auto_clear_interval);
-      $body.removeClass('fogbugz-helper-auto-clear-notify');
-    };
-
-    pm.add({
-      id: 'auto_clear_notifications',
-      text: 'Auto-Clear Notifications',
-      title: 'Clears the FogBugz notifications periodically. Can help with FogBugz sluggishness.',
-      defaultOn: false,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Color code statuses
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var has_add_text_classes_class = 'has_add_text_classes_button';
-
-    // Add resolve or reopen button to ticket
-    var _add_text_classes = function() {
-      var $container = $('.droplist-popup:not(.' + has_add_text_classes_class + '), .case-list:not(.' + has_add_text_classes_class + '), .case .case-header-info:not(.' + has_add_text_classes_class + ')');
-
-      if ( $container.length ) {
-        $container.addClass(has_add_text_classes_class);
-
-        $container.find('.grid-column-Status, .status, .droplist-popup-item').each(function() {
-          var $this = $(this);
-          $this.addClass('status_helper ' + ('status_' + $this.text().trim()).replace(/[^a-z\-]+/gi, '_').toLowerCase());
-        });
-      }
-
-      var $field = $('#ixStatus input[type="text"]');
-
-      if ( $field.length ) {
-        $field.closest('.field')
-          .removeClass (function (index, css) {
-            return (css.match (/(^|\s)status_\S+/g) || []).join(' ');
-          })
-          .addClass('status_helper ' + ('status_' + $field.val().trim()).replace(/[^a-z\-]+/gi, '_').toLowerCase());
-      }
-    };
-
-    var add_text_classes_timeout;
-    // Don't call this function thousands of times
-    var add_text_classes = function() {
-      clearTimeout(add_text_classes_timeout);
-
-      add_text_classes_timeout = setTimeout(_add_text_classes, 10);
-    };
-
-    var active_class = 'fogbugz-helper-colorize-statuses';
-    var onload_fn = function() {
-      $body.addClass(active_class);
-
-      add_text_classes();
-      $document
-        .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
-        ;
-    };
-
-    var onunload_fn = function() {
-      $body.removeClass(active_class);
-
-      $document
-        .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
-        ;
-
-      $('.' + active_class).removeClass();
-    };
-
-    /* pm.add({
-      id: 'add_resolve',
-      text: 'Add Save/Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
-      title: 'Adds a "save," "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
-      defaultOn: true,
-      onload: onload_add_resolve,
-      onunload: onunload_add_related_ticket
-    }); */
-
-    pm.add({
-      id: 'colorize_statuses',
-      text: 'Colorize Statuses',
-      title: 'Adds colorful backgrounds to status indicators on tickets',
-      defaultOn: true,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Hotfix shortcut
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var $tooltip = $('<button type="button" class="fogbugz_helper_tooltip"></button>');
-    var $tooltip_text = $('<span class="fogbugz_helper_tooltip_text"></span>')
-      .appendTo($tooltip);
-
-    var copy_text = function(ev) {
-      try {
-        if ( window.getSelection().empty ) {  // Chrome
-          window.getSelection().empty();
-        } else if ( window.getSelection().removeAllRanges ) {  // Firefox
-          window.getSelection().removeAllRanges();
-        }
-
-        var range = document.createRange();
-        range.selectNode($tooltip_text[0]);
-        window.getSelection().addRange(range);
-
-        if ( window.getSelection().toString() ) {
-          document.execCommand('copy');
-        } else {
-          // If at first you don't succeed...
-          setTimeout(function() {
-            copy_text.call(this, ev);
-          }, 100)
-        }
-      } catch(copyErr) {
-        alert('Unable to copy');
-      }
-
-      // Hiding here seems to cause all kinds of issues
-      // $tooltip.fadeOut(50);
-
-      if ( window.getSelection().empty ) {  // Chrome
-        window.getSelection().empty();
-      } else if ( window.getSelection().removeAllRanges ) {  // Firefox
-        window.getSelection().removeAllRanges();
-      }
-    };
-
-    $tooltip
-      .bind('mousedown', copy_text)
-      .bind('click', function(ev) {
-        ev.preventDefault();
-        ev.stopPropagation();
-      })
-      ;
-
-    var hide_tooltip_to;
-    var show_tooltip_to;
-
-    var show_tooltip = function() {
-      var el = this;
-      var $this = $(this);
-      clearTimeout(hide_tooltip_to);
-      clearTimeout(show_tooltip_to);
-
-      show_tooltip_to = setTimeout(function() {
-        var text = el.childNodes[0].textContent;
-        if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
-          $tooltip.show();
-          $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www -m="" ' + text + '');
-          $tooltip.appendTo(el);
-        }
-      }, 100);
-    };
-
-    var hide_tooltip = function() {
-      hide_tooltip_to = setTimeout(function() {
-        $tooltip.detach();
-      }, 500);
-    };
-
-    var onload_fn = function() {
-      $document
-        .delegate('.event a', 'mouseover focus', show_tooltip)
-        .delegate('.event a', 'mouseout blur', hide_tooltip)
-        ;
-    };
-
-    var onunload_fn = function() {
-      $document
-        .undelegate('.event a', 'mouseover focus', show_tooltip)
-        .undelegate('.event a', 'mouseout blur', hide_tooltip)
-        ;
-    };
-
-    pm.add({
-      id: 'hotfix_shortcut',
-      text: 'Show Hotfix Comand on Commit IDs',
-      title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
-      defaultOn: true,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Kill ticket modals
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var force_ticket_navigation = function(e) {
-      e.stopPropagation();
-    };
-
-    var onload_fn = function() {
-      $('#event-tracking-div').delegate('a.case', 'click', force_ticket_navigation);
-    };
-
-    var onunload_fn = function() {
-      $('#event-tracking-div').undelegate('a.case', 'click', force_ticket_navigation);
-    };
-
-    pm.add({
-      id: 'no_ticket_modals',
-      text: 'Disable Ticket Modals',
-      title: 'Forces a page refresh when clicking a ticket link',
-      defaultOnIOS: true,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Preview Images
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var _preview_images_class = 'fogbugz_helper_preview_images';
-    var _inserted_class = 'fogbugz_helper_preview_images_inserted';
-    var _has_image_class = 'fogbugz_helper_preview_images_has_image';
-    var _image_selector = '.fogbugz_helper_preview_images_inserted .grid-column-contents.grid-column-50_PreviewImage button';
-
-    // TODO: Make these globally accessible
-    var _modal_showing_class = 'fogbugz_helper_modal_showing';
-    var $backdrop = $('<div/>').addClass('fogbugz_helper_backdrop');
-    var $modal_wrapper = $('<div/>').addClass('fogbugz_helper_modal_wrapper');
-    var $modal = $('<div/>').addClass('fogbugz_helper_modal');
-    var $modal_content = $('<div/>').addClass('fogbugz_helper_modal_content');
-    var $close = $('<button/>').attr('type', 'button').html('Close').addClass('fogbugz_helper_modal_close');
-
-    var show_modal = function(content) {
-      $body.addClass(_modal_showing_class);
-      $modal_content.empty().append($(content));
-    };
-
-    var hide_modal = function() {
-      $body.removeClass(_modal_showing_class);
-      $modal_content.empty();
-    };
-
-    $modal_wrapper
-      .delegate('.fogbugz_helper_modal_close', 'click', hide_modal)
-      .bind('click', function(ev) {
-        if ( ev.target === $modal_wrapper[0] ) {
-          hide_modal.call($modal_wrapper[0], ev);
-        }
-      })
-      .append($modal)
-      .appendTo('body')
-      ;
-
-    $modal
-      .append($modal_content)
-      .append($close)
-      ;
-
-    $backdrop.appendTo('body').bind('click', hide_modal);
-
-    $modal.bind('click', function(ev) {
-      // ev.stopPropagation();
-    });
-
-    // Back to feature stuff
-    var images;
-    var _template_inserted = function(r, data) {
-      var $case_list = $('.case-list');
-
-      if ( $case_list.hasClass(_inserted_class) ) {
+    PreferenceManager.prototype.add = function(pref) {
+      if ( !pref.id ) {
+        // Maybe throw an error?
         return;
       }
 
-      var idx = 0;
-      images = [];
-      $('.bug-grid-row .grid-column-50_PreviewImage').each(function() {
-        var $this = $(this);
-        var $a = $this.find('a');
-        var href = $a.attr('href');
+      this.prefs[pref.id] = pref;
+    };
 
-        if ( href ) {
-          var $img = $('<img/>').attr('src', href);
-          var $button = $('<button/>').attr('type', 'button').append($img);
-          //$this.css({width: 100, height: 100, border: '1px solid blue'});
-          //console.log($this[0], $img[0])
-          $this
-            .empty().addClass(_has_image_class).append($button)
-            .data('__fbhpis_idx', idx)
+    PreferenceManager.prototype.load = function() {
+      var me = this;
+      var pkey;
+      var pref;
+      var prefs_array = [];
+
+      if ( me.loaded ) {
+        // Maybe throw an error?
+        return;
+      }
+
+      me.loaded = true;
+
+      var add_prefs = function(force) {
+        var $helper_menu = $('#fogbugz-helper-menu');
+
+        force = force || false;
+
+        if ( !force && $helper_menu.length ) {
+          // Already added menu
+          return;
+        } else if ( force ) {
+          $helper_menu.empty();
+        } else {
+          $helper_menu = $('<div/>').attr('id', 'fogbugz-helper-menu');
+          // Add a link to plugin homepage
+          var $homepage_link = $('<label><a href="http://ziprecruiter.github.io/greasemonkey/fogbugz-helper/" target="_blank">ZipRecruiter FogBugz Helper</a></label>');
+          $helper_menu.append($homepage_link);
+        }
+
+        // Menu to put checkbox preferences into
+        var $prefs_menu = $('<menu/>').attr('id', 'fogbugz-helper-prefs-menu');
+
+        // Menu for features to dump stuff into
+        var $features_menu = $('<menu/>').attr('id', 'fogbugz-helper-features-menu');
+
+        // Make preferences
+        var $plabel;
+        var $pcheck;
+
+        prefs_array.sort(function(a, b) {
+          if ( a.text < b.text ) {
+            return -1;
+          }
+
+          if ( a.text > b.text ) {
+            return 1;
+          }
+
+          // names must be equal
+          return 0;
+        });
+
+        for ( var i = 0, l = prefs_array.length; i < l; i++ /*pkey in me.prefs*/ ) {
+          //pref = me.prefs[pkey];
+          pref = prefs_array[i];
+
+          $pcheck = $('<input type="checkbox">')
+            .attr({
+              'id': 'fogbugz-helper-pref-check-' + pref.id
+            })
+            .data('prefid', pref.id)
             ;
 
-          images.push($button[0]);
+          if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) ) {
+            $pcheck.prop('checked', true);
+          }
 
-          idx++;
+          $plabel = $('<label/>')
+            .attr({
+              'id': 'fogbugz-helper-pref-' + pref.id,
+              'for': 'fogbugz-helper-pref-check-' + pref.id,
+              'title': pref.title + ' (Default: ' + (pref.defaultOn || (iOS && pref.defaultOnIOS)?'On':'Off') + ')'
+            })
+            .html(pref.text)
+            .prepend($pcheck)
+            .appendTo($prefs_menu)
+            ;
         }
-      });
 
-      $case_list.addClass(_inserted_class)
-    };
+        $helper_menu
+          .append($prefs_menu)
+          .append($features_menu)
+          .insertBefore($('.gw-nav-entry-settings .dropdown-menu .menu-content-section:last-child'))
+          ;
 
-    var image;
-    var image_click = function(ev) {
-      ev.preventDefault();
-      ev.stopPropagation();
+        for ( pkey in me.prefs ) {
+          pref = me.prefs[pkey];
 
-      var $row = $(this).closest('.bug-grid-row');
-      var $pi = $row.find('.grid-column-50_PreviewImage');
-      image = $pi.data('__fbhpis_idx');
+          if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) && pref.ontools ) {
+            pref.ontools();
+          }
+        }
+      };
 
-      $modal_wrapper.scrollTop(0);
+      // One-time setup stuff
+      $document
+        .delegate('.gw-nav-entry-settings', 'mouseover', function() {
+          setTimeout(add_prefs, 10);
+        })
+        // Changing preferences via checkboxes
+        .delegate('#fogbugz-helper-prefs-menu input', 'change', function() {
+          var $this = $(this);
+          var id = $this.data('prefid');
+          var pref = me.prefs[id];
+          var checked = $this.prop('checked');
+          me.set(id, checked);
 
-      var content = '';
-      $row.find('td').each(function() {
-        content += this.innerHTML;
-      });
+          if ( !checked && pref.onunload ) {
+            pref.onunload();
+          } else if ( checked ) {
+            if ( pref.onload ) {
+              pref.onload();
+            }
 
-      var $div = $('<div/>').addClass(_preview_images_class + '_modal_content').html(content);
+            if ( pref.ontools ) {
+              pref.ontools();
+            }
+          }
+        })
+        ;
 
-      var $prev;
-      var $next;
+      for ( pkey in me.prefs ) {
+        pref = me.prefs[pkey];
+        prefs_array.push(pref);
 
-      $div.find('input').remove(); // remove checkbox
-      var $img_div = $div.find('.grid-column-50_PreviewImage');
-      $img_div.find('img').appendTo($img_div);
-      $img_div.find('button').remove();
-
-      if ( image > 0 ) {
-        $prev = $('<button/>').attr('type', 'button').html('Prev').addClass(_preview_images_class + '_prev ' + _preview_images_class + '_prevnext');
-        $img_div.prepend($prev);
+        if ( me.get(pref.id, pref.defaultOn || (iOS && pref.defaultOnIOS)) && pref.onload ) {
+          pref.onload();
+        }
       }
-
-      if ( image < images.length - 1 ) {
-        $next = $('<button/>').attr('type', 'button').html('Next').addClass(_preview_images_class + '_next ' + _preview_images_class + '_prevnext');
-        $img_div.append($next);
-      }
-
-      $div.append($img_div); // Make image last
-
-      show_modal($div);
     };
 
-    var prev_image_click = function(ev) {
-      image_click.call(images[image - 1], ev);
-    };
+    // Make the preference manager
+    var pm = new PreferenceManager();
 
-    var next_image_click = function(ev) {
-      image_click.call(images[image + 1], ev);
-    };
-
-    var onload_fn = function() {
-      $body.addClass(_preview_images_class);
-
-      fb.pubsub.subscribe("/template/inserted", _template_inserted);
-      $document.delegate(_image_selector, 'click', image_click);
-      $document.delegate('.fogbugz_helper_preview_images_next', 'click', next_image_click);
-      $document.delegate('.fogbugz_helper_preview_images_prev', 'click', prev_image_click);
-
-      _template_inserted(false);
-    };
-
-    var onunload_fn = function() {
-      fb.pubsub.unsubscribe("/template/inserted", _template_inserted);
-      $document.undelegate(_image_selector, 'click', image_click);
-      $document.undelegate('.fogbugz_helper_preview_images_next', 'click', next_image_click);
-      $document.undelegate('.fogbugz_helper_preview_images_prev', 'click', prev_image_click);
-
-      $body.removeClass(_preview_images_class);
-    };
-
-    pm.add({
-      id: 'preview_images',
-      text: 'Preview Images',
-      title: 'Changes "Preview Image" field into an image',
-      defaultOn: true,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
+      ////////////////////////////
+     // (Preference) Use Stylesheet (for debugging)
     ////////////////////////////
-   // FB Icon
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
-    function changeFavicon(src) {
-     var link = document.createElement('link'),
-         oldLink = document.getElementById('dynamic-favicon');
-     link.id = 'dynamic-favicon';
-     link.rel = 'shortcut icon';
-     link.href = src;
-     if (oldLink) {
-      document.head.removeChild(oldLink);
-     }
-     document.head.appendChild(link);
+    var use_stylesheet = function() {
+      var link = document.createElement('link');
+      link.rel = 'stylesheet';
+      link.id = 'fogbugz-helper-css';
+      document.head.appendChild(link);
+      link.href = window.zrBookmarkletUrl + '/fogbugz-helper.css?';
+    };
+
+    var use_style_tag = function() {
+      var s = document.createElement('style');
+      s.id = 'fogbugz-helper-css';
+      s.innerHTML = window.zrBookmarkletCSS;
+      document.head.appendChild(s);
     }
 
-    var onload_fn = function() {
-      changeFavicon(window.zrBaseUrl + '/img/fogbugz_favicon.ico');
+    var onload_use_stylesheet = function() {
+      $('#fogbugz-helper-css').remove();
+      use_stylesheet();
     };
 
-    var onunload_fn = function() {
-      document.head.removeChild(document.getElementById('dynamic-favicon'));
-      $('[rel="shortcut icon"]').appendTo('head');
-    };
-
-    pm.add({
-      id: 'use_old_favicon',
-      text: 'Use Old FogBugz Icon',
-      title: 'Shows the old kiwi icon rather than the weird Decepticon/Manuscript icon',
-      defaultOn: true,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Hide user avatars
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var onload_fn = function() {
-      $body.addClass('fogbugz_helper_hide_avatars');
-    };
-
-    var onunload_fn = function() {
-      $body.removeClass('fogbugz_helper_hide_avatars');
+    var onunload_use_stylesheet = function() {
+      $('#fogbugz-helper-css').remove();
+      use_style_tag();
     };
 
     pm.add({
-      id: 'hide_avatars',
-      text: 'Hide User Avatars in Comments',
-      title: 'Hides the avatars on ticket comments',
-      defaultOn: false,
-      onload: onload_fn,
-      onunload: onunload_fn
+      id: 'use_stylesheet',
+      text: 'Use Stylesheet (for debugging)',
+      title: 'This is for development purposes, you shouldn\'t need to enable it',
+      onload: onload_use_stylesheet,
+      onunload: onunload_use_stylesheet
     });
-  })(pm);
 
+    if ( pm.get('use_stylesheet') ) {
+      use_stylesheet();
+    } else {
+      use_style_tag();
+    }
 
-    ////////////////////////////
-   // Hide empty comments
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    var onload_fn = function() {
-      $body.addClass('fogbugz_helper_hide_empty_comments');
-    };
-
-    var onunload_fn = function() {
-      $body.removeClass('fogbugz_helper_hide_empty_comments');
-    };
-
-    pm.add({
-      id: 'hide_empty_comments',
-      text: 'Hide empty comments in ticket view',
-      title: 'Hides the empty comments on ticket comments',
-      defaultOn: false,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
-
-    ////////////////////////////
-   // Assign To Me Button
-  ////////////////////////////
-  (function(pm) { // So as not to pollute the namespace
-    // Script specific
-    var assign_to_me = function(event) {
-      $('#ixPersonAssignedTo').droplist().val(window.fb.config.ixPerson);
-
-      if ( event ) {
-        event.preventDefault();
+      //////////////////////
+     // Set up and run the features
+    //////////////////////
+    var init = function() {
+      // Make sure jQuery is loaded before continuing
+      if ( !window.jQuery ) {
+        setTimeout(init, 10);
+        return;
       }
-    };
 
-    var remove_button = function() {
-      $('._fbh_atm_button').remove();
+      $ = window.jQuery;
 
-      $('#ixPersonAssignedTo').removeClass('_fbh_atm_done').parent().removeClass('_fbh_atm_same');
-    };
-
-    var check_change = function() {
-      console.log('change');
-
-      var $ixPersonAssignedTo = $('#ixPersonAssignedTo');
-
-      var val = $ixPersonAssignedTo.droplist().val();
-
-      if ( val === window.fb.config.ixPerson || (val === '- default assignee -' && window.fb.cases.current.bug.ixPersonAssignedTo === window.fb.config.ixPerson) ) {
-        $ixPersonAssignedTo.parent().addClass('_fbh_atm_same');
-      } else {
-        $ixPersonAssignedTo.parent().removeClass('_fbh_atm_same');
+      if ( pm.get('use_stylesheet') ) {
+        // Make sure css is loaded before continuing
+        var $fogbugz_helper_css = $('#fogbugz-helper-css');
+        if ( !$fogbugz_helper_css.length || ($fogbugz_helper_css.css('content') != 'loaded' && $fogbugz_helper_css.css('content') != '"loaded"' && $fogbugz_helper_css.css('content') != "'loaded'") ) {
+          setTimeout(init, 10);
+          return;
+        }
       }
-    };
 
-    // Boilerplate
-    var body_class = '_fbh_atm';
+        //////////////////////
+       // autosize textarea plugin
+      //////////////////////
+      $.fn.autosize = function() {
+        return this.each(function() {
+          var $this = $(this);
 
-    var run_script = function() {
-      var $ixPersonAssignedTo = $('#ixPersonAssignedTo:not(._fbh_atm_done)');
+          if ( $this.is('.autosize-autosized') ) {
+            return;
+          }
 
-      if ( !$ixPersonAssignedTo.length ) return;
+          $this.addClass('autosize-autosized');
 
-      $ixPersonAssignedTo.addClass('_fbh_atm_done');
+          autosize(this);
+        });
+      };
 
-      var $me = $('<a href="javascript:;" class="_fbh_atm_button">Assign to Me</a>');
-      $me.insertBefore($ixPersonAssignedTo);
+      // Run the main functionality
+      main($);
+    }
 
-      $ixPersonAssignedTo.bind('droplistChange', check_change);
+    var main = function($) {
+      // Shared Stuff
+      var $body = $('body');
+      $document = $(document);
+      $window = $(window);
 
-      check_change();
-    };
+        ////////////////////////////
+       // (Preference) Hotkeys
+      ////////////////////////////
 
-    var run_script_timeout;
-    // Don't call this function thousands of times
-    var try_run_script = function() {
-      clearTimeout(run_script_timeout);
+      // Keep this preference first so other preferences can add their own hotkeys
 
-      run_script_timeout = setTimeout(run_script, 10);
-    };
+      // http://stackoverflow.com/questions/13992111/javascript-function-to-convert-keycodes-into-characters
+      var convertKeyCode = function(evt) {
+        var chara = null;
+        var keyCode = (evt.which) ? evt.which : evt.keyCode;
+        var shift = evt.shiftKey;
+        //if (keyCode == 8)
+        //  chara = "backspace";
+        //  backspace
+        //if (keyCode == 9)
+        //  chara = "tab";
+        //  tab
+        //if (keyCode == 13)
+        //  chara = "enter";
+        //  enter
+        if (keyCode == 16)
+          chara = "";
+        //  chara = "shift";
+        //  shift
+        //if (keyCode == 17)
+        //  chara = "ctrl";
+        //  ctrl
+        //if (keyCode == 18)
+        //  chara = "alt";
+        //  alt
+        if (keyCode == 19) {
+            chara = "PAUSE/BREAK";
+        //  pause/break
+        //if (keyCode == 20)
+        //  chara = "caps lock";
+        //  caps lock
+        } else if (keyCode == 27) {
+          chara = "ESC";
+        //  escape
+        //if (keyCode == 33)
+        //  chara = "page up";
+        // page up, to avoid displaying alternate character and confusing people
+        //if (keyCode == 34)
+        //  chara = "page down";
+        // page down
+        //if (keyCode == 35)
+        //  chara = "end";
+        // end
+        //if (keyCode == 36)
+        //  chara = "home";
+        // home
+        //if (keyCode == 37)
+        //  chara = "left arrow";
+        // left arrow
+        //if (keyCode == 38)
+        //  chara = "up arrow";
+        // up arrow
+        //if (keyCode == 39)
+        //  chara = "right arrow";
+        // right arrow
+        //if (keyCode == 40)
+        //  chara = "down arrow";
+        // down arrow
+        //if (keyCode == 45)
+        //  chara = "insert";
+        // insert
+        //if (keyCode == 46)
+        //  chara = "delete";
+        // delete
+        // Alphanumeric
+        } else if (keyCode == 48) {
+          chara = /*(shift) ? ")" :*/ "0";
+        } else if (keyCode == 49) {
+          chara = /*(shift) ? "!" :*/ "1";
+        } else if (keyCode == 50) {
+          chara = /*(shift) ? "@" :*/ "2";
+        } else if (keyCode == 51) {
+          chara = /*(shift) ? "#" :*/ "3";
+        } else if (keyCode == 52) {
+          chara = /*(shift) ? "$" :*/ "4";
+        } else if (keyCode == 53) {
+          chara = /*(shift) ? "%" :*/ "5";
+        } else if (keyCode == 54) {
+          chara = /*(shift) ? "^" :*/ "6";
+        } else if (keyCode == 55) {
+          chara = /*(shift) ? "&" :*/ "7";
+        } else if (keyCode == 56) {
+          chara = /*(shift) ? "*" :*/ "8";
+        } else if (keyCode == 57) {
+          chara = /*(shift) ? "(" :*/ "9";
 
+        } else if (keyCode == 65) {
+          chara = /*(shift) ? "A" :*/ "a";
+        } else if (keyCode == 66) {
+          chara = /*(shift) ? "B" :*/ "b";
+        } else if (keyCode == 67) {
+          chara = /*(shift) ? "C" :*/ "c";
+        } else if (keyCode == 68) {
+          chara = /*(shift) ? "D" :*/ "d";
+        } else if (keyCode == 69) {
+          chara = /*(shift) ? "E" :*/ "e";
+        } else if (keyCode == 70) {
+          chara = /*(shift) ? "F" :*/ "f";
+        } else if (keyCode == 71) {
+          chara = /*(shift) ? "G" :*/ "g";
+        } else if (keyCode == 72) {
+          chara = /*(shift) ? "H" :*/ "h";
+        } else if (keyCode == 73) {
+          chara = /*(shift) ? "I" :*/ "i";
+        } else if (keyCode == 74) {
+          chara = /*(shift) ? "J" :*/ "j";
+        } else if (keyCode == 75) {
+          chara = /*(shift) ? "K" :*/ "k";
+        } else if (keyCode == 76) {
+          chara = /*(shift) ? "L" :*/ "l";
+        } else if (keyCode == 77) {
+          chara = /*(shift) ? "M" :*/ "m";
+        } else if (keyCode == 78) {
+          chara = /*(shift) ? "N" :*/ "n";
+        } else if (keyCode == 79) {
+          chara = /*(shift) ? "O" :*/ "o";
+        } else if (keyCode == 80) {
+          chara = /*(shift) ? "P" :*/ "p";
+        } else if (keyCode == 81) {
+          chara = /*(shift) ? "Q" :*/ "q";
+        } else if (keyCode == 82) {
+          chara = /*(shift) ? "R" :*/ "r";
+        } else if (keyCode == 83) {
+          chara = /*(shift) ? "S" :*/ "s";
+        } else if (keyCode == 84) {
+          chara = /*(shift) ? "T" :*/ "t";
+        } else if (keyCode == 85) {
+          chara = /*(shift) ? "U" :*/ "u";
+        } else if (keyCode == 86) {
+          chara = /*(shift) ? "V" :*/ "v";
+        } else if (keyCode == 87) {
+          chara = /*(shift) ? "W" :*/ "w";
+        } else if (keyCode == 88) {
+          chara = /*(shift) ? "X" :*/ "x";
+        } else if (keyCode == 89) {
+          chara = /*(shift) ? "Y" :*/ "y";
+        } else if (keyCode == 90) {
+          chara = /*(shift) ? "Z" :*/ "z";
+        // Alphanumeric
+        //} else if (keyCode == 91) {
+        //  chara = "left window";
+        // left window
+        //} else if (keyCode == 92) {
+        //  chara = "right window";
+        // right window
+        //} else if (keyCode == 93) {
+        //  chara = "select key";
+        // select key
+        //} else if (keyCode == 96) {
+        //  chara = "numpad 0";
+        // numpad 0
+        //} else if (keyCode == 97) {
+        //  chara = "numpad 1";
+        // numpad 1
+        //} else if (keyCode == 98) {
+        //  chara = "numpad 2";
+        // numpad 2
+        //} else if (keyCode == 99) {
+        //  chara = "numpad 3";
+        // numpad 3
+        //} else if (keyCode == 100) {
+        //  chara = "numpad 4";
+        // numpad 4
+        //} else if (keyCode == 101) {
+        //  chara = "numpad 5";
+        // numpad 5
+        //} else if (keyCode == 102) {
+        //  chara = "numpad 6";
+        // numpad 6
+        //} else if (keyCode == 103) {
+        //  chara = "numpad 7";
+        // numpad 7
+        //} else if (keyCode == 104) {
+        //  chara = "numpad 8";
+        // numpad 8
+        //} else if (keyCode == 105) {
+        //  chara = "numpad 9";
+        // numpad 9
+        //} else if (keyCode == 106) {
+        //  chara = "multiply";
+        // multiply
+        //} else if (keyCode == 107) {
+        //  chara = "add";
+        // add
+        //} else if (keyCode == 109) {
+        //  chara = "subtract";
+        // subtract
+        //} else if (keyCode == 110) {
+        //  chara = "decimal point";
+        // decimal point
+        //} else if (keyCode == 111) {
+        //  chara = "divide";
+        // divide
+        //} else if (keyCode == 112) {
+        //  chara = "F1";
+        // F1
+        //} else if (keyCode == 113) {
+        //  chara = "F2";
+        // F2
+        //} else if (keyCode == 114) {
+        //  chara = "F3";
+        // F3
+        //} else if (keyCode == 115) {
+        //  chara = "F4";
+        // F4
+        //} else if (keyCode == 116) {
+        //  chara = "F5";
+        // F5
+        //} else if (keyCode == 117) {
+        //  chara = "F6";
+        // F6
+        //} else if (keyCode == 118) {
+        //  chara = "F7";
+        // F7
+        //} else if (keyCode == 119) {
+        //  chara = "F8";
+        // F8
+        //} else if (keyCode == 120) {
+        //  chara = "F9";
+        // F9
+        //} else if (keyCode == 121) {
+        //  chara = "F10";
+        // F10
+        //} else if (keyCode == 122) {
+        //  chara = "F11";
+        // F11
+        //} else if (keyCode == 123) {
+        //  chara = "F12";
+        // F12
+        //} else if (keyCode == 144) {
+        //  chara = "num lock";
+        // num lock
+        //} else if (keyCode == 145) {
+        //  chara = "scroll lock";
+        // scroll lock
+        } else if (keyCode == 186) {
+          chara = ";";
+        // semi-colon
+        } else if (keyCode == 187) {
+          chara = "=";
+        // equal-sign
+        } else if (keyCode == 188) {
+          chara = ",";
+        // comma
+        } else if (keyCode == 189) {
+          chara = "-";
+        // dash
+        } else if (keyCode == 190) {
+          chara = ".";
+        // period
+        } else if (keyCode == 191) {
+          chara = (shift) ? "?" : "/";
+        // forward slash
+        } else if (keyCode == 192) {
+          chara = "`";
+        // grave accent
+        } else if (keyCode == 219) {
+          chara = /*(shift) ? "{" :*/ "[";
+        // open bracket
+        } else if (keyCode == 220) {
+          chara = "\\";
+        // back slash
+        } else if (keyCode == 221) {
+          chara = /*(shift) ? "}" :*/ "]";
+        // close bracket
+        } else if (keyCode == 222) {
+          chara = "'";
+        // single quote
+        }
 
-    var onload_fn = function() {
-      $body.addClass(body_class);
+        return chara;
+      }
 
-      $document
-        .delegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
-        .delegate('._fbh_atm_button', 'click', assign_to_me)
+      var Hotkey = function(hotkey) {
+        this.action = hotkey.action;
+        this.hotkey = hotkey;
+      };
+
+      var default_hotkey_pairs = [
+        // Create new case
+        {
+          text: 'Create Case',
+          name: 'create_case',
+          keys: 'c',
+          allowInput: false,
+          action: function() {
+            $('.add-case-button').click();
+          }
+        }
+        // Close case
+        ,{
+          text: 'Close Case or Unfocus Input',
+          name: 'close_case_or_unfocus',
+          keys: 'ESC',
+          allowInput: true,
+          action: function(e) {
+            if ( $(e.target).is('input, button, textarea, select') ) {
+              $(e.target).blur();
+            } else {
+              $('.js-header-list-cases-link').click();
+            }
+
+            $hotkey_wrapper.hide();
+          }
+        }
+        // Search
+        ,{
+          text: 'Search Cases',
+          name: 'search_cases',
+          keys: 'gi',
+          allowInput: false,
+          action: function() {
+            $('.search-box').focus();
+          }
+        }
+        // Search
+        ,{
+          text: 'Quick Search',
+          name: 'quick_search',
+          keys: '/',
+          allowInput: false,
+          action: function() {
+            $('.search-box').focus();
+          }
+        }
+        // Search
+        ,{
+          text: 'Search',
+          name: 'search',
+          keys: 'f',
+          allowInput: false,
+          action: function() {
+            $('.search-box').focus();
+          }
+        }
+        // Hotkey help
+        ,{
+          text: 'Show Hotkeys',
+          name: 'show_hotkeys',
+          keys: '?',
+          allowInput: false,
+          action: function() {
+            $hotkey_wrapper.show();
+          }
+        }
+        // Previous case
+        ,{
+          text: 'Previous Case',
+          name: 'previous_case',
+          keys: 'j',
+          allowInput: false,
+          action: function() {
+            $('[name="previous-case"]').click();
+          }
+        }
+        // Next case
+        ,{
+          text: 'Next Case',
+          name: 'next_case',
+          keys: 'k',
+          allowInput: false,
+          action: function() {
+            $('[name="next-case"]').click();
+          }
+        }
+        // Edit case
+        ,{
+          text: 'Edit Case',
+          name: 'edit_case',
+          keys: 'e',
+          allowInput: false,
+          action: function() {
+            $('[name="edit"]').click();
+          }
+        }
+        // Assign case
+        ,{
+          text: 'Assign Case',
+          name: 'assign_case',
+          keys: 'a',
+          allowInput: false,
+          action: function() {
+            $('[name="assign"]').eq(0).click();
+          }
+        }
+      ];
+
+      var hotkey_pairs = {};
+      var hotkey_chain = '';
+      var clear_hotkey_chain_timeout;
+      var $hotkey_wrapper = $('<div/>')
+        .addClass('fogbugz-helper-hotkeys-wrapper')
         ;
 
-      try_run_script();
-    };
+      var hotkey_press = function(e) {
+        //expire after focusing anything
+        clearTimeout(clear_hotkey_chain_timeout);
+        if ( e.altKey || e.ctrlKey || e.metaKey || e.shiftKey ) {
+          hotkey_chain = '';
+          return;
+        }
 
-    var onunload_fn = function() {
-      $body.removeClass(body_class);
+        var cha = convertKeyCode(e);
+        if ( cha === null ) {
+          hotkey_chain = '';
+          return;
+        }
 
-      $document
-        .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
-        .undelegate('._fbh_atm_button', 'click', assign_to_me)
+        hotkey_chain += cha;
+
+        if ( hotkey_pairs[hotkey_chain] ) {
+          // Make sure not to fire macros while typing comments etc
+          if ( !hotkey_pairs[hotkey_chain].hotkey.allowInput && $(e.target).is('input, button, textarea, select') ) {
+            hotkey_chain = '';
+            return;
+          }
+
+          setTimeout(function() {
+            hotkey_pairs[hotkey_chain].action(e);
+            hotkey_chain = '';
+          }, 0);
+        } else {
+          //expire after a set amount of time
+          clear_hotkey_chain_timeout = setTimeout(function() {
+            hotkey_chain = '';
+          }, 1000);
+        }
+      };
+
+      var onload_fb_hotkeys = function() {
+        $document
+          .bind('keydown', hotkey_press)
+          ;
+      };
+
+      var onunload_fb_hotkeys = function() {
+        $document
+          .unbind('keydown', hotkey_press)
+          ;
+
+        $('.fogbugz-helper-hotkeys-tool').remove();
+      };
+
+      var ontools_fb_hotkeys = function() {
+        var $hotkeys = $('<div/>')
+          .addClass('fogbugz-helper-hotkeys-tool fogbugz-helper-tool')
+          ;
+
+        var $headline = $('<a href="#">')
+          .addClass('fogbugz-helper-headline')
+          .html('Show Hotkeys')
+          .appendTo($hotkeys)
+          .bind('click', function() {
+            $hotkey_wrapper.show();
+          })
+          ;
+
+        var $menu = $('#fogbugz-helper-features-menu');
+
+        $menu.append($hotkeys);
+      }
+
+      var show_hotkeys_popup = function() {
+        $hotkey_wrapper
+          .show()
+          .focus()
+          ;
+      };
+
+      var build_hotkeys_pop = function() {
+        var hotkeys = localStorage.getItem('zr_hotkeys') || '{}';
+        hotkeys = JSON.parse(hotkeys);
+
+        var $hotkeys = $('<div/>')
+          .addClass('fogbugz-helper-hotkeys-modal')
+          ;
+
+        var $headline = $('<h4>')
+          .addClass('fogbugz-helper-headline')
+          .html('Hotkeys')
+          .appendTo($hotkeys)
+          ;
+
+        for ( var i = 0, l = default_hotkey_pairs.length, hotkey, keys; i < l; i++ ) {
+          hotkey = default_hotkey_pairs[i];
+          keys = hotkeys[hotkey.name] || hotkey.keys;
+
+          var $hotkey = $('<div/>')
+            .addClass('fogbugz-helper-hotkey')
+            ;
+
+          var $input = $('<label>') //$('<input type="text">')
+            .attr({
+              'id': 'hotkey-' + hotkey.name
+            })
+            .addClass('fogbugz-helper-hotkey-input-wrapper')
+            //.val(keys)
+            .html(keys)
+            ;
+
+          var $label = $('<label>')
+            .attr({
+              'for': 'hotkey-' + hotkey.name
+            })
+            .addClass('fogbugz-helper-hotkey-label')
+            .html(hotkey.text)
+            ;
+
+          $hotkeys.append(
+            $hotkey.append($input, $label)
+          );
+        }
+
+        var $close = $('<p>')
+          .addClass('fogbugz-helper-hotkey-close')
+          .html('(click anywhere or press ESC to close)')
+          .appendTo($hotkeys)
+          ;
+
+        $hotkey_wrapper
+          .attr({'tabIndex': 1})
+          .hide()
+          .empty()
+          .append($hotkeys)
+          .appendTo('body')
+          .bind('click', function() {
+            $hotkey_wrapper.hide();
+          })
+          ;
+      };
+
+      var hotkeys = localStorage.getItem('zr_hotkeys') || '{}';
+      hotkeys = JSON.parse(hotkeys);
+
+      for ( var i = 0, l = default_hotkey_pairs.length, hotkey, keys; i < l; i++ ) {
+        hotkey = default_hotkey_pairs[i];
+        keys = hotkeys[hotkey.name] || hotkey.keys;
+        hotkey_pairs[keys] = new Hotkey(hotkey);
+      }
+
+      build_hotkeys_pop();
+
+      pm.add({
+        id: 'fb_hotkeys',
+        text: 'Hotkeys',
+        title: 'Hotkeys for common actions. May not play nicely with FogBugz\'s built-in hotkeys.',
+        defaultOn: false,
+        onload: onload_fb_hotkeys,
+        ontools: ontools_fb_hotkeys,
+        onunload: onunload_fb_hotkeys
+      });
+
+        ////////////////////////////
+       // (Preference) Autosize Textareas
+      ////////////////////////////
+
+      var _autosize_textareas = function() {
+        var $textareas = $('textarea:not(.autosize-autosized)');
+
+        if ( $textareas.length ) {
+          $textareas.autosize();
+        }
+      };
+
+      var autosize_textareas_timeout;
+      var autosize_textareas = function() {
+        clearTimeout(autosize_textareas_timeout);
+        autosize_textareas_timeout = setTimeout(_autosize_textareas, 10);
+      };
+
+      var onload_autosize_textareas = function() {
+        autosize_textareas();
+        $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
+      };
+
+      var onunload_autosize_textareas = function() {
+        $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', autosize_textareas);
+      };
+
+      pm.add({
+        id: 'autosize_textareas',
+        text: 'Autosize Textareas',
+        title: 'Large text fields will automatically expand when type in them',
+        defaultOn: true,
+        onload: onload_autosize_textareas,
+        onunload: onunload_autosize_textareas
+      });
+
+        ////////////////////////////
+       // (Preference) Background color picker
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var colors = [
+          '#FFFFFF',
+          '#3B3B3B',
+          '#0079BF',
+          '#D29034',
+          '#519839',
+          '#B04632',
+          '#89609E',
+          '#CD5A91',
+          '#4BBF6B',
+          '#00AECC',
+          '#838C91'
+        ];
+
+        // Get preference
+        var color;
+        var color_re = /(rgb)\(([0-9]+),\s+([0-9]+),\s+([0-9]+)/;
+
+        var set_bgcolor = function(color) {
+          $body.css('background-color', color);
+          color = $body.css('background-color');
+
+          if ( color ) {
+            var matches = color.match(color_re);
+            var r = matches[2];
+            var g = matches[3];
+            var b = matches[4];
+            var luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+            if ( luma < 200 ) {
+              $body.addClass('fogbugz-helper-bgcolors-dark');
+            } else {
+              $body.removeClass('fogbugz-helper-bgcolors-dark');
+            }
+          }
+
+          return color;
+        };
+
+        var onload_bgcolors = function() {
+          $body.addClass('fogbugz-helper-bgcolors');
+
+          color = localStorage.getItem('color');
+
+          set_bgcolor(color);
+        };
+
+        var onunload_bgcolors = function() {
+          $body
+            .removeClass('fogbugz-helper-bgcolors')
+            .removeClass('fogbugz-helper-bgcolors-dark')
+            .css('background-color', '')
+            ;
+
+          $('.fogbugz-helper-colors').remove();
+        };
+
+        var ontools_bgcolors = function() {
+          var $color_li = $('.fogbugz-helper-colors');
+
+          // Can't figure out why the colors don't stay, we'll just run this function every time and bail if they exist
+          if ( $color_li.length ) {
+            return;
+          }
+
+          $color_li = $('<div/>')
+            .addClass('fogbugz-helper-colors fogbugz-helper-tool')
+            .delegate('button', 'click', function(e) {
+              e.preventDefault();
+              var color = $(this).css('background-color');
+
+              localStorage.setItem('color', color);
+              set_bgcolor(color);
+              $input.val(color);
+            })
+            ;
+
+          var $headline = $('<h4>')
+            .addClass('fogbugz-helper-headline')
+            .html('Choose a background color')
+            .appendTo($color_li)
+            ;
+
+          // Buttons
+          for ( var ci = 0, cl = colors.length, c, $c; ci < cl; ci++ ) {
+            c = colors[ci];
+
+            $c = $('<button>&nbsp;</button>')
+              .addClass('color')
+              .css('background-color', c)
+              .appendTo($color_li)
+              ;
+          }
+
+          // Input
+          var $input = $('<input type="text">')
+            .val(color)
+            .appendTo($color_li)
+            .bind('input', function() {
+              var color = $(this).val();
+
+              localStorage.setItem('color', color);
+
+              set_bgcolor(color);
+            })
+            ;
+
+          var $menu = $('#fogbugz-helper-features-menu');
+
+          $menu.append($color_li);
+        };
+
+        pm.add({
+          id: 'bgcolors',
+          text: 'Background Colors',
+          title: 'Enable the color picker to change the background color of FogBugz. Has a few styling issues here and there. If you encounter an issue you can quickly disable it in the FogBugz tools menu.',
+          defaultOn: true,
+          onload: onload_bgcolors,
+          ontools: ontools_bgcolors,
+          onunload: onunload_bgcolors
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) Edit Ticket Links
+      ////////////////////////////
+      var edit_ticket_links = function(e) {
+        var href = this.href;
+
+        href = href.replace(/cases\/([0-9]+)/, 'cases/edit/$1');
+
+        this.href = href;
+      };
+
+      var onload_edit_ticket_links = function() {
+        $document.delegate('a.case', 'mouseover focus', edit_ticket_links);
+      };
+
+      var onunload_edit_ticket_links = function() {
+        $document.undelegate('a.case', 'mouseover focus', edit_ticket_links);
+      };
+
+      pm.add({
+        id: 'edit_ticket_links',
+        text: 'Edit Ticket Links',
+        title: 'When you click on ticket links within FogBugz, they will open in "edit mode." This will not work on links outside of FogBugz yet (like links in emails, etc).',
+        defaultOn: false,
+        onload: onload_edit_ticket_links,
+        onunload: onunload_edit_ticket_links
+      });
+
+        ////////////////////////////
+       // (Preference) Open Tickets in Modal
+      ////////////////////////////
+
+      //var $main = $('#main');
+      var $main = $('#main-wrap');
+
+      var _close_ticket_modal = function() {
+        $('.js-header-list-cases-link').click();
+      };
+
+      var close_ticket_modal = function(e) {
+        if ( e.target !== this ) {
+          return;
+        }
+
+        _close_ticket_modal();
+      };
+
+      var onload_tickets_in_modal = function() {
+        $body.addClass('fogbugz-helper-tickets-in-modal')
+        $main.bind('click', close_ticket_modal);
+      };
+
+      var onunload_tickets_in_modal = function() {
+        $body.removeClass('fogbugz-helper-tickets-in-modal')
+        $main.unbind('click', close_ticket_modal);
+      };
+
+      pm.add({
+        id: 'onunload_tickets_in_modal',
+        text: 'Click Backdrop to Close Ticket (Modal Only)',
+        title: 'Clicking the area behind a ticket will close the ticket and load your last filter.',
+        defaultOn: true,
+        onload: onload_tickets_in_modal,
+        onunload: onunload_tickets_in_modal
+      });
+
+        ////////////////////////////
+       // (Preference) Auto Sort Tickets
+      ////////////////////////////
+      var onload_auto_sort = function() {
+        $body.addClass('fogbugz-helper-auto-sort');
+      };
+
+      var onunload_auto_sort = function() {
+        $body.removeClass('fogbugz-helper-auto-sort');
+      };
+
+      pm.add({
+        id: 'auto_sort',
+        text: 'Auto Sort Tickets (by status)',
+        title: 'When grouped and sorted by status, ticket groups are arranged in a more logical order. Reverse sorting doesn\'t work yet',
+        defaultOn: false,
+        onload: onload_auto_sort,
+        onunload: onunload_auto_sort
+      });
+
+        ////////////////////////////
+       // (Preference) Expand Task List
+      ////////////////////////////
+      var onload_expand_tasks = function() {
+        $body.addClass('fogbugz-helper-expand-tasks');
+      };
+
+      var onunload_expand_tasks = function() {
+        $body.removeClass('fogbugz-helper-expand-tasks');
+      };
+
+      pm.add({
+        id: 'expand_tasks',
+        text: 'Expand Task List Cells',
+        title: 'Shows the full text of titles etc. in ticket lists. Each row can be more than one line of text.',
+        defaultOn: false,
+        onload: onload_expand_tasks,
+        onunload: onunload_expand_tasks
+      });
+
+        ////////////////////////////
+       // (Preference) Ticket Tweaks
+      ////////////////////////////
+
+      (function(pm) {
+        var $meta_tweaks = $('<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, shrink-to-fit=no"/>');
+
+        var onload = function() {
+          $body.addClass('_fhtt');
+          $meta_tweaks.appendTo('head');
+          $('html,body').scrollTop(0);
+          $('html,body').scrollLeft(0);
+        };
+
+        var onunload = function() {
+          $body.removeClass('_fhtt');
+          $meta_tweaks.remove();
+        };
+
+        pm.add({
+          id: 'ticket_tweaks',
+          text: 'Styling Fixes',
+          title: 'Various tweaks which fix mobile and other issues',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) Other Tweaks
+      ////////////////////////////
+
+      (function(pm) {
+        var onload = function() {
+          $body.addClass('_fhot');
+        };
+
+        var onunload = function() {
+          $body.removeClass('_fhot');
+        };
+
+        pm.add({
+          id: 'other_tweaks',
+          text: 'Old FogBugz Styling',
+          title: 'Changes colors, fonts and some other things back to a less terrible time',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) Fake Kanban
+      ////////////////////////////
+      var _fake_kanban_class = 'fogbugz-helper-fake-kanban';
+      var _fake_kanban_sorted_class = 'fogbugz-helper-fake-kanban-sorted';
+      var _fake_kanban_double_sorted_class = 'fogbugz-helper-fake-kanban-double-sorted';
+
+      var _fake_kanban_template_inserted = function(r, data) {
+        if ( $('.list-group-header').children().length > 2 ) {
+          if ( r === false ) {
+            // This is specifically for the first page load
+          } else if ( !r || !r.element.filter('#filter-bar-title').length ) {
+            return;
+          }
+
+          // This is where we do things when the tickets are all loaded
+
+          // Sorts
+          var $sorts = $('#filter-description-sort [data-s-name]');
+
+          if ( !$sorts.length ) return;
+
+          var sorts = [];
+          $sorts.each(function() {
+            sorts.push($(this).data('s-name'));
+          });
+
+          // Columns
+          var $columns = $('.grid-column-contents');
+          var columns_o = {};
+          var columns = [];
+          $columns.each(function() {
+            var match = this.className.match(/ grid\-column\-([a-zA-Z]+)/);
+            if ( match && columns_o[match[1]] !== true ) {
+              columns_o[match[1]] = true;
+              columns.push(match[1]);
+            }
+          });
+
+          // Double sort
+          if ( sorts.length > 1 && columns_o[sorts[1]] === true ) {
+            $body.removeClass(_fake_kanban_sorted_class);
+            $body.addClass(_fake_kanban_double_sorted_class);
+
+            var types_o = {};
+            var types_a = [];
+            $('.list-group-body').each(function() {
+              $(this).find('.bug-grid-row').each(function() {
+                var $column = $(this).find('.grid-column-' + sorts[1]);
+                var id = $.trim($column.text());
+
+                if ( !types_o[id] ) {
+                  types_o[id] = true;
+                  types_a.push(id);
+                }
+              });
+            });
+
+            types_a.sort();
+
+            $('.list-group-body').each(function() {
+              var list_group_body = this;
+              var types = {};
+
+              for ( var i = 0, l = types_a.length, t; i < l; i++ ) {
+                t = types_a[i];
+                var $table = $('<table/>');
+                types[t] = $table;
+                $table
+                  .appendTo(list_group_body)
+                  .attr('data-collapse-key', t)
+                  ;
+              }
+
+              $(this).find('.bug-grid-row').each(function() {
+                var $column = $(this).find('.grid-column-' + sorts[1]);
+                var id = $.trim($column.text());
+
+                $column.closest('td').addClass(_fake_kanban_double_sorted_class + '-sort');
+                types[id].append($column.closest('tr').detach());
+              });
+            });
+          } else {
+            // Single sort
+            $body.removeClass(_fake_kanban_double_sorted_class);
+            $body.addClass(_fake_kanban_sorted_class);
+          }
+        } else {
+          $body.removeClass(_fake_kanban_double_sorted_class);
+          $body.removeClass(_fake_kanban_sorted_class);
+        }
+      };
+
+      var onload_fake_kanban = function() {
+        $body.addClass(_fake_kanban_class);
+
+        fb.pubsub.subscribe("/template/inserted", _fake_kanban_template_inserted);
+
+        _fake_kanban_template_inserted(false);
+      };
+
+      var onunload_fake_kanban = function() {
+        $body.removeClass(_fake_kanban_class);
+
+        fb.pubsub.unsubscribe("/template/inserted", _fake_kanban_template_inserted);
+
+        $body.removeClass(_fake_kanban_sorted_class);
+      };
+
+      pm.add({
+        id: 'fake_kanban',
+        text: 'Kanban-Style Ticket Listing',
+        title: 'Changes ticket listings to be similar to the FogBugz Kanban board. Drag n drop to come...',
+        defaultOn: false,
+        onload: onload_fake_kanban,
+        onunload: onunload_fake_kanban
+      });
+
+        ////////////////////////////
+       // (Preference) Reverse Comments
+      ////////////////////////////
+      var onload_reverse_comments = function() {
+        $body.addClass('fogbugz-helper-reverse-comments');
+      };
+
+      var onunload_reverse_comments = function() {
+        $body.removeClass('fogbugz-helper-reverse-comments');
+      };
+
+      pm.add({
+        id: 'reverse_comments',
+        text: 'Reverse Comment Order on Tickets',
+        title: 'Pretty self explanatory',
+        defaultOn: false,
+        onload: onload_reverse_comments,
+        onunload: onunload_reverse_comments
+      });
+
+        ////////////////////////////
+       // Hide Useless Stuff
+      ////////////////////////////
+      var onload_hide_stuff = function() {
+        $body.addClass('fogbugz-helper-hide-stuff');
+      };
+
+      var onunload_reverse_comments = function() {
+        $body.removeClass('fogbugz-helper-hide-stuff');
+      };
+
+      pm.add({
+        id: 'hide_stuff',
+        text: 'Hide Unused FogBugz Stuff',
+        title: 'I don\'t use these anyway. Hollar if you like this but want something specific back.',
+        defaultOn: false,
+        onload: onload_hide_stuff,
+        onunload: onunload_reverse_comments
+      });
+
+        ////////////////////////////
+       // WYSIWYG for custom inputs
+      ////////////////////////////
+
+      /*var decodeEntities = (function() {
+        // this prevents any overhead from creating the object each time
+        var $div = $('<div>');
+        var txt = document.createElement('textarea');
+
+        function decodeHTMLEntities (str) {
+          txt.innerHTML = str;
+          str = txt.value;
+          str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+          $div.html(str);
+
+          var $imgs = $div.find('img');
+          for ( var i = 0, l = $imgs.length; i < l; i++ ) {
+            var $img = $imgs.eq(i);
+            var src = $img.attr('src');
+            $img.wrap('<a href="' + src + '" target="_blank"></a>');
+          }
+
+          str = $div.html();
+
+          return str;
+        }
+
+        return decodeHTMLEntities;
+      })();*/
+
+      /*var decodeEntities = (function() {
+        // this prevents any overhead from creating the object each time
+        var element = document.createElement('div');
+
+        function decodeHTMLEntities (str) {
+          if(str && typeof str === 'string') {
+            // strip script/html tags
+            str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+            str = str.replace(/<\/?\w(?:[^"'>]|"[^"]*"|'[^']*')*>/gmi, '');
+            element.innerHTML = str;
+            str = element.textContent;
+            element.textContent = '';
+          }
+
+          return str;
+        }
+
+        return decodeHTMLEntities;
+      })();*/
+
+      // http://stackoverflow.com/questions/5796718/html-entity-decode
+      var decodeEntities = (function() {
+          // this prevents any overhead from creating the object each time
+          var element = document.createElement('div');
+
+          // regular expression matching HTML entities
+          var entity = /&(?:#x[a-f0-9]+|#[0-9]+|[a-z0-9]+);?/ig;
+
+          return function decodeHTMLEntities(str) {
+              // find and replace all the html entities
+              str = str.replace(entity, function(m) {
+                  element.innerHTML = m;
+                  return element.textContent;
+              });
+
+              //str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+              str = str.replace(/<script/gmi, '&lt;script');
+              str = str.replace(/<\/script/gmi, '&lt;/script');
+
+              // reset the value
+              element.textContent = '';
+
+              return str;
+          }
+      })();
+
+      // Toggle
+      var $wysiwyg_toggle;
+      var original_code;
+
+      var wysiwyg_add = function() {
+        var $customfield = $('.customfield-longtext');
+        var $textarea = $customfield.find('textarea.wysiwygified');
+        var code = '';
+
+        // Edit
+        if ( $textarea.length ) {
+          // replace textarea with ckeditor
+          original_code = code = $textarea.val();
+
+          if ( code.charAt(0) != '<' || code.charAt(code.length - 1) != '>' ) {
+            code = code.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+            code = do_marked(code);
+          } else {
+            code = do_marked(_toMarkDown(code));
+          }
+
+          code = decodeEntities(code);
+
+          code = auto_links(code);
+
+          $textarea.val(code);
+          wysiwyg_textarea($textarea);
+        }
+
+        $wysiwyg_toggle.find('.wysiwyg_toggle_rich').addClass('wysiwyg_toggle_selected');
+      };
+
+      var wysiwyg_remove = function(markdown) {
+        markdown = markdown || false;
+
+        var $textarea = $('textarea.wysiwygified');
+        var val;
+
+        if ( markdown ) {
+          val = wysiwygify_editor.getData();
+          val = _toMarkDown(val);
+          val = _wysiwyg_fix_links(val);
+        } else {
+          val = $textarea.val();
+          val = decodeEntities(convertHtmlToText(val));
+        }
+
+        wysiwygify_editor.destroy(true);
+        wysiwygify_editor = null;
+
+        $textarea.val(val);
+      };
+
+      var wysiwyg_toggle_off = function() {
+        $wysiwyg_toggle.find('label').removeClass('wysiwyg_toggle_selected');
+      };
+
+      $body
+        /*.delegate('.wysiwyg_toggle .wysiwyg_toggle_plain:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
+          ev.preventDefault();
+          if ( !confirm('Lose formatting and switch to plain-text mode?') ) {
+            return;
+          }
+
+          var $this = $(this);
+          wysiwyg_toggle_off();
+          wysiwyg_remove();
+          $this.addClass('wysiwyg_toggle_selected');
+        })*/
+        .delegate('.wysiwyg_toggle .wysiwyg_toggle_rich:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
+          ev.preventDefault();
+          var $this = $(this);
+          wysiwyg_toggle_off();
+          wysiwyg_add(true);
+          $this.addClass('wysiwyg_toggle_selected');
+        })
+        .delegate('.wysiwyg_toggle .wysiwyg_toggle_markdown:not(.wysiwyg_toggle_selected)', 'click', function(ev) {
+          ev.preventDefault();
+
+          var $this = $(this);
+          wysiwyg_toggle_off();
+
+          wysiwyg_remove(true);
+
+          $this.addClass('wysiwyg_toggle_selected');
+        })
         ;
 
-      remove_button();
+      // Make wysiwyg editor
+      var wysiwygify_editor;
+      var wysiwygify_config = {
+        extraPlugins : '',
+        uploadUrl: '/',
+        extraAllowedContent: 'code;hr;table;tr;td;thead;tbody;th;del',
+        //customConfig: "{0}FogBugzMVC.js".format(window.CKEDITOR_BASEPATH),
+        toolbar: [
+          { name: 'one', items: ['Undo', 'Redo'] }
+          ,{ name: 'two', items: ['Format'] }
+          ,{ name: 'three', items: ['Bold', 'Italic', 'Strike', '-', 'RemoveFormat'] }
+          ,{ name: 'four', items: ['NumberedList', 'BulletedList', 'Blockquote'] } //, 'Outdent', 'Indent'],
+          ,{ name: 'five', items: ['Source'] }
+        ],
+        format_tags: 'h1;h2;h3;h4;h5;h6;p;pre',
+        // Note: these styles are duplicated in the css
+        contentsCss: [
+          '{0}contents.css'.format(window.CKEDITOR_BASEPATH),
+          '{0}contents.bugRichEdit.css'.format(window.CKEDITOR_BASEPATH),
+          'data:text/css;base64,' + btoa('\
+            body {\
+              line-height: 1.4;\
+              font-size: 13px;\
+            }\
+            pre {\
+              background: #eee;\
+              border-radius: 3px;\
+              padding: 10px;\
+              display: block;\
+              font-family: monospace;\
+              overflow: auto;\
+              max-width: 100%;\
+              white-space: pre;\
+            }\
+            \
+            code {\
+              background-color: #f7f7f9;\
+              border: 1px solid #e1e1e8;\
+              white-space: normal;\
+              color: #c25;\
+              padding: 1px 3px;\
+              border-radius: 3px;\
+              font-size: 12px;\
+            }\
+            \
+            pre code {\
+              background-color: transparent;\
+              border: none;\
+              white-space: inherit;\
+              color: inherit;\
+              padding: 0;\
+            }\
+            table {\
+              margin: .5em 0;\
+              border-collapse: collapse;\
+              border-spacing: 0;\
+              empty-cells: show;\
+              border: 1px solid #cbcbcb;\
+            }\
+            \
+            thead {\
+              background-color: #e0e0e0;\
+              color: #000;\
+              text-align: left;\
+              vertical-align: bottom;\
+            }\
+            \
+            td,\
+            th {\
+              border-left: 1px solid #cbcbcb;\
+              border-width: 0 0 0 1px;\
+              font-size: inherit;\
+              margin: 0;\
+              overflow: visible;\
+              padding: .5em 1em;\
+            }\
+            \
+            th,\
+            td {\
+              padding: 0.5em 1em;\
+            }\
+            \
+            td:first-child,\
+            th:first-child {\
+              border-left-width: 0;\
+            }\
+            \
+            tr:nth-child(even) {\
+              background: #f2f2f2;\
+            }\
+            blockquote {\
+              margin-left: .5em;\
+              padding-left: .5em;\
+              border-left: 2px solid #ccc;\
+            }\
+          ')
+        ]
+      };
+
+      var _wysiwyg_fix_links = function(data) {
+        // Fix MD links that FB will munge
+        // find markdown links
+        var ms = data.match(/\[([^\]]+)\]\(([^\)]+)\)/g);
+
+        if ( ! ms ) {
+          return data;
+        }
+
+        for ( var i = 0, l = ms.length, m, mms; i < l; i++ ) {
+          m = ms[i];
+
+          // if the first and last argument match, just put the url in
+          mms = m.match(/\[([^\]]+)\]\(([^\)]+)\)/);
+
+          if ( mms[1] == mms[2] || mms[1] + '/' == mms[2] || mms[1] == mms[2] + '/' ) {
+            data = data.replace(mms[0], mms[1]);
+          }
+        }
+
+        return data;
+      };
+
+      var wysiwyg_textarea = function($textarea) {
+        wysiwygify_editor = CKEDITOR.replace($textarea.attr('id'), wysiwygify_config);
+        // Replacing CKE's textarea updater so I can intercept the save command. Kinda scary.
+        wysiwygify_editor.updateElement = function() {
+          var element = this.element;
+
+          if ( element && this.elementMode == CKEDITOR.ELEMENT_MODE_REPLACE ) {
+            if ( !wysiwygify_editor.checkDirty() ) {
+              element.setValue( original_code );
+              return;
+            }
+
+            var data = this.getData();
+
+            if ( this.config.htmlEncodeOutput ) {
+              data = CKEDITOR.tools.htmlEncode( data );
+            }
+
+            if ( element.is( 'textarea' ) ) {
+              // Strip tags
+              data = data.replace(/<([\/]?)(div)([^>]*)>/g, '<$1p>');
+              // My regex isn't good enough to combine these :(
+              data = data.replace(/<([\/]?)(span)([^>]*)>/g, '');
+              data = data.replace(/<(?!((?:\/\s*)?(?:table|thead|tr|th|tbody|td|del|strike|s|code|pre|a|blockquote|h1|h2|h3|h4|h5|h6|br|p|i|em|b|strong|[o|u]l|li)))([^>])+>/g, '');
+
+              data = _toMarkDown(data);
+
+              data = _wysiwyg_fix_links(data);
+
+              element.setValue( data );
+            } else {
+              element.setHtml( data );
+            }
+          }
+        }
+      };
+
+      var _wysiwygify = function() {
+        var $customfield = $('.customfield-longtext');
+        var $textarea = $customfield.find('textarea:not(.wysiwygified)').addClass('wysiwygified');
+
+        // Edit
+        if ( $textarea.length ) {
+          $wysiwyg_toggle = $('<div class="wysiwyg_toggle">\
+            <!-- label class="wysiwyg_toggle_plain">Plain text</label -->\
+            <label class="wysiwyg_toggle_markdown">Markdown</label>\
+            <label class="wysiwyg_toggle_rich">Rich text</label>\
+          </div>')
+          .insertBefore($textarea);
+
+          wysiwyg_add();
+        // Show
+        }
+      };
+
+      // Don't call this function thousands of times
+      var wysiwygify_timeout;
+      var wysiwygify = function() {
+        clearTimeout(wysiwygify_timeout);
+
+        wysiwygify_timeout = setTimeout(_wysiwygify, 10);
+      };
+
+      var onload_wysiwygify = function() {
+        wysiwygify();
+        $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
+      };
+
+      var onunload_wysiwygify = function() {
+        $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', wysiwygify);
+
+        // TODO: Unload CKEDITOR instances
+        if ( wysiwygify_editor && wysiwygify_editor.name ) {
+          wysiwyg_remove(true);
+
+          var $textarea = $('textarea.wysiwygified');
+          if ( $textarea.length ) {
+            $textarea
+              .removeClass('wysiwygified')
+              ;
+          }
+        }
+      };
+
+      pm.add({
+        id: 'wysiwygify',
+        text: 'Rich Text on Case Summary',
+        title: 'Makes the Case Summary textarea "rich text" formattable (saves as markdown)',
+        defaultOn: false,
+        onload: onload_wysiwygify,
+        onunload: onunload_wysiwygify
+      });
+
+        ////////////////////////////
+       // Markdown parser
+      ////////////////////////////
+
+      (function(pm) {
+        var _markdownify_fix_text = function(text, replace_br, skip_other, skip_decode) {
+          if ( !skip_other && !skip_decode ) {
+            text = decodeEntities(text);
+          }
+
+          if ( replace_br ) {
+            // Remove br tags that FB adds
+            text = text.replace(/<br>/g, '').replace(/&nbsp;/g, ' ');
+          }
+
+          if ( !skip_other ) {
+            // Remove links FB adds to markdown'd links
+            text = text.replace(/(\[[^\]]+\]\()<a .*?href="([^"]+)".*?>[^<]+<\/a>\)/g, '$1$2)');
+
+            // Fix other f'd up links like [http://google.com](http://google.com)
+            // [<a href="http://google.com](http://google.com)" rel="nofollow" target="_blank">http://google.com](http://google.com)</a>
+            text = text.replace(/\[<a .*?href="([^"\]\(]+)\]\(([^"\]\(]+)\)".*?>[^<\]\(]+\]\([^<\]\(]+\)<\/a>/g, '[$1]($2)');
+
+            // Convert to markdown
+            text = do_marked(text);
+          }
+
+          text = auto_links(text);
+
+          return text;
+        };
+
+        var $markdownify_converter = $('<textarea/>');
+        var markdownify_timeout;
+        var _markdownify = function() {
+          var $customfield = $('.customfield-longtext .content > pre:not(.wysiwygified, .markdownified)').addClass('markdownified');
+
+          if ( $customfield.length ) {
+            $customfield.each(function() {
+              var $this = $(this);
+              var $parent = $this.closest('.customfield');
+              var id = $parent.find('[id]').attr('id');
+              ticket_data = ticket_data || window.fb.cases.current.bug;
+              var text = ticket_data.customFields[id] || $this.html();
+
+              //text = decodeEntities(text);
+              $this.data('markdown-text', text);
+
+              // get rid of auto links within code blocks
+              var matches = text.match(/\n    .+/g);
+              var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
+
+              if ( matches ) {
+                matches = matches.concat(cmatches);
+              } else {
+                matches = cmatches;
+              }
+
+              if ( matches ) {
+                for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+                  m = matches[i];
+
+                  if ( m ) {
+                    rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+                    text = text.replace(m, rm);
+                  }
+                }
+              }
+
+                                                               // don't decode since we got this raw
+              text = _markdownify_fix_text(text, false, false, true);
+
+              $this.html(text);
+            });
+          }
+
+          // Plain text comments
+          var $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified):not(:has(:not(a, br)))').addClass('markdownified');
+
+          if ( $bodycontent.length ) {
+            $bodycontent.each(function() {
+              var $this = $(this);
+              var id = $this.closest('[data-ix-bug-event]').data('ix-bug-event');
+              ticket_data = ticket_data || window.fb.cases.current.bug;
+              var event = ticket_data.findEvent(id);
+
+                                                                                // Removing some weird whitespace FB adds causing code formatting
+              var text = event.sHtmlBody.replace(/<br \/>/g, '') || $this.html().replace(/^\n      \n      /, '').replace(/\n    $/, '');
+
+              $this.data('markdown-text', text);
+
+              // get rid of auto links within code blocks
+              var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+              var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
+
+              if ( matches ) {
+                matches = matches.concat(cmatches);
+              } else {
+                matches = cmatches;
+              }
+
+              if ( matches ) {
+                for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+                  m = matches[i];
+
+                  if ( m ) {
+                    rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+                    text = text.replace(m, rm);
+                  }
+                }
+              }
+
+              text = _markdownify_fix_text(text, true, false, false);
+
+              $this.html(text);
+            });
+          }
+
+          // WYSIWYG'd comments
+          $bodycontent = $('.events .event .bodycontent:not(.wysiwygified, .markdownified)').addClass('markdownified');
+
+          if ( $bodycontent.length ) {
+            $bodycontent.each(function() {
+              var $this = $(this);
+              var text = $this.html();
+
+              $this.data('markdown-text', text);
+
+              // get rid of auto links within code blocks
+              var matches = text.match(/\n&nbsp; &nbsp; .+/g);
+              var cmatches = text.match(/[`~]{3}[\s\S]+?[`~]{3}/g);
+
+              if ( matches ) {
+                matches = matches.concat(cmatches);
+              } else {
+                matches = cmatches;
+              }
+
+              if ( matches ) {
+                for ( var i = 0, l = matches.length, m, rm, amatches; i < l; i++ ) {
+                  m = matches[i];
+
+                  if ( m ) {
+                    rm = m.replace(/<a .+?>([^<]+?)<\/a>/g, '$1');
+                    text = text.replace(m, rm);
+                  }
+                }
+              }
+
+              text = _markdownify_fix_text(text, false, true);
+
+              $this.html(text);
+            });
+          }
+        };
+
+        // TODO: DRY
+        var ticket_data;
+        var check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
+        var check_api_response = function(type, info) {
+          if ( check_api_response_regex.test(type.route) ) {
+            var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\/?/);
+            if ( id ) {
+              var uid = type.route.match(/cases\/([0-9]+)/)[1];
+
+              if ( id[2] === uid ) {
+                ticket_data = info.data;
+              }
+            }
+          }
+        };
+
+        // Don't call this function thousands of times
+        var markdownify = function() {
+          clearTimeout(markdownify_timeout);
+
+          markdownify_timeout = setTimeout(_markdownify, 10);
+        };
+
+        // open links in new window
+        var set_target_blank = function() {
+          $(this).attr('target', '_blank');
+        };
+
+        var onload_markdown = function() {
+          markdownify();
+          $document.delegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
+          $body.delegate('.markdownified a', 'mouseover focus', set_target_blank);
+          $body.addClass('fogbugz-helper-markdown');
+          fb.pubsub.subscribe('/api/success', check_api_response);
+        };
+
+        var onunload_markdown = function() {
+          $document.undelegate('body', 'DOMNodeInserted DOMNodeRemoved', markdownify);
+
+          $('.markdownified').each(function() {
+            var $this = $(this);
+
+            $this.removeClass('markdownified');
+            $this.html($this.data('markdown-text'));
+          });
+
+          $body.removeClass('fogbugz-helper-markdown');
+          $body.undelegate('.markdownified a', 'mouseover focus', set_target_blank);
+
+          fb.pubsub.unsubscribe('/api/success', check_api_response);
+        };
+
+        pm.add({
+          id: 'markdown',
+          text: 'Markdown for Comments/Case Description',
+          title: 'Automatically converts markdown in plain text comments and case description',
+          defaultOn: true,
+          onload: onload_markdown,
+          onunload: onunload_markdown
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Add related tickets
+      ////////////////////////////
+
+      var add_related_ticket_buttons_timeout;
+      var add_related_ticket_done_class = 'add_related_ticket_done';
+      var add_related_ticket_button_class = 'add_related_ticket_button';
+      //var add_related_ticket_link_class = 'add_related_ticket_link';
+      var add_related_ticket_child_class = 'add_related_ticket_child';
+      var add_related_ticket_copy_class = 'add_related_ticket_copy';
+      //var add_related_ticket_parent_class = 'add_related_ticket_parent';
+
+      var add_related_ticket_values = null;
+      var add_related_ticket_array_regex = /^\[.*\]$/;
+
+      var add_related_ticket_click = function(ev) {
+        // ev.preventDefault();
+
+        var $this = $(this);
+        var id = $('.case .top .left .case').text();
+
+        var $add_button = $('.gw-new-case');
+        var old_href = $add_button.attr('href');
+        var href = old_href + '?';
+
+        if ( $this.hasClass(add_related_ticket_child_class) ) {
+          var duplicates = {
+            props: [
+              'ixProject',
+              'ixArea',
+              'ixCategory'
+            ]
+          };
+
+          href += 'ixBugParent=' + id + '&';
+        } else if ( $this.hasClass(add_related_ticket_copy_class) ) {
+          // Values are hard coded, couldn't find anything in fb that would tell me what should be editable
+          var duplicates = {
+            props: [
+              'sTitle',
+              'ixProject',
+              'ixArea',
+              'ixFixFor',
+              'ixCategory',
+              'ixPersonAssignedTo',
+              'ixStatus',
+              'sCustomerEmail',
+              'ixPriority',
+              'ixBugParent',
+              'dtDue',
+              'hrsCurrEst',
+              'hrsElapsedExtra',
+              'dblStoryPts',
+              'tags',
+            ],
+            customs: [],
+            kanbans: [
+              'ixKanbanColumn',
+              'ixKanbanColor'
+            ],
+            cases: [
+              'subcases',
+              'casesDependedOn'
+            ]
+          };
+
+          for ( var field in add_related_ticket_data.customFields ) {
+            if ( !add_related_ticket_data.customFields.hasOwnProperty(field) ) continue;
+            if ( /^[0-9]+_/.test(field) === false ) continue;
+            duplicates.customs.push(field);
+          }
+        }
+
+        for ( var key in duplicates ) {
+          // skip loop if the property is from prototype
+          if (!duplicates.hasOwnProperty(key)) continue;
+
+          var dupes = duplicates[key];
+
+          add_related_ticket_data = add_related_ticket_data || window.fb.cases.current.bug;
+
+          for ( var i = 0, l = dupes.length, value; i < l; i++ ) {
+            if ( key === 'props' ) {
+              value = add_related_ticket_data[dupes[i]];
+
+              if ( dupes[i] === 'sTitle' ) {
+                value = 'Copy of ' + value;
+              }
+            } else if ( key === 'customs' ) {
+              value = add_related_ticket_data.customFields[dupes[i]];
+            } else if ( key === 'kanbans' ) {
+              value = add_related_ticket_data.kanbanInfo[dupes[i]];
+            } else if ( key === 'cases' ) {
+              value = [];
+              var cases = add_related_ticket_data[dupes[i]];
+
+              for ( var ci = 0, cl = cases.length, c; ci < cl; ci++ ) {
+                c = cases[ci];
+                value.push(c.ixBug + ': ' + c.sTitle);
+              }
+            }
+
+            if ( value === null || typeof value === 'undefined' || value === 0 ) {
+              continue;
+            }
+
+            href += encodeURIComponent(dupes[i]) + '=' + encodeURIComponent(value) + '&'
+          }
+        }
+
+        /*$add_button
+          .attr('href', href)
+          .click()
+          .attr('href', old_href)
+          ;*/
+
+        return href;
+      };
+
+      // Add buttons and add id's if a button was previously clicked
+      var _add_related_ticket_buttons = function() {
+        var $left = $('.case .top .left:not(.' + add_related_ticket_done_class + ')').addClass(add_related_ticket_done_class);
+
+        // Case has an ID
+        if ( $('.case .top .left .case').length ) {
+          var id = $('#formEditCase .top .left .case').text();
+
+          var $child = $('<a href="javascript:;">Sub Case</a>')
+            .addClass(add_related_ticket_button_class)
+            .addClass(add_related_ticket_child_class)
+            .appendTo($left)
+            ;
+
+          $child.attr('href', add_related_ticket_click.call($child[0]));
+
+          var $copy = $('<a href="javascript:;">Duplicate</a>')
+            .addClass(add_related_ticket_button_class)
+            .addClass(add_related_ticket_copy_class)
+            .appendTo($left)
+            ;
+
+          $copy.attr('href', add_related_ticket_click.call($copy[0]));
+
+          /* var $parent = $('<button>+ Parent Case</button>')
+            .addClass(add_related_ticket_button_class)
+            .addClass(add_related_ticket_parent_class)
+            .appendTo($left)
+            ;*/
+        }
+      };
+
+      // Don't call this function thousands of times
+      var add_related_ticket_buttons = function() {
+        clearTimeout(add_related_ticket_buttons_timeout);
+
+        add_related_ticket_buttons_timeout = setTimeout(_add_related_ticket_buttons, 10);
+      };
+
+      // TODO: DRY
+      var add_related_ticket_data;
+      var add_related_ticket_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
+      var add_related_ticket_check_api_response = function(type, info) {
+        if ( add_related_ticket_check_api_response_regex.test(type.route) ) {
+          var id = document.location.href.match(/cases\/([a-z]+\/)?([0-9]+)\/?/);
+          if ( id ) {
+            var uid = type.route.match(/cases\/([0-9]+)/)[1];
+
+            if ( id[2] === uid ) {
+              add_related_ticket_data = info.data;
+            }
+          }
+        }
+      };
+
+      var onload_add_related_ticket = function() {
+        add_related_ticket_buttons();
+        $document
+          .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
+          .delegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
+          ;
+
+        fb.pubsub.subscribe('/api/success', add_related_ticket_check_api_response);
+      };
+
+      var onunload_add_related_ticket = function() {
+        $document
+          .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_related_ticket_buttons)
+          .undelegate('.' + add_related_ticket_button_class, 'click', add_related_ticket_click)
+          ;
+
+        $('.' + add_related_ticket_button_class).remove();
+        //$('.' + add_related_ticket_link_class).remove();
+        $('.' + add_related_ticket_done_class).removeClass(add_related_ticket_done_class);
+
+        fb.pubsub.unsubscribe('/api/success', add_related_ticket_check_api_response);
+      };
+
+      pm.add({
+        id: 'add_related_ticket',
+        text: 'Add Related Ticket Buttons',
+        title: 'Adds buttons to make it easy to add parent/child tickets',
+        defaultOn: true,
+        onload: onload_add_related_ticket,
+        onunload: onunload_add_related_ticket
+      });
+
+        ////////////////////////////
+       // Add resolve/reopen/close/reactivate button to edit ticket
+      ////////////////////////////
+
+      var add_resolve_button_timeout;
+      var has_add_resolve_button_class = 'has_add_resolve_button';
+
+      // Add resolve or reopen button to ticket
+      var _add_resolve_button = function() {
+        var $nav = $('.case > article > nav:not(.' + has_add_resolve_button_class + ')');
+
+        if ( $nav.length && $('#sCommand').val() === 'edit' ) {
+          $nav.addClass(has_add_resolve_button_class);
+
+          // Case is open
+          if ( window.fb.cases.current.bug.fOpen ) {
+            var resolve_url = document.location.href.replace(/\/edit\//, '/resolve/');
+            var extra = '';
+
+            // Case is resolved
+            if ( window.fb.cases.current.bug.ixPersonResolvedBy ) {
+              var reactivate_url = document.location.href.replace(/\/edit\//, '/reactivate/');
+              var close_url = document.location.href.replace(/\/edit\//, '/close/');
+
+              extra = '\
+                <a class="control" name="reactivate" href="' + reactivate_url + '" accesskey="t">\
+                  <span class="icon icon-case-reactivate"></span>Reactivate\
+                </a>\
+                <a class="control" name="close" href="' + close_url + '" accesskey="x">\
+                  <span class="icon icon-case-close"></span>Close Case\
+                </a>\
+              ';
+            }
+
+            $nav.append('\
+              <span class="controls">\
+                <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
+                  <span class="icon icon-case-resolve"></span>Resolve\
+                </a>\
+                ' + extra + '\
+                <label for="btnSubmit" class="control save">\
+                  <span class="icon"></span>Save\
+                </label>\
+                <label for="btnCancel" class="control cancel">\
+                  <span class="icon"></span>Cancel\
+                </label>\
+              </span>\
+            ');
+          } else {
+            // Case is closed
+            var reopen_url = document.location.href.replace(/\/edit\//, '/reopen/');
+
+            $nav.append('\
+              <span class="controls">\
+                <a class="control" name="reopen" href="' + reopen_url + '" accesskey="u">\
+                  <span class="icon icon-case-reopen"></span>Reopen\
+                </a>\
+                <label for="btnSubmit" class="control save">\
+                  <span class="icon"></span>Save\
+                </label>\
+                <label for="btnCancel" class="control cancel">\
+                  <span class="icon"></span>Cancel\
+                </label>\
+              </span>\
+            ');
+          }
+        }
+      };
+
+      // Checking to see if the api call was a case, and if so save the fOpen state
+      var add_resolve_check_api_response_regex = /^\/api\/0\/cases\/[0-9]+$/;
+      var add_resolve_check_api_response = function(type, info) {
+        //if ( info.data && add_resolve_check_api_response_regex.test(type.route) ) {
+        //}
+      };
+
+      // Don't call this function thousands of times
+      var add_resolve_button = function() {
+        clearTimeout(add_resolve_button_timeout);
+
+        add_resolve_button_timeout = setTimeout(_add_resolve_button, 10);
+      };
+
+      var onload_add_resolve = function() {
+        add_resolve_button();
+        $document
+          .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
+          ;
+
+        fb.pubsub.subscribe('/api/success', add_resolve_check_api_response);
+      };
+
+      var onunload_add_related_ticket = function() {
+        $document
+          .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
+          ;
+
+        $('.' + has_add_resolve_button_class).removeClass().find('.controls').remove();
+        fb.pubsub.unsubscribe('/api/success', add_resolve_check_api_response);
+      };
+
+      pm.add({
+        id: 'add_resolve',
+        text: 'Add Save/Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
+        title: 'Adds a "save," "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
+        defaultOn: true,
+        onload: onload_add_resolve,
+        onunload: onunload_add_related_ticket
+      });
+
+        ////////////////////////////
+       // Auto-clear notifications
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var auto_clear_interval;
+        var $header_unread_counter;
+
+        var clear = function() {
+          if ( !$header_unread_counter || !$header_unread_counter.length ) {
+            $header_unread_counter = $('#header-unread-counter');
+          }
+
+          if ( parseInt($header_unread_counter.html()) ) {
+            $('#mark-all-read').click();
+          }
+        };
+
+        // Preference Manager functions
+        var onload_fn = function() {
+          auto_clear_interval = setInterval(clear, 5000);
+          $body.addClass('fogbugz-helper-auto-clear-notify');
+        };
+
+        var onunload_fn = function() {
+          clearInterval(auto_clear_interval);
+          $body.removeClass('fogbugz-helper-auto-clear-notify');
+        };
+
+        pm.add({
+          id: 'auto_clear_notifications',
+          text: 'Auto-Clear Notifications',
+          title: 'Clears the FogBugz notifications periodically. Can help with FogBugz sluggishness.',
+          defaultOn: false,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Color code statuses
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var has_add_text_classes_class = 'has_add_text_classes_button';
+
+        // Add resolve or reopen button to ticket
+        var _add_text_classes = function() {
+          var $container = $('.droplist-popup:not(.' + has_add_text_classes_class + '), .case-list:not(.' + has_add_text_classes_class + '), .case .case-header-info:not(.' + has_add_text_classes_class + ')');
+
+          if ( $container.length ) {
+            $container.addClass(has_add_text_classes_class);
+
+            $container.find('.grid-column-Status, .status, .droplist-popup-item').each(function() {
+              var $this = $(this);
+              $this.addClass('status_helper ' + ('status_' + $this.text().trim()).replace(/[^a-z\-]+/gi, '_').toLowerCase());
+            });
+          }
+
+          var $field = $('#ixStatus input[type="text"]');
+
+          if ( $field.length ) {
+            $field.closest('.field')
+              .removeClass (function (index, css) {
+                return (css.match (/(^|\s)status_\S+/g) || []).join(' ');
+              })
+              .addClass('status_helper ' + ('status_' + $field.val().trim()).replace(/[^a-z\-]+/gi, '_').toLowerCase());
+          }
+        };
+
+        var add_text_classes_timeout;
+        // Don't call this function thousands of times
+        var add_text_classes = function() {
+          clearTimeout(add_text_classes_timeout);
+
+          add_text_classes_timeout = setTimeout(_add_text_classes, 10);
+        };
+
+        var active_class = 'fogbugz-helper-colorize-statuses';
+        var onload_fn = function() {
+          $body.addClass(active_class);
+
+          add_text_classes();
+          $document
+            .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
+            ;
+        };
+
+        var onunload_fn = function() {
+          $body.removeClass(active_class);
+
+          $document
+            .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_text_classes)
+            ;
+
+          $('.' + active_class).removeClass();
+        };
+
+        /* pm.add({
+          id: 'add_resolve',
+          text: 'Add Save/Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
+          title: 'Adds a "save," "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
+          defaultOn: true,
+          onload: onload_add_resolve,
+          onunload: onunload_add_related_ticket
+        }); */
+
+        pm.add({
+          id: 'colorize_statuses',
+          text: 'Colorize Statuses',
+          title: 'Adds colorful backgrounds to status indicators on tickets',
+          defaultOn: true,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Hotfix shortcut
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var $tooltip = $('<button type="button" class="fogbugz_helper_tooltip"></button>');
+        var $tooltip_text = $('<span class="fogbugz_helper_tooltip_text"></span>')
+          .appendTo($tooltip);
+
+        var copy_text = function(ev) {
+          try {
+            if ( window.getSelection().empty ) {  // Chrome
+              window.getSelection().empty();
+            } else if ( window.getSelection().removeAllRanges ) {  // Firefox
+              window.getSelection().removeAllRanges();
+            }
+
+            var range = document.createRange();
+            range.selectNode($tooltip_text[0]);
+            window.getSelection().addRange(range);
+
+            if ( window.getSelection().toString() ) {
+              document.execCommand('copy');
+            } else {
+              // If at first you don't succeed...
+              setTimeout(function() {
+                copy_text.call(this, ev);
+              }, 100)
+            }
+          } catch(copyErr) {
+            alert('Unable to copy');
+          }
+
+          // Hiding here seems to cause all kinds of issues
+          // $tooltip.fadeOut(50);
+
+          if ( window.getSelection().empty ) {  // Chrome
+            window.getSelection().empty();
+          } else if ( window.getSelection().removeAllRanges ) {  // Firefox
+            window.getSelection().removeAllRanges();
+          }
+        };
+
+        $tooltip
+          .bind('mousedown', copy_text)
+          .bind('click', function(ev) {
+            ev.preventDefault();
+            ev.stopPropagation();
+          })
+          ;
+
+        var hide_tooltip_to;
+        var show_tooltip_to;
+
+        var show_tooltip = function() {
+          var el = this;
+          var $this = $(this);
+          clearTimeout(hide_tooltip_to);
+          clearTimeout(show_tooltip_to);
+
+          show_tooltip_to = setTimeout(function() {
+            var text = el.childNodes[0].textContent;
+            if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
+              $tooltip.show();
+              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www -m="" ' + text + '');
+              $tooltip.appendTo(el);
+            }
+          }, 100);
+        };
+
+        var hide_tooltip = function() {
+          hide_tooltip_to = setTimeout(function() {
+            $tooltip.detach();
+          }, 500);
+        };
+
+        var onload_fn = function() {
+          $document
+            .delegate('.event a', 'mouseover focus', show_tooltip)
+            .delegate('.event a', 'mouseout blur', hide_tooltip)
+            ;
+        };
+
+        var onunload_fn = function() {
+          $document
+            .undelegate('.event a', 'mouseover focus', show_tooltip)
+            .undelegate('.event a', 'mouseout blur', hide_tooltip)
+            ;
+        };
+
+        pm.add({
+          id: 'hotfix_shortcut',
+          text: 'Show Hotfix Comand on Commit IDs',
+          title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
+          defaultOn: true,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Kill ticket modals
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var force_ticket_navigation = function(e) {
+          e.stopPropagation();
+        };
+
+        var onload_fn = function() {
+          $('#event-tracking-div').delegate('a.case', 'click', force_ticket_navigation);
+        };
+
+        var onunload_fn = function() {
+          $('#event-tracking-div').undelegate('a.case', 'click', force_ticket_navigation);
+        };
+
+        pm.add({
+          id: 'no_ticket_modals',
+          text: 'Disable Ticket Modals',
+          title: 'Forces a page refresh when clicking a ticket link',
+          defaultOnIOS: true,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Preview Images
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var _preview_images_class = 'fogbugz_helper_preview_images';
+        var _inserted_class = 'fogbugz_helper_preview_images_inserted';
+        var _has_image_class = 'fogbugz_helper_preview_images_has_image';
+        var _image_selector = '.fogbugz_helper_preview_images_inserted .grid-column-contents.grid-column-50_PreviewImage button';
+
+        // TODO: Make these globally accessible
+        var _modal_showing_class = 'fogbugz_helper_modal_showing';
+        var $backdrop = $('<div/>').addClass('fogbugz_helper_backdrop');
+        var $modal_wrapper = $('<div/>').addClass('fogbugz_helper_modal_wrapper');
+        var $modal = $('<div/>').addClass('fogbugz_helper_modal');
+        var $modal_content = $('<div/>').addClass('fogbugz_helper_modal_content');
+        var $close = $('<button/>').attr('type', 'button').html('Close').addClass('fogbugz_helper_modal_close');
+
+        var show_modal = function(content) {
+          $body.addClass(_modal_showing_class);
+          $modal_content.empty().append($(content));
+        };
+
+        var hide_modal = function() {
+          $body.removeClass(_modal_showing_class);
+          $modal_content.empty();
+        };
+
+        $modal_wrapper
+          .delegate('.fogbugz_helper_modal_close', 'click', hide_modal)
+          .bind('click', function(ev) {
+            if ( ev.target === $modal_wrapper[0] ) {
+              hide_modal.call($modal_wrapper[0], ev);
+            }
+          })
+          .append($modal)
+          .appendTo('body')
+          ;
+
+        $modal
+          .append($modal_content)
+          .append($close)
+          ;
+
+        $backdrop.appendTo('body').bind('click', hide_modal);
+
+        $modal.bind('click', function(ev) {
+          // ev.stopPropagation();
+        });
+
+        // Back to feature stuff
+        var images;
+        var _template_inserted = function(r, data) {
+          var $case_list = $('.case-list');
+
+          if ( $case_list.hasClass(_inserted_class) ) {
+            return;
+          }
+
+          var idx = 0;
+          images = [];
+          $('.bug-grid-row .grid-column-50_PreviewImage').each(function() {
+            var $this = $(this);
+            var $a = $this.find('a');
+            var href = $a.attr('href');
+
+            if ( href ) {
+              var $img = $('<img/>').attr('src', href);
+              var $button = $('<button/>').attr('type', 'button').append($img);
+              //$this.css({width: 100, height: 100, border: '1px solid blue'});
+              //console.log($this[0], $img[0])
+              $this
+                .empty().addClass(_has_image_class).append($button)
+                .data('__fbhpis_idx', idx)
+                ;
+
+              images.push($button[0]);
+
+              idx++;
+            }
+          });
+
+          $case_list.addClass(_inserted_class)
+        };
+
+        var image;
+        var image_click = function(ev) {
+          ev.preventDefault();
+          ev.stopPropagation();
+
+          var $row = $(this).closest('.bug-grid-row');
+          var $pi = $row.find('.grid-column-50_PreviewImage');
+          image = $pi.data('__fbhpis_idx');
+
+          $modal_wrapper.scrollTop(0);
+
+          var content = '';
+          $row.find('td').each(function() {
+            content += this.innerHTML;
+          });
+
+          var $div = $('<div/>').addClass(_preview_images_class + '_modal_content').html(content);
+
+          var $prev;
+          var $next;
+
+          $div.find('input').remove(); // remove checkbox
+          var $img_div = $div.find('.grid-column-50_PreviewImage');
+          $img_div.find('img').appendTo($img_div);
+          $img_div.find('button').remove();
+
+          if ( image > 0 ) {
+            $prev = $('<button/>').attr('type', 'button').html('Prev').addClass(_preview_images_class + '_prev ' + _preview_images_class + '_prevnext');
+            $img_div.prepend($prev);
+          }
+
+          if ( image < images.length - 1 ) {
+            $next = $('<button/>').attr('type', 'button').html('Next').addClass(_preview_images_class + '_next ' + _preview_images_class + '_prevnext');
+            $img_div.append($next);
+          }
+
+          $div.append($img_div); // Make image last
+
+          show_modal($div);
+        };
+
+        var prev_image_click = function(ev) {
+          image_click.call(images[image - 1], ev);
+        };
+
+        var next_image_click = function(ev) {
+          image_click.call(images[image + 1], ev);
+        };
+
+        var onload_fn = function() {
+          $body.addClass(_preview_images_class);
+
+          fb.pubsub.subscribe("/template/inserted", _template_inserted);
+          $document.delegate(_image_selector, 'click', image_click);
+          $document.delegate('.fogbugz_helper_preview_images_next', 'click', next_image_click);
+          $document.delegate('.fogbugz_helper_preview_images_prev', 'click', prev_image_click);
+
+          _template_inserted(false);
+        };
+
+        var onunload_fn = function() {
+          fb.pubsub.unsubscribe("/template/inserted", _template_inserted);
+          $document.undelegate(_image_selector, 'click', image_click);
+          $document.undelegate('.fogbugz_helper_preview_images_next', 'click', next_image_click);
+          $document.undelegate('.fogbugz_helper_preview_images_prev', 'click', prev_image_click);
+
+          $body.removeClass(_preview_images_class);
+        };
+
+        pm.add({
+          id: 'preview_images',
+          text: 'Preview Images',
+          title: 'Changes "Preview Image" field into an image',
+          defaultOn: true,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // FB Icon
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        // https://stackoverflow.com/questions/260857/changing-website-favicon-dynamically
+        function changeFavicon(src) {
+         var link = document.createElement('link'),
+             oldLink = document.getElementById('dynamic-favicon');
+         link.id = 'dynamic-favicon';
+         link.rel = 'shortcut icon';
+         link.href = src;
+         if (oldLink) {
+          document.head.removeChild(oldLink);
+         }
+         document.head.appendChild(link);
+        }
+
+        var onload_fn = function() {
+          changeFavicon(window.zrBaseUrl + '/img/fogbugz_favicon.ico');
+        };
+
+        var onunload_fn = function() {
+          document.head.removeChild(document.getElementById('dynamic-favicon'));
+          $('[rel="shortcut icon"]').appendTo('head');
+        };
+
+        pm.add({
+          id: 'use_old_favicon',
+          text: 'Use Old FogBugz Icon',
+          title: 'Shows the old kiwi icon rather than the weird Decepticon/Manuscript icon',
+          defaultOn: true,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Hide user avatars
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var onload_fn = function() {
+          $body.addClass('fogbugz_helper_hide_avatars');
+        };
+
+        var onunload_fn = function() {
+          $body.removeClass('fogbugz_helper_hide_avatars');
+        };
+
+        pm.add({
+          id: 'hide_avatars',
+          text: 'Hide User Avatars in Comments',
+          title: 'Hides the avatars on ticket comments',
+          defaultOn: false,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+
+        ////////////////////////////
+       // Hide empty comments
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var onload_fn = function() {
+          $body.addClass('fogbugz_helper_hide_empty_comments');
+        };
+
+        var onunload_fn = function() {
+          $body.removeClass('fogbugz_helper_hide_empty_comments');
+        };
+
+        pm.add({
+          id: 'hide_empty_comments',
+          text: 'Hide empty comments in ticket view',
+          title: 'Hides the empty comments on ticket comments',
+          defaultOn: false,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Assign To Me Button
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        // Script specific
+        var assign_to_me = function(event) {
+          $('#ixPersonAssignedTo').droplist().val(window.fb.config.ixPerson);
+
+          if ( event ) {
+            event.preventDefault();
+          }
+        };
+
+        var remove_button = function() {
+          $('._fbh_atm_button').remove();
+
+          $('#ixPersonAssignedTo').removeClass('_fbh_atm_done').parent().removeClass('_fbh_atm_same');
+        };
+
+        var check_change = function() {
+          var $ixPersonAssignedTo = $('#ixPersonAssignedTo');
+
+          var val = $ixPersonAssignedTo.droplist().val();
+
+          if ( val === window.fb.config.ixPerson || (window.fb.cases.current.bug && val === '- default assignee -' && window.fb.cases.current.bug.ixPersonAssignedTo === window.fb.config.ixPerson) ) {
+            $ixPersonAssignedTo.parent().addClass('_fbh_atm_same');
+          } else {
+            $ixPersonAssignedTo.parent().removeClass('_fbh_atm_same');
+          }
+        };
+
+        // Boilerplate
+        var body_class = '_fbh_atm';
+
+        var run_script = function() {
+          var $ixPersonAssignedTo = $('#ixPersonAssignedTo:not(._fbh_atm_done)');
+
+          if ( !$ixPersonAssignedTo.length ) return;
+
+          $ixPersonAssignedTo.addClass('_fbh_atm_done');
+
+          var $me = $('<a href="javascript:;" class="_fbh_atm_button">Assign to Me</a>');
+          $me.insertBefore($ixPersonAssignedTo);
+
+          $ixPersonAssignedTo.bind('droplistChange', check_change);
+
+          check_change();
+        };
+
+        var run_script_timeout;
+        // Don't call this function thousands of times
+        var try_run_script = function() {
+          clearTimeout(run_script_timeout);
+
+          run_script_timeout = setTimeout(run_script, 10);
+        };
+
+
+        var onload_fn = function() {
+          $body.addClass(body_class);
+
+          $document
+            .delegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
+            .delegate('._fbh_atm_button', 'click', assign_to_me)
+            ;
+
+          try_run_script();
+        };
+
+        var onunload_fn = function() {
+          $body.removeClass(body_class);
+
+          $document
+            .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', try_run_script)
+            .undelegate('._fbh_atm_button', 'click', assign_to_me)
+            ;
+
+          remove_button();
+        };
+
+        pm.add({
+          id: 'assign_to_me_button',
+          text: 'Assign To Me Button',
+          title: 'Adds a "Me" to "Assigned To" field',
+          defaultOn: true,
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+      /* Not used, but this is how I figured out FB's event names*/
+
+      /*var _sub = fb.pubsub.subscribe;
+
+      fb.pubsub.subscribe = function(name, fun) {
+        console.log('fb.pubsub.subscribe:', name);
+        _sub(name, fun);
+        _sub(name, function(m, d) {
+          console.log('subscribed event:', name, m, d);
+        });
+      };*/
+
+      /*var _pub = fb.pubsub.publish;
+
+      fb.pubsub.publish = function(name) {
+        console.log('fb.pubsub.publish:', arguments);
+        _pub.apply(window, arguments);
+        debugger;
+      };*/
+
+      // Set up all the preferences
+      pm.load();
     };
 
-    pm.add({
-      id: 'assign_to_me_button',
-      text: 'Assign To Me Button',
-      title: 'Adds a "Me" to "Assigned To" field',
-      defaultOn: true,
-      onload: onload_fn,
-      onunload: onunload_fn
-    });
-  })(pm);
+    // Attempt to run the code
+    init();
 
-  /* Not used, but this is how I figured out FB's event names*/
-
-  /*var _sub = fb.pubsub.subscribe;
-
-  fb.pubsub.subscribe = function(name, fun) {
-    console.log('fb.pubsub.subscribe:', name);
-    _sub(name, fun);
-    _sub(name, function(m, d) {
-      console.log('subscribed event:', name, m, d);
-    });
-  };*/
-
-  /*var _pub = fb.pubsub.publish;
-
-  fb.pubsub.publish = function(name) {
-    console.log('fb.pubsub.publish:', arguments);
-    _pub.apply(window, arguments);
-    debugger;
-  };*/
-
-  // Set up all the preferences
-  pm.load();
-};
-
-// Attempt to run the code
-init();
-
-})();
+  })();
 })();

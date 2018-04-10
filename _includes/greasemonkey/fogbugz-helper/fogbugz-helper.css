@@ -776,6 +776,9 @@ label[id="38_SHA"] + .content {
 ////////////////////////// */
 
 /* BLUE */
+._fhot .case .corner #case-link a {
+  color: #39668e;
+}
 
 ._fhot .flexy-ok-input button {
   color: #39668e;

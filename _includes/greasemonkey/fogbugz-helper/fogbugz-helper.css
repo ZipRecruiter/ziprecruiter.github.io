@@ -776,10 +776,15 @@ label[id="38_SHA"] + .content {
 ////////////////////////// */
 
 /* BLUE */
+._fhot .case nav .controls .control:hover {
+  color: #39668e;
+}
+._fhot .case nav .controls .control:hover svg {
+  fill: #39668e;
+}
 ._fhot .case .corner #case-link a {
   color: #39668e;
 }
-
 ._fhot .flexy-ok-input button {
   color: #39668e;
 }
@@ -1170,7 +1175,7 @@ label[id="38_SHA"] + .content {
 ._fhot .case textarea.active {
   /*box-shadow: 0 0 0px 2px #39668e*/
 }
-._fhot .case nav .controls .control:hover {
+._fhot .case nav .nav_controls .control:hover {
   color: #39668e;
 }
 ._fhot .case .left .content .case {
@@ -1306,15 +1311,18 @@ body._fhot {
   color: #80a8cc;
   margin-right: 2px;
 }
-._fhot section.case nav .controls > .control {
+._fhot section.case nav .nav_controls > .control {
   padding: 4px 5px;
   font-size: 13px;
   line-height: normal;
   border-radius: 4px;
   white-space: nowrap;
+  background: transparent;
+  border: 0;
+  outline: none;
 }
-._fhot section.case nav .controls > .control:focus,
-._fhot section.case nav .controls > .control:hover {
+._fhot section.case nav .nav_controls > .control:focus,
+._fhot section.case nav .nav_controls > .control:hover {
   background: #ddd;
   color: #444;
 }
@@ -1695,11 +1703,11 @@ body._fhot {
 }*/
 
 /* Button order */
-._fhtt .controls .control {
+._fhtt .nav_controls .control {
   order: 1;
 }
 
-._fhtt .controls .control[name="edit"] {
+._fhtt .nav_controls .control[name="edit"] {
   order: 0;
 }
 
@@ -1944,7 +1952,7 @@ body._fhot {
     padding-right: .5em;
   }
 
-  ._fhtt section.case nav .controls {
+  ._fhtt section.case nav .nav_controls {
     display: inline-block;
   }
 
@@ -2034,7 +2042,7 @@ body._fhot {
     border-radius: 0;
   }
 
-  ._fhtt section.case nav .controls > .control {
+  ._fhtt section.case nav .nav_controls > .control {
     margin: 0 5px 5px 0;
   }
 
@@ -2426,27 +2434,54 @@ section.case .corner.add_related_ticket_done a.case {
  // Add Cancel/Resolve/Reopen Buttons to Edit Ticket Header
 ////////////////////////// */
 
-section.case nav .controls>.control.save {
+section.case nav .nav_controls>.control.save {
   margin-left: 1em;
 }
 
-section.case nav .controls>.control.save .icon,
-section.case nav .controls>.control.cancel .icon {
+section.case nav .nav_controls>.control.save .icon,
+section.case nav .nav_controls>.control.cancel .icon {
   vertical-align: bottom;
 }
 
-section.case nav .controls>.control.cancel .icon:before {
+section.case nav .nav_controls>.control.cancel .icon:before {
   content: "🚫";
   font-family: Emojione, Noto, Twemoji, Symbola;
   color: #80a8cc;
   margin-right: 2px;
 }
 
-section.case nav .controls>.control.save .icon:before {
+section.case nav .nav_controls>.control.save .icon:before {
   content: "💾";
   font-family: Emojione, Noto, Twemoji, Symbola;
   color: #80a8cc;
   margin-right: 2px;
+}
+
+section.case nav .nav_controls>.control.kanban_next .icon:before {
+  content: "➧";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a8cc;
+  margin-right: 2px;
+}
+
+section.case nav .nav_controls>.control.loading .icon:before {
+  visibility: hidden;
+}
+
+section.case nav .nav_controls>.control.loading {
+  position: relative;
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+section.case nav .nav_controls>.control.loading:after {
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a8cc;
+  content: "⚙️";
+  animation: spin 4s infinite linear;
+  position: absolute;
+  left: -3px;
 }
 
   /* //////////////////////////

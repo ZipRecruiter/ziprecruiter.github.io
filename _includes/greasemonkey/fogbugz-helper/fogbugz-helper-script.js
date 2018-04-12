@@ -2302,7 +2302,7 @@ var do_marked = function(text) {
             }
 
             $nav.append('\
-              <span class="controls">\
+              <span class="nav_controls controls">\
                 <a class="control" name="resolve" href="' + resolve_url + '" accesskey="r">\
                   <span class="icon icon-case-resolve"></span>Resolve\
                 </a>\
@@ -2320,7 +2320,7 @@ var do_marked = function(text) {
             var reopen_url = document.location.href.replace(/\/edit\//, '/reopen/');
 
             $nav.append('\
-              <span class="controls">\
+              <span class="nav_controls controls">\
                 <a class="control" name="reopen" href="' + reopen_url + '" accesskey="u">\
                   <span class="icon icon-case-reopen"></span>Reopen\
                 </a>\
@@ -2948,6 +2948,135 @@ var do_marked = function(text) {
           defaultOn: true,
           onload: onload_fn,
           onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
+       // Add "next kanban lane" button
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var add_kanban_buttons_timeout;
+        var has_class = 'has_add_kanban_buttons';
+        var controls_class = 'kanban_controls';
+
+        // Add resolve or reopen button to ticket
+        var _add_kanban_buttons = function() {
+          var $nav = $('.case > article > nav:not(.' + has_class + ')');
+
+          if ( $nav.length ) {
+            $nav.addClass(has_class);
+
+            var planner_ix = window.fb.db.Planner.ixByFixFor(window.fb.cases.current.bug.ixFixFor, window.fb.cases.current.bug.ixProject);
+
+            if ( planner_ix === -1 ) {
+              // No planner for this project/category
+              return;
+            }
+
+            var columns = window.fb.db.Kanban2.columnsByPlanner[planner_ix];
+            var column_order = window.fb.db.Planner.byIx(planner_ix).oKanbanVisible[window.fb.cases.current.bug.ixFixFor];
+            column_order = column_order.split(',');
+
+            var current_value = 'None';
+            var next_value;
+
+            if ( !window.fb.cases.current.fields.byName.ixKanbanColumn2.initialValue ) {
+              next_value = column_order[0];
+            } else {
+              var current_idx = column_order.findIndex(function(val) {
+                return val === window.fb.cases.current.fields.byName.ixKanbanColumn2.initialValue + ''
+              });
+
+              if ( current_idx >= column_order.length ) {
+                return;
+              }
+
+              var current_column = columns.find(function(val) { return val.ixKanbanColumn2 === window.fb.cases.current.fields.byName.ixKanbanColumn2.initialValue });
+              current_value = current_column.name;
+
+              next_value = column_order[current_idx + 1];
+            }
+
+            next_value = parseInt(next_value);
+
+            var next_column = columns.find(function(val) { return val.ixKanbanColumn2 === next_value });
+
+            var $next = $('<button/>')
+              .addClass('control kanban_next')
+              .html(next_column.name)
+              .prepend('<span class="icon"></span>')
+              .data('column', next_column.ixKanbanColumn2);
+
+            var $controls = $('<span/>')
+              .addClass(controls_class + ' nav_controls')
+              .append($next);
+
+            $nav.append($controls);
+          }
+        };
+
+        var change_kanban = function() {
+          var $this = $(this);
+
+          $this.addClass('loading');
+
+          var column = $this.data('column');
+
+          var bug = window.fb.cases.current.fields.getCaseData()[0];
+
+          bug = {
+            ixBug: bug.ixBug,
+            ixBugEventLatest: bug.ixBugEventLatest,
+            sCommand: 'edit',
+            ixKanbanColumn2: column
+          };
+
+          fb.api.cases.post({
+            id: bug.ixBug,
+            data: bug
+          })
+          .done(function (dataResponse, dataEnvelope, scrollToEvent) {
+            // Create URL
+            var url = fb.urls.mapCaseUrl(dataResponse.ixBug, { sTitle: $('#sTitle').val() || $('.case h1').text() });
+            // Go to the ticket
+            fb.navigation.navigate(url);
+          })
+          .fail(function (errorInfo) {
+            console.log(errorInfo);
+          });
+        };
+
+        // Don't call this function thousands of times
+        var add_kanban_buttons = function() {
+          clearTimeout(add_kanban_buttons_timeout);
+
+          add_kanban_buttons_timeout = setTimeout(_add_kanban_buttons, 10);
+        };
+
+        var onload = function() {
+          add_kanban_buttons();
+          $document
+            .delegate('body', 'DOMNodeInserted DOMNodeRemoved', add_kanban_buttons)
+            .delegate('.kanban_next', 'click', change_kanban)
+            ;
+        };
+
+        var onunload = function() {
+          $document
+            .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_kanban_buttons)
+            .undelegate('.kanban_next', 'click', change_kanban)
+            ;
+
+          $('.' + has_class).removeClass().find('.' + controls_class + '').remove();
+        };
+
+        pm.add({
+          id: 'add_kanban',
+          text: 'Add Kanban "next lane" button to ticket header',
+          title: 'Add Kanban "next lane" button to ticket header',
+          defaultOn: false,
+          onload: onload,
+          onunload: onunload
         });
       })(pm);
 

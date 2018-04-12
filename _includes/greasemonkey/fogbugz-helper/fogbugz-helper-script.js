@@ -3072,7 +3072,7 @@ var do_marked = function(text) {
 
         pm.add({
           id: 'add_kanban',
-          text: 'Add Kanban "next lane" button to ticket header',
+          text: 'Add Kanban Ticket Buttons',
           title: 'Add Kanban "next lane" button to ticket header',
           defaultOn: false,
           onload: onload,

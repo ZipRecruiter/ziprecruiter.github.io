@@ -2364,7 +2364,7 @@ var do_marked = function(text) {
           .undelegate('body', 'DOMNodeInserted DOMNodeRemoved', add_resolve_button)
           ;
 
-        $('.' + has_add_resolve_button_class).removeClass().find('.controls').remove();
+        $('.' + has_add_resolve_button_class).removeClass(has_add_resolve_button_class).find('.nav_controls').remove();
         fb.pubsub.unsubscribe('/api/success', add_resolve_check_api_response);
       };
 
@@ -3001,14 +3001,14 @@ var do_marked = function(text) {
 
             var next_column = columns.find(function(val) { return val.ixKanbanColumn2 === next_value });
 
-            var $next = $('<button/>')
+            var $next = $('<a href="javascript:;"></a>')
               .addClass('control kanban_next')
               .html(next_column.name)
               .prepend('<span class="icon"></span>')
               .data('column', next_column.ixKanbanColumn2);
 
             var $controls = $('<span/>')
-              .addClass(controls_class + ' nav_controls')
+              .addClass(controls_class + ' controls')
               .append($next);
 
             $nav.append($controls);
@@ -3067,7 +3067,7 @@ var do_marked = function(text) {
             .undelegate('.kanban_next', 'click', change_kanban)
             ;
 
-          $('.' + has_class).removeClass().find('.' + controls_class + '').remove();
+          $('.' + has_class).removeClass(has_class).find('.' + controls_class + '').remove();
         };
 
         pm.add({

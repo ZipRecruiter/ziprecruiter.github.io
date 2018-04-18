@@ -1175,9 +1175,6 @@ label[id="38_SHA"] + .content {
 ._fhot .case textarea.active {
   /*box-shadow: 0 0 0px 2px #39668e*/
 }
-._fhot .case nav .nav_controls .control:hover {
-  color: #39668e;
-}
 ._fhot .case .left .content .case {
   color: #39668e;
 }
@@ -1308,21 +1305,22 @@ body._fhot {
 ._fhot .icon-case-resolve:before {
   content: "✔";
   font-family: Emojione, Noto, Twemoji, Symbola;
-  color: #80a8cc;
+  color: color: #828293;
   margin-right: 2px;
 }
-._fhot section.case nav .nav_controls > .control {
+._fhot section.case nav .controls > .control {
   padding: 4px 5px;
   font-size: 13px;
-  line-height: normal;
+  line-height: 20px;
   border-radius: 4px;
   white-space: nowrap;
   background: transparent;
   border: 0;
   outline: none;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-._fhot section.case nav .nav_controls > .control:focus,
-._fhot section.case nav .nav_controls > .control:hover {
+._fhot section.case nav .controls > .control:focus,
+._fhot section.case nav .controls > .control:hover {
   background: #ddd;
   color: #444;
 }
@@ -2446,42 +2444,46 @@ section.case nav .nav_controls>.control.cancel .icon {
 section.case nav .nav_controls>.control.cancel .icon:before {
   content: "🚫";
   font-family: Emojione, Noto, Twemoji, Symbola;
-  color: #80a8cc;
+  color: #828293;
   margin-right: 2px;
 }
 
 section.case nav .nav_controls>.control.save .icon:before {
   content: "💾";
   font-family: Emojione, Noto, Twemoji, Symbola;
-  color: #80a8cc;
+  color: #828293;
   margin-right: 2px;
 }
 
-section.case nav .nav_controls>.control.kanban_next .icon:before {
+section.case nav .controls>.control.kanban_next .icon:before {
   content: "➧";
   font-family: Emojione, Noto, Twemoji, Symbola;
-  color: #80a8cc;
+  color: #828293;
   margin-right: 2px;
 }
 
-section.case nav .nav_controls>.control.loading .icon:before {
+section.case nav .controls>.control.loading .icon:before {
   visibility: hidden;
 }
 
-section.case nav .nav_controls>.control.loading {
+section.case nav .controls>.control.loading {
   position: relative;
 }
 @keyframes spin {
   from {transform:rotate(0deg);}
   to {transform:rotate(360deg);}
 }
-section.case nav .nav_controls>.control.loading:after {
+section.case nav .controls>.control.loading:after {
   font-family: Emojione, Noto, Twemoji, Symbola;
   color: #80a8cc;
   content: "⚙️";
   animation: spin 4s infinite linear;
   position: absolute;
   left: -3px;
+}
+
+section.case nav .controls>.control:hover .icon:before {
+  color: #39668e;
 }
 
   /* //////////////////////////

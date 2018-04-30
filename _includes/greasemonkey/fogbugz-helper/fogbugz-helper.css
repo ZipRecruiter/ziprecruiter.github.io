@@ -1290,6 +1290,9 @@ body._fhot {
 ._fhot .case .top {
   margin-bottom: 10px;
 }
+._fhot .case .left {
+  padding: 10px;
+}
 ._fhot section.case nav {
   background-color: #f6f6f6;
   height: auto;
@@ -1323,10 +1326,6 @@ body._fhot {
 ._fhot section.case nav .controls > .control:hover {
   background: #ddd;
   color: #444;
-}
-._fhot .case .right {
-  flex-grow: 1;
-  overflow: auto;
 }
 ._fhot .case #formEditCase .top .right {
   padding-top: 0;
@@ -1435,12 +1434,6 @@ body._fhot {
 /* bottom */
 
 /* left */
-._fhot .case .left {
-  width: auto;
-  min-width: 150px;
-  padding: 10px;
-  max-width: 185px;
-}
 ._fhot .case .left label {
   color: #000;
 }
@@ -1575,6 +1568,21 @@ body._fhot {
 ._fhtt .case-list .list-group-footer > .list-add-case.disabled {
   background: #fff;
   padding: 0 5px;
+}
+
+._fhtt .case .top {
+  display: flex;
+}
+
+._fhtt .case .left.left.left {
+  width: auto;
+  min-width: 150px;
+  /*max-width: 185px;*/
+}
+
+._fhtt .case .right {
+  flex-grow: 1;
+  overflow: auto;
 }
 
 ._fhtt .case .top .right {
@@ -1720,6 +1728,9 @@ body._fhot {
   width: 200px;
   margin-right: -200px;
   position: relative;
+  min-width: 0;
+  display: inline-block;
+  float: left;
 }
 
 ._fhtt #formEditCase > .left > * {
@@ -1739,6 +1750,8 @@ body._fhot {
   float: right;
   padding-left: 210px;
   width: 100%;
+  border-top: 0;
+  padding-top: 0;
 }
 
 /* Events */
@@ -1997,7 +2010,7 @@ body._fhot {
   ._fhtt section.case nav {
     height: auto;
     display: block;
-    padding: 10px 5px 5px 5px;
+    padding: 5px 5px 5px 5px;
   }
 
   ._fhtt #header.thunder-header .has-search-guide {

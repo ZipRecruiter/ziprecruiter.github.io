@@ -1570,14 +1570,20 @@ body._fhot {
   padding: 0 5px;
 }
 
+._fhtt .case article > .left {
+  width: 25%;
+  min-width: 25%;
+  display: inline-block;
+  float: left;
+}
+
 ._fhtt .case .top {
   display: flex;
 }
 
-._fhtt .case .left.left.left {
+._fhtt .case .top .left.left {
   width: auto;
   min-width: 150px;
-  /*max-width: 185px;*/
 }
 
 ._fhtt .case .right {

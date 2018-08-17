@@ -1516,28 +1516,28 @@ var do_marked = function(text) {
 
       // http://stackoverflow.com/questions/5796718/html-entity-decode
       var decodeEntities = (function() {
-          // this prevents any overhead from creating the object each time
-          var element = document.createElement('div');
+      // this prevents any overhead from creating the object each time
+      var element = document.createElement('div');
 
-          // regular expression matching HTML entities
-          var entity = /&(?:#x[a-f0-9]+|#[0-9]+|[a-z0-9]+);?/ig;
+      // regular expression matching HTML entities
+      var entity = /&(?:#x[a-f0-9]+|#[0-9]+|[a-z0-9]+);?/ig;
 
-          return function decodeHTMLEntities(str) {
-              // find and replace all the html entities
-              str = str.replace(entity, function(m) {
-                  element.innerHTML = m;
-                  return element.textContent;
-              });
+      return function decodeHTMLEntities(str) {
+        // find and replace all the html entities
+        str = str.replace(entity, function(m) {
+            element.innerHTML = m;
+            return element.textContent;
+        });
 
-              //str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
-              str = str.replace(/<script/gmi, '&lt;script');
-              str = str.replace(/<\/script/gmi, '&lt;/script');
+        //str = str.replace(/<script[^>]*>([\S\s]*?)<\/script>/gmi, '');
+        str = str.replace(/<script/gmi, '&lt;script');
+        str = str.replace(/<\/script/gmi, '&lt;/script');
 
-              // reset the value
-              element.textContent = '';
+        // reset the value
+        element.textContent = '';
 
-              return str;
-          }
+        return str;
+      }
       })();
 
       // Toggle
@@ -1545,8 +1545,8 @@ var do_marked = function(text) {
       var original_code;
 
       var wysiwyg_add = function() {
-        var $customfield = $('.customfield-longtext');
-        var $textarea = $customfield.find('textarea.wysiwygified');
+        var $customfield = $('.customfield-longtext').eq(0);
+        var $textarea = $customfield.find('textarea.wysiwygified').eq(0);
         var code = '';
 
         // Edit
@@ -1575,7 +1575,7 @@ var do_marked = function(text) {
       var wysiwyg_remove = function(markdown) {
         markdown = markdown || false;
 
-        var $textarea = $('textarea.wysiwygified');
+        var $textarea = $('textarea.wysiwygified').eq(0);
         var val;
 
         if ( markdown ) {
@@ -1788,7 +1788,7 @@ var do_marked = function(text) {
       };
 
       var _wysiwygify = function() {
-        var $customfield = $('.customfield-longtext');
+        var $customfield = $('.customfield-longtext').eq(0);
         var $textarea = $customfield.find('textarea:not(.wysiwygified)').addClass('wysiwygified');
 
         // Edit

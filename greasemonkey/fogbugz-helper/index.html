@@ -1,6 +1,11 @@
 ---
 layout: default
 title: Greasemonkey Scripts - FogBugz Helper
+custom-javascript-list:
+  - "/greasemonkey/fogbugz-helper/fogbugz-helper.js"
+  - "/greasemonkey/fogbugz-helper/js/index.js"
+custom-css-list:
+  - "/greasemonkey/fogbugz-helper/css/index.css"
 ---
 <section class="section">
   <section id="enabling" class="page_section">
@@ -11,18 +16,18 @@ title: Greasemonkey Scripts - FogBugz Helper
       <ol>
         <li>
           <figure>
-            <img src="/greasemonkey/fogbugz-helper/img/enable_fogbugz_customization_1.png" width="233" height="148">
             <figcaption>
-              Mouseover (or tap on mobile) your avatar in the upper right of a FogBugz page and click "Customizations"
+              Mouseover (or tap on mobile) your avatar in the lower left of a FogBugz page and click "Customizations"
             </figcaption>
+            <img src="/greasemonkey/fogbugz-helper/img/enable_fogbugz_customization_1.png" width="274" height="278">
           </figure>
         </li>
         <li>
           <figure>
-            <img src="/greasemonkey/fogbugz-helper/img/enable_fogbugz_customization_2.png" width="469" height="279">
             <figcaption>
               Click "Your Available Customizations" then click the value in the "Enabled" column to toggle on/off
             </figcaption>
+            <img src="/greasemonkey/fogbugz-helper/img/enable_fogbugz_customization_2.png" width="469" height="279">
           </figure>
         </li>
       </ol>
@@ -32,47 +37,9 @@ title: Greasemonkey Scripts - FogBugz Helper
   <section id="features" class="page_section">
     <h2 class="headline"><div class="content"><a href="#features">Features</a></div></h2>
 
-    <div class="body cms"><div class="content">
-      <ul>
-        <li>Fake kanban-style interface for ticket lists (work in progress)</li>
-        <li>Background color picker (in tools menu)</li>
-        <li>Task list: rows can be more than one line</li>
-        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/new_ui.png" width="1269" height="876"></li>
-
-        <li>Various styling tweaks to make the page more responsive for smaller windows</li>
-        <li>Ticket links default to linking to "edit" mode</li>
-        <li>Task list: Click the background to close ticket modals</li>
-        <li>Tickets: Case description field made larger</li>
-        <li>Tickets: Text areas auto expand while typing</li>
-        <li>Tickets: Markdown in Case Summary and plain-text comment fields</li>
-        <li>Tickets: WYSIWYG editor (disabled by default, saves as Markdown)</li>
-        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/new_tickets.png" width="797" height="885"></li>
-
-        <li>Tickets: Some ticket spam is hidden, mouse over the "events" to see the full description of the event</li>
-        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/ticket_spam.gif" width="673" height="366"></li>
-
-        <li>Tickets: Useful buttons added to the top of tickets</li>
-        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/ticket_buttons.png" width="252" height="47"></li>
-
-        <li>Tickets: Reverse order of comments (disabled by default)</li>
-        <li>Auto-sorting tickets that arranged by "status" (Fogbugz sorts them in an almost random order)</li>
-        <li>Hotkeys (work in progress, disabled by default)</li>
-
-        <li>WYSIWYG editor for Case Description (disabled by default)</li>
-        <li>Markdown to HTML in comments and case description</li>
-
-        <li>Preferences for many JS features. More styling features to come.</li>
-
-        <li>Colorful status indicators</li>
-        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/colorful_statuses.png" width="374" height="355"></li>
-
-        <li>More mobile friendly layout</li>
-        <li class="thumb collapsed"><img src="/greasemonkey/fogbugz-helper/img/responsive.png" width="796" height="660"></li>
-      </ul>
-
+    <div class="body cms"><div class="content" id="features_content">
       <p>To enable/disable features, mouse-over the tools menu in FogBugz:</p>
       <p><img src="/greasemonkey/fogbugz-helper/img/tools_dropdown.png" width="610" height="863"></p>
-      <p>Note: some features are disabled by default</p>
     </div></div>
   </section>
 
@@ -136,3 +103,7 @@ title: Greasemonkey Scripts - FogBugz Helper
   </div>
 
 </section>
+
+<script>
+  window.__fogbugz_helper_do_not_init = true;
+</script>

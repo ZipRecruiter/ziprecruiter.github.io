@@ -1,4 +1,9 @@
 (function() {
+// In case it doesn't exist
+if ( !String.prototype.format ) {
+  String.prototype.format = function() {return this;};
+}
+
 /*!
  * Autolinker.js
  * 0.25.2
@@ -336,7 +341,7 @@ var do_marked = function(text) {
     };
 
     // Make the preference manager
-    var pm = new PreferenceManager();
+    var pm = window.__fogbugz_helper_pm = new PreferenceManager();
 
       ////////////////////////////
      // (Preference) Use Stylesheet (for debugging)
@@ -1276,7 +1281,9 @@ var do_marked = function(text) {
         pm.add({
           id: 'ticket_tweaks',
           text: 'Styling Fixes',
-          title: 'Various tweaks which fix mobile and other issues',
+          title: 'Various tweaks which fix mobile and other issues. Hides ticket spam.',
+          screenshot: 'img/responsive.png',
+          screenshot2: 'img/ticket_spam.gif',
           defaultOn: true,
           onload: onload,
           onunload: onunload
@@ -1419,6 +1426,7 @@ var do_marked = function(text) {
         id: 'fake_kanban',
         text: 'Kanban-Style Ticket Listing',
         title: 'Changes ticket listings to be similar to the FogBugz Kanban board. Drag n drop to come...',
+        screenshot: 'img/new_ui.png',
         defaultOn: false,
         onload: onload_fake_kanban,
         onunload: onunload_fake_kanban
@@ -1838,6 +1846,7 @@ var do_marked = function(text) {
         id: 'wysiwygify',
         text: 'Rich Text on Case Summary',
         title: 'Makes the Case Summary textarea "rich text" formattable (saves as markdown)',
+        screenshot: 'img/new_tickets.png',
         defaultOn: false,
         onload: onload_wysiwygify,
         onunload: onunload_wysiwygify
@@ -2262,6 +2271,7 @@ var do_marked = function(text) {
         id: 'add_related_ticket',
         text: 'Add Related Ticket Buttons',
         title: 'Adds buttons to make it easy to add parent/child tickets',
+        screenshot: 'img/ticket_buttons.png',
         defaultOn: true,
         onload: onload_add_related_ticket,
         onunload: onunload_add_related_ticket
@@ -2486,6 +2496,7 @@ var do_marked = function(text) {
           id: 'colorize_statuses',
           text: 'Colorize Statuses',
           title: 'Adds colorful backgrounds to status indicators on tickets',
+          screenshot: 'img/colorful_statuses.png',
           defaultOn: true,
           onload: onload_fn,
           onunload: onunload_fn
@@ -3101,7 +3112,9 @@ var do_marked = function(text) {
       };*/
 
       // Set up all the preferences
-      pm.load();
+      if ( !window.__fogbugz_helper_do_not_init ) {
+        pm.load();
+      }
     };
 
     // Attempt to run the code

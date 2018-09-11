@@ -1146,6 +1146,7 @@ var do_marked = function(text) {
           id: 'bgcolors',
           text: 'Background Colors',
           title: 'Enable the color picker to change the background color of FogBugz. Has a few styling issues here and there. If you encounter an issue you can quickly disable it in the FogBugz tools menu.',
+          screenshot: 'img/background_color.png',
           defaultOn: true,
           onload: onload_bgcolors,
           ontools: ontools_bgcolors,
@@ -1254,6 +1255,7 @@ var do_marked = function(text) {
         id: 'expand_tasks',
         text: 'Expand Task List Cells',
         title: 'Shows the full text of titles etc. in ticket lists. Each row can be more than one line of text.',
+        screenshot: 'img/expand_text.png',
         defaultOn: false,
         onload: onload_expand_tasks,
         onunload: onunload_expand_tasks
@@ -1307,6 +1309,7 @@ var do_marked = function(text) {
           id: 'other_tweaks',
           text: 'Old FogBugz Styling',
           title: 'Changes colors, fonts and some other things back to a less terrible time',
+          screenshot: 'img/old_fogbugz_styling.png',
           defaultOn: true,
           onload: onload,
           onunload: onunload
@@ -2064,6 +2067,7 @@ var do_marked = function(text) {
           id: 'markdown',
           text: 'Markdown for Comments/Case Description',
           title: 'Automatically converts markdown in plain text comments and case description',
+          screenshot: 'img/markdown.png',
           defaultOn: true,
           onload: onload_markdown,
           onunload: onunload_markdown
@@ -2270,8 +2274,8 @@ var do_marked = function(text) {
       pm.add({
         id: 'add_related_ticket',
         text: 'Add Related Ticket Buttons',
-        title: 'Adds buttons to make it easy to add parent/child tickets',
-        screenshot: 'img/ticket_buttons.png',
+        title: 'Adds buttons to make it easy to add child tickets and duplicate tickets',
+        screenshot: 'img/related_buttons.png',
         defaultOn: true,
         onload: onload_add_related_ticket,
         onunload: onunload_add_related_ticket
@@ -2382,6 +2386,7 @@ var do_marked = function(text) {
         id: 'add_resolve',
         text: 'Add Save/Cancel/Resolve/Reopen Buttons to Edit Ticket Header',
         title: 'Adds a "save," "cancel," "resolve," "reactivate," "close," and "reopen" buttons to the header area of tickets when editing',
+        screenshot: 'img/ticket_buttons.png',
         defaultOn: true,
         onload: onload_add_resolve,
         onunload: onunload_add_related_ticket
@@ -2821,6 +2826,7 @@ var do_marked = function(text) {
           id: 'use_old_favicon',
           text: 'Use Old FogBugz Icon',
           title: 'Shows the old kiwi icon rather than the weird Decepticon/Manuscript icon',
+          screenshot: 'img/favicon.png',
           defaultOn: true,
           onload: onload_fn,
           onunload: onunload_fn
@@ -2956,6 +2962,7 @@ var do_marked = function(text) {
           id: 'assign_to_me_button',
           text: 'Assign To Me Button',
           title: 'Adds a "Me" to "Assigned To" field',
+          screenshot: 'img/assign_to_me.png',
           defaultOn: true,
           onload: onload_fn,
           onunload: onunload_fn
@@ -3085,6 +3092,7 @@ var do_marked = function(text) {
           id: 'add_kanban',
           text: 'Add Kanban Ticket Buttons',
           title: 'Add Kanban "next lane" button to ticket header',
+          screenshot: 'img/kanban_button.png',
           defaultOn: false,
           onload: onload,
           onunload: onunload

@@ -1,0 +1,32 @@
+---
+layout: default
+title: Bookmarklets - Mixpanel Segmentation URL Cleaner
+# custom-javascript-list:
+#   - "/greasemonkey/fogbugz-helper/fogbugz-helper.js"
+#   - "/greasemonkey/fogbugz-helper/js/index.js"
+# custom-css-list:
+#   - "/greasemonkey/fogbugz-helper/css/index.css"
+---
+
+<section class="section">
+  <section id="using" class="page_section">
+    <h2 class="headline"><div class="content"><a href="#using">Using the Bookmarklets</a></div></h2>
+
+    <div class="body cms"><div class="content">
+      <p>These bookmarklets clean out some of the Mixpanel Segmentation stuff (namely the checkbox information on the graphs) to make the URLs much shorter.</p>
+      <p>To use, drag the links below to your bookmarks bar and click them while on a Mixpanel "Segmentation" page.</p>
+      <ol>
+        <li>
+          <p>This bookmarklet cleans the mixpanel segmentation URL and allows you to copy it from a JavaScript prompt:</p>
+          <p><a href="javascript:(function(){url='//ziprecruiter.github.io/bookmarklets/mixpanel-urls/get-clean-mixpanel-url.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();">Get Clean Mixpanel URL</a></p>
+          <p>Mainly for sharing shorter urls with others.</p>
+        </li>
+        <li>
+          <p>Clean the mixpanel segmentation URL and go to the new URL:</p>
+          <p><a href="javascript:(function(){url='//ziprecruiter.github.io/bookmarklets/mixpanel-urls/goto-clean-mixpanel-url.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();">Go To Clean Mixpanel URL</a></p>
+          <p>This bookmarklet is for fixing a situation where the graph shows you unwanted (old) values. Kind of an edge case.</p>
+        </li>
+      </ol>
+    </div></div>
+  </section>
+</section>

@@ -136,7 +136,7 @@ var do_marked = function(text) {
 
       // Perl nerd stuff
       // ZR specific
-      auto_link_html(auto_link_html_div, /\b(ZR::|StarterView::|PartnerAlerts::|Test::ZR::|Test::StarterView::|Test::PartnerAlerts::)(([a-zA-Z0-9]+::)*[a-zA-Z0-9]+)/, 'https://pod.ziprecruiter.com/?$1');
+      auto_link_html(auto_link_html_div, /\b(ZR::|StarterView::|PartnerAlerts::|Test::ZR::|Test::StarterView::|Test::PartnerAlerts::)(([a-zA-Z0-9]+::)*[a-zA-Z0-9]+)/, 'https://pod.zr.org/?$1');
 
       auto_link_html(auto_link_html_div, /\b([a-zA-Z0-9]+::)+[a-zA-Z0-9]+/, 'https://metacpan.org/pod/$1');
 

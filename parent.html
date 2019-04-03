@@ -12,6 +12,8 @@
 
 <script>
   window.addEventListener('message', function(e) {
-    console.log(data);
+    if ( e.data === 'please refresh' ) {
+      window.location.reload(true);
+    }
   }, false);
 </script>

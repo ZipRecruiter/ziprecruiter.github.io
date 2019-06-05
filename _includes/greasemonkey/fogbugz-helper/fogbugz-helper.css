@@ -2555,6 +2555,16 @@ section.case nav .controls>.control:hover .icon:before {
 
 /* Both */
 
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status {
+  background: #88ca66;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_helper:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_helper:before {
+  content: " ";
+  background: #fff;
+}
+
 .fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_backlog {
   background: #aaa;
 }
@@ -2644,6 +2654,16 @@ section.case nav .controls>.control:hover .icon:before {
 .fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_released:before {
   content: " ";
   background: #38761d;
+}
+
+.fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_ready_for_prod {
+  background: #88ca66;
+}
+.fogbugz-helper-colorize-statuses #stacking-context-main .field.status_ready_for_prod:before,
+.fogbugz-helper-colorize-statuses #stacking-context-droplists .status_ready_for_prod:before,
+.fogbugz-helper-colorize-statuses #case-lightbox-droplists .status_ready_for_prod:before {
+  content: " ";
+  background: #88ca66;
 }
 
 .fogbugz-helper-colorize-statuses #stacking-context-main .grid-column-Status.status_paused {

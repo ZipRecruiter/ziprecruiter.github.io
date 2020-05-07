@@ -2571,7 +2571,7 @@ var do_marked = function(text) {
             var text = el.childNodes[0].textContent;
             if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
               $tooltip.show();
-              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --server-class=www -m="" ' + text + '');
+              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --qa-facing=yes -m="" ' + text + '');
               $tooltip.appendTo(el);
             }
           }, 100);

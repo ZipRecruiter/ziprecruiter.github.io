@@ -353,6 +353,37 @@
       })(pm);
 
         ////////////////////////////
+       // (Preference) Open external links in new tabs
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var onload_fn = function() {
+          $body.addClass('jira-helper-external-links');
+        };
+
+        var onunload_fn = function() {
+          $body.removeClass('jira-helper-external-links');
+        };
+
+        $body
+          .delegate('.jira-helper-external-links a[href]:not([href^="https://ziprecruiter.atlassian.net/"]):not([href^="/"]):not([href^="#"])', 'focus mousedown', function() {
+            $(this).attr({
+              target: '_blank',
+              rel: 'noopener'
+            });
+          })
+
+        pm.add({
+          id: 'external_links',
+          text: 'Open External Links in New Tabs',
+          title: 'Also indicates external links with an arrow',
+          defaultOn: true,
+          screenshot: 'img/ft_external_links.png',
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
+
+        ////////////////////////////
        // Hotfix shortcut
       ////////////////////////////
       (function(pm) { // So as not to pollute the namespace

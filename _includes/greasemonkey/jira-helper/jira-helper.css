@@ -140,3 +140,12 @@
   padding: 15px 0 !important;
 }
 
+  /* //////////////////////////
+ // Open external links in new tab
+////////////////////////// */
+
+.jira-helper-external-links a[href]:not([href^="https://ziprecruiter.atlassian.net/"]):not([href^="/"]):not([href^="#"]):after {
+  font-family: apple color emoji,segoe ui emoji,noto color emoji,android emoji,emojisymbols,emojione mozilla,twemoji mozilla,segoe ui symbol;
+  content: "↗️";
+}
+

@@ -1,0 +1,110 @@
+---
+layout: default
+title: Greasemonkey Scripts - JIRA Helper
+custom-javascript-list:
+  - "/greasemonkey/jira-helper/jira-helper.js"
+  - "/greasemonkey/jira-helper/js/index.js"
+custom-css-list:
+  - "/greasemonkey/jira-helper/css/index.css"
+---
+<section class="section">
+  <!-- section id="enabling" class="page_section">
+    <h2 class="headline"><div class="content"><a href="#enabling">Enabling in JIRA</a></div></h2>
+
+    <div class="body cms"><div class="content">
+      <p>Note: You do <strong>not</strong> need Greasemonkey etc. to enable this in JIRA. Just follow these instructions:</p>
+      <ol>
+        <li>
+          <figure>
+            <figcaption>
+              Mouseover (or tap on mobile) your avatar in the lower left of a JIRA page and click "Customizations"
+            </figcaption>
+            <img src="/greasemonkey/jira-helper/img/enable_jira_customization_1.png" width="274" height="278">
+          </figure>
+        </li>
+        <li>
+          <figure>
+            <figcaption>
+              Click "Your Available Customizations" then click the value in the "Enabled" column to toggle on/off
+            </figcaption>
+            <img src="/greasemonkey/jira-helper/img/enable_jira_customization_2.png" width="469" height="279">
+          </figure>
+        </li>
+      </ol>
+    </div></div>
+  </section -->
+
+  <section id="features" class="page_section">
+    <h2 class="headline"><div class="content"><a href="#features">Features</a></div></h2>
+
+    <div class="body cms"><div class="content" id="features_content">
+      <!-- p>To enable/disable features, mouse-over the tools menu in JIRA.</p>
+      <p>Also, the "ZipRecruiter JIRA Helper" text links to this page.</p>
+      <p><img src="/greasemonkey/jira-helper/img/tools_dropdown.png"></p -->
+    </div></div>
+  </section>
+
+  <section id="installing" class="page_section">
+    <h2 class="headline"><div class="content"><a href="#installing">Greasemonkey Installation instructions</a></div></h2>
+
+    <div class="spoiler" data-type="not-spoiler">
+      <!-- div class="body cms" data-type="spoiler-info"><div class="content">
+        <p>Note: You do not need Greasemonkey to run this script. Simply <a href="#enabling">follow the instructions at the top</a>.</p>
+        <p><a href="#installing" data-type="spoiler-show">Show me the Greasemonkey instructions.</a></p>
+      </div></div -->
+
+      <div class="body cms"><div class="content">
+        <h3>Firefox</h3>
+        <ul>
+          <li>Install greasemonkey (<a href="https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/">https://addons.mozilla.org/en-Us/firefox/addon/greasemonkey/</a>)</li>
+          <li>Copy the script below, click the down arrow next to the monkey and click "New User Script" then click "Use Script From Clipboard"</li>
+        </ul>
+
+        <h3>Chrome</h3>
+        <ul>
+          <li>Install Tampermonkey (<a href="https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en">https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=en</a>)</li>
+          <li>Copy the script below, click the weird square icon with two circles then click "Add new script". Select what's there and paste the script. Then click the Save button.</li>
+        </ul>
+
+        <h3>Opera</h3>
+        <ul>
+          <li>Install Violent Monkey (<a href="https://addons.opera.com/en/extensions/details/violent-monkey/?display=en">https://addons.opera.com/en/extensions/details/violent-monkey/?display=en</a>)</li>
+          <li>Copy the script below, click the monkey, click "Manage Scripts", then "New". Select what's there and paste the script.</li>
+        </ul>
+
+        <h3>Safari</h3>
+        <ul>
+          <li>Install Tampermonkey (<a href="https://tampermonkey.net/index.php?ext=dhdg&browser=safari">https://tampermonkey.net/index.php?ext=dhdg&browser=safari</a>)</li>
+          <li>Once installed, you must restart Safari.</li>
+          <li>Copy the script below, click the weird square icon with two circles then click "Create new script". Select what's there and paste the script. Click the floppy disk to save.</li>
+        </ul>
+      </div></div>
+
+      <h3 id="script" class="headline"><div class="content"><a href="#script">The Script</a></div></h2>
+
+      <div class="body cms"><div class="content">
+        <p>Copy <strong>everything</strong> in the green box:</p>
+
+        <textarea id="user_script">
+// ==UserScript==
+// @name         JIRA Helper
+// @namespace    http://ziprecruiter.github.io/
+// @version      0.1
+// @description  Various alterations to JIRA's UI
+// @author       ZipRecruiter
+// @match        https://*.jira.com/*
+// @grant        none
+// @run-at       document-start
+// ==/UserScript==
+
+(function(){url='//ziprecruiter.github.io/greasemonkey/jira-helper/jira-helper.js';document.head.appendChild(document.createElement('script')).src=url+'?'+new Date().getTime();})();
+        </textarea>
+      </div></div>
+    </section>
+  </div>
+
+</section>
+
+<script>
+  window.__jira_helper_do_not_init = true;
+</script>

@@ -1,0 +1,142 @@
+/* ------------------------------------------------------------
+   Mono fonts
+   --------------------------------------------------------- */
+
+@font-face { /* http://emojione.com/developers/ */
+  font-family: Emojione;
+  src: local("EmojiOne BW"), local("EmojiOne"), local("Emoji One"),
+       /*   https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-bw.otf – monochrome only, deprecated, removed
+            https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-android.ttf – with hack
+            https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-apple.ttf – with hack */
+       url("https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-svg.woff2") format("woff2"),
+       url("https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-svg.woff") format("woff"),
+       url("https://cdn.rawgit.com/Ranks/emojione/master/assets/fonts/emojione-svg.otf") format("truetype");
+}
+@font-face { /* https://www.google.com/get/noto/#noto-emoji-zsye */
+  font-family: Noto;
+  src: local("Noto Emoji"), local("Noto Color Emoji"), local("Noto"),
+       url("https://cdn.rawgit.com/googlei18n/noto-emoji/master/fonts/NotoEmoji-Regular.ttf");
+}
+@font-face { /* https://github.com/eosrei/twemoji-color-font/releases */
+  font-family: Twemoji;
+  src: local("Twemoji");
+}
+@font-face { /* http://users.teilar.gr/~g1951d/ */
+  font-family: Symbola;
+  src: local("Symbola");
+}
+
+  /* //////////////////////////
+ // Hotfix tooltip
+////////////////////////// */
+
+.jira_helper_tooltip {
+  position: absolute;
+
+  display: block;
+  max-width: 150px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+
+  color: #555;
+  border-radius: 4px;
+  background: #f6f6f6;
+  padding: 4px 5px;
+  border: 1px solid #ccc;
+
+  -webkit-appearance: none;
+  cursor: pointer;
+}
+
+.jira_helper_tooltip:hover {
+  background-color: #ddd;
+}
+
+.jira_helper_tooltip:before {
+  content: "💕";
+  font-family: Emojione, Noto, Twemoji, Symbola;
+  color: #80a1bd;
+  display: inline-block;
+  margin-right: 4px;
+}
+
+  /* //////////////////////////
+ // Show priority text
+////////////////////////// */
+
+/* Add priority text next to arrows*/
+
+/* Kanban */
+[data-tooltip$="priority"]:after {
+  content: attr(data-tooltip);
+}
+
+/* List */
+.priority img[alt="Highest"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Highest</text></svg>');
+  background-position-x: 20px;
+  padding-right: 55px;
+}
+
+.priority img[alt="High"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">High</text></svg>');
+  background-position-x: 20px;
+  padding-right: 35px;
+}
+
+.priority img[alt="Medium"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Medium</text></svg>');
+  background-position-x: 20px;
+  padding-right: 55px;
+}
+
+.priority img[alt="Low"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Low</text></svg>');
+  background-position-x: 20px;
+  padding-right: 30px;
+}
+
+.priority img[alt="Lowest"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Lowest</text></svg>');
+  background-position-x: 20px;
+  padding-right: 60px;
+}
+
+.priority img[alt="Needs Priority"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Needs Priority</text></svg>') no-repeat;
+  background-position-x: 20px;
+  padding-right: 60px;
+}
+
+.priority img[alt="No Priority"] {
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">No Priority</text></svg>') no-repeat;
+  background-position-x: 20px;
+  padding-right: 60px;
+}
+
+  /* //////////////////////////
+ // Sort Order (new JIRA ticket view)
+////////////////////////// */
+
+.jira-helper-reverse-comments [data-test-id="issue.activity.comments-list"] {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 0
+}
+
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(4) > span:nth-child(3)  {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 24px;
+}
+
+  /* //////////////////////////
+ // Ticket Tweaks (new JIRA ticket view)
+////////////////////////// */
+
+.jira-helper-new-ticket-tweaks [data-test-id="issue.activity.comments-list"] > div {
+  border-top: solid 2px #ebecf0;
+  padding: 15px 0 !important;
+}
+

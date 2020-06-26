@@ -68,48 +68,48 @@
 /* Add priority text next to arrows*/
 
 /* Kanban */
-[data-tooltip$="priority"]:after {
+.jira-helper-priority-text [data-tooltip$="priority"]:after {
   content: attr(data-tooltip);
 }
 
 /* List */
-.priority img[alt="Highest"] {
+.jira-helper-priority-text .priority img[alt="Highest"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Highest</text></svg>');
   background-position-x: 20px;
   padding-right: 55px;
 }
 
-.priority img[alt="High"] {
+.jira-helper-priority-text .priority img[alt="High"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">High</text></svg>');
   background-position-x: 20px;
   padding-right: 35px;
 }
 
-.priority img[alt="Medium"] {
+.jira-helper-priority-text .priority img[alt="Medium"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Medium</text></svg>');
   background-position-x: 20px;
   padding-right: 55px;
 }
 
-.priority img[alt="Low"] {
+.jira-helper-priority-text .priority img[alt="Low"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Low</text></svg>');
   background-position-x: 20px;
   padding-right: 30px;
 }
 
-.priority img[alt="Lowest"] {
+.jira-helper-priority-text .priority img[alt="Lowest"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Lowest</text></svg>');
   background-position-x: 20px;
   padding-right: 60px;
 }
 
-.priority img[alt="Needs Priority"] {
+.jira-helper-priority-text .priority img[alt="Needs Priority"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Needs Priority</text></svg>') no-repeat;
   background-position-x: 20px;
   padding-right: 60px;
 }
 
-.priority img[alt="No Priority"] {
+.jira-helper-priority-text .priority img[alt="No Priority"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">No Priority</text></svg>') no-repeat;
   background-position-x: 20px;
   padding-right: 60px;

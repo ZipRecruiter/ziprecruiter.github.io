@@ -299,10 +299,9 @@
 
         pm.add({
           id: 'new_ticket_tweaks',
-          text: 'New JIRA Ticket Styling Tweaks',
-          title: 'Makes the new JIRA ticket view easier to read, etc.',
-          /*screenshot: 'img/responsive.png',
-          screenshot2: 'img/ticket_spam.gif',*/
+          text: 'New JIRA Issue View Styling Tweaks',
+          title: 'Makes the new JIRA issue view easier to read, etc.',
+          screenshot: 'img/ft_new_styling_tweaks.png',
           defaultOn: true,
           onload: onload,
           onunload: onunload
@@ -322,12 +321,36 @@
 
       pm.add({
         id: 'reverse_comments',
-        text: 'Reverse Comment Order on New JIRA Ticket View',
-        title: 'Reverses comment order when New JIRA Ticket View is on, puts comment box at the top',
+        text: 'Reverse Comment Order on New JIRA Issue View',
+        title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
         defaultOn: true,
+        screenshot: 'img/ft_reverse_comments.png',
         onload: onload_reverse_comments,
         onunload: onunload_reverse_comments
       });
+
+        ////////////////////////////
+       // (Preference) Show Priority Text
+      ////////////////////////////
+      (function(pm) { // So as not to pollute the namespace
+        var onload_fn = function() {
+          $body.addClass('jira-helper-priority-text');
+        };
+
+        var onunload_fn = function() {
+          $body.removeClass('jira-helper-priority-text');
+        };
+
+        pm.add({
+          id: 'priority_text',
+          text: 'Show Priority Text',
+          title: 'Shows prioity name next to arrows',
+          defaultOn: true,
+          screenshot: 'img/ft_priority_text.png',
+          onload: onload_fn,
+          onunload: onunload_fn
+        });
+      })(pm);
 
         ////////////////////////////
        // Hotfix shortcut
@@ -428,6 +451,7 @@
           text: 'Show Hotfix Comand on Commit Links',
           title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
           defaultOn: true,
+          screenshot: 'img/ft_hotfix.png',
           onload: onload_fn,
           onunload: onunload_fn
         });

@@ -252,7 +252,7 @@
     //////////////////////
     var init = function() {
       // Make sure jQuery is loaded before continuing
-      if ( !window.jQuery ) {
+      if ( !window.jQuery || !document.body ) {
         setTimeout(init, 10);
         return;
       }
@@ -293,7 +293,7 @@
         };
 
         var onunload = function() {
-          $body.removeClass('_fhtt');
+          $body.removeClass('jira-helper-new-ticket-tweaks');
           $meta_tweaks.remove();
         };
 

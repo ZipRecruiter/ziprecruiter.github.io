@@ -153,7 +153,7 @@
         $helper_menu
           .append($prefs_menu)
           .append($features_menu)
-          .insertBefore($('.gw-nav-entry-settings .dropdown-menu .menu-content-section:last-child'))
+          .appendTo($('[data-testid="atlassian-navigation--secondary-actions--settings--menu-popup"] > div > div > div'))
           ;
 
         for ( pkey in me.prefs ) {
@@ -167,7 +167,7 @@
 
       // One-time setup stuff
       $document
-        .delegate('.gw-nav-entry-settings', 'mouseover', function() {
+        .delegate('[data-testid="atlassian-navigation--secondary-actions--settings--menu-trigger"] button', 'click', function() {
           setTimeout(add_prefs, 10);
         })
         // Changing preferences via checkboxes

@@ -27,6 +27,70 @@
 }
 
   /* //////////////////////////
+ // Preferences
+////////////////////////// */
+#jira-helper-prefs-menu,
+#jira-helper-features-menu {
+  padding: 0;
+  margin: .5em 1em;
+}
+
+#jira-helper-prefs-menu {
+  padding-bottom: .5em;
+  margin: .5em 0;
+}
+
+#jira-helper-prefs-menu input {
+  margin-right: .5em;
+  vertical-align: text-top;
+  position: absolute;
+  left: 0;
+  top: 2px;
+}
+
+#jira-helper-prefs-menu label {
+  display: block;
+  padding: 0 0 3px 20px;
+  font-size: 13px;
+  position: relative;
+  line-height: 17px;
+}
+
+#jira-helper-prefs-menu label:hover {
+  background-color: #E0E9F1;
+}
+
+#jira-helper-prefs-menu label .defind {
+  font-size: 11px;
+  opacity: .9;
+}
+
+#jira-helper-menu {
+  padding: 0 20px;
+  margin-top: 15px;
+}
+
+#jira-helper-menu a {
+  color: #39668e;
+  font-weight: bold;
+}
+
+#jira-helper-menu a:hover,
+#jira-helper-menu a:focus {
+  text-decoration: underline;
+}
+
+.jira-helper-tool {
+  padding: .75em 0;
+  border-top: 1px solid #bac2cc;
+}
+
+#jira-helper-menu .jira-helper-headline {
+  margin: 0 0 .25em 0;
+  text-transform: capitalize;
+}
+
+  /* //////////////////////////
  // Hotfix tooltip
 ////////////////////////// */
 

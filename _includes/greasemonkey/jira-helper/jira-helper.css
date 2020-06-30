@@ -140,6 +140,11 @@
   padding: 15px 0 !important;
 }
 
+/* Show all our statuses in the dropdown */
+.jira-helper-new-ticket-tweaks [data-test-id="issue.views.issue-base.foundation.status.status-field-wrapper"] > div:nth-of-type(2) > div:nth-of-type(1) > div:nth-of-type(2) > div:nth-of-type(1) {
+  max-height: 440px !important;
+}
+
   /* //////////////////////////
  // Open external links in new tab
 ////////////////////////// */

@@ -296,8 +296,8 @@
         pm.add({
           id: 'remove_status_icons',
           text: 'Remove Status Icons',
-          title: 'Only show status text (if enabled) in most views',
-          // screenshot: 'img/ft_new_styling_tweaks.png',
+          title: 'Only show status text in list-y views (must enable "Show Priority Text")',
+          screenshot: 'img/ft_remove_status_icons.png',
           defaultOn: false,
           onload: onload,
           onunload: onunload

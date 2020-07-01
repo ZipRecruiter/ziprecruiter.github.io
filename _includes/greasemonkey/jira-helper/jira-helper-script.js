@@ -279,6 +279,84 @@
       $window = $(window);
 
         ////////////////////////////
+       // (Preference) Re-order ticket statuses
+      ////////////////////////////
+
+      (function(pm) {
+        var $list;
+        var selector = '[data-test-id="issue.views.issue-base.foundation.status.status-field-wrapper"]';
+        var body_class = 'jira-helper-re-order-statuses';
+
+        // Observer stuff
+        var config = { attributes: false, childList: true, subtree: true };
+
+        var callback = function(mutationsList, observer) {
+          for ( let mutation of mutationsList ) {
+            if (mutation.type === 'childList') {
+              var $options = $list.find('[id*="-option-"]');
+
+              if ( $options.length ) {
+                var section = 0;
+                var last_section = '';
+
+                $options.each(function() {
+                  var $this = $(this);
+                  var $lozenge = $this.find('[data-test-id]');
+                  var section_id = $lozenge.data('test-id');
+
+                  if ( section_id !== last_section ) {
+                    section++;
+                  }
+
+                  last_section = section_id;
+
+                  $this.attr({
+                    'data-status': $lozenge.text(),
+                    'data-status-section': section
+                  });
+                });
+
+                observer.disconnect();
+              }
+            }
+
+          }
+        };
+
+        var observer = new MutationObserver(callback);
+
+        var order_statuses = function() {
+          $list = $(this);
+
+          observer.disconnect();
+
+          observer.observe(this, config);
+        };
+
+        var onload = function() {
+          $body
+            .delegate(selector, 'click', order_statuses)
+            .addClass(body_class);
+        };
+
+        var onunload = function() {
+          $body
+            .undelegate(selector, 'click', order_statuses)
+            .addClass(body_class);
+        };
+
+        pm.add({
+          id: 're_order_statuses',
+          text: 'Reorder Ticket Statuses (New JIRA Issue View)',
+          title: 'Put ticket statuses in an order which more matches our workflow',
+          // screenshot: 'img/ft_new_styling_tweaks.png',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) New Ticket Tweaks
       ////////////////////////////
 
@@ -321,7 +399,7 @@
 
       pm.add({
         id: 'reverse_comments',
-        text: 'Reverse Comment Order on New JIRA Issue View',
+        text: 'Reverse Comment Order (New JIRA Issue View)',
         title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
         defaultOn: true,
         screenshot: 'img/ft_reverse_comments.png',

@@ -279,6 +279,45 @@
       $window = $(window);
 
         ////////////////////////////
+       // (Preference) Don't open button clicks etc in new window
+      ////////////////////////////
+
+      (function(pm) {
+        // back up the old window.open
+        var _open = window.open;
+
+        var no_new_window_open = function(url, target) {
+          var args = Array.prototype.slice.call(arguments);
+
+          if ( target == '_blank' ) {
+            args[1] = undefined;
+            args = [url, target];
+          }
+
+          _open.apply(window, args);
+        };
+
+        var onload = function() {
+          // monkey patch
+          window.open = no_new_window_open;
+        };
+
+        var onunload = function() {
+          window.open = _open;
+        };
+
+        pm.add({
+          id: 'no_new_window',
+          text: 'Do Not Open Links In New Window',
+          title: 'Overrides some button clicks to not open in anew browser windows',
+          // screenshot: 'img/ft_new_styling_tweaks.png',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Re-order ticket statuses
       ////////////////////////////
 

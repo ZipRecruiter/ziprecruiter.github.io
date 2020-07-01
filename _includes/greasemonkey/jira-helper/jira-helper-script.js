@@ -279,6 +279,32 @@
       $window = $(window);
 
         ////////////////////////////
+       // (Preference) Remove status icons
+      ////////////////////////////
+
+      (function(pm) {
+        var body_class = 'jira-helper-remove-status-icons';
+
+        var onload = function() {
+          $body.addClass(body_class);
+        };
+
+        var onunload = function() {
+          $body.removeClass(body_class);
+        };
+
+        pm.add({
+          id: 'remove_status_icons',
+          text: 'Remove Status Icons',
+          title: 'Only show status text (if enabled) in most views',
+          // screenshot: 'img/ft_new_styling_tweaks.png',
+          defaultOn: false,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Don't open button clicks etc in new window
       ////////////////////////////
 

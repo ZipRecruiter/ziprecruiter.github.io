@@ -139,45 +139,177 @@
 /* List */
 .jira-helper-priority-text .priority img[alt="Highest"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Highest</text></svg>');
-  background-position-x: 20px;
   padding-right: 55px;
 }
 
 .jira-helper-priority-text .priority img[alt="High"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">High</text></svg>');
-  background-position-x: 20px;
   padding-right: 35px;
 }
 
 .jira-helper-priority-text .priority img[alt="Medium"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Medium</text></svg>');
-  background-position-x: 20px;
   padding-right: 55px;
 }
 
 .jira-helper-priority-text .priority img[alt="Low"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Low</text></svg>');
-  background-position-x: 20px;
   padding-right: 30px;
 }
 
 .jira-helper-priority-text .priority img[alt="Lowest"] {
   background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Lowest</text></svg>');
-  background-position-x: 20px;
   padding-right: 60px;
 }
 
 .jira-helper-priority-text .priority img[alt="Needs Priority"] {
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Needs Priority</text></svg>') no-repeat;
-  background-position-x: 20px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">Needs Priority</text></svg>');
   padding-right: 60px;
 }
 
 .jira-helper-priority-text .priority img[alt="No Priority"] {
-  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">No Priority</text></svg>') no-repeat;
-  background-position-x: 20px;
+  background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14">No Priority</text></svg>');
   padding-right: 60px;
 }
+
+.jira-helper-priority-text .priority.priority img {
+  background-position-x: 20px;
+  background-repeat: no-repeat;
+}
+
+/* Backlog */
+.jira-helper-priority-text .ghx-priority:after {
+  content: attr(title);
+  display: inline-block;
+  width: 60px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  vertical-align: text-top;
+  margin-left: 3px;
+}
+
+  /* //////////////////////////
+ // Hide status icons
+////////////////////////// */
+
+/* List */
+.jira-helper-remove-status-icons [data-tooltip$="priority"] img {
+  display: none;
+}
+
+.jira-helper-remove-status-icons [data-tooltip$="priority"]:after {
+  display: inline-block;
+  padding: 0 4px;
+  border-radius: 3px;
+  background: rgb(154, 161, 178);
+  color: #fff;
+}
+
+.jira-helper-remove-status-icons [data-tooltip^="Highest"]:after {
+  background: rgb(206, 0, 0);
+}
+
+.jira-helper-remove-status-icons [data-tooltip^="High "]:after {
+  background: rgb(234, 68, 68);
+}
+
+.jira-helper-remove-status-icons [data-tooltip^="Medium"]:after {
+  background: rgb(234, 125, 36);
+}
+
+.jira-helper-remove-status-icons [data-tooltip^="Low "]:after {
+  background: rgb(42, 135, 53);
+}
+
+.jira-helper-remove-status-icons [data-tooltip^="Lowest"]:after {
+  background: rgb(85, 165, 87);
+}
+
+/* Backlog */
+.jira-helper-remove-status-icons .ghx-priority img {
+  display: none;
+}
+
+.jira-helper-remove-status-icons .ghx-priority:after {
+  padding: 0 4px;
+  border-radius: 3px;
+  background: rgb(154, 161, 178);
+  color: #fff;
+}
+
+.jira-helper-remove-status-icons .ghx-priority[title="Highest"]:after {
+  background: rgb(206, 0, 0);
+}
+
+.jira-helper-remove-status-icons .ghx-priority[title="High"]:after {
+  background: rgb(234, 68, 68);
+}
+
+.jira-helper-remove-status-icons .ghx-priority[title="Medium"]:after {
+  background: rgb(234, 125, 36);
+}
+
+.jira-helper-remove-status-icons .ghx-priority[title="Low"]:after {
+  background: rgb(42, 135, 53);
+}
+
+.jira-helper-remove-status-iconst .ghx-priority[title="Lowest"]:after {
+  background: rgb(85, 165, 87);
+}
+
+/* List */
+.jira-helper-remove-status-icons .priority img[alt] {
+  background-color: rgb(154, 161, 178);
+}
+
+.jira-helper-remove-status-icons .priority img[alt="Highest"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">Highest</text></svg>');
+  background-color: rgb(206, 0, 0);
+  padding-right: 57px;
+}
+
+.jira-helper-remove-status-icons .priority img[alt="High"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">High</text></svg>');
+  background-color: rgb(234, 68, 68);
+  padding-right: 37px;
+}
+
+.jira-helper-remove-status-icons .priority img[alt="Medium"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">Medium</text></svg>');
+  background-color: rgb(234, 125, 36);
+  padding-right: 57px;
+}
+
+.jira-helper-remove-status-icons .priority img[alt="Low"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">Low</text></svg>');
+  background-color: rgb(42, 135, 53);
+  padding-right: 32px;
+}
+
+.jira-helper-remove-status-icons .priority img[alt="Lowest"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">Lowest</text></svg>');
+  background-color: rgb(85, 165, 87);
+  padding-right: 62px;
+}
+
+.jira-helper-remove-status-icons .priority img[alt="Needs Priority"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">Needs Priority</text></svg>');
+  padding-right: 62px;
+}
+
+.jira-helper-remove-status-icons .priority img[alt="No Priority"] {
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="94" height="16"><text transform="translate(0 12)" font-family="Arial" font-size="14" fill="rgb(255,255,255)">No Priority</text></svg>');
+  padding-right: 62px;
+}
+
+.jira-helper-remove-status-icons .priority.priority img {
+  padding: 18px 39px 0 0;
+  background-position: 4px 2px;
+  height: 0;
+  border-radius: 3px;
+}
+
 
   /* //////////////////////////
  // Sort Order (new JIRA ticket view)

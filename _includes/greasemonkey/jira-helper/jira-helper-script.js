@@ -283,6 +283,32 @@
       ////////////////////////////
 
       (function(pm) {
+        var body_class = 'jira-helper-PONY-MODE';
+
+        var onload = function() {
+          $body.addClass(body_class);
+        };
+
+        var onunload = function() {
+          $body.removeClass(body_class);
+        };
+
+        pm.add({
+          id: 'PONY_MODE',
+          text: 'PONY MODE',
+          title: 'Made especially for Dez',
+          // screenshot: 'img/ft_remove_status_icons.png',
+          defaultOn: false,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) Remove status icons
+      ////////////////////////////
+
+      (function(pm) {
         var body_class = 'jira-helper-remove-status-icons';
 
         var onload = function() {

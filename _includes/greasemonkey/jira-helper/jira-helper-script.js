@@ -490,7 +490,7 @@
 
       pm.add({
         id: 'reverse_comments',
-        text: 'Reverse Comment Order (New JIRA Issue View)',
+        text: 'Reverse Comment/History Order (New JIRA Issue View)',
         title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
         defaultOn: true,
         screenshot: 'img/ft_reverse_comments.png',

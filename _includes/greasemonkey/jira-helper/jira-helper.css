@@ -321,6 +321,7 @@
   margin-top: 0
 }
 
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(3),
 .jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(4) > span:nth-child(3)  {
   display: flex;
   flex-direction: column-reverse;

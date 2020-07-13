@@ -279,7 +279,33 @@
       $window = $(window);
 
         ////////////////////////////
-       // (Preference) Remove status icons
+       // (Preference) Tame ticket links
+      ////////////////////////////
+
+      (function(pm) {
+        var body_class = 'jira-helper-tame-ticket-links';
+
+        var onload = function() {
+          $body.addClass(body_class);
+        };
+
+        var onunload = function() {
+          $body.removeClass(body_class);
+        };
+
+        pm.add({
+          id: 'tame_ticket_links',
+          text: 'Tame Ticket Links (WIP)',
+          title: 'Make ticket related links smaller (and remove web links)',
+          // screenshot: 'img/ft_remove_status_icons.png',
+          defaultOn: false,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) PONY MODE
       ////////////////////////////
 
       (function(pm) {

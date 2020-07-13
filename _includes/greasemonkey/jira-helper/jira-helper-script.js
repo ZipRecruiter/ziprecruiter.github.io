@@ -270,13 +270,52 @@
 
       // Run the main functionality
       main($);
-    }
+    };
 
     var main = function($) {
       // Shared Stuff
       var $body = $('body');
       $document = $(document);
       $window = $(window);
+
+        ////////////////////////////
+       // (Preference) Ticket titles in URLs
+      ////////////////////////////
+
+      (function(pm) {
+        var interval;
+        var check = function() {
+          var matches;
+          if ( matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)\/?$/) ) {
+            var id = matches[1];
+            // new jira issue view, old
+            var title = $('[data-test-id="issue.views.issue-base.foundation.summary.heading"], #summary-val').text();
+
+            if ( !title ) return;
+
+            title = title.replace(/[^a-zA-Z0-9\.]+/g, '-').replace(/^-+|-+$/g, '');
+            history.replaceState({}, document.title, '/browse/' + id + '/' + title);
+          }
+        };
+
+        var onload = function() {
+          interval = setInterval(check, 200);
+        };
+
+        var onunload = function() {
+          clearInterval(interval);
+        };
+
+        pm.add({
+          id: 'add_title_to_ticket_url',
+          text: 'Add Title to Ticket URL',
+          title: 'Adds a URLized title to the end of the current ticket URL',
+          // screenshot: 'img/ft_remove_status_icons.png',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
 
         ////////////////////////////
        // (Preference) Tame ticket links
@@ -690,7 +729,9 @@
     };
 
     // Attempt to run the code
-    init();
+    if ( document.location.href ) { // I think this is trying to run in iframes
+      init();
+    }
 
   })();
 })();

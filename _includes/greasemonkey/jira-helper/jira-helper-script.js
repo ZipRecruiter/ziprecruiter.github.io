@@ -285,6 +285,74 @@ window.$ = undefined;
       $document = $(document);
       $window = $(window);
 
+        //////////////////////
+       // History helpers
+      //////////////////////
+
+      // monkey patch some History events
+      var pushState = history.pushState;
+      var replaceState = history.replaceState;
+      var history_settings = {}; // settings that preferences can turn on and off
+
+      history.pushState = function(stateObj, title, url) {
+        if ( history_settings.skipNextPush ) {
+          history_settings.skipNextPush = false;
+          return;
+        }
+        var ret = pushState.apply(this, arguments);
+        window.dispatchEvent(new Event('pushstate'));
+        return ret;
+      };
+
+      history.replaceState = function(stateObj, title, url) {
+        // opening a ticket on kanban view
+        if ( history_settings.fixKanbanBackButton && window.location.href.match(/\/RapidBoard\.jspa/) && !window.location.href.match(/modal=detail/) && url.match(/&modal=detail&/) ) {
+          history.pushState.apply(this, arguments);
+        } else {
+          var ret = replaceState.apply(this, arguments);
+          window.dispatchEvent(new Event('replacestate'));
+        }
+
+        return ret;
+      };
+
+        ////////////////////////////
+       // (Preference) Fix Kanban Back Button
+      ////////////////////////////
+
+      (function(pm) {
+        var check_close_modal = function() {
+          if ( window.location.href.match(/\/RapidBoard\.jspa/) && !window.location.href.match(/modal=detail/) ) {
+            // $('.atlaskit-portal [aria-hidden="false"] [data-focus-lock-disabled="false"] > div:first-of-type').click();
+            history_settings.skipNextPush = true;
+            $('#jira-issue-header [aria-label="Close"]').click();
+            setTimeout(function() {
+              history_settings.skipNextPush = false;
+            }, 50);
+          }
+        };
+
+        var onload = function() {
+          history_settings.fixKanbanBackButton = true;
+          window.addEventListener('popstate', check_close_modal);
+        };
+
+        var onunload = function() {
+          history_settings.fixKanbanBackButton = false;
+          window.removeEventListener('popstate', check_close_modal);
+        };
+
+        pm.add({
+          id: 'fix_kanban_back_button',
+          text: 'Fix Kanban Back Button',
+          title: 'When opening tickets in kanban view they do not add a history state, but when you close them they do, but they do not actually close/chage the ticket modal when clicking the back button. This makes it act a little more like you\'d expect.',
+          // screenshot: 'img/ft_remove_status_icons.png',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
         ////////////////////////////
        // (Preference) Ticket titles in URLs
       ////////////////////////////
@@ -294,6 +362,7 @@ window.$ = undefined;
         var check = function() {
           clearInterval(interval);
           var matches;
+
           if ( matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)\/?$/) ) {
             var id = matches[1];
             // new jira issue view, old
@@ -312,12 +381,16 @@ window.$ = undefined;
         };
 
         var onload = function() {
+          window.addEventListener('pushstate', check);
+          window.addEventListener('replacestate', check);
           window.addEventListener('popstate', check);
           check();
         };
 
         var onunload = function() {
           clearInterval(interval);
+          window.removeEventListener('pushstate', check);
+          window.removeEventListener('replacestate', check);
           window.removeEventListener('popstate', check);
         };
 

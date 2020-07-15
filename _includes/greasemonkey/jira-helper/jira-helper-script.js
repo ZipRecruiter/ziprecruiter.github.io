@@ -621,7 +621,7 @@ window.$ = undefined;
 
         pm.add({
           id: 'new_ticket_tweaks',
-          text: 'New JIRA Issue View Styling Tweaks',
+          text: '(New JIRA Issue View) Styling Tweaks',
           title: 'Makes the new JIRA issue view easier to read, etc.',
           screenshot: 'img/ft_new_styling_tweaks.png',
           defaultOn: true,
@@ -631,25 +631,54 @@ window.$ = undefined;
       })(pm);
 
         ////////////////////////////
+       // (Preference) Add Comment on top
+      ////////////////////////////
+      (function(pm) {
+        var class_name = 'jira-helper-add-comment-on-top';
+
+        var onload = function() {
+          $body.addClass(class_name);
+        };
+
+        var onunload = function() {
+          $body.removeClass(class_name);
+        };
+
+        pm.add({
+          id: 'add_comment_on_top',
+          text: '(New & Old JIRA Issue View) Add Comment Section Above Comments',
+          title: 'Puts the comment section above the comments',
+          defaultOn: true,
+          // screenshot: 'img/ft_reverse_comments.png',
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Reverse Comments
       ////////////////////////////
-      var onload_reverse_comments = function() {
-        $body.addClass('jira-helper-reverse-comments');
-      };
+      (function(pm) {
+        var class_name = 'jira-helper-reverse-comments';
 
-      var onunload_reverse_comments = function() {
-        $body.removeClass('jira-helper-reverse-comments');
-      };
+        var onload = function() {
+          $body.addClass(class_name);
+        };
 
-      pm.add({
-        id: 'reverse_comments',
-        text: 'Reverse Comment/History Order (New JIRA Issue View)',
-        title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
-        defaultOn: true,
-        screenshot: 'img/ft_reverse_comments.png',
-        onload: onload_reverse_comments,
-        onunload: onunload_reverse_comments
-      });
+        var onunload = function() {
+          $body.removeClass(class_name);
+        };
+
+        pm.add({
+          id: 'reverse_comments',
+          text: '(New JIRA Issue View) Reverse Comment/History Order',
+          title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
+          defaultOn: true,
+          screenshot: 'img/ft_reverse_comments.png',
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
 
         ////////////////////////////
        // (Preference) Show Priority Text

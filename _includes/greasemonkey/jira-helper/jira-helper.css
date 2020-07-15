@@ -312,7 +312,7 @@
 
 
   /* //////////////////////////
- // Sort Order (new JIRA ticket view)
+ // Reverse Sort Order (new JIRA ticket view)
 ////////////////////////// */
 
 .jira-helper-reverse-comments [data-test-id="issue.activity.comments-list"] {
@@ -321,11 +321,34 @@
   margin-top: 0
 }
 
-.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(3),
-.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(4) > span:nth-child(3)  {
+  /* //////////////////////////
+ // Add Comment On Top
+////////////////////////// */
+
+/* New Issue View */
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(3),
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(4) > span:nth-child(3)  {
   display: flex;
   flex-direction: column-reverse;
   /* margin-top: 24px; */
+}
+
+/* Old */
+.jira-helper-add-comment-on-top .issue-main-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.jira-helper-add-comment-on-top .issue-main-column {
+  order: 2;
+}
+
+.jira-helper-add-comment-on-top #addcomment {
+  order: 3;
+}
+
+.jira-helper-add-comment-on-top #activitymodule {
+  order: 4;
 }
 
   /* //////////////////////////

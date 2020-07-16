@@ -20,28 +20,39 @@ window.$ = undefined;
       //////////////////////
      // Sniff for dom mutation events
     //////////////////////
-    var sniff = function(selector, fn, once) {
+    var sniff = function(selector, fn, once, $el) {
       once = once || false;
+      $el = $el || $document;
       var running = false;
-      var fn_wrap = function() {
-        if ( running ) {
+      var stop = false;
+      var sniff_timeout;
+
+      var fn_wrap = function(e) {
+        if ( running || stop ) {
           return;
         }
 
         running = true;
+        var self = this;
+        var args = arguments;
 
-        var ret = fn.apply(this, arguments);
+        clearTimeout(sniff_timeout);
 
-        if ( ret && once ) {
-          $document.off('DOMNodeInserted DOMNodeRemoved', '#main', fn_wrap);
-        }
+        sniff_timeout = setTimeout(function() {
+          var ret = fn.apply(self, args);
 
-        running = false;
+          if ( ret && once ) {
+            $el.off('DOMNodeInserted DOMNodeRemoved', selector, fn_wrap);
+            stop = true;
+          }
 
-        return ret;
+          running = false;
+        }, 0);
+
+        // return ret;
       };
 
-      $document.on('DOMNodeInserted DOMNodeRemoved', '#main', fn_wrap);
+      $el.on('DOMNodeInserted DOMNodeRemoved', selector, fn_wrap);
     };
 
     var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
@@ -317,6 +328,108 @@ window.$ = undefined;
       };
 
         ////////////////////////////
+       // (Preference) Select All Status Button
+      ////////////////////////////
+
+      (function(pm) {
+        // Keep track of this, because jira fires the click twice
+        var sniffing = false;
+        var listen_for_statuses = function(e) {
+          if ( sniffing ) {
+            return;
+          }
+
+          sniffing = true;
+          sniff('#issue-filter', function() {
+            var $inputs = $('#issue-filter input[type="checkbox"]');
+
+            if ( $inputs.length ) {
+              var all_checked = true;
+              $inputs.each(function() {
+                if ( !$(this).prop('checked') ) {
+                  all_checked = false;
+                  return false;
+                }
+              })
+
+              var $select_all = $('<div class="check-list-item" id="select_all_statuses_wrapper" role="option">\
+                  <label class="item-label" data-descriptor-title="Blocked" for="select_all_statuses">\
+                    <input type="checkbox" tabindex="-1" id="select_all_statuses">\
+                    <span class="jira-issue-status-lozenge-max-width-medium">\
+                      -Select All Shown-\
+                    </span>\
+                  </label>\
+                </div>');
+
+              if ( all_checked ) {
+                $select_all.find('input').prop('checked', true);
+              }
+
+              $select_all.insertBefore('#issue-filter');
+
+              sniffing = false;
+              return true;
+            }
+          }, true);
+        };
+
+        var onload = function() {
+          $body
+            // Clicking the status dropdown
+            .on('click', '[data-id="status"]', listen_for_statuses)
+            // clicking the select all button
+            .on('change', '#select_all_statuses', function() {
+              var $this = $(this);
+
+              if ( $this.prop('checked') ) {
+                $('#issue-filter input[type="checkbox"]').each(function() {
+                  var $this = $(this);
+
+                  if ( !$this.prop('checked') ) {
+                    $this.prop('checked', true).trigger('change');
+                  }
+                });
+              } else {
+                $('#issue-filter input[type="checkbox"]').each(function() {
+                  var $this = $(this);
+
+                  if ( $this.prop('checked') ) {
+                    $this.prop('checked', false).trigger('change');
+                  }
+                });
+              }
+            })
+            // Update select all button based on other checkboxes
+            .on('change', '#issue-filter input[type="checkbox"]', function() {
+              var $inputs = $('#issue-filter input[type="checkbox"]');
+              var all_checked = true;
+              $inputs.each(function() {
+                if ( !$(this).prop('checked') ) {
+                  all_checked = false;
+                  return false;
+                }
+              });
+
+              $('#select_all_statuses').prop('checked', all_checked);
+            });
+        };
+
+        var onunload = function() {
+          $body.off('click', '[data-id="status"]', listen_for_statuses);
+        };
+
+        pm.add({
+          id: 'select_all_status_button',
+          text: '(Search Issues) Select All Status Button',
+          title: 'When clicking the "Status" button on the Search Issues page, show a "Select All" button to check all the boxes at the top',
+          screenshot: 'img/ft_select_all.png',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Fix Kanban Back Button
       ////////////////////////////
 
@@ -422,7 +535,7 @@ window.$ = undefined;
 
         pm.add({
           id: 'tame_ticket_links',
-          text: 'Tame Ticket Links (WIP)',
+          text: '(New JIRA Issue View) Tame Ticket Links (WIP)',
           title: 'Make ticket related links smaller (and remove web links)',
           // screenshot: 'img/ft_remove_status_icons.png',
           defaultOn: false,

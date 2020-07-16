@@ -468,6 +468,18 @@
 }
 
   /* //////////////////////////
+ // Select All Statuses
+////////////////////////// */
+
+#select_all_statuses_wrapper {
+  margin-top: 5px;
+}
+
+#select_all_statuses_wrapper + #issue-filter {
+  margin-top: 0;
+}
+
+  /* //////////////////////////
  // Re-order ticket sections
 ////////////////////////// */
 

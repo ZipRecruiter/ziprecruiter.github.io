@@ -58,6 +58,25 @@ window.$ = undefined;
     var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
       //////////////////////
+     // Get id of current ticket
+    //////////////////////
+
+    var get_jira_id = function() {
+      var jira_id = $("meta[name='ajs-issue-key']").attr("content");
+      if ( !jira_id ) {
+        try {
+          for(var i in window.SPA_STATE.ISSUE) {
+            if (window.SPA_STATE.ISSUE.hasOwnProperty(i)) {
+              return i;
+            }
+          }
+        } catch (err) {}
+      } else {
+        return jira_id;
+      }
+    };
+
+      //////////////////////
      // Preference manager
     //////////////////////
     var PreferenceManager = function() {
@@ -910,10 +929,11 @@ window.$ = undefined;
             var text_match = el.href.match(/(\b[a-f0-9]{40})/);
             if ( !text_match ) return;
             var text = text_match[0];
+            var jira_id = get_jira_id();
 
             if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
               $tooltip.show();
-              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix -s --qa-facing=yes -m="" ' + text + '');
+              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('bin/zr-req-hotfix --release -s --qa-facing=yes -m="' + jira_id + '" ' + text + '');
               $tooltip.appendTo(el);
             }
           }, 100);
@@ -925,7 +945,7 @@ window.$ = undefined;
           }, 500);
         };
 
-        var commit_selector = 'a[href^="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/-/commit/"]';
+        var commit_selector = 'a[href^="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/-/commit/"], a[href^="https://git.ziprecruiter.com/ZipRecruiter/ziprecruiter/commit/"]';
 
         var onload_fn = function() {
           $document

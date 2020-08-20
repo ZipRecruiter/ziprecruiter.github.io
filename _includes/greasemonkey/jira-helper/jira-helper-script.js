@@ -803,7 +803,7 @@ window.$ = undefined;
 
         pm.add({
           id: 'reverse_comments',
-          text: '(New JIRA Issue View) Reverse Comment/History Order',
+          text: '(New JIRA Issue View) Reverse Comment Order',
           title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
           defaultOn: true,
           screenshot: 'img/ft_reverse_comments.png',

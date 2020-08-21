@@ -499,48 +499,49 @@
  // Re-order ticket sections
 ////////////////////////// */
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div {
   max-width: 47%;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:empty {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:empty {
   display: none;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(1) {
+/* Description Header */
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(1) {
+  width: 100%;
+  max-width: none;
+}
+/* Description */
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(2) {
   width: 100%;
   max-width: none;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(2) {
-  width: 100%;
-  max-width: none;
-}
-
-/* Spacer */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(3) {}
+/* Attachments */
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(3) {}
 
 /* Sub tasks */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(4) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(4) {}
 
-/* Spacer */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(5) {}
+/* ??? */
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(5) {}
 
 /* Linked issues */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(6) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(6) {}
 
 /* Spacer */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(7) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(7) {}
 
 /* Web Links */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(3) > div:nth-of-type(8) {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(8) {
   display: none;
 }
 

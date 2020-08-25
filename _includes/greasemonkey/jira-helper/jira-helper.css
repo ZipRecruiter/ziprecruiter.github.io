@@ -315,16 +315,16 @@
  // Reverse Comment Order (new JIRA ticket view)
 ////////////////////////// */
 
-.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span {
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span {
   display: flex;
   flex-direction: column;
 }
 
-.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span > * {
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span > * {
   order: 3;
 }
 
-.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span > *:first-child {
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span > *:first-child {
   order: 4;
 }
 
@@ -338,16 +338,16 @@
  // Add Comment On Top
 ////////////////////////// */
 /* New Issue View */
-.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span {
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span {
   display: flex;
   flex-direction: column;
 }
 
-.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span > * {
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span > * {
   order: 3;
 }
 
-.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span > span {
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span > span {
   order: 1;
 }
 
@@ -499,49 +499,49 @@
  // Re-order ticket sections
 ////////////////////////// */
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div {
   max-width: 47%;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:empty {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:empty {
   display: none;
 }
 
 /* Description Header */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(1) {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(1) {
   width: 100%;
   max-width: none;
 }
 /* Description */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(2) {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(2) {
   width: 100%;
   max-width: none;
 }
 
 /* Attachments */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(3) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(3) {}
 
 /* Sub tasks */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(4) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(4) {}
 
 /* ??? */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(5) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(5) {}
 
 /* Linked issues */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(6) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(6) {}
 
 /* Spacer */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(7) {}
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(7) {}
 
 /* Web Links */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(5) > div:nth-of-type(8) {
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-of-type(4) > div:nth-of-type(8) {
   display: none;
 }
 

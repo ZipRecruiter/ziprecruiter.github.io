@@ -492,11 +492,13 @@ window.$ = undefined;
       (function(pm) {
         var interval;
         var check = function() {
-          clearInterval(interval);
           var matches;
 
-          if ( matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)\/?$/) ) {
+          if ( matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/) ) {
             var id = matches[1];
+            var title_path = matches[2] || '';
+            var query = matches[3] || '';
+
             // new jira issue view, old
             var title = $('[data-test-id="issue.views.issue-base.foundation.summary.heading"], #summary-val').text();
 
@@ -505,7 +507,9 @@ window.$ = undefined;
             }
 
             title = title.replace(/[^a-zA-Z0-9\.]+/g, '-').replace(/^-+|-+$/g, '');
-            history.replaceState({}, document.title, '/browse/' + id + '/' + title);
+            if ( '/' + title === title_path ) return;
+
+            history.replaceState({}, document.title, '/browse/' + id + '/' + title + query);
           }
         };
 

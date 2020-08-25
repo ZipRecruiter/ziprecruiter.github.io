@@ -501,14 +501,11 @@ window.$ = undefined;
             var title = $('[data-test-id="issue.views.issue-base.foundation.summary.heading"], #summary-val').text();
 
             if ( !title ) {
-              interval = setInterval(check, 200);
               return;
             }
 
             title = title.replace(/[^a-zA-Z0-9\.]+/g, '-').replace(/^-+|-+$/g, '');
             history.replaceState({}, document.title, '/browse/' + id + '/' + title);
-          } else {
-            clearInterval(interval);
           }
         };
 
@@ -517,6 +514,7 @@ window.$ = undefined;
           window.addEventListener('replacestate', check);
           window.addEventListener('popstate', check);
           check();
+          interval = setInterval(check, 400);
         };
 
         var onunload = function() {
@@ -530,6 +528,48 @@ window.$ = undefined;
           id: 'add_title_to_ticket_url',
           text: 'Add Title to Ticket URL',
           title: 'Adds a URLized title to the end of the current ticket URL',
+          // screenshot: 'img/ft_remove_status_icons.png',
+          defaultOn: true,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) Fix old ticket view removing id from url
+      ////////////////////////////
+
+      (function(pm) {
+        var interval;
+        var check = function() {
+          if (!window.AJS) return;
+
+          var id = window.AJS.$('meta[name="ajs-issue-key"]').attr('content');
+
+          if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
+            history.replaceState({}, document.title, window.location.href.replace('/browse/', '/browse/' + id + '/'));
+          }
+        };
+
+        var onload = function() {
+          window.addEventListener('pushstate', check);
+          window.addEventListener('replacestate', check);
+          window.addEventListener('popstate', check);
+          check();
+          interval = setInterval(check, 400);
+        };
+
+        var onunload = function() {
+          clearInterval(interval);
+          window.removeEventListener('pushstate', check);
+          window.removeEventListener('replacestate', check);
+          window.removeEventListener('popstate', check);
+        };
+
+        pm.add({
+          id: 'fix_old_ticket_view_removing_id_from_url',
+          text: '(Old Ticket View) Fix Removed ID In URL',
+          title: 'Fixes old ticket views mangling ticket urls',
           // screenshot: 'img/ft_remove_status_icons.png',
           defaultOn: true,
           onload: onload,

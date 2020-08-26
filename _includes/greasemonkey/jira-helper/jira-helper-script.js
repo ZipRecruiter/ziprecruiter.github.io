@@ -977,7 +977,7 @@ window.$ = undefined;
 
             if ( text && text.match(/(\b[a-f0-9]{40})/) ) {
               $tooltip.show();
-              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('tsar-v -- tools/starterview_release/bin/sv-hotfix-stg --message="' + jira_id + ' fixes" --qa-facing=yes ' + text + '');
+              $tooltip_text.attr('title', 'Click to copy the hotfix command').html('tsar-v -- tools/starterview_release/bin/sv-hotfix-stg --message="' + jira_id + ' fixes" --qa-facing ' + text + '');
               $tooltip.appendTo(el);
             }
           }, 100);

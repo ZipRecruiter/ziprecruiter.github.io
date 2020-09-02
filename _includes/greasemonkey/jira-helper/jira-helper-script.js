@@ -494,7 +494,7 @@ window.$ = undefined;
         var check = function() {
           var matches;
 
-          if ( matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/) ) {
+          if ( !window.AJS && (matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/)) ) {
             var id = matches[1];
             var title_path = matches[2] || '';
             var query = matches[3] || '';
@@ -530,7 +530,7 @@ window.$ = undefined;
 
         pm.add({
           id: 'add_title_to_ticket_url',
-          text: 'Add Title to Ticket URL',
+          text: '(New JIRA Issue View) Add Title to Ticket URL',
           title: 'Adds a URLized title to the end of the current ticket URL',
           // screenshot: 'img/ft_remove_status_icons.png',
           defaultOn: true,
@@ -551,10 +551,9 @@ window.$ = undefined;
           var id = window.AJS.$('meta[name="ajs-issue-key"]').attr('content');
           var matches;
 
-          //if ( id && (matches = window.location.href.match(/\/browse\/[^\/]+(\/[^\?]*)/)) ) {
-            //history.replaceState({}, document.title, window.location.href.replace(matches[1], ''));
-          //} else
-          if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
+          if ( id && (matches = window.location.href.match(/\/browse\/[^\/]+(\/[^\?]*)/)) ) {
+            history.replaceState({}, document.title, window.location.href.replace(matches[1], ''));
+          } else if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
             history.replaceState({}, document.title, window.location.href.replace('/browse/', '/browse/' + id + '/'));
           }
         };

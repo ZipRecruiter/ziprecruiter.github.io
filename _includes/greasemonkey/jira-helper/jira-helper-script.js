@@ -549,8 +549,11 @@ window.$ = undefined;
           if (!window.AJS) return;
 
           var id = window.AJS.$('meta[name="ajs-issue-key"]').attr('content');
+          var matches;
 
-          if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
+          if ( id && (matches = window.location.href.match(/\/browse\/[^\/]+(\/[^\?]*)/)) ) {
+            history.replaceState({}, document.title, window.location.href.replace(matches[1], ''));
+          } else if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
             history.replaceState({}, document.title, window.location.href.replace('/browse/', '/browse/' + id + '/'));
           }
         };

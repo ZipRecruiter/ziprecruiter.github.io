@@ -894,6 +894,11 @@ window.$ = undefined;
           clearTimeout(hide_tooltip_to);
           clearTimeout(show_tooltip_to);
 
+          var $content_editable = $this.closest('[contenteditable="true"]');
+
+          // Don't do this if they are editing/adding a comment, etc
+          if ( $content_editable.length ) return;
+
           show_tooltip_to = setTimeout(function() {
             var text_match = el.href.match(/(\b[a-f0-9]{40})/);
             if ( !text_match ) return;

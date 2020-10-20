@@ -456,7 +456,7 @@
   width: 100%;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:empty,
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:empty,
 .jira-helper-tame-ticket-links .jira-helper-hook-ticket-info-wrapper div:empty {
   display: none;
 }

@@ -58,6 +58,42 @@ window.$ = undefined;
     var iOS = !!navigator.platform && /iPad|iPhone|iPod/.test(navigator.platform);
 
       //////////////////////
+     // "Forward" styling rule from one selector to another
+    //////////////////////
+
+    var my_ss;
+    var forward_style_rule = function(from, to, prepend) {
+      prepend = prepend || '';
+      var sto;
+
+      if ( !my_ss ) {
+        for ( var i=0, l=document.styleSheets.length, s; i < l; i++ ) {
+          s = document.styleSheets[i];
+          if ( !s.href && s.rules[0] && s.rules[0].selectorText === '#jira-helper-loaded' ) {
+            my_ss = s;
+          }
+        }
+      }
+
+      if ( typeof to !== 'string' ) {
+        // Assuming a jQuery object
+        sto = ( to[0].className ) ? '.' + to[0].className.split(' ').join('.') : to[0].tagName;
+        sto += ':nth-child(' + (to.index() + 1) + ')';
+      } else {
+        sto = to;
+      }
+
+      for ( var si=0, sl=my_ss.rules.length, sr; si < sl; si++ ) {
+        sr = my_ss.rules[si];
+
+        if ( sr.selectorText && sr.selectorText.indexOf(from) !== -1 && sr.selectorText.indexOf(sto) === -1 ) {
+          sr.selectorText += ', ' + prepend + sto;
+          console.log(sr.selectorText)
+        }
+      }
+    };
+
+      //////////////////////
      // Get id of current ticket
     //////////////////////
 
@@ -248,25 +284,25 @@ window.$ = undefined;
     var use_stylesheet = function() {
       var link = document.createElement('link');
       link.rel = 'stylesheet';
-      link.id = 'fogbugz-helper-css';
+      link.id = 'jira-helper-css';
       document.head.appendChild(link);
-      link.href = window.zrBookmarkletUrl + '/fogbugz-helper.css?';
+      link.href = window.zrBookmarkletUrl + '/jira-helper.css?';
     };
 
     var use_style_tag = function() {
       var s = document.createElement('style');
-      s.id = 'fogbugz-helper-css';
+      s.id = 'jira-helper-css';
       s.innerHTML = window.zrBookmarkletCSS;
       document.head.appendChild(s);
     }
 
     var onload_use_stylesheet = function() {
-      $('#fogbugz-helper-css').remove();
+      $('#jira-helper-css').remove();
       use_stylesheet();
     };
 
     var onunload_use_stylesheet = function() {
-      $('#fogbugz-helper-css').remove();
+      $('#jira-helper-css').remove();
       use_style_tag();
     };
 
@@ -299,7 +335,7 @@ window.$ = undefined;
       if ( pm.get('use_stylesheet') ) {
         // Make sure css is loaded before continuing
         var $jira_helper_css = $('#jira-helper-css');
-        if ( !$jira_helper_css.length || ($jira_helper_css.css('content') != 'loaded' && $jira_helper_css.css('content') != '"loaded"' && $jira_helper_css.css('content') != "'loaded'") ) {
+        if ( !$jira_helper_css.length /* || ($jira_helper_css.css('content') != 'loaded' && $jira_helper_css.css('content') != '"loaded"' && $jira_helper_css.css('content') != "'loaded'")*/ ) {
           setTimeout(init, 10);
           return;
         }
@@ -732,6 +768,136 @@ window.$ = undefined;
       })(pm);
 
         ////////////////////////////
+       // (Preference) New Ticket Styling Hooks
+      ////////////////////////////
+
+      (function(pm) {
+        var class_prefix = 'jira-helper-hook-ticket-';
+        var column_selector = '[data-test-id="issue.views.issue-details.issue-layout.left-most-column"]';
+        var interval;
+
+        var find_and_forward = function(sparent, sfind, sforward) {
+          var $el = $(sfind);
+
+          if ( !$el.length ) return;
+          //if ( $el.data('__hooks_added') ) return true;
+
+          var $el_wrapper = $el
+            .closest(sparent + ' > *');
+
+          var class_name = sforward.replace(/\./g, ' ');
+
+          if ( !$el_wrapper.length ) return;
+          if ( $el_wrapper[0].className && $el_wrapper[0].className.indexOf(class_name) !== -1 ) return true;
+
+          //forward_style_rule(sforward, $el_wrapper, sparent + ' > ');
+          $el_wrapper.addClass(class_name);
+
+          return true;
+        };
+
+        var check = function() {
+          var matches;
+
+          var is_job_url = !!window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)/);
+          if ( /*window.AJS &&*/ is_job_url ) {
+            var $left = $(column_selector);
+            if ( !$left.length || $left.data('__hooks_added') ) return;
+
+            var all_found = true;
+
+            // Title
+            if ( !find_and_forward(column_selector, '[data-test-id="issue.views.issue-base.foundation.summary.heading"]', '.jira-helper-hook-ticket-title-wrapper') ) {
+              all_found = false;
+            }
+
+            // Tools
+            if ( !find_and_forward(column_selector, '[data-test-id="issue.views.issue-base.foundation.quick-add.link-button.ui.link-dropdown-button"]', '.jira-helper-hook-ticket-actions-wrapper') )  {
+              all_found = false;
+            }
+
+            // Info
+            if ( !find_and_forward(column_selector, '[data-test-id="issue.views.field.rich-text.description"]', '.jira-helper-hook-ticket-info-wrapper') ) {
+              all_found = false;
+            }
+
+            // Description
+            var $description = $('[data-test-id="issue.views.field.rich-text.description"]');
+            var $info_wrapper = $description.closest(column_selector + ' > *');
+            var info_wrapper_class = '.' + $info_wrapper[0].className.split(/\s+/).join('.');
+
+            if ( !find_and_forward(column_selector + ' > ' + info_wrapper_class, '[data-test-id="issue.views.field.rich-text.description"]', '.jira-helper-hook-ticket-description-wrapper') ) {
+              all_found = false;
+            }
+
+            // Subtasks
+            if ( !find_and_forward(column_selector + ' > ' + info_wrapper_class, '[aria-label="Issue actions"]', '.jira-helper-hook-ticket-subtasks-wrapper') ) {
+              all_found = false;
+            }
+
+            // Linked Issues
+            if ( !find_and_forward(column_selector + ' > ' + info_wrapper_class, '[aria-label="Link an issue"]', '.jira-helper-hook-ticket-linkedissues-wrapper') ) {
+              all_found = false;
+            }
+
+            // Web Links
+            if ( !find_and_forward(column_selector + ' > ' + info_wrapper_class, '[aria-label="Link to a web page"]', '.jira-helper-hook-ticket-weblinks-wrapper') ) {
+              all_found = false;
+            }
+
+            // Activity Heading
+            if ( !find_and_forward(column_selector, '[data-test-id="issue-activity-feed.heading"]', '.jira-helper-hook-ticket-activityheading-wrapper') ) {
+              all_found = false;
+            }
+
+            // Activity Nav
+            if ( !find_and_forward(column_selector, column_selector + ' > div:last-of-type', '.jira-helper-hook-ticket-activitynav-wrapper') ) {
+              all_found = false;
+            }
+
+            // Comment Section
+            if ( !find_and_forward(column_selector, '[data-test-id="issue.activity.comments-list"]', '.jira-helper-hook-ticket-commentsection-wrapper') ) {
+              console.log('no comment section')
+              all_found = false;
+            }
+
+            // Load Comments
+            if ( !find_and_forward(column_selector + ' > span', column_selector + ' > span > div:not([data-test-id="issue.activity.comments-list"])', '.jira-helper-hook-ticket-loadcomments-wrapper') ) {
+              all_found = false;
+            }
+
+            // Comment
+            if ( !find_and_forward(column_selector + ' > span', column_selector + ' > span > span', '.jira-helper-hook-ticket-comment-wrapper') ) {
+              all_found = false;
+            }
+
+            if ( all_found ) {
+              $left.attr('data-__hooks_added', 1);
+            }
+          }
+        };
+
+        var onload = function() {
+          check();
+          interval = setInterval(check, 1000);
+        };
+
+        var onunload = function() {
+          clearInterval(interval);
+        };
+
+        pm.add({
+          id: 'new_ticket_hooks',
+          text: '(New JIRA Issue View) Styling Hooks',
+          title: 'Needed for styling tweaks',
+          // screenshot: 'img/ft_new_styling_tweaks.png',
+          defaultOn: false,
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Add Comment on top
       ////////////////////////////
       (function(pm) {
@@ -761,13 +927,22 @@ window.$ = undefined;
       ////////////////////////////
       (function(pm) {
         var class_name = 'jira-helper-reverse-comments';
+        var older_comments_button_selector = '[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > div:first-child:not([data-test-id="issue.activity.comments-list"])';
+
+        var scroll_left_pane_up = function() {
+          var $left = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"]').parent();
+          var top = $left[0].scrollTop;
+          $left[0].scrollTop = top - 150;
+        };
 
         var onload = function() {
           $body.addClass(class_name);
+          $body.delegate(older_comments_button_selector, 'click', scroll_left_pane_up);
         };
 
         var onunload = function() {
           $body.removeClass(class_name);
+          $body.undelegate(older_comments_button_selector, 'click', scroll_left_pane_up);
         };
 
         pm.add({

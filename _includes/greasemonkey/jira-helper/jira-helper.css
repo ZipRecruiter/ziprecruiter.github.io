@@ -346,17 +346,23 @@
   /* //////////////////////////
  // Add Comment On Top
 ////////////////////////// */
+
 /* New Issue View */
-.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span {
+
+/* Info */
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5),
+.jira-helper-tame-ticket-links .jira-helper-hook-ticket-info-wrapper {
   display: flex;
   flex-direction: column;
 }
 
-.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span > * {
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *,
+.jira-helper-hook-ticket-commentsection-wrapper > * {
   order: 3;
 }
 
-.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:last-child > span > span {
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > span,
+.jira-helper-hook-ticket-commentsection-wrapper .jira-helper-hook-ticket-comment-wrapper {
   order: 1;
 }
 

@@ -931,8 +931,12 @@ window.$ = undefined;
 
         var scroll_left_pane_up = function() {
           var $left = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"]').parent();
-          var top = $left[0].scrollTop;
-          $left[0].scrollTop = top - 150;
+
+          // If we are scrolled down too far the browser will stick us to the bottom of the comments when loaded in, so scroll up
+          if ( $left[0].scrollHeight - $left[0].scrollTop - $left.height() < 150 ) {
+            var top = $left[0].scrollTop;
+            $left[0].scrollTop = top - 150;
+          }
         };
 
         var onload = function() {
@@ -951,6 +955,64 @@ window.$ = undefined;
           title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
           defaultOn: true,
           screenshot: 'img/ft_reverse_comments.png',
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
+       // (Preference) Auto load more comments
+      ////////////////////////////
+      (function(pm) {
+        var scroll_area_selector = '[data-test-id="issue.views.issue-details.issue-layout.issue-layout"] > div:first-child > div:first-child > div:first-child';
+        var backoff_timeout_time = 100;
+        var timeout_time = 0;
+        var check_timeout;
+        var clear_backoff_timeout;
+        var scroll_bottom_distance = 400;
+
+        var clear_backoff = function() {
+          timeout_time = 0;
+        };
+
+        var check_scroll = function(event) {
+          // Back off if called too rapidly
+          timeout_time = backoff_timeout_time;
+          clearTimeout(clear_backoff_timeout);
+          clear_backoff_timeout = setTimeout(clear_backoff, backoff_timeout_time);
+
+          var el = event.target;
+          var $this = $(el);
+
+          if ( !$this.is(scroll_area_selector) ) return;
+
+          if ( el.scrollHeight - el.scrollTop - $this.height() < scroll_bottom_distance ) {
+            var $button = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > div:first-child:not([data-test-id="issue.activity.comments-list"]) button');
+            $button.click();
+            skip_scroll = false;
+          }
+        };
+
+        // Don't fire too many times
+        var try_check_scroll = function(event) {
+          clearTimeout(check_timeout);
+          check_timeout = setTimeout(check_scroll.bind(this, event), timeout_time);
+        };
+
+        var onload = function() {
+          document.addEventListener('scroll', try_check_scroll, true);
+        };
+
+        var onunload = function() {
+          document.removeEventListener('scroll', try_check_scroll);
+        };
+
+        pm.add({
+          id: 'auto_load_all_comments',
+          text: '(New JIRA Issue View) Auto Load All Comments',
+          title: 'Clicks the show more comments button until all comments are loaded',
+          defaultOn: true,
+          /* screenshot: 'img/ft_reverse_comments.png', */
           onload: onload,
           onunload: onunload
         });

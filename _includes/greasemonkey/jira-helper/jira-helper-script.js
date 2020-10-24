@@ -981,6 +981,8 @@ window.$ = undefined;
           clearTimeout(clear_backoff_timeout);
           clear_backoff_timeout = setTimeout(clear_backoff, backoff_timeout_time);
 
+          if ( !pm.get('reverse_comments') ) return;
+
           var el = event.target;
           var $this = $(el);
 
@@ -989,7 +991,6 @@ window.$ = undefined;
           if ( el.scrollHeight - el.scrollTop - $this.height() < scroll_bottom_distance ) {
             var $button = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > div:first-child:not([data-test-id="issue.activity.comments-list"]) button');
             $button.click();
-            skip_scroll = false;
           }
         };
 
@@ -1009,7 +1010,7 @@ window.$ = undefined;
 
         pm.add({
           id: 'auto_load_all_comments',
-          text: '(New JIRA Issue View) Auto Load All Comments',
+          text: '(New JIRA Issue View) Auto Load Comments (Requires "Reverse Comment Order")',
           title: 'Clicks the show more comments button until all comments are loaded',
           defaultOn: true,
           /* screenshot: 'img/ft_reverse_comments.png', */

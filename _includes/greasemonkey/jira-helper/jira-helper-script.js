@@ -226,7 +226,7 @@ window.$ = undefined;
         $helper_menu
           .append($prefs_menu)
           .append($features_menu)
-          .appendTo($('[data-testid="atlassian-navigation--secondary-actions--settings--menu-popup"] > div > div > div'))
+          .appendTo($('[data-placement="bottom-end"] > span > div > div > div'))
           ;
 
         for ( pkey in me.prefs ) {
@@ -240,7 +240,7 @@ window.$ = undefined;
 
       // One-time setup stuff
       $document
-        .on('click', '[data-testid="atlassian-navigation--secondary-actions--settings--menu-trigger"] button', function() {
+        .on('click', '[aria-label="Settings"]', function() {
           setTimeout(add_prefs, 10);
         })
         // Changing preferences via checkboxes

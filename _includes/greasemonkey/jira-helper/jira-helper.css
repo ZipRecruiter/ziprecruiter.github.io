@@ -332,7 +332,7 @@
 }
 
 .jira-helper-reverse-comments .jira-helper-hook-ticket-loadcomments-wrapper,
-.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *:first-child:not([data-test-id="issue.activity.comments-list"]) {
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *:nth-child(2):not([data-test-id="issue.activity.comments-list"]) {
   order: 4;
 }
 

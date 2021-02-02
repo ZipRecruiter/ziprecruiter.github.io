@@ -989,7 +989,7 @@ window.$ = undefined;
           if ( !$this.is(scroll_area_selector) ) return;
 
           if ( el.scrollHeight - el.scrollTop - $this.height() < scroll_bottom_distance ) {
-            var $button = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > div:first-child:not([data-test-id="issue.activity.comments-list"]) button');
+            var $button = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *:nth-child(2):not([data-test-id="issue.activity.comments-list"]) button');
             $button.click();
           }
         };

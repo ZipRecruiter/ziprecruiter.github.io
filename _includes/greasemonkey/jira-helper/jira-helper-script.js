@@ -530,13 +530,14 @@ window.$ = undefined;
         var check = function() {
           var matches;
 
-          if ( !window.AJS && (matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/)) ) {
+          if ( (matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/)) ) {
             var id = matches[1];
             var title_path = matches[2] || '';
             var query = matches[3] || '';
 
             // new jira issue view, old
             var title = $('[data-test-id="issue.views.issue-base.foundation.summary.heading"], #summary-val').text();
+            // var title = $('[data-test-id="issue.views.issue-base.foundation.summary.heading"]').text();
 
             if ( !title ) {
               return;
@@ -587,9 +588,15 @@ window.$ = undefined;
           var id = window.AJS.$('meta[name="ajs-issue-key"]').attr('content');
           var matches;
 
-          if ( id && (matches = window.location.href.match(/\/browse\/[^\/]+(\/[^\?]*)/)) ) {
-            history.replaceState({}, document.title, window.location.href.replace(matches[1], ''));
-          } else if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
+          // I don't remember what this was :(
+          /*if ( id && (matches = window.location.href.match(/\/browse\/[^\/]+(\/[^\?]*)/)) ) {
+            if ( window.location.href.replace(matches[1] != id) {
+              history.replaceState({}, document.title, window.location.href.replace(matches[1], ''));
+            }
+          } else */
+
+          // Jira eats the id if anything comes after the id. Put the id back
+          if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
             history.replaceState({}, document.title, window.location.href.replace('/browse/', '/browse/' + id + '/'));
           }
         };

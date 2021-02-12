@@ -1180,7 +1180,7 @@ window.$ = undefined;
             ;
         };
 
-        pm.add({
+        /*pm.add({
           id: 'hotfix_shortcut',
           text: 'Show Hotfix Comand on Commit Links',
           title: 'Adds a copyable hotfix command in a tooltip on linked sha1\'s',
@@ -1188,7 +1188,7 @@ window.$ = undefined;
           screenshot: 'img/ft_hotfix.png',
           onload: onload_fn,
           onunload: onunload_fn
-        });
+        });*/
       })(pm);
 
       // Set up all the preferences

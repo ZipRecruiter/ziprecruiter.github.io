@@ -530,7 +530,7 @@ window.$ = undefined;
         var check = function() {
           var matches;
 
-          if ( (matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/)) ) {
+          if ( (matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/)) && !window.location.search ) {
             var id = matches[1];
             var title_path = matches[2] || '';
             var query = matches[3] || '';

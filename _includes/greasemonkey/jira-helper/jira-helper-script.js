@@ -565,7 +565,7 @@ window.$ = undefined;
           window.removeEventListener('popstate', check);
         };
 
-        pm.add({
+        /*pm.add({
           id: 'add_title_to_ticket_url',
           text: '(New JIRA Issue View) Add Title to Ticket URL',
           title: 'Adds a URLized title to the end of the current ticket URL',
@@ -573,7 +573,7 @@ window.$ = undefined;
           defaultOn: true,
           onload: onload,
           onunload: onunload
-        });
+        });*/
       })(pm);
 
         ////////////////////////////
@@ -588,16 +588,11 @@ window.$ = undefined;
           var id = window.AJS.$('meta[name="ajs-issue-key"]').attr('content');
           var matches;
 
-          // I don't remember what this was :(
-          /*if ( id && (matches = window.location.href.match(/\/browse\/[^\/]+(\/[^\?]*)/)) ) {
-            if ( window.location.href.replace(matches[1] != id) {
-              history.replaceState({}, document.title, window.location.href.replace(matches[1], ''));
-            }
-          } else */
-
           // Jira eats the id if anything comes after the id. Put the id back
           if ( id && window.location.href.indexOf('/browse/' + id) === -1 ) {
             history.replaceState({}, document.title, window.location.href.replace('/browse/', '/browse/' + id + '/'));
+          } else if ( id && (matches = window.location.href.match(/\/browse\/([A-Z]+-[0-9]+)(\/[^?]*)?(\?.*)?$/)) && matches[2] ) {
+            history.replaceState({}, document.title, window.location.href.replace(matches[2], ''));
           }
         };
 
@@ -617,9 +612,9 @@ window.$ = undefined;
         };
 
         pm.add({
-          id: 'fix_old_ticket_view_removing_id_from_url',
-          text: '(Old Ticket View) Fix Removed ID In URL',
-          title: 'Fixes old ticket views mangling ticket urls',
+          id: 'fix_old_ticket_urls',
+          text: '(Old Ticket View) Fix Ticket Title In URL',
+          title: 'Fixes old ticket views choking on ticket urls',
           // screenshot: 'img/ft_remove_status_icons.png',
           defaultOn: true,
           onload: onload,

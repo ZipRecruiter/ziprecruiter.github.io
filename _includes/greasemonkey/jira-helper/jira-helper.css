@@ -398,6 +398,34 @@
   max-height: 440px !important;
 }
 
+/* idiot margins */
+.jira-helper-new-ticket-tweaks [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div {
+  margin-top: 0;
+}
+
+.jira-helper-new-ticket-tweaks [data-test-id="issue-activity-feed.heading"],
+.jira-helper-new-ticket-tweaks [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div > :first-child {
+  margin-top: 20px;
+  padding-top: 10px;
+  border-top: solid 2px #ebecf0;
+}
+
+/* "activity" header */
+.jira-helper-new-ticket-tweaks [data-test-id="issue-activity-feed.heading"] {
+  flex-grow: 1;
+}
+
+/* hide empty divs */
+.jira-helper-new-ticket-tweaks [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:empty,
+.jira-helper-new-ticket-tweaks [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div > :first-child:empty,
+.jira-helper-new-ticket-tweaks .jira-helper-hook-ticket-info-wrapper div:empty {
+  display: none;
+}
+
+.jira-helper-new-ticket-tweaks [data-test-id="issue.views.field.rich-text.description"] > :first-child {
+  margin-bottom: 0;
+}
+
   /* //////////////////////////
  // Open external links in new tab
 ////////////////////////// */
@@ -463,11 +491,6 @@
   width: 100%;
 }
 
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:empty,
-.jira-helper-tame-ticket-links .jira-helper-hook-ticket-info-wrapper div:empty {
-  display: none;
-}
-
 /* Sub Tasks */
 /*.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:nth-child(4),
 .jira-helper-tame-ticket-links .jira-helper-hook-ticket-subtasks-wrapper[class] {
@@ -483,6 +506,7 @@
 
 /* Web Links */
 .jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:nth-child(7),
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:nth-child(8),
 .jira-helper-tame-ticket-links .jira-helper-hook-ticket-weblinks-wrapper {
   /*outline: 2px dashed blue;*/
   display: none;

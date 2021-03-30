@@ -320,6 +320,12 @@
  // Ticket Tweaks (new JIRA ticket view)
 ////////////////////////// */
 
+/* Fix width not taking scrollbar into account */
+.jira-helper-new-ticket-tweaks #page-body > #content {
+  width: calc(100% - var(--leftPanelWidth, 0px) - var(--leftSidebarWidth, 0px) - var(--rightPanelWidth, 0px) - var(--rightSidebarWidth, 0px)) !important;
+}
+
+/* Visually break up comment section */
 .jira-helper-new-ticket-tweaks [data-test-id="issue.activity.comments-list"] > div {
   border-top: solid 2px #ebecf0;
   padding: 15px 0 !important;

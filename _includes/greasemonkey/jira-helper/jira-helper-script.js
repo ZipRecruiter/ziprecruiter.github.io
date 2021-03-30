@@ -900,69 +900,6 @@ window.$ = undefined;
       })(pm);
 
         ////////////////////////////
-       // (Preference) Add Comment on top
-      ////////////////////////////
-      (function(pm) {
-        var class_name = 'jira-helper-add-comment-on-top';
-
-        var onload = function() {
-          $body.addClass(class_name);
-        };
-
-        var onunload = function() {
-          $body.removeClass(class_name);
-        };
-
-        pm.add({
-          id: 'add_comment_on_top',
-          text: '(New & Old JIRA Issue View) Add Comment Section Above Comments',
-          title: 'Puts the comment section above the comments',
-          defaultOn: true,
-          // screenshot: 'img/ft_reverse_comments.png',
-          onload: onload,
-          onunload: onunload
-        });
-      })(pm);
-
-        ////////////////////////////
-       // (Preference) Reverse Comments
-      ////////////////////////////
-      (function(pm) {
-        var class_name = 'jira-helper-reverse-comments';
-        var older_comments_button_selector = '[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > div:first-child:not([data-test-id="issue.activity.comments-list"])';
-
-        var scroll_left_pane_up = function() {
-          var $left = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"]').parent();
-
-          // If we are scrolled down too far the browser will stick us to the bottom of the comments when loaded in, so scroll up
-          if ( $left[0].scrollHeight - $left[0].scrollTop - $left.height() < 150 ) {
-            var top = $left[0].scrollTop;
-            $left[0].scrollTop = top - 150;
-          }
-        };
-
-        var onload = function() {
-          $body.addClass(class_name);
-          $body.delegate(older_comments_button_selector, 'click', scroll_left_pane_up);
-        };
-
-        var onunload = function() {
-          $body.removeClass(class_name);
-          $body.undelegate(older_comments_button_selector, 'click', scroll_left_pane_up);
-        };
-
-        pm.add({
-          id: 'reverse_comments',
-          text: '(New JIRA Issue View) Reverse Comment Order',
-          title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
-          defaultOn: true,
-          screenshot: 'img/ft_reverse_comments.png',
-          onload: onload,
-          onunload: onunload
-        });
-      })(pm);
-
-        ////////////////////////////
        // (Preference) Auto load more comments
       ////////////////////////////
       (function(pm) {

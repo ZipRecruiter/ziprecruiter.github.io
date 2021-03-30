@@ -928,7 +928,7 @@ window.$ = undefined;
           if ( !$this.is(scroll_area_selector) ) return;
 
           if ( el.scrollHeight - el.scrollTop - $this.height() < scroll_bottom_distance ) {
-            var $button = $('[data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *:nth-child(2):not([data-test-id="issue.activity.comments-list"]) button');
+            var $button = $('[data-test-id="issue.activity.comments-list"] ~ div button');
             $button.click();
           }
         };
@@ -951,8 +951,7 @@ window.$ = undefined;
           id: 'auto_load_all_comments',
           text: '(New JIRA Issue View) Auto Load Comments (Requires "Reverse Comment Order")',
           title: 'Clicks the show more comments button until all comments are loaded',
-          defaultOn: true,
-          /* screenshot: 'img/ft_reverse_comments.png', */
+          defaultOn: false,
           onload: onload,
           onunload: onunload
         });

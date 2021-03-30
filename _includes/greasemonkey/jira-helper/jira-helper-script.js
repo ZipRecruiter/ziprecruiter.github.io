@@ -949,7 +949,7 @@ window.$ = undefined;
 
         pm.add({
           id: 'auto_load_all_comments',
-          text: '(New JIRA Issue View) Auto Load Comments (Requires "Reverse Comment Order")',
+          text: '(New JIRA Issue View) Auto Load Comments',
           title: 'Clicks the show more comments button until all comments are loaded',
           defaultOn: false,
           onload: onload,

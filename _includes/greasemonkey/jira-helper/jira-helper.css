@@ -317,6 +317,74 @@
 
 
   /* //////////////////////////
+ // Reverse Comment Order (new JIRA ticket view)
+////////////////////////// */
+
+.jira-helper-reverse-comments .jira-helper-hook-ticket-commentsection-wrapper,
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.jira-helper-reverse-comments .jira-helper-hook-ticket-commentsection-wrapper > *,
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > * {
+  order: 3;
+}
+
+.jira-helper-reverse-comments .jira-helper-hook-ticket-loadcomments-wrapper,
+.jira-helper-reverse-comments [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *:nth-child(2):not([data-test-id="issue.activity.comments-list"]) {
+  order: 4;
+}
+
+.jira-helper-reverse-comments .jira-helper-hook-ticket-comment-wrapper,
+.jira-helper-reverse-comments [data-test-id="issue.activity.comments-list"] {
+  display: flex;
+  flex-direction: column-reverse;
+  margin-top: 0
+}
+
+  /* //////////////////////////
+ // Add Comment On Top
+////////////////////////// */
+
+/* New Issue View */
+
+/* Info */
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5),
+.jira-helper-tame-ticket-links .jira-helper-hook-ticket-info-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > *,
+.jira-helper-hook-ticket-commentsection-wrapper > * {
+  order: 3;
+}
+
+.jira-helper-add-comment-on-top [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > span:last-child > span,
+.jira-helper-hook-ticket-commentsection-wrapper .jira-helper-hook-ticket-comment-wrapper {
+  order: 1;
+}
+
+/* Old */
+.jira-helper-add-comment-on-top .issue-main-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.jira-helper-add-comment-on-top .issue-main-column {
+  order: 2;
+}
+
+.jira-helper-add-comment-on-top #addcomment {
+  order: 3;
+}
+
+.jira-helper-add-comment-on-top #activitymodule {
+  order: 4;
+}
+
+  /* //////////////////////////
  // Ticket Tweaks (new JIRA ticket view)
 ////////////////////////// */
 

@@ -913,15 +913,15 @@ window.$ = undefined;
           $body.removeClass(class_name);
         };
 
-        pm.add({
-          id: 'add_comment_on_top',
-          text: '(New & Old JIRA Issue View) Add Comment Section Above Comments',
-          title: 'Puts the comment section above the comments',
-          defaultOn: true,
-          // screenshot: 'img/ft_reverse_comments.png',
-          onload: onload,
-          onunload: onunload
-        });
+        // pm.add({
+        //   id: 'add_comment_on_top',
+        //   text: '(New & Old JIRA Issue View) Add Comment Section Above Comments',
+        //   title: 'Puts the comment section above the comments',
+        //   defaultOn: true,
+        //   // screenshot: 'img/ft_reverse_comments.png',
+        //   onload: onload,
+        //   onunload: onunload
+        // });
       })(pm);
 
         ////////////////////////////
@@ -951,15 +951,15 @@ window.$ = undefined;
           $body.undelegate(older_comments_button_selector, 'click', scroll_left_pane_up);
         };
 
-        pm.add({
-          id: 'reverse_comments',
-          text: '(New JIRA Issue View) Reverse Comment Order',
-          title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
-          defaultOn: true,
-          screenshot: 'img/ft_reverse_comments.png',
-          onload: onload,
-          onunload: onunload
-        });
+        // pm.add({
+        //   id: 'reverse_comments',
+        //   text: '(New JIRA Issue View) Reverse Comment Order',
+        //   title: 'Reverses comment order when New JIRA Issue View is on, puts comment box at the top',
+        //   defaultOn: true,
+        //   screenshot: 'img/ft_reverse_comments.png',
+        //   onload: onload,
+        //   onunload: onunload
+        // });
       })(pm);
 
         ////////////////////////////

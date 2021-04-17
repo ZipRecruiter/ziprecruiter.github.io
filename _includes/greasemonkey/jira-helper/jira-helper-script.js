@@ -925,6 +925,31 @@ window.$ = undefined;
       })(pm);
 
         ////////////////////////////
+       // (Preference) Hide "Automation" field
+      ////////////////////////////
+      (function(pm) {
+        var class_name = 'jira-helper-hide-automation-field';
+
+        var onload = function() {
+          $body.addClass(class_name);
+        };
+
+        var onunload = function() {
+          $body.removeClass(class_name);
+        };
+
+        pm.add({
+          id: 'hide_automation_field',
+          text: '(New JIRA Issue View) Hide Automation Field on Issues',
+          title: 'Hides the useless Automation field that pops up in the field list of issues',
+          defaultOn: true,
+          // screenshot: 'img/ft_reverse_comments.png',
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Reverse Comments
       ////////////////////////////
       (function(pm) {

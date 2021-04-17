@@ -480,6 +480,14 @@
 }
 
   /* //////////////////////////
+ // Hide "Automation" field
+////////////////////////// */
+
+.jira-helper-hide-automation-field [data-test-id="issue.views.issue-base.context.ecosystem-glance-panel"] {
+  display: none !important;
+}
+
+  /* //////////////////////////
  // Re-order ticket sections
 ////////////////////////// */
 

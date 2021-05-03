@@ -1022,6 +1022,7 @@ window.$ = undefined;
 
           $('#hide_closed_tickets_list_item').remove();
           $('#ghx-quick-filters > ul').removeClass('hide_closed_tickets_added');
+          $body.removeClass(hide_body_class);
         };
 
         pm.add({

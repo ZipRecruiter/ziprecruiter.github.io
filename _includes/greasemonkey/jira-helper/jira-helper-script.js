@@ -988,6 +988,54 @@ window.$ = undefined;
       })(pm);
 
         ////////////////////////////
+       // (Preference) Hide Closed Tickets on Rapid Board
+      ////////////////////////////
+      (function(pm) {
+        var hide_body_class = 'jira-helper-hide-closed-tickets-on-rapid-board';
+        var interval;
+
+        $document.on('change', '#hide_closed_tickets', function() {
+          if ( $(this).prop('checked') ) {
+            $body.addClass(hide_body_class);
+          } else {
+            $body.removeClass(hide_body_class);
+          }
+        });
+
+        var check = function() {
+          var $list = $('#ghx-quick-filters > ul:not(.hide_closed_tickets_added');
+
+          if ( $list.length ) {
+            var $hide = $('<li id="hide_closed_tickets_list_item"><label for="hide_closed_tickets"><input type="checkbox" id="hide_closed_tickets"> Hide Closed</label></li>');
+
+            $list.addClass('hide_closed_tickets_added').append($hide);
+          }
+        };
+
+        var onload = function() {
+          check();
+          interval = setInterval(check, 1000);
+        };
+
+        var onunload = function() {
+          clearInterval(interval);
+
+          $('#hide_closed_tickets_list_item').remove();
+          $('#ghx-quick-filters > ul').removeClass('hide_closed_tickets_added');
+        };
+
+        pm.add({
+          id: 'hide_closed_tickets_on_rapid_board',
+          text: 'Hide Closed Tickets on Rapid Board',
+          title: 'Adds a checkbox that lets you easily hide closed tickets',
+          defaultOn: true,
+          // screenshot: 'img/ft_reverse_comments.png',
+          onload: onload,
+          onunload: onunload
+        });
+      })(pm);
+
+        ////////////////////////////
        // (Preference) Auto load more comments
       ////////////////////////////
       (function(pm) {

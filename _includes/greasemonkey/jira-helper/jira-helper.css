@@ -580,6 +580,10 @@
   /*outline: 2px dashed yellow;*/
 }
 
+  /* //////////////////////////
+ // Ticket Section Classes (for reference)
+////////////////////////// */
+
 /* Activity nav */
 .jira-helper-hook-ticket-activitynav-wrapper {
   /*outline: 2px dashed green;*/
@@ -603,4 +607,12 @@
 /* Comment */
 .jira-helper-hook-ticket-comment-wrapper {
   /*outline: 2px dotted blue;*/
+}
+
+  /* //////////////////////////
+ // Ticket Section Classes (for reference)
+////////////////////////// */
+
+.jira-helper-hide-closed-tickets-on-rapid-board .ghx-done {
+  display: none;
 }

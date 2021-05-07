@@ -519,8 +519,8 @@
 /* Not doing the above anymore since we are focusing on epics and child tickets more */
 
 /* Web Links */
-.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:nth-child(7),
 .jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:nth-child(8),
+.jira-helper-tame-ticket-links [data-test-id="issue.views.issue-details.issue-layout.left-most-column"] > div:nth-child(5) > div:nth-child(9),
 .jira-helper-tame-ticket-links .jira-helper-hook-ticket-weblinks-wrapper {
   /*outline: 2px dashed blue;*/
   display: none;
